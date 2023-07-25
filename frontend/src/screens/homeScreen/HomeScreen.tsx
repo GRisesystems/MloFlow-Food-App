@@ -3,7 +3,9 @@ import './home.css'
 const HomeScreen = () => {
     // Home Screen 
     return (
-        <div>HomeScreen</div>
+        <div>
+            <h1>Mlo Flow HomeScreen</h1>
+        </div>
     )
 }
 
