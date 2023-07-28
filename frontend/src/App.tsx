@@ -1,11 +1,12 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import HomeScreen from "./screens/homeScreen/HomeScreen"
+import Root from './Root'
 
 const router = createBrowserRouter(
   // App router configuration. 
   createRoutesFromElements(
-    <Route>
-      <Route path='/' element={<HomeScreen />} />
+    <Route path='/' element={<Root />}>
+      <Route index element={<HomeScreen />} />
     </Route>
   )
 )
