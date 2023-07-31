@@ -1,0 +1,5 @@
+django
+python
+env
+Createuser '': admin
+password: mloflow
