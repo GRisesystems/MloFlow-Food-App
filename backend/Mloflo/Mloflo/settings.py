@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +28,10 @@ SECRET_KEY = "django-insecure-uc&_xy5q3skrh9yb^@(+k@6c03rkit6hrwt6=@$omy#*u!=b=$
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'arkauth:login'
 
 
 # Application definition
@@ -37,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'main',
+    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +74,19 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django.core.mail.backends.smtp.EmailBackend',
+]
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True  
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_USER = 'faithsang001@gmail.com'  
+EMAIL_HOST_PASSWORD = 'mzoxvivicpxnngvn'  
+EMAIL_PORT = 587  
+
+PASSWORD_RESET_TIMEOUT = 1400
 
 WSGI_APPLICATION = "Mloflo.wsgi.application"
 
@@ -110,6 +131,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
