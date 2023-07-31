@@ -11,7 +11,7 @@ const Root = () => {
         <NavBar/>
             <Outlet/>
             <FooterContainer />
-        {/* footer section */}
+      
     </>
   )
 }
