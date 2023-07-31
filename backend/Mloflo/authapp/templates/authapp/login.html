@@ -1,0 +1,51 @@
+{% extends 'authapp/nav.html' %}
+{% block title %}
+Login
+{% endblock title %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+ <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+    <h1 class="mb-2 text-3xl text-center" data-aos="fade-up">Login</h1>
+
+    {% for message in messages %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <form method="post" action="/authapp/login/">
+        {% csrf_token %}
+
+        <div class="mb-3" data-aos="fade-up" data-aos-delay="100">
+            <label class="inline-block mb-2">Username</label><br>
+            {{ form.username }}
+        </div>
+        <div class="mb-3" data-aos="fade-up" data-aos-delay="200">
+            <label class="inline-block mb-2">Password</label><br>
+            {{ form.password }}
+        </div>
+        
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{ field.errors}}
+                {% endfor %}
+<!-- Errors not connected to the field are shown here -->
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button class="py-2 px-4 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white" data-aos="fade-up" data-aos-delay="300">Login</button>
+        <br>
+        <p data-aos="fade-up" data-aos-delay="6 00">Not regisitered?<a href="/authapp/signup/" class="text-teal-500 cursor-pointer"> Signup</a></p>
+        <br>
+        <span><p data-aos="fade-up" data-aos-delay="6 00">Forgot password<a href="#" class="text-teal-500 cursor-pointer"> reset</a></p></span>
+    </form>
+</div>
+
+{% endblock body %}

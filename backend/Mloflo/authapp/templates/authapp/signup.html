@@ -1,0 +1,58 @@
+{% extends 'authapp/nav.html' %}
+{% block title %}
+Signup
+{% endblock title %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+ <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+    <h1 class="mb-2 text-3xl text-center" data-aos="fade-up">Signup</h1>
+
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong>You should check in some of those fileds below.
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %} 
+
+
+    <form method="post" action="/authapp/signup/">
+        {% csrf_token %}
+
+        <div class="mb-3" data-aos="fade-up" data-aos-delay="100">
+            <label class="inline-block mb-2">Username</label><br>
+            {{ form.username }}
+        </div>
+        <div class="mb-3" data-aos="fade-up" data-aos-delay="200">
+            <label class="inline-block mb-2">Email Address</label><br>
+            {{ form.email }}
+        </div>
+        <div class="mb-3" data-aos="fade-up" data-aos-delay="300">
+            <label class="inline-block mb-2">Password</label><br>
+            {{ form.password1 }}
+        </div>
+        <div class="mb-3" data-aos="fade-up" data-aos-delay="400">
+            <label class="inline-block mb-2">Confrimn Password</label><br>
+            {{ form.password2 }}
+        </div>
+        
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{ field.errors}}
+                {% endfor %}
+<!-- Errors not connected to the field are shown here -->
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button class="py-2 px-4 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white" data-aos="fade-up" data-aos-delay="500">Submit</button>
+        <p data-aos="fade-up" data-aos-delay="6 00">Already regisitered?<a href="/authapp/login/" class="text-teal-500 cursor-pointer"> Login</a></p>
+    </form>
+</div>
+
+{% endblock body %}
