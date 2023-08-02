@@ -1,0 +1,14 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- ======= Intro Section ======= -->
+
+<h2> whats your category </h2>
+<ul>
+<li><a class=" "  a href="{% url 'customer' %}">Customer</a></li>
+<li><a class=" "  a href="{% url 'vendor' %}">Vendor</a></li>
+<li><a class=" "  a href="{% url 'chef' %}">Chef</a></li>
+</ul>
+{% endblock%}
