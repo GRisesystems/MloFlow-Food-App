@@ -1,107 +1,60 @@
-from django.shortcuts import redirect,render
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout
-from django.contrib import messages
+#from django.shortcuts import render, redirect
+#from django.contrib import messages
+#from . forms import *
+
+from . models import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from . serializers import *
+
 
 # Create your views here.
-def signup(request):
-
-    if request.method=="POST":
-        get_email=request.POST.get('email')
-        get_password=request.POST.get('pass1')
-        get_confirm_password=request.POST.get('pass2')
-        if get_password != get_confirm_password:
-            messages.info(request,"Password is not matching!!")
-            return redirect('/auth/signup/')
-        
-        try:
-            if User.objects.get(username=get_email):
-                messages.warning(request,"Email is already taken!!")
-                return redirect('/auth/signup/')
-        except Exception as identifier:
-            pass
-        myuser=User.objects.create_user(get_email, get_password)
-        myuser.save()
-        messages.success(request,"User is Created, Please Login!!")
-        return redirect('/auth/login/')
-    return render(request,'signup.html')
-
-def handleLogin(request):
-    if request.method=="POST":
-       get_email=request.POST.get('email')
-       get_password=request.POST.get('pass1')
-       myuser= authenticate( username=get_email, password=get_password )
-        
-       if myuser is not None:
-         login(request,myuser)
-       messages.success(request,"Login Success!!")
-       return redirect('/')
-    else:
-       messages.error(request,"Invalid Credentials")
-       return render(request,'login.html')
 
 
-
-def handleLogout(request): 
-    logout(request)
-    messages.success(request,"Logged out Successfully!!")
-    return render(request,'login.html')  
-
-
+@api_view(["POST"])
 def customerInfo(request):
              
     if request.method =="POST":
-        form = customerForm(request.POST,request.FILES)              
-        if form.is_valid():
-            form.save()
-            messages.success = (request, "your information was succefully updated ")
-            return redirect("home")
-            
-    else:
-        form = customerForm()
-       
-    
-    context = {
-            "form": form,           
-              }
-    return render(request,'accounts/informationForm.html',context)
+        serializer = CustomerSerializer(data =request.data)
+        if serializer.is_valid():
+            serializer.save()
+        
+    return Response(serializer.data)
 
-
+@api_view(["POST"])
 def vendorInfo(request):
      
     if request.method =="POST":
-        form = vendorForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("/")
+        serializer = VendorSerializer(data =request.data)
+        if serializer.is_valid():
+            serializer.save()
         
-    else:
-        form = vendorForm()
-    
-    context = {
-            "form": form
-              }
-    return render(request,'accounts/informationForm.html',context)
+    return Response(serializer.data)
 
-
+@api_view(["POST"])
 def chefInfo(request):
   
-    if request.method =="POST":        
-        form = chefForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("/")
+    if request.method =="POST":
+        serializer = ChefSerializer(data =request.data)
+        if serializer.is_valid():
+            serializer.save()
         
-    else:
-        form = chefForm()
-    
-    context = {
-            "form": form
-              }
-    return render(request,'accounts/informationForm.html',context)
+    return Response(serializer.data)
 
-
+@api_view(["GET"])
 def index(request):
-    
-    context = {}
-    return render(request, 'accounts/index.html')
+    api_urls = {
+        'post customer Information' :'http://127.0.0.1:8000/customer/',
+        'post vendor Information': 'http://127.0.0.1:8000/vendor/',
+        'post chef Information':'http://127.0.0.1:8000/chef/',    
+        'see chefs available':'http://127.0.0.1:8000/chefs_list/',     
+    }
+    return Response(api_urls)
+
+@api_view(["GET"])
+def getChef(request):
+             
+    chef = Chef.objects.all()
+    serializer = ChefSerializer(chef, many = True)
+            
+    return Response(serializer.data)
