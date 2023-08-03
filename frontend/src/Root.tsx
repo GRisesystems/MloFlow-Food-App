@@ -10,7 +10,7 @@ const Root = () => {
         <TopNav/>
         <NavBar/>
             <Outlet/>
-            <FooterContainer />
+            {/* <FooterContainer /> */}
         {/* footer section */}
     </>
   )

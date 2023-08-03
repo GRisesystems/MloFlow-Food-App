@@ -2,16 +2,28 @@ import { Paper, Grid, CardContent, CardActions, Button, Typography } from '@mui/
 
 const HomeServiceCategoryCard = ({ background_image }) => {
   return (
-    <Grid item xs={12} sm={4} sx={{ height: '45vh' }}>
-      <Paper elevation={3} sx={{ backgroundImage: `url(${background_image})`, height: '100%' }}>
-        <CardContent>
-          <Typography variant="h5" component="div" sx={{mt:3}}>
+    <Grid item xs={12} sm={4} sx={{ height: '25vw' }}>
+      <Paper
+        elevation={3}
+        sx={{
+          backgroundImage: `url(${background_image})`,
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'transform 0.3s ease', // Add transition for smooth zoom effect
+          '&:hover': {
+            transform: 'scale(1.1)', // Zoom out the background image on hover
+          },
+        }}
+      >
+        <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column',ml:3}}>
+          <Typography variant="h5" component="div" sx={{ mt: 3 }}>
             Category
           </Typography>
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
         </CardContent>
+        <CardActions sx={{ml:3}}>
+          <Button size="small">Learn More</Button>
+        </CardActions>
       </Paper>
     </Grid>
   );
