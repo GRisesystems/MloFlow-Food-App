@@ -1,12 +1,13 @@
 import './home.css'
 import Box from '@mui/material/Box'
+import HomeCarousel from '../../components/homeScreen/HomeCarousel'
 
 const HomeScreen = () => {
     // Home Screen 
     return (
-        <Box>            
-            <h1>Mlo Flow HomeScreen</h1>
-        </Box>
+        <>            
+            <HomeCarousel/>            
+        </>
     )
 }
 
