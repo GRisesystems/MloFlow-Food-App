@@ -10,8 +10,9 @@ const Root = () => {
         <TopNav/>
         <NavBar/>
             <Outlet/>
-            {/* <FooterContainer /> */}
-        {/* footer section */}
+            <FooterContainer />
+      
+
     </>
   )
 }

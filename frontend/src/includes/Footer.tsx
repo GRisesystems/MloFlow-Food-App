@@ -25,6 +25,8 @@ const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
         width: "100%",
         display: "flex",
         flexDirection: "column",
+        //maxHeight: "120px",
+        overflow:"visible",
        
       }}
     maxWidth="xl"
