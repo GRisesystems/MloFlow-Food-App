@@ -50,7 +50,7 @@ def index(request):
 @api_view(["GET"])
 def getChef(request):
     
-    permission_classes = [IsAuthenticated]         
+    #permission_classes = [IsAuthenticated]         
     chef = Chef.objects.all()
     serializer = ChefSerializer(chef, many = True)
             
