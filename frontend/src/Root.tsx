@@ -12,6 +12,7 @@ const Root = () => {
             <Outlet/>
             <FooterContainer />
       
+
     </>
   )
 }
