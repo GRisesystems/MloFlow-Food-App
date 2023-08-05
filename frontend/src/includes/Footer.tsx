@@ -3,11 +3,13 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+//import h1, { h1Props }from "@mui/material/h1";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
+
+
 
 // Footer component
 const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
@@ -15,17 +17,17 @@ const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
     <Container
       component="footer"
       sx={{
-        py: 8,
+        py: 4,
         background: "#0b490b",
-        position: "fixed",
+        position: "absolute",
         bottom: 0,
         left: 0,
         right: 0,
         m: 0,
+        p:0,
         width: "100%",
         display: "flex",
-        flexDirection: "column",
-        //maxHeight: "120px",
+        flexDirection: "column",            
         overflow:"visible",
        
       }}
@@ -46,6 +48,7 @@ const FooterWrapper: React.FC<{ children: React.ReactNode }> = ({
   sx={{
     maxWidth:"1200px",
     margin: "0",
+   
     
   }}
   >{children}
@@ -95,13 +98,11 @@ const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({
 // FooterTitle component
 const FooterTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <Typography
-      variant="h5"
-      component="h2"
-      sx={{ color: "white", fontWeight: "bold", marginBottom: 4 }}
+    <h5 style={{
+     color: "white", fontWeight: "bold", fontSize: 18, marginBottom: 4 }}
     >
       {children}
-    </Typography>
+    </h5>
   );
 };
 
@@ -120,19 +121,24 @@ const FooterSocialLink: React.FC<{ href: string; icon: React.ReactNode }> = ({
         marginBottom: 2,
         fontSize: 18,
         color: "#a69b9b",
-        "&:hover": { color: "#82c12a", transition: "200ms ease-in" },
+        "&:hover": { color: "#0b490b", transition: "200ms ease-in" },
       }}
     >
       {icon}
     </Link>
   );
 };
+
 const NewFooterColumn: React.FC = () => {
   return (
     <Grid item xs={12} sm={6} md={3}>
-      <FooterColumn>
+      <FooterColumn>       
         <FooterTitle>Store Location</FooterTitle>
-        <FooterLink href="#">Store location TBD</FooterLink>
+        <Box style ={{ color: "white" }}>
+        <p>P.O. BOX 1234</p>
+        <p>Kisumu, Kenya</p>
+        </Box>
+       
       </FooterColumn>
     </Grid>
   );
@@ -142,13 +148,26 @@ const SocialFooterRow: React.FC<{ children: React.ReactNode }> = ({ children }) 
   return (
     <Grid container spacing={2} style={{
       display: "flex", 
-    flexDirection: "row" }}>
+    flexDirection: "row"}}>
+       <FooterColumnOne /> 
       {children}
     </Grid>
   );
 };
+const FooterColumnOne: React.FC = () => {
+  return (
+    <Grid item xs={12} sm={6} md={3}>
+      <FooterColumn>
+        <Box style ={{ fontSize: "18px", marginTop:22 }}>
+        <FooterTitleFirst>Call us 24/7</FooterTitleFirst>
+        </Box>
+      </FooterColumn>
+    </Grid>
+  );
+};
 
-const FooterColumnWithHorizontalIcons: React.FC<{ children: React.ReactNode }> = ({
+
+const FooterColumnTwo: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
@@ -157,11 +176,13 @@ const FooterColumnWithHorizontalIcons: React.FC<{ children: React.ReactNode }> =
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
+        marginTop:20,
+        marginBottom: 20,
       }}
     >
       {React.Children.map(children, (child, index) => (
         <>
-          {index > 0 && <div style={{ margin: "0 10px" }} /> /* Add spacing between icons */}
+          {index > 0 && <div style={{ margin: "0 20px" }} /> /* Add spacing between icons */}
           {child}
         </>
       ))}
@@ -169,15 +190,12 @@ const FooterColumnWithHorizontalIcons: React.FC<{ children: React.ReactNode }> =
   );
 };
 
-const FooterTitleWithSpace: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const FooterTitleFirst: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <Typography
-      variant="h5"
-      component="h2"
-      sx={{ color: "white", fontWeight: "bold", marginBottom: 4}}
+    <h5 style={{color: "white", overflow: "visible", fontWeight: "bold", marginBottom: 2, marginTop: 2}}
     >
       {children}
-    </Typography>
+    </h5>
   );
 };
 
@@ -190,14 +208,14 @@ export function FooterContainer() {
     <Footer>
       <FooterWrapper>  
       <SocialFooterRow>
+      
       <Grid item xs={12} sm={6} md={3}>
-            <FooterColumnWithHorizontalIcons>
-              <FooterTitleWithSpace>Contact Us</FooterTitleWithSpace>
+            <FooterColumnTwo>              
               <FooterSocialLink href="#" icon={<FacebookIcon />} />
               <FooterSocialLink href="#" icon={<InstagramIcon />} />
               <FooterSocialLink href="#" icon={<YouTubeIcon />} />
               <FooterSocialLink href="#" icon={<TwitterIcon />} />
-            </FooterColumnWithHorizontalIcons>
+            </FooterColumnTwo>
           </Grid>
         </SocialFooterRow>
     
@@ -235,7 +253,11 @@ export function FooterContainer() {
           
         </FooterRow>
         
+        
       </FooterWrapper>
+      <FooterRow>
+     <p style={{alignItems: "center", color: "white",fontSize: 12, marginBottom: 2, marginTop: 2}}>Copyright GRISE Systems 2023.</p>
+        </FooterRow>
     </Footer>
   );
 }

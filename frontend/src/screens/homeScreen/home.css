@@ -1,0 +1,63 @@
+.flash-card-container {
+  display: inline;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.flash-card {
+  flex: 0 0 calc(25% - 20px); /* Adjust the width to fit 4 items per row with small gaps */
+  height: 500px;
+  width: 300px;
+  margin: 0;
+  overflow: visible;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.flash-card img {
+  flex: 1;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.flash-card:hover {
+  transform: scale(0.95);
+}
+
+.like-button {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.flash-card:hover .like-button {
+  display: block;
+}
+
+.like-button svg {
+  width: 20px;
+  height: 20px;
+  fill: red;
+}
+
+.flash-card h3 {
+  margin: 5px;
+  text-align: center;
+}
+
+.flash-card button {
+  display: block;
+}

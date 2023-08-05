@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import HomeScreen from "./screens/homeScreen/HomeScreen"
 import Root from './Root'
 
+
 const router = createBrowserRouter(
   // App router configuration. 
   createRoutesFromElements(
