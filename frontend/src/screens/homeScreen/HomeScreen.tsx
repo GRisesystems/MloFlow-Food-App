@@ -3,6 +3,8 @@ import HomeCarousel from '../../components/homeScreen/HomeCarousel';
 import HomeServiceCategoryCard from '../../components/homeScreen/HomeServiceCategoryCard';
 import { ProductItem } from '../../components/homeScreen/productItem';
 import FlashCard from '../../components/homeScreen/Flashcard';
+import Subscription from '../../components/homeScreen/Subscribe';
+import FoodCategory from '../../components/homeScreen/Categories';
 import './home.css';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
@@ -55,6 +57,12 @@ const HomeScreen = () => {
       <Box>
         <h1 style={{ color: 'green' }}>Shop Here</h1>
         <FlashCard productItems={dummyProductItems} />
+      </Box>
+      <Box>
+      <Subscription />
+      </Box>
+      <Box>
+        <FoodCategory />
       </Box>
     </div>
   );
