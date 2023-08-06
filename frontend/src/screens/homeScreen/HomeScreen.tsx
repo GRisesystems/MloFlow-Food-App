@@ -36,7 +36,15 @@ const dummyProductItems: ProductItem[] = [
     price: 29.99,
     discount: 10, // Add a discount value
     cover: '/src/assets/images/Onions.jpg', // Add the URL or path to the product cover image
-  },]
+  },
+  {
+    id: 4,
+    name: 'Carrots',
+    price: 29.99,
+    discount: 10, // Add a discount value
+    cover: '/src/assets/images/Carrots.jpg', // Add the URL or path to the product cover image
+  },
+]
  
 
 const HomeScreen = () => {

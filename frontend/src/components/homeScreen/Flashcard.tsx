@@ -1,11 +1,85 @@
-//import React, { useState } from "react";
-import Slider from "react-slick";
+import React, { useState } from "react";
+import Slider, { Settings } from "react-slick";
 import { ProductItem } from "./productItem";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import styled from "styled-components";
+
+const LikeButton = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background-color: rgba(169, 144, 3, 0.8);
+  padding: 5px;
+  border-radius: 50%;
+`;
+
+const AddToCartButton = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  padding: 5px;
+  background-color: rgba(169, 144, 3, 0.8);
+  margin-left: 35px;
+  border-radius: 50%;
+`;
+const NextArrowButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  background-color: #f0d469; /* Yellow-green background color */
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index:2;
+
+  &:hover {
+    background-color: #d5b542; /* Darker shade on hover */
+  }
+`;
+
+const PrevArrowButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  background-color: #f0d469; /* Yellow-green background color */
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+
+  &:hover {
+    background-color: #d5b542; /* Darker shade on hover */
+  }
+`;
+
+const NextArrowIcon = styled(ChevronRightIcon)`
+  width: 20px;
+  height: 20px;
+  fill: white;
+`;
+
+const PrevArrowIcon = styled(ChevronLeftIcon)`
+  width: 20px;
+  height: 20px;
+  fill: white;
+`;
 
 interface SampleNextArrowProps {
   onClick: () => void;
@@ -13,13 +87,12 @@ interface SampleNextArrowProps {
 
 const SampleNextArrow: React.FC<SampleNextArrowProps> = ({ onClick }) => {
   return (
-    <div className="control-btn" onClick={onClick}>
-      <button className="next">
-        <ChevronRightIcon />
-      </button>
-    </div>
-  );
+    <NextArrowButton onClick={onClick}>
+    <NextArrowIcon />
+  </NextArrowButton>
+);
 };
+    
 
 interface SamplePrevArrowProps {
   onClick: () => void;
@@ -27,26 +100,101 @@ interface SamplePrevArrowProps {
 
 const SamplePrevArrow: React.FC<SamplePrevArrowProps> = ({ onClick }) => {
   return (
-    <div className="control-btn" onClick={onClick}>
-      <button className="prev">
-        <ChevronLeftIcon />
-      </button>
-    </div>
+    <PrevArrowButton onClick={onClick}>
+      <PrevArrowIcon />
+    </PrevArrowButton>
   );
 };
 
 interface FlashCardProps {
   productItems: ProductItem[];
-  //addToCart: (product: ProductItem) => void;
 }
 
+const FlashCardContainer = styled.div`
+  display: inline;
+  flex-wrap: nowrap;
+  justify-content: center; /* Change to flex-start to fill the row space */
+  gap: 20px; /* Set the desired gap between each flashcard */
+  max-width: 1000px;
+  overflow-x: auto;
+  padding: 10px;
+`;
+
+const FlashCardItem = styled.div`
+  flex: 0 0 calc(25% - 10px); /* Set the width to 25% minus the gap */
+  height: 400px;
+  margin: 0;
+  overflow: visible;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &:hover {
+    transform: scale(0.95);
+    ${LikeButton} {
+      display: block;
+  }
+  ${AddToCartButton} {
+    display: block;
+  }
+}
+&.active {
+  ${LikeButton} {
+    display: block;
+    background-color: red;
+  }
+}
+`;
+
+const FlashCardImg = styled.img`
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+`;
+
+const FlashCardH3 = styled.h3`
+  margin: 5px;
+  text-align: center;
+`;
+
+
+
+const LikeButtonSvg = styled(FavoriteIcon)`
+  width: 20px;
+  height: 20px;
+  fill: white;
+`;
+
+
+
+const AddToCartButtonSvg = styled(AddShoppingCartIcon)`
+  width: 20px;
+  height: 20px;
+  fill: black;
+`;
+
+
 const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
-  // const [count, setCount] = useState(0);
-  // const increment = () => {
-  // setCount(count + 1);
-  // }
-  
-  const settings = {
+  const [likedCards, setLikedCards] = useState<boolean[]>(Array(productItems.length).fill(false));
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const handleLikeClick = (index: number) => {
+    const newLikedCards = [...likedCards];
+    newLikedCards[index] = !newLikedCards[index];
+    setLikedCards(newLikedCards);
+  };
+
+  const handleCardClick = (index: number) => {
+    setActiveIndex(index);
+  };
+
+
+  const settings: Settings = {
     dots: false,
     infinite: true,
     speed: 500,
@@ -57,24 +205,30 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
   };
 
   return (
-    <div className="flash-card-container">
+    <FlashCardContainer>
       <Slider {...settings}>
-        {productItems.map((product) => {
+        {productItems.map((product, index) => {
           return (
-            <div className="flash-card" key={product.name}>
-              <img src={product.cover} alt={product.name} />
-              <h3>{product.name}</h3>
-              <div className="like-button">
-                <FavoriteIcon />
-              </div>
-              {/* <button onClick={() => addToCart(product)}>Add to Cart</button> */}
-            </div>
+            <FlashCardItem
+              key={product.name}
+              onClick={() => handleCardClick(index)}
+              className={activeIndex === index ? "active" : ""}
+            >
+              <FlashCardImg src={product.cover} alt={product.name} />
+              <FlashCardH3>{product.name}</FlashCardH3>
+              <LikeButton className={likedCards[index] ? "fill" : ""} onClick={() => handleLikeClick(index)}>
+                <LikeButtonSvg className={likedCards[index] ? "fill" : ""} />
+              </LikeButton>
+              <AddToCartButton>
+                <AddToCartButtonSvg />
+              </AddToCartButton>
+            </FlashCardItem>
           );
         })}
       </Slider>
-      {/* <button onClick={increment}>Increment Count</button>  */}
-    </div>
+    </FlashCardContainer>
   );
 };
 
 export default FlashCard;
+
