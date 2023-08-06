@@ -122,7 +122,7 @@ const FlashCardContainer = styled.div`
 
 const FlashCardItem = styled.div`
   flex: 0 0 calc(25% - 10px); /* Set the width to 25% minus the gap */
-  height: 400px;
+  height: 300px;
   margin: 0;
   overflow: visible;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

@@ -19,11 +19,11 @@ const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
       sx={{
         py: 4,
         background: "#0b490b",
-        position: "absolute",
+        position: "relative",
         bottom: 0,
         left: 0,
         right: 0,
-        m: 0,
+        marginTop: 200,
         p:0,
         width: "100%",
         display: "flex",

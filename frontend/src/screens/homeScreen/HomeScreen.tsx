@@ -1,8 +1,11 @@
-import { Container, Grid, Box } from '@mui/material';
-import HomeCarousel from '../../components/homeScreen/HomeCarousel';
-import HomeServiceCategoryCard from '../../components/homeScreen/HomeServiceCategoryCard';
-import { ProductItem } from '../../components/homeScreen/productItem';
-import FlashCard from '../../components/homeScreen/Flashcard';
+// import React from "react";
+import styled from "styled-components";
+import { Container, Grid, Box } from "@mui/material";
+import HomeCarousel from "../../components/homeScreen/HomeCarousel";
+import HomeServiceCategoryCard from "../../components/homeScreen/HomeServiceCategoryCard";
+import { ProductItem } from "../../components/homeScreen/productItem";
+import FlashCard from "../../components/homeScreen/Flashcard";
+import Wrapper from "../../components/homeScreen/Wrapper";
 import './home.css';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
@@ -45,7 +48,11 @@ const dummyProductItems: ProductItem[] = [
     cover: '/src/assets/images/Carrots.jpg', // Add the URL or path to the product cover image
   },
 ]
- 
+
+const PageContainer = styled.div`
+background-color: #faeda5; // Set your desired background color here
+
+`;
 
 const HomeScreen = () => {
   const images = [chef1, farmproducts, food1];
@@ -64,6 +71,10 @@ const HomeScreen = () => {
         <h1 style={{ color: 'green' }}>Shop Here</h1>
         <FlashCard productItems={dummyProductItems} />
       </Box>
+      <PageContainer>
+        <Wrapper />
+      </PageContainer>
+      
     </div>
   );
 };

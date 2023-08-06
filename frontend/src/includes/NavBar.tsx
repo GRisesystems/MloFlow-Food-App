@@ -24,7 +24,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#0b490b',color:'white'}}>
+    <AppBar position="static" sx={{ backgroundColor: '#FFD700',color:'white'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -68,7 +68,7 @@ function NavBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#82c12a", transition: "200ms ease-in" }, }}
+                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
               >
                 {page}
               </Button>
