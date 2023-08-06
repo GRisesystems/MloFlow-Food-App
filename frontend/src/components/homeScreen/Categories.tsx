@@ -1,29 +1,29 @@
 import { Box, Grid, List, Divider, Typography,  Link} from '@mui/material';
-
+// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const categories = [
   {
     title: 'Fruits & Vegetables',
-    description: ['{'>'}  Nut & Seed', '{'>'} Oils', 'Contact us', '{'>'} Fruits', '{'>'} Tomatoes', '{'>'} Soup ' ],
+    description: [' Nut & Seed', 'Oils',  'Fruits', 'Tomatoes', 'Soup ' ],
   },
   {
     title: 'Dairy Products',
-    description: ['{'>'}  Nut & Seed', '{'>'} Oils', 'Contact us', '{'>'} Fruits', '{'>'} Tomatoes', '{'>'} Soup ' ],
+    description: ['Cream', ' Butter',  'Fermented', 'Yogurt', 'Cheese ' ],
   },
   {
-    title: 'Package Foods',
-    description: ['{'>'}  Nut & Seed', '{'>'} Oils', 'Contact us', '{'>'} Fruits', '{'>'} Tomatoes', '{'>'} Soup ' ],
+    title: 'Packaged Foods',
+    description: ['Cookies', ' Cornmeal', ' French fries', ' Energy bars', 'Flour ' ],
   },
   {
     title: 'Beverages',
-    description: ['{'>'}  Nut & Seed', '{'>'} Oils', 'Contact us', '{'>'} Fruits', '{'>'} Tomatoes', '{'>'} Soup ' ],
+    description: ['Coffee', ' Juice', 'Tea', ' Fruits', ' Milk', ],
   },
   {
     title: 'Health & Wellness',
-    description: ['{'>'}  Nut & Seed', '{'>'} Oils', 'Contact us', '{'>'} Fruits', '{'>'} Tomatoes', '{'>'} Soup ' ],
+    description: ['Sea Food', 'Grains', ' Veggies', 'Water', 'Roughages ' ],
   },
   {
     title: 'Grocery & Staples',
-    description: ['{'>'}  Nut & Seed', '{'>'} Oils', 'Contact us', '{'>'} Fruits', '{'>'} Tomatoes', '{'>'} Soup ' ],
+    description: ['Oatmeal', ' Spice', ' Beans', ' Soy Sauce', ' Spice ' ],
   },
   
 ];
@@ -48,15 +48,15 @@ const FoodCategory = () => {
           {category.title}
         </Typography>
           {category.description.map((item) => (
-            <List>
-              <Link href="#"  sx={{color:"#000",textDecoration: 'none', "&:hover": {color: '#ffb717' },}} >
+            <List sx={{paddingLeft:3,}}>
+              <Link  href="#"  sx={{color:"#000",textDecoration: 'none', "&:hover": {color: '#ffb717' },}} >
+                {/* <ChevronRightIcon /> */}
                 {item}
               </Link>
               </List>
           ))}
       </Grid>
     ))}
-    <Divider orientation="vertical"  flexItem sx={{maxHeight:'150px', marginTop:4,}}/>
   </Grid>
   </Box>
   );
