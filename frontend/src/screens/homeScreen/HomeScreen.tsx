@@ -1,4 +1,5 @@
 // import React from "react";
+
 import styled from "styled-components";
 import { Container, Grid, Box } from "@mui/material";
 import HomeCarousel from "../../components/homeScreen/HomeCarousel";
@@ -50,7 +51,7 @@ const dummyProductItems: ProductItem[] = [
 ]
 
 const PageContainer = styled.div`
-background-color: #faeda5; // Set your desired background color here
+background-color: #F5F5F5; // Set your desired background color here
 
 `;
 

@@ -18,7 +18,7 @@ const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
       component="footer"
       sx={{
         py: 4,
-        background: "#0b490b",
+        background: "#FFA000",
         position: "relative",
         bottom: 0,
         left: 0,
@@ -86,8 +86,8 @@ const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({
         display: "block",
         marginBottom: 2,
         fontSize: 18,
-        color: "#a69b9b",
-        "&:hover": { color: "#82c12a", transition: "200ms ease-in" },
+        color: "#F5F5F5",
+        "&:hover": { color: "#AC8F00", transition: "200ms ease-in" },
       }}
     >
       {children}
