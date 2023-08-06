@@ -54,9 +54,9 @@ const FoodCategory = () => {
               </Link>
               </List>
           ))}
-    <Divider orientation="vertical"  flexItem sx={{maxHeight:'150px', marginTop:4,}}/>
       </Grid>
     ))}
+    <Divider orientation="vertical"  flexItem sx={{maxHeight:'150px', marginTop:4,}}/>
   </Grid>
   </Box>
   );
