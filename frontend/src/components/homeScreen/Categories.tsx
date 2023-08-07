@@ -3,27 +3,27 @@ import { Box, Grid, List, Divider, Typography,  Link} from '@mui/material';
 const categories = [
   {
     title: 'Fruits & Vegetables',
-    description: [' Nut & Seed', 'Oils',  'Fruits', 'Tomatoes', 'Soup ' ],
+    description: ['>  Nut & Seed', '>  Oils',  '>  Fruits', '>  Tomatoes', '>  Soup' ],
   },
   {
     title: 'Dairy Products',
-    description: ['Cream', ' Butter',  'Fermented', 'Yogurt', 'Cheese ' ],
+    description: ['>  Cream', '>  Butter',  '>  Fermented', '>  Yogurt', '>  Cheese' ],
   },
   {
     title: 'Packaged Foods',
-    description: ['Cookies', ' Cornmeal', ' French fries', ' Energy bars', 'Flour ' ],
+    description: ['>  Cookies', '>  Cornmeal', '>  French fries', '>  Energy bars', '>  Flour' ],
   },
   {
     title: 'Beverages',
-    description: ['Coffee', ' Juice', 'Tea', ' Fruits', ' Milk', ],
+    description: ['>  Coffee', '>  Juice', '>  Tea', '>  Fruits', '>  Milk'],
   },
   {
     title: 'Health & Wellness',
-    description: ['Sea Food', 'Grains', ' Veggies', 'Water', 'Roughages ' ],
+    description: ['>  Sea Food', '>  Grains', '>  Veggies', '>  Water', '>  Roughages' ],
   },
   {
     title: 'Grocery & Staples',
-    description: ['Oatmeal', ' Spice', ' Beans', ' Soy Sauce', ' Spice ' ],
+    description: ['>  Oatmeal', '>  Rice', '>  Beans', '>  Soy Sauce', '>  Spice' ],
   },
   
 ];

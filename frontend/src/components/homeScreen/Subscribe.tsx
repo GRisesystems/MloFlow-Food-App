@@ -5,7 +5,7 @@ const Subscription = () => {
     <Box
         sx={{
             height: 'auto',
-            padding: '8px',
+            padding: '1rem',
             backgroundColor: '#ffb717',
             textAlign: 'center',
         }}
@@ -23,7 +23,7 @@ const Subscription = () => {
           sx={ { borderRadius: '3rem', backgroundColor:'#ffffff',  "& fieldset": { border: 'none'}, width:400, paddingRight:0,}}
           InputProps = {{
             endAdornment: (
-                <InputAdornment position='start'>
+                <InputAdornment position='start' sx={{fontWeight:900,}}>
                     <ArrowRightAltSharp sx={{ "&:hover": {
     backgroundColor: "#ffb717",  padding: '1rem 1.6rem', color: '#ffffff', right:0, outline:'1px solid #000000', borderRadius:'0 3rem 3rem 0'
   },
