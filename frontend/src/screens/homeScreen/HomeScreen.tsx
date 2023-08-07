@@ -56,15 +56,15 @@ background-color: #F5F5F5; // Set your desired background color here
 `;
 
 const HomeScreen = () => {
-  const images = [chef1, farmproducts, food1];
+  const categories = [{"image":chef1,name:"Chefs"},{"image":farmproducts, name:"Farm Produce"},{"image":food1,name:"Food Delivery"}];
 
   return (
     <div>
       <HomeCarousel />
       <Container sx={{ mt: 3 }}>
-        <Grid container spacing={5}>
-          {images.map((image, index) => (
-            <HomeServiceCategoryCard key={index} background_image={image} />
+        <Grid container spacing={7}>
+          {categories.map((category, index) => (
+            <HomeServiceCategoryCard key={index} background_image={category.image} category_name={category.name}/>
           ))}
         </Grid>
       </Container>
