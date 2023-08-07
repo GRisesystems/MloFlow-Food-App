@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box,Button } from '@mui/material';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
@@ -66,14 +66,32 @@ const HomeCarousel: React.FC = () => {
 
 const CarouselSlide: React.FC<CarouselSlideProps> = ({ image }) => {
   return (
-    <Box position="relative" width="100%" height="100%">
+    <Box position="relative" width="100%" height="400px"> {/* Set a fixed height for the carousel */}
       <img src={image} alt={`Image ${image}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-      <Box position="absolute" top={0} left={0} padding={2} color="#fff">
+      <Box
+        position="absolute"
+        top={80}
+        left={0}
+        width="100%"
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-end"
+        p={2}
+        // bgcolor="rgba(0, 0, 0, 0.5)"
+        color="white"
+        textAlign="center"
+      >
         <Typography variant="h5">Image Carousel</Typography>
         <Typography variant="body1">This is a simple image carousel with buttons and text above the images.</Typography>
+        <Box mt={2}>
+          <Button variant="contained" color="primary">
+            Click Me
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
 };
+
 
 export default HomeCarousel;
