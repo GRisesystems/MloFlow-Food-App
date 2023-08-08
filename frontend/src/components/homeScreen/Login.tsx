@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Paper } from '@mui/material';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -27,17 +28,17 @@ const defaultTheme = createTheme();
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" >
+   <Container component="main" maxWidth="sm">
+      <Paper elevation={2} style={{ padding: "1rem" }}>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-      <Avatar alt="MloFlow Logo" src="/src/assets/mloflowlogo.jfif"  />
+      <Avatar alt="MloFlow Logo" src="/src/assets/mloflowlogo.jfif" sx={{width:'150px', height:'150px'}}  />
           <Typography component="h1" variant="h4">
             Sign in
           </Typography>
@@ -102,6 +103,7 @@ const defaultTheme = createTheme();
             </Grid>
           </Box>
         </Box>
+        </Paper>
       </Container>
     </ThemeProvider>
   );
