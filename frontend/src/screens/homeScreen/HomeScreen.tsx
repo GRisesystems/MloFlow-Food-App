@@ -12,6 +12,8 @@ import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
 
+
+
 const dummyProductItems: ProductItem[] = [
   {
     id: 1,
@@ -60,6 +62,7 @@ const HomeScreen = () => {
 
   return (
     <div>
+     
       <HomeCarousel />
       <Container sx={{ mt: 3 }}>
         <Grid container spacing={5}>
@@ -75,6 +78,7 @@ const HomeScreen = () => {
       <PageContainer>
         <Wrapper />
       </PageContainer>
+    
       
     </div>
   );
