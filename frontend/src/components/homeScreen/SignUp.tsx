@@ -1,17 +1,6 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import {
-  Checkbox,
-  Button,
-  TextField,
-  Container,
-  Paper,
-  Typography,
-  Grid,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import PhoneNumber from "mui-tel-input"; // Import the PhoneInput component
+import { Checkbox, Button, TextField, Container, Paper, Typography, Grid } from "@mui/material";
 
 type FormData = {
   firstName: string;
@@ -19,12 +8,16 @@ type FormData = {
   email: string;
   phoneNumber: string;
   homeAddress: string;
-  country: string;
+  username: string;
+  password: string;
   agreeToTerms: boolean;
+  confirmPassword: string;
 };
 
 const App: React.FC = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { control, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
+    mode: "onChange", // Enable real-time validation
+  });
 
   const onSubmit = (data: FormData) => {
     console.log(data);
@@ -77,41 +70,17 @@ const App: React.FC = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name="country"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <Select {...field} label="Country" variant="outlined" fullWidth error={!!errors.country}>
-                    <MenuItem value="US">United States (+1)</MenuItem>
-                    <MenuItem value="GB">United Kingdom (+44)</MenuItem>
-                    {/* Add more countries as needed */}
-                  </Select>
-                )}
-              />
-              {errors.country && <span>This field is required</span>}
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <Controller
                 name="phoneNumber"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <PhoneNumber
-                    {...field}
-                    defaultCountry="us" // Set the default country here
-                    label="Phone Number"
-                    variant="outlined"
-                    fullWidth
-                    error={!!errors.phoneNumber}
-                  />
+                  <TextField {...field} label="Phone Number" variant="outlined" fullWidth error={!!errors.phoneNumber} />
                 )}
               />
               {errors.phoneNumber && <span>This field is required</span>}
             </Grid>
-            {/* Agreement checkbox and submit button... */}
             <Grid item xs={12}>
               <Controller
                 name="homeAddress"
@@ -122,6 +91,28 @@ const App: React.FC = () => {
                 )}
               />
               {errors.homeAddress && <span>This field is required</span>}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="username"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <TextField {...field} label="Username" variant="outlined" fullWidth error={!!errors.username} />
+                )}
+              />
+              {errors.username && <span>This field is required</span>}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="password"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <TextField {...field} type="password" label="Password" variant="outlined" fullWidth error={!!errors.password} />
+                )}
+              />
+              {errors.password && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12}>
               <Controller
