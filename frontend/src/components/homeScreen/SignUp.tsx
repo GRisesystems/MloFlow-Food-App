@@ -1,11 +1,18 @@
+// import "mui-tel-input/dist/index.css";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Checkbox, Button, TextField, Container, Paper, Typography, Grid } from "@mui/material";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
+
+
+
+
 
 type FormData = {
   firstName: string;
   surname: string;
   email: string;
+  countryCode: string;
   phoneNumber: string;
   homeAddress: string;
   username: string;
@@ -15,14 +22,15 @@ type FormData = {
 };
 
 const App: React.FC = () => {
-  const { control, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
+  const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
     mode: "onChange", // Enable real-time validation
   });
 
   const onSubmit = (data: FormData) => {
+    const isPhoneNumberValid = matchIsValidTel(data.phoneNumber); // Check if the phone number is valid
+    console.log("Is phone number valid:", isPhoneNumberValid);
     console.log(data);
   };
-
   return (
     <Container component="main" maxWidth="sm">
       <Paper elevation={3} style={{ padding: "20px" }}>
@@ -70,13 +78,21 @@ const App: React.FC = () => {
                 )}
               />
             </Grid>
+            
             <Grid item xs={12}>
               <Controller
                 name="phoneNumber"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <TextField {...field} label="Phone Number" variant="outlined" fullWidth error={!!errors.phoneNumber} />
+                  <MuiTelInput
+                    {...field}
+                    label="Phone Number"
+                    variant="outlined"
+                    fullWidth
+                    defaultCountry="KE" // Set Kenya as the default country
+                    error={!!errors.phoneNumber}
+                  />
                 )}
               />
               {errors.phoneNumber && <span>This field is required</span>}
@@ -92,7 +108,7 @@ const App: React.FC = () => {
               />
               {errors.homeAddress && <span>This field is required</span>}
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <Controller
                 name="username"
                 control={control}
@@ -110,6 +126,17 @@ const App: React.FC = () => {
                 rules={{ required: true }}
                 render={({ field }) => (
                   <TextField {...field} type="password" label="Password" variant="outlined" fullWidth error={!!errors.password} />
+                )}
+              />
+              {errors.password && <span>This field is required</span>}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="confirmPassword"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <TextField {...field} type="password" label="Confirm Password" variant="outlined" fullWidth error={!!errors.password} />
                 )}
               />
               {errors.password && <span>This field is required</span>}
