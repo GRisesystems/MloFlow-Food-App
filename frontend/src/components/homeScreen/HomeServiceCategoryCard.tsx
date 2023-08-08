@@ -1,6 +1,12 @@
 import { Paper, Grid, CardContent, CardActions, Button, Typography } from '@mui/material';
 
-const HomeServiceCategoryCard = ({ background_image }) => {
+
+interface HomeServiceCategoryCardProps {
+  background_image: string; 
+  category_name: string; 
+}
+
+const HomeServiceCategoryCard : React.FC<HomeServiceCategoryCardProps> = ({ background_image,category_name }) => {
   return (
     <Grid item xs={12} sm={4} sx={{ height: '25vw' }}>
       <Paper
@@ -11,14 +17,15 @@ const HomeServiceCategoryCard = ({ background_image }) => {
           display: 'flex',
           flexDirection: 'column',
           transition: 'transform 0.3s ease', // Add transition for smooth zoom effect
+          transform: 'scale(1.1)',
           '&:hover': {
-            transform: 'scale(1.1)', // Zoom out the background image on hover
+            transform: 'scale(1)', // Zoom out the background image on hover
           },
         }}
       >
         <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column',ml:3}}>
-          <Typography variant="h5" component="div" sx={{ mt: 3 }}>
-            Category
+          <Typography variant="h5" component="div" sx={{ mt: 3,color:"green" }}>
+            {category_name}
           </Typography>
         </CardContent>
         <CardActions sx={{ml:3}}>

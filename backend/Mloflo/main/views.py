@@ -1,63 +1,57 @@
-from django.shortcuts import render,redirect
-from django.contrib import messages
-from .forms import customerForm, vendorForm, chefForm
+from . models import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from . serializers import *
 
 # Create your views here.
+@api_view(["POST"])
 def customerInfo(request):
              
     if request.method =="POST":
-        form = customerForm(request.POST,request.FILES)              
-        if form.is_valid():
-            form.save()
-            messages.success = (request, "your information was succefully updated ")
-            return redirect("home")
-            
-    else:
-        form = customerForm()
-       
-    
-    context = {
-            "form": form,           
-              }
-    return render(request,'main/informationForm.html',context)
+        serializer = CustomerSerializer(data =request.data)
+        if serializer.is_valid():
+            serializer.save()
+        
+    return Response(serializer.data)
 
-
+@api_view(["POST"])
 def vendorInfo(request):
      
     if request.method =="POST":
-        form = vendorForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("/")
+        serializer = VendorSerializer(data =request.data)
+        if serializer.is_valid():
+            serializer.save()
         
-    else:
-        form = vendorForm()
-    
-    context = {
-            "form": form
-              }
-    return render(request,'main/informationForm.html',context)
+    return Response(serializer.data)
 
-
+@api_view(["POST"])
 def chefInfo(request):
   
-    if request.method =="POST":        
-        form = chefForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("/")
+    if request.method =="POST":
+        serializer = ChefSerializer(data =request.data)
+        if serializer.is_valid():
+            serializer.save()
         
-    else:
-        form = chefForm()
-    
-    context = {
-            "form": form
-              }
-    return render(request,'main/informationForm.html',context)
+    return Response(serializer.data)
 
-
+@api_view(["GET"])
 def index(request):
-    
-    context = {}
-    return render(request, 'main/index.html')
+    api_urls = {
+        'post customer Information' :'http://127.0.0.1:8000/customer/',
+        'post vendor Information': 'http://127.0.0.1:8000/vendor/',
+        'post chef Information':'http://127.0.0.1:8000/chef/',    
+        'see chefs available':'http://127.0.0.1:8000/chefs_list/',
+        'login':'http://127.0.0.1:8000/login/',
+        'login refresh':'http://127.0.0.1:8000/login/refresh/',
+        'register':'http://127.0.0.1:8000/login/refresh/'       
+    }
+    return Response(api_urls)
 
+@api_view(["GET"])
+def getChef(request):
+    
+    #permission_classes = [IsAuthenticated]         
+    chef = Chef.objects.all()
+    serializer = ChefSerializer(chef, many = True)
+            
+    return Response(serializer.data)
