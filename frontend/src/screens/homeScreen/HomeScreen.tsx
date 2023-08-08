@@ -1,7 +1,6 @@
 // import React from "react";
-
 import styled from "styled-components";
-import { Container, Grid, Box } from "@mui/material";
+import { Container, Grid, Box,CssBaseline } from "@mui/material";
 import HomeCarousel from "../../components/homeScreen/HomeCarousel";
 import HomeServiceCategoryCard from "../../components/homeScreen/HomeServiceCategoryCard";
 import { ProductItem } from "../../components/homeScreen/productItem";
@@ -11,7 +10,6 @@ import './home.css';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
-import Form from '../../components/homeScreen/SignUp';
 
 
 const dummyProductItems: ProductItem[] = [
@@ -61,8 +59,9 @@ const HomeScreen = () => {
   const categories = [{"image":chef1,name:"Chefs"},{"image":farmproducts, name:"Farm Produce"},{"image":food1,name:"Food Delivery"}];
 
   return (
-    <div>
-     
+    // <Box sx={{display:"flex"}}> flexible container
+    <Box>
+      <CssBaseline/>
       <HomeCarousel />
       <Container sx={{ mt: 3 }}>
         <Grid container spacing={7}>
@@ -78,9 +77,9 @@ const HomeScreen = () => {
       <PageContainer>
         <Wrapper />
       </PageContainer>
-    <Form />
-      
-    </div>
+     
+         
+    </Box>
   );
 };
 
