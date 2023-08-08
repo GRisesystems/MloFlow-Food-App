@@ -6,11 +6,14 @@ import HomeCarousel from "../../components/homeScreen/HomeCarousel";
 import HomeServiceCategoryCard from "../../components/homeScreen/HomeServiceCategoryCard";
 import { ProductItem } from "../../components/homeScreen/productItem";
 import FlashCard from "../../components/homeScreen/Flashcard";
+import FoodCategory from "../../components/homeScreen/Categories";
+import Subscription from "../../components/homeScreen/Subscribe";
 import Wrapper from "../../components/homeScreen/Wrapper";
 import './home.css';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
+// import SignIn from "../../components/homeScreen/Login";
 
 const dummyProductItems: ProductItem[] = [
   {
@@ -59,7 +62,7 @@ const HomeScreen = () => {
   const categories = [{"image":chef1,name:"Chefs"},{"image":farmproducts, name:"Farm Produce"},{"image":food1,name:"Food Delivery"}];
 
   return (
-    <div>
+    <div style={{ marginTop: 4, marginBottom:2}}>
       <HomeCarousel />
       <Container sx={{ mt: 3 }}>
         <Grid container spacing={7}>
@@ -75,7 +78,15 @@ const HomeScreen = () => {
       <PageContainer>
         <Wrapper />
       </PageContainer>
-      
+      <Box>
+        <Subscription />
+      </Box>
+      {/* <Box>
+        <SignIn />
+      </Box> */}
+      <Box>
+        <FoodCategory />
+      </Box>
     </div>
   );
 };
