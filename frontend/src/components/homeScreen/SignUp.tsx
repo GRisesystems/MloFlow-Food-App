@@ -1,6 +1,17 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Checkbox, Button, TextField, Container, Paper, Typography, Grid } from "@mui/material";
+import {
+  Checkbox,
+  Button,
+  TextField,
+  Container,
+  Paper,
+  Typography,
+  Grid,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import PhoneNumber from "mui-tel-input"; // Import the PhoneInput component
 
 type FormData = {
   firstName: string;
@@ -8,6 +19,7 @@ type FormData = {
   email: string;
   phoneNumber: string;
   homeAddress: string;
+  country: string;
   agreeToTerms: boolean;
 };
 
@@ -65,17 +77,41 @@ const App: React.FC = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="country"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select {...field} label="Country" variant="outlined" fullWidth error={!!errors.country}>
+                    <MenuItem value="US">United States (+1)</MenuItem>
+                    <MenuItem value="GB">United Kingdom (+44)</MenuItem>
+                    {/* Add more countries as needed */}
+                  </Select>
+                )}
+              />
+              {errors.country && <span>This field is required</span>}
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
               <Controller
                 name="phoneNumber"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <TextField {...field} label="Phone Number" variant="outlined" fullWidth error={!!errors.phoneNumber} />
+                  <PhoneNumber
+                    {...field}
+                    defaultCountry="us" // Set the default country here
+                    label="Phone Number"
+                    variant="outlined"
+                    fullWidth
+                    error={!!errors.phoneNumber}
+                  />
                 )}
               />
               {errors.phoneNumber && <span>This field is required</span>}
             </Grid>
+            {/* Agreement checkbox and submit button... */}
             <Grid item xs={12}>
               <Controller
                 name="homeAddress"
