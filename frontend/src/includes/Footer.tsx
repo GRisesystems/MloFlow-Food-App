@@ -23,7 +23,7 @@ const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
         bottom: 0,
         left: 0,
         right: 0,
-        marginTop: 200,
+        marginTop: 3,
         p:0,
         width: "100%",
         display: "flex",
