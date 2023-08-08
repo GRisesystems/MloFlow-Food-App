@@ -77,8 +77,6 @@ const HomeScreen = () => {
       <PageContainer>
         <Wrapper />
       </PageContainer>
-     
-         
     </Box>
   );
 };
