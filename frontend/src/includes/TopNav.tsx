@@ -100,6 +100,10 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
   }
 
+  const handleDrawerOpen = () => {
+    setIsDrawerVisible(true)
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -111,7 +115,7 @@ export default function ClippedDrawer() {
               sx={{ height: 54 }}
               alt="MloFlow Logo"
               src={logo}
-              />
+            />
           </Link>
           <Search>
             <SearchIconWrapper>
@@ -122,9 +126,25 @@ export default function ClippedDrawer() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto' }}>
-            {isMobileView ? <MenuIcon /> :
-              (
+          {isMobileView ?
+            (
+              <>
+                <IconButton
+                  size="large"
+                  aria-label="user Profile"
+                  color="inherit"
+                  aria-haspopup="true"
+                  onClick={()=>console.log('mobile menu')}
+                >
+                  <Badge >
+                    <MenuIcon />
+                  </Badge>
+                </IconButton>
+              </>
+            )
+            :
+            (
+              <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto' }}>
                 <>
                   {showProfileIcon ? (
                     <IconButton
@@ -166,12 +186,12 @@ export default function ClippedDrawer() {
                   </IconButton>
 
                 </>
-              )
+              </Stack>
+            )
 
-            }
+          }
 
 
-          </Stack>
         </Toolbar>
       </AppBar>
       {isDrawerVisible && (
