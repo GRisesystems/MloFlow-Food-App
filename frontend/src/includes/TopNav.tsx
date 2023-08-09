@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -21,6 +21,8 @@ import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
+import { useMediaQuery, useTheme } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 240;
 
@@ -65,7 +67,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function ClippedDrawer() {
+  const theme = useTheme()
+  const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [showProfileIcon, setshowProfileIcon] = useState(false);
+  const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
+
+  useEffect(() => {
+    // This will run whenever isMobileView changes
+    if (isMobileView) {
+      setshowmobileMenuIcon(true)
+    } 
+  }, [isMobileView]);
+  
+  const handleLogout = () =>{
+    setIsDrawerVisible(!isDrawerVisible)
+    setshowProfileIcon(!setshowProfileIcon)
+  }
+
+  const handleShowProfileIcon = () =>{
+    setshowProfileIcon(!setshowProfileIcon)
+  }
+
   const handleProfileMenuOpen = () =>{
     setIsDrawerVisible(!isDrawerVisible)
   }
@@ -93,22 +116,28 @@ export default function ClippedDrawer() {
             />
           </Search>
           <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto' }}>
-              <Link href="/login">
-                <IconButton>Login/Signup</IconButton>
-              </Link>     
+            {isMobileView ? <MenuIcon/>:
+            (
+              <>
+              {showProfileIcon ? (
+                <IconButton
+                size="large"
+                aria-label="user Profile"
+                color="inherit"
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+              >
+                <Badge >
+                  <AccountCircle  />
+                </Badge>
+              <Typography variant="body1">Isaac Kamula</Typography>
+            </IconButton> 
+              ): (
+                <Link>
+                  <IconButton onClick={setshowProfileIcon}>Login/Signup</IconButton>
+                </Link> 
+              )}   
               <IconButton
-              size="large"
-              aria-label="user Profile"
-              color="inherit"
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-            >
-              <Badge >
-                <AccountCircle  />
-              </Badge>
-            <Typography variant="body1">Isaac Kamula</Typography>
-            </IconButton>    
-            <IconButton
               size="large"
               aria-label="Cart"
               color="inherit"
@@ -128,6 +157,13 @@ export default function ClippedDrawer() {
                 <FavoriteBorderIcon />
               </Badge>
             </IconButton>
+
+            </>
+            )
+            
+            }
+                  
+              
           </Stack>
         </Toolbar>
       </AppBar>
@@ -172,7 +208,7 @@ export default function ClippedDrawer() {
                   <ListItemText primary='Help & Support' />
                 </ListItemButton>
             </ListItem>
-            <ListItem  disablePadding>
+            <ListItem  disablePadding onClick={handleLogout}>
                 <ListItemButton>
                   <ListItemIcon>
                     <LogoutIcon />
