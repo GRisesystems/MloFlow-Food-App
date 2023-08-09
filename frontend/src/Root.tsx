@@ -7,7 +7,7 @@ import { FooterContainer } from './includes/Footer'
 const Root = () => {
   return (
     <>
-        <TopNav/>
+        <TopNav/>        
         <NavBar/>
             <Outlet/>
         <FooterContainer />       
