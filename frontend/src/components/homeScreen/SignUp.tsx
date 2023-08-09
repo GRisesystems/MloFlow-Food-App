@@ -1,9 +1,10 @@
 // import "mui-tel-input/dist/index.css";
-import React from "react";
+import React, {useState} from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Checkbox, Button, TextField, Container, Paper, Typography, Grid } from "@mui/material";
+import { Checkbox, Button, TextField, Container, Paper, Typography, Grid, IconButton, InputAdornment } from "@mui/material";
 import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 
 
@@ -22,15 +23,27 @@ type FormData = {
 };
 
 const App: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
     mode: "onChange", // Enable real-time validation
   });
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prevShowConfirmPassword) => !prevShowConfirmPassword);
+  };
+
   const onSubmit = (data: FormData) => {
-    const isPhoneNumberValid = matchIsValidTel(data.phoneNumber); // Check if the phone number is valid
+    const isPhoneNumberValid = matchIsValidTel(data.phoneNumber);
     console.log("Is phone number valid:", isPhoneNumberValid);
     console.log(data);
   };
+
   return (
     <Container component="main" maxWidth="sm">
       <Paper elevation={3} style={{ padding: "20px" }}>
@@ -119,13 +132,32 @@ const App: React.FC = () => {
               />
               {errors.username && <span>This field is required</span>}
             </Grid>
+
+            <Grid container spacing={2}>
+            {/* ... other fields */}
             <Grid item xs={12} sm={6}>
               <Controller
                 name="password"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <TextField {...field} type="password" label="Password" variant="outlined" fullWidth error={!!errors.password} />
+                  <TextField
+                    {...field}
+                    type={showPassword ? "text" : "password"}
+                    label="Password"
+                    variant="outlined"
+                    fullWidth
+                    error={!!errors.password}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={togglePasswordVisibility}>
+                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                 )}
               />
               {errors.password && <span>This field is required</span>}
@@ -136,7 +168,23 @@ const App: React.FC = () => {
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <TextField {...field} type="password" label="Confirm Password" variant="outlined" fullWidth error={!!errors.password} />
+                  <TextField
+                    {...field}
+                    type={showConfirmPassword ? "text" : "password"}
+                    label="Confirm Password"
+                    variant="outlined"
+                    fullWidth
+                    error={!!errors.password}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={toggleConfirmPasswordVisibility}>
+                            {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                 )}
               />
               {errors.password && <span>This field is required</span>}
@@ -157,10 +205,24 @@ const App: React.FC = () => {
               />
               {errors.agreeToTerms && <span>You must agree to the terms and conditions</span>}
             </Grid>
+            <Controller
+                name="agreeToTerms"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
+                   
+                    <span>
+                      Already have an account?<a href="#">Sign in</a>
+                    </span>
+                  </div>
+                )}
+              />
             <Grid item xs={12}>
               <Button type="submit" variant="contained" color="primary" fullWidth>
                 Create Account
               </Button>
+            </Grid>
             </Grid>
           </Grid>
         </form>
