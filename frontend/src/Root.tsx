@@ -7,7 +7,7 @@ import { FooterContainer } from './includes/Footer'
 const Root = () => {
   return (
     <>
-        <TopNav/>
+        <TopNav/>        
         <NavBar/>
             <Outlet/>
             <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
