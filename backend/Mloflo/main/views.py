@@ -3,7 +3,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from . serializers import *
 
+from drf_spectacular.utils import extend_schema
+
 # Create your views here.
+
+
+@extend_schema(responses=CustomerSerializer)
 @api_view(["POST"])
 def customerInfo(request):
              
@@ -14,6 +19,7 @@ def customerInfo(request):
         
     return Response(serializer.data)
 
+@extend_schema(responses=VendorSerializer)
 @api_view(["POST"])
 def vendorInfo(request):
      
@@ -24,6 +30,8 @@ def vendorInfo(request):
         
     return Response(serializer.data)
 
+
+@extend_schema(responses=ChefSerializer)
 @api_view(["POST"])
 def chefInfo(request):
   
@@ -47,6 +55,8 @@ def index(request):
     }
     return Response(api_urls)
 
+
+@extend_schema(responses=ChefSerializer)
 @api_view(["GET"])
 def getChef(request):
     
