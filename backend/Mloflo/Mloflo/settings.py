@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'main',
     'authapp',
+    'category',
     'rest_framework',
 ]
 
