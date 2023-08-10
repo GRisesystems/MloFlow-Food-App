@@ -85,7 +85,7 @@ SIMPLE_JWT = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'MLOFLOW API',
-    'DESCRIPTION': 'Document API,s for the MLOFLOW-FOOD-APP.',
+    'DESCRIPTION': 'Document APIs for the MLOFLOW-FOOD-APP.',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
@@ -152,11 +152,17 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 
@@ -196,8 +202,8 @@ DJOSER = {
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
-        'user_create':'accountAPI.serializers.UserCreateSerializer',
-        'user':'accountsAPI.serializers.UserCreateSerializer',
+        'user_create':'authapp.serializers.UserCreateSerializer',
+        'user':'authapp.serializers.UserCreateSerializer',
         'user_delete':'djoser.serializers.UserDeleteSerializer',
             
         },
