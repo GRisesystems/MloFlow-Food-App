@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'djoser',
 ]
 
-AUTH_USER_MODEL = 'authapp.User'
+
 
 REST_FRAMEWORK = {
      
@@ -219,3 +219,6 @@ DJOSER = {
         
     
 }
+
+
+AUTH_USER_MODEL = 'authapp.User'
