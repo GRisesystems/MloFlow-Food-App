@@ -12,22 +12,40 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Paper } from '@mui/material';
+import axios from 'axios';
+
+import {BASE_URL} from './constants'
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
  const SignIn = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+    await axios.post(`${BASE_URL}/auth/jwt/create/`, data).then(function (response) {
+      console.log(response.status);
+      if (response.status === 200) {
+          // const { access, refresh } = response.data;
+          // localStorage.setItem('accessToken', access);
+          // localStorage.setItem('refreshToken', refresh);
+          // navigate('/home')
+
+      } else {
+          // setErrorMessage('Invalid phone number or password');
+      }
+  }).catch(function (error) {
+    console.log(error)
+      // setErrorMessage('Invalid phone number or password');
+  });
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+  <ThemeProvider theme={defaultTheme}>
    <Container component="main" maxWidth="sm">
       <Paper elevation={2} style={{ padding: "1rem" }}>
         <CssBaseline />
