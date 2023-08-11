@@ -13,14 +13,15 @@ import {BASE_URL} from './constants'
 
 
 type FormData = {
-  firstName: string;
+  first_name: string;
   surname: string;
   email: string;
   countryCode: string;
-  phoneNumber: string;
-  homeAddress: string;
+  phone: string;
+  home_address: string;
   username: string;
   password: string;
+  re_password: string;
   agreeToTerms: boolean;
   confirmPassword: string;
 };
@@ -76,14 +77,14 @@ const App: React.FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Controller
-                name="firstName"
+                name="first_name"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <TextField {...field} label="First Name" variant="outlined" fullWidth error={!!errors.firstName} />
+                  <TextField {...field} label="First Name" variant="outlined" fullWidth error={!!errors.first_name} />
                 )}
               />
-              {errors.firstName && <span>This field is required</span>}
+              {errors.first_name && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
@@ -116,7 +117,7 @@ const App: React.FC = () => {
             
             <Grid item xs={12}>
               <Controller
-                name="phoneNumber"
+                name="phone"
                 control={control}
                 rules={{ required: true, minLength:10 }}
                 render={({ field }) => (
@@ -126,16 +127,16 @@ const App: React.FC = () => {
                     variant="outlined"
                     fullWidth
                     defaultCountry="KE"
-                    error={!!errors.phoneNumber}
+                    error={!!errors.phone}
                     helperText={
-                      errors.phoneNumber
+                      errors.phone
                         ? "This field is required and should be a valid phone number"
                         : ""
                     }
                     onBlur={(e) => {
                       const isValid = matchIsValidTel(e.target.value);
                       if (!isValid) {
-                        setError("phoneNumber", { // Use setError here
+                        setError("phone", { // Use setError here
                           type: "manual",
                           message: "Invalid phone number",
                         });
@@ -144,7 +145,18 @@ const App: React.FC = () => {
                   />
                 )}
               />
-              {errors.phoneNumber && <span>This field is required</span>}
+              {errors.phone && <span>This field is required</span>}
+            </Grid>
+            <Grid item xs={12} sx={{mb:2}}>
+              <Controller
+                name="home_address"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <TextField {...field} label="Home Address" variant="outlined" fullWidth error={!!errors.home_address} />
+                )}
+              />
+              {errors.home_address && <span>This field is required</span>}
             </Grid>
             <Grid container spacing={2}>
             {/* ... other fields */}
@@ -177,7 +189,7 @@ const App: React.FC = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
-                name="confirmPassword"
+                name="re_password"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
@@ -187,7 +199,7 @@ const App: React.FC = () => {
                     label="Confirm Password"
                     variant="outlined"
                     fullWidth
-                    error={!!errors.password}
+                    error={!!errors.re_password}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -200,7 +212,7 @@ const App: React.FC = () => {
                   />
                 )}
               />
-              {errors.password && <span>This field is required</span>}
+              {errors.re_password && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12}>
               <Controller
@@ -226,7 +238,8 @@ const App: React.FC = () => {
                   <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
                    
                     <span>
-                      Already have an account?<a href="/">Sign in</a>
+                      {/* redirect to login page */}
+                      Already have an account?<a href="/login">Sign in</a>
                     </span>
                   </div>
                 )}

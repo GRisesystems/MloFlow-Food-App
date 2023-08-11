@@ -4,7 +4,7 @@ import SignUp from '../../components/signin/SignUp'
 const SignInScreen = () => {
   return (
     <>
-      <SignUp/>
+      <Login/>
     </>
   )
 }
