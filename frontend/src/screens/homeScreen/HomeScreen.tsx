@@ -12,7 +12,7 @@ import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
 import Form from '../../components/homeScreen/SignUp';
 import FoodCategory from "../../components/homeScreen/Categories";
-import SignIn from "../../components/homeScreen/Login";
+import SignIn from "../SignInScreen/Login";
 import Subscription from "../../components/homeScreen/Subscribe";
 
 const dummyProductItems: ProductItem[] = [
