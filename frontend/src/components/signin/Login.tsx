@@ -80,27 +80,53 @@ const defaultTheme = createTheme();
               fullWidth
               variant="contained"
               // onClick={handleClear}
-              sx={{ mt: 3, mb: 2, backgroundColor: '#FFA000', "&:hover": {color: '#FFA000', backgroundColor: '#000',}, }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#FFA000', "&:hover": {color: 'black', backgroundColor: '#FFA000',}, }}
             >
               Sign In
             </Button>
-            <FormControlLabel
-              control={<Checkbox value="remember" sx={{color:'#FFA000', "&:hover": {color: '#FFA000',},  "&:checked": {backgroundColor: '#FFA000',}}}/>}
-              label="Remember me"
-              sx={{color:'#FFA000'}}
-            />
+            
             <Grid container>
-              <Grid item xs>
-                <Link href="/reset_password" variant="body2" sx={{color: '#000', fontSize:'.9rem', fontWeight:600, textDecoration:'none',  "&:hover": {color: '#FFA000', textDecoration:'underline',  }}}>
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2" sx={{color: '#000', fontSize:'.9rem', fontWeight:600, textDecoration:'none',  "&:hover": {color: '#FFA000', textDecoration:'underline',  }}}>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            <Grid item xs={6} sx={{ display: 'flex-start', justifyContent: 'flex-end' }}>
+  <FormControlLabel
+    control={
+      <Checkbox
+        value="remember"
+        sx={{
+          "&.Mui-checked": {
+            color: 'black',
+          },
+          "&:hover": {
+            color: '#FFA000',
+          },
+        }}
+      />
+    }
+    label="Remember me"
+    sx={{ color: 'black', ml: 0 }}
+  />
+</Grid>
+
+
+
+  <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+    <Link
+      href="/reset_password"
+      variant="body2"
+      sx={{
+        color: '#000',
+        fontSize: '.9rem',
+        fontWeight: 600,
+        textDecoration: 'none',
+        "&:hover": { color: '#FFA000', textDecoration: 'underline' },
+        mt:1,
+        ml:12,
+      }}
+    >
+      Forgot password?
+    </Link>
+  </Grid>
+</Grid>
+
           </Box>
         </Box>
         </Paper>

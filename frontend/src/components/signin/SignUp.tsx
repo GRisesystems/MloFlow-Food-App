@@ -12,6 +12,7 @@ import {BASE_URL} from './constants'
 
 
 
+
 type FormData = {
   firstName: string;
   surname: string;
@@ -63,6 +64,7 @@ const App: React.FC = () => {
     });
 
 };
+
 // const history = useHistory();
 
 
@@ -114,38 +116,39 @@ const App: React.FC = () => {
               />
             </Grid>
             
-            <Grid item xs={12}>
-              <Controller
-                name="phoneNumber"
-                control={control}
-                rules={{ required: true, minLength:10 }}
-                render={({ field }) => (
-                  <MuiTelInput
-                    {...field}
-                    label="Phone Number"
-                    variant="outlined"
-                    fullWidth
-                    defaultCountry="KE"
-                    error={!!errors.phoneNumber}
-                    helperText={
-                      errors.phoneNumber
-                        ? "This field is required and should be a valid phone number"
-                        : ""
-                    }
-                    onBlur={(e) => {
-                      const isValid = matchIsValidTel(e.target.value);
-                      if (!isValid) {
-                        setError("phoneNumber", { // Use setError here
-                          type: "manual",
-                          message: "Invalid phone number",
-                        });
-                      }
-                    }}
-                  />
-                )}
-              />
-              {errors.phoneNumber && <span>This field is required</span>}
-            </Grid>
+            <Grid item xs={12} style={{ marginBottom: "16px" }}>
+  <Controller
+    name="phoneNumber"
+    control={control}
+    rules={{ required: true, minLength: 10 }}
+    render={({ field }) => (
+      <MuiTelInput
+        {...field}
+        label="Phone Number"
+        variant="outlined"
+        fullWidth
+        defaultCountry="KE"
+        error={!!errors.phoneNumber}
+        helperText={
+          errors.phoneNumber
+            ? "This field is required and should be a valid phone number"
+            : ""
+        }
+        onBlur={(e) => {
+          const isValid = matchIsValidTel(e.target.value);
+          if (!isValid) {
+            setError("phoneNumber", {
+              type: "manual",
+              message: "Invalid phone number",
+            });
+          }
+        }}
+      />
+    )}
+  />
+  {errors.phoneNumber && <span>This field is required</span>}
+</Grid>
+
             <Grid container spacing={2}>
             {/* ... other fields */}
             <Grid item xs={12} sm={6}>
@@ -203,21 +206,23 @@ const App: React.FC = () => {
               {errors.password && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12}>
-              <Controller
-                name="agreeToTerms"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Checkbox {...field} />
-                    <span>
-                      I agree to the <a href="#">terms and conditions</a>
-                    </span>
-                  </div>
-                )}
-              />
-              {errors.agreeToTerms && <span>You must agree to the terms and conditions</span>}
-            </Grid>
+  <Controller
+    name="agreeToTerms"
+    control={control}
+    rules={{ required: true }}
+    render={({ field }) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Checkbox {...field} style={{color:"black"}}/>
+        <span>
+          I agree to the <a href="#" style={{ color: "#FFA000" }}>terms and conditions</a>
+        </span>
+      </div>
+    )}
+  />
+  {errors.agreeToTerms && <span style={{ color: "#FFA000" }}>You must agree to the terms and conditions</span>}
+</Grid>
+
+
             <Controller
                 name="agreeToTerms"
                 control={control}
@@ -226,15 +231,22 @@ const App: React.FC = () => {
                   <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
                    
                     <span>
-                      Already have an account?<a href="/">Sign in</a>
+                      {/* Already have an account?<a href="/">Sign in</a> */}
                     </span>
                   </div>
                 )}
               />
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
-                Create Account
-              </Button>
+            <Button
+  type="submit"
+  variant="contained"
+  color="primary"
+  fullWidth
+  style={{ backgroundColor: "#FFA000", color: "white" }}
+>
+  Create Account
+</Button>
+
             </Grid>
             </Grid>
           </Grid>
