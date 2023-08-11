@@ -5,6 +5,9 @@ import { Checkbox, Button, TextField, Container, Paper, Typography, Grid, IconBu
 import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
+import {BASE_URL} from './constants'
+
 
 
 
@@ -25,10 +28,16 @@ type FormData = {
 const App: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const methods = useForm<FormData>();
+  const {
+    control,
+    handleSubmit,
+    setError, // Import setError from useForm
+    formState: { errors },
+  } = methods;
 
-  const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
-    mode: "onChange", // Enable real-time validation
-  });
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -38,11 +47,24 @@ const App: React.FC = () => {
     setShowConfirmPassword((prevShowConfirmPassword) => !prevShowConfirmPassword);
   };
 
-  const onSubmit = (data: FormData) => {
-    const isPhoneNumberValid = matchIsValidTel(data.phoneNumber);
-    console.log("Is phone number valid:", isPhoneNumberValid);
-    console.log(data);
-  };
+  const onSubmit = async (data: FormData) => {
+    console.log(data)
+    await axios.post(`${BASE_URL}/auth/users/`, data).then(function (response) {
+        console.log(response.status);
+        if (response.status === 201) {
+            setSuccessMessage('Successfully registered. You can now login.');               
+            
+        } else {                
+            setErrorMessage('Registration Failed');
+        }
+    }).catch(function (error) {
+        console.log(error);
+        setErrorMessage('Registration Failed');
+    });
+
+};
+// const history = useHistory();
+
 
   return (
     <Container component="main" maxWidth="sm">
@@ -96,50 +118,41 @@ const App: React.FC = () => {
               <Controller
                 name="phoneNumber"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true, minLength:10 }}
                 render={({ field }) => (
                   <MuiTelInput
                     {...field}
                     label="Phone Number"
                     variant="outlined"
                     fullWidth
-                    defaultCountry="KE" // Set Kenya as the default country
+                    defaultCountry="KE"
                     error={!!errors.phoneNumber}
+                    helperText={
+                      errors.phoneNumber
+                        ? "This field is required and should be a valid phone number"
+                        : ""
+                    }
+                    onBlur={(e) => {
+                      const isValid = matchIsValidTel(e.target.value);
+                      if (!isValid) {
+                        setError("phoneNumber", { // Use setError here
+                          type: "manual",
+                          message: "Invalid phone number",
+                        });
+                      }
+                    }}
                   />
                 )}
               />
               {errors.phoneNumber && <span>This field is required</span>}
             </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name="homeAddress"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <TextField {...field} label="Home Address" variant="outlined" fullWidth error={!!errors.homeAddress} />
-                )}
-              />
-              {errors.homeAddress && <span>This field is required</span>}
-            </Grid>
-            <Grid item xs={12}>
-              <Controller
-                name="username"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <TextField {...field} label="Username" variant="outlined" fullWidth error={!!errors.username} />
-                )}
-              />
-              {errors.username && <span>This field is required</span>}
-            </Grid>
-
             <Grid container spacing={2}>
             {/* ... other fields */}
             <Grid item xs={12} sm={6}>
               <Controller
                 name="password"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true, minLength:8 }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -213,7 +226,7 @@ const App: React.FC = () => {
                   <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
                    
                     <span>
-                      Already have an account?<a href="#">Sign in</a>
+                      Already have an account?<a href="/">Sign in</a>
                     </span>
                   </div>
                 )}
@@ -226,6 +239,8 @@ const App: React.FC = () => {
             </Grid>
           </Grid>
         </form>
+        {successMessage && <div className="success-message">{successMessage}</div>}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
       </Paper>
     </Container>
   );

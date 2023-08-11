@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,11 +9,24 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { Badge, Stack, useMediaQuery, useTheme } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 
-const pages = ['Chefs', 'Vendors', 'Farm Produce', 'Blog'];
+const pages = ['Home','Chefs', 'Vendors', 'Farm Produce','Contact' ,'Blog'];
 
 function NavBar() {
+  const theme = useTheme()
+  const isMobileView = useMediaQuery(theme.breakpoints.down('sm')); 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+
+
+  // useEffect(() => {
+  //   // This will run whenever isMobileView changes
+  //   if (isMobileView) {
+  //     setShowNavBarDrawer(!showNavBarDrawer)
+  //   }
+  // }, [isMobileView]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -74,6 +87,30 @@ function NavBar() {
               </Button>
             ))}
           </Box>
+          {isMobileView && 
+            <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto',color:'black' }}>
+            <IconButton
+              size="large"
+              aria-label="Cart"
+              color="inherit"
+
+            >
+              <Badge badgeContent={6} color="error">
+                <ShoppingCartCheckoutRoundedIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show favourites"
+              color="inherit"
+              onClick={() => console.log('Profile clicked')}
+            >
+              <Badge badgeContent={17} color="error">
+                <FavoriteBorderIcon />
+              </Badge>
+            </IconButton>
+          </Stack>
+          }
         </Toolbar>
       </Container>
     </AppBar>
