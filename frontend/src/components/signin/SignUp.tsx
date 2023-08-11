@@ -12,6 +12,7 @@ import {BASE_URL} from './constants'
 
 
 
+
 type FormData = {
   first_name: string;
   surname: string;
@@ -64,6 +65,7 @@ const App: React.FC = () => {
     });
 
 };
+
 // const history = useHistory();
 
 
@@ -115,6 +117,7 @@ const App: React.FC = () => {
               />
             </Grid>
             
+
             <Grid item xs={12}>
               <Controller
                 name="phone"
@@ -158,6 +161,7 @@ const App: React.FC = () => {
               />
               {errors.home_address && <span>This field is required</span>}
             </Grid>
+
             <Grid container spacing={2}>
             {/* ... other fields */}
             <Grid item xs={12} sm={6}>
@@ -215,21 +219,23 @@ const App: React.FC = () => {
               {errors.re_password && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12}>
-              <Controller
-                name="agreeToTerms"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Checkbox {...field} />
-                    <span>
-                      I agree to the <a href="#">terms and conditions</a>
-                    </span>
-                  </div>
-                )}
-              />
-              {errors.agreeToTerms && <span>You must agree to the terms and conditions</span>}
-            </Grid>
+  <Controller
+    name="agreeToTerms"
+    control={control}
+    rules={{ required: true }}
+    render={({ field }) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Checkbox {...field} style={{color:"black"}}/>
+        <span>
+          I agree to the <a href="#" style={{ color: "#FFA000" }}>terms and conditions</a>
+        </span>
+      </div>
+    )}
+  />
+  {errors.agreeToTerms && <span style={{ color: "#FFA000" }}>You must agree to the terms and conditions</span>}
+</Grid>
+
+
             <Controller
                 name="agreeToTerms"
                 control={control}
@@ -237,17 +243,21 @@ const App: React.FC = () => {
                 render={({ field }) => (
                   <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
                    
-                    <span>
-                      {/* redirect to login page */}
-                      Already have an account?<a href="/login">Sign in</a>
-                    </span>
+                    
                   </div>
                 )}
               />
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
-                Create Account
-              </Button>
+            <Button
+  type="submit"
+  variant="contained"
+  color="primary"
+  fullWidth
+  style={{ backgroundColor: "#FFA000", color: "white" }}
+>
+  Create Account
+</Button>
+
             </Grid>
             </Grid>
           </Grid>

@@ -10,7 +10,6 @@ import './home.css';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
-
 import FoodCategory from "../../components/homeScreen/Categories";
 import Subscription from "../../components/homeScreen/Subscribe";
 
