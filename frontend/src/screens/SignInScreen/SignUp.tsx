@@ -5,7 +5,6 @@ import { Checkbox, Button, TextField, Container, Paper, Typography, Grid, IconBu
 import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-
 import axios from "axios";
 
 
@@ -63,6 +62,7 @@ const App: React.FC = () => {
     });
 
 };
+// const history = useHistory();
 
 
   return (
@@ -117,7 +117,7 @@ const App: React.FC = () => {
               <Controller
                 name="phoneNumber"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true, minLength:10 }}
                 render={({ field }) => (
                   <MuiTelInput
                     {...field}
@@ -151,7 +151,7 @@ const App: React.FC = () => {
               <Controller
                 name="password"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true, minLength:8 }}
                 render={({ field }) => (
                   <TextField
                     {...field}
