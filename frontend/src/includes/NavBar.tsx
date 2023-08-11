@@ -13,7 +13,7 @@ import { Badge, Stack, useMediaQuery, useTheme } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 
-const pages = ['Chefs', 'Vendors', 'Farm Produce', 'Blog'];
+const pages = ['Home','Chefs', 'Vendors', 'Farm Produce','Contact' ,'Blog'];
 
 function NavBar() {
   const theme = useTheme()

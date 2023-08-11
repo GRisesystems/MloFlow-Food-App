@@ -22,10 +22,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 import { useMediaQuery, useTheme } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import logo from '../assets/mloflowlogo.jfif'
+import { useNavigate } from 'react-router-dom'
 
 
 const drawerWidth = 240;
@@ -76,6 +76,7 @@ export default function ClippedDrawer() {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [showProfileIcon, setshowProfileIcon] = useState(false);
   const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     // This will run whenever isMobileView changes
@@ -85,8 +86,8 @@ export default function ClippedDrawer() {
   }, [isMobileView]);
 
   const handleLogin = () => {
-    // Login function to redirect to sign up and login page
-    console.log('')
+    // nagigate to login screen
+    navigate('/login')
   }
 
   const handleLogout = () => {

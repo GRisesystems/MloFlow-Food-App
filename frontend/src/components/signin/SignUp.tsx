@@ -6,6 +6,7 @@ import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
+import {BASE_URL} from './constants'
 
 
 
@@ -48,7 +49,7 @@ const App: React.FC = () => {
 
   const onSubmit = async (data: FormData) => {
     console.log(data)
-    await axios.post("/api/v1/accounts/register", data).then(function (response) {
+    await axios.post(`${BASE_URL}/auth/users/`, data).then(function (response) {
         console.log(response.status);
         if (response.status === 201) {
             setSuccessMessage('Successfully registered. You can now login.');               
