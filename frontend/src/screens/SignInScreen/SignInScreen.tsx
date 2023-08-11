@@ -31,6 +31,7 @@ const SignInScreen = () => {
   };
 
   return (
+
     <div style={{ display: 'flex' }}>
       <div style={{ flex: 1, padding: '50px', backgroundColor: '#f0f0f0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <p style={{ fontSize: '65px', marginBottom: '16px' }}>
@@ -51,5 +52,6 @@ const SignInScreen = () => {
     </div>
   );
 };
+
 
 export default SignInScreen;

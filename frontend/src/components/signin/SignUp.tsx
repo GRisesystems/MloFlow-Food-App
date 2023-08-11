@@ -14,14 +14,15 @@ import {BASE_URL} from './constants'
 
 
 type FormData = {
-  firstName: string;
+  first_name: string;
   surname: string;
   email: string;
   countryCode: string;
-  phoneNumber: string;
-  homeAddress: string;
+  phone: string;
+  home_address: string;
   username: string;
   password: string;
+  re_password: string;
   agreeToTerms: boolean;
   confirmPassword: string;
 };
@@ -78,14 +79,14 @@ const App: React.FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Controller
-                name="firstName"
+                name="first_name"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <TextField {...field} label="First Name" variant="outlined" fullWidth error={!!errors.firstName} />
+                  <TextField {...field} label="First Name" variant="outlined" fullWidth error={!!errors.first_name} />
                 )}
               />
-              {errors.firstName && <span>This field is required</span>}
+              {errors.first_name && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
@@ -116,38 +117,50 @@ const App: React.FC = () => {
               />
             </Grid>
             
-            <Grid item xs={12} style={{ marginBottom: "16px" }}>
-  <Controller
-    name="phoneNumber"
-    control={control}
-    rules={{ required: true, minLength: 10 }}
-    render={({ field }) => (
-      <MuiTelInput
-        {...field}
-        label="Phone Number"
-        variant="outlined"
-        fullWidth
-        defaultCountry="KE"
-        error={!!errors.phoneNumber}
-        helperText={
-          errors.phoneNumber
-            ? "This field is required and should be a valid phone number"
-            : ""
-        }
-        onBlur={(e) => {
-          const isValid = matchIsValidTel(e.target.value);
-          if (!isValid) {
-            setError("phoneNumber", {
-              type: "manual",
-              message: "Invalid phone number",
-            });
-          }
-        }}
-      />
-    )}
-  />
-  {errors.phoneNumber && <span>This field is required</span>}
-</Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                name="phone"
+                control={control}
+                rules={{ required: true, minLength:10 }}
+                render={({ field }) => (
+                  <MuiTelInput
+                    {...field}
+                    label="Phone Number"
+                    variant="outlined"
+                    fullWidth
+                    defaultCountry="KE"
+                    error={!!errors.phone}
+                    helperText={
+                      errors.phone
+                        ? "This field is required and should be a valid phone number"
+                        : ""
+                    }
+                    onBlur={(e) => {
+                      const isValid = matchIsValidTel(e.target.value);
+                      if (!isValid) {
+                        setError("phone", { // Use setError here
+                          type: "manual",
+                          message: "Invalid phone number",
+                        });
+                      }
+                    }}
+                  />
+                )}
+              />
+              {errors.phone && <span>This field is required</span>}
+            </Grid>
+            <Grid item xs={12} sx={{mb:2}}>
+              <Controller
+                name="home_address"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <TextField {...field} label="Home Address" variant="outlined" fullWidth error={!!errors.home_address} />
+                )}
+              />
+              {errors.home_address && <span>This field is required</span>}
+            </Grid>
 
             <Grid container spacing={2}>
             {/* ... other fields */}
@@ -180,7 +193,7 @@ const App: React.FC = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Controller
-                name="confirmPassword"
+                name="re_password"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
@@ -190,7 +203,7 @@ const App: React.FC = () => {
                     label="Confirm Password"
                     variant="outlined"
                     fullWidth
-                    error={!!errors.password}
+                    error={!!errors.re_password}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -203,7 +216,7 @@ const App: React.FC = () => {
                   />
                 )}
               />
-              {errors.password && <span>This field is required</span>}
+              {errors.re_password && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12}>
   <Controller
@@ -230,9 +243,7 @@ const App: React.FC = () => {
                 render={({ field }) => (
                   <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
                    
-                    <span>
-                      {/* Already have an account?<a href="/">Sign in</a> */}
-                    </span>
+                    
                   </div>
                 )}
               />
