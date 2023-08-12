@@ -2,6 +2,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
+
 # Create your models here.
 
 class UserAccountManager(BaseUserManager):
@@ -15,6 +16,7 @@ class UserAccountManager(BaseUserManager):
         email = email.lower()
 
         user = self.model(
+           
             email = email,
             first_name = first_name,
             surname = surname,
@@ -45,6 +47,7 @@ class UserAccountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
