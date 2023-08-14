@@ -21,7 +21,8 @@ import {BASE_URL} from './constants'
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 const SignIn = () => {
-  const navigate = useNavigate('')
+  const[errorMessage,setErrorMessage] = React.useState('')
+  const navigate = useNavigate()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log('hello')
     event.preventDefault();
@@ -30,21 +31,21 @@ const SignIn = () => {
     //   email: data.get('email'),
     //   password: data.get('password'),
     // });
-    await axios.post(`${BASE_URL}/auth/jwt/create/`, data).then(function (response) {
-      console.log(response.status);
+    await axios.post(`${BASE_URL}/auth/jwt/create/`, data).then(function (response) {      
       if (response.status === 200) {
-          // const { access, refresh } = response.data;
-          // localStorage.setItem('accessToken', access);
-          // localStorage.setItem('refreshToken', refresh);
-          // navigate('/home')
+          const { access, refresh } = response.data;
+          localStorage.setItem('accessToken', access);
+          localStorage.setItem('refreshToken', refresh);
+          navigate('/chefs')
+          window.location.reload();
 
       } else {
         
-          // setErrorMessage('Invalid phone number or password');
+          setErrorMessage('Invalid phone number or password');
       }
   }).catch(function (error) {
     console.log(error)
-    navigate('/chefs')
+    
       // setErrorMessage('Invalid phone number or password');
   });
   };

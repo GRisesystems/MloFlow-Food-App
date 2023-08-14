@@ -71,12 +71,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function ClippedDrawer() {
+  const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [showProfileIcon, setshowProfileIcon] = useState(false);
   const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
+  const[isAuthenticated,setIsAuthenticated] = useState( (accessToken && refreshToken) ? true: false )
   const navigate = useNavigate()
+
+  useEffect(() => {
+    // Check authentication status on initial load
+    setIsAuthenticated(isAuthenticated);
+  }, []);
 
   useEffect(() => {
     // This will run whenever isMobileView changes
@@ -92,8 +101,12 @@ export default function ClippedDrawer() {
 
   const handleLogout = () => {
     // Handle logout fucntionality
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     setIsDrawerVisible(!isDrawerVisible)
     setshowProfileIcon(!setshowProfileIcon)
+    setIsAuthenticated(false)
+    navigate('/login')
   }
 
 
@@ -150,7 +163,7 @@ export default function ClippedDrawer() {
             (
               <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto' }}>
                 <>
-                  {showProfileIcon ? (
+                  {isAuthenticated ? (
                     <IconButton
                       size="large"
                       aria-label="user Profile"
@@ -166,8 +179,21 @@ export default function ClippedDrawer() {
                   ) : (
 
                     <Button onClick={handleLogin}>Log In</Button>
+                    
 
                   )}
+                  {/* <IconButton
+                      size="large"
+                      aria-label="user Profile"
+                      color="inherit"
+                      aria-haspopup="true"
+                      onClick={handleProfileMenuOpen}
+                    >
+                      <Badge >
+                        <AccountCircle />
+                      </Badge>
+                      <Typography variant="body1">Isaac Kamula</Typography>
+                    </IconButton> */}
                   <IconButton
                     size="large"
                     aria-label="Cart"
