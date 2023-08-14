@@ -6,7 +6,9 @@ import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'
 import {BASE_URL} from './constants'
+
 
 
 
@@ -37,6 +39,7 @@ const App: React.FC = () => {
     setError, // Import setError from useForm
     formState: { errors },
   } = methods;
+  const navigate = useNavigate()
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -54,7 +57,8 @@ const App: React.FC = () => {
     await axios.post(`${BASE_URL}/auth/users/`, data).then(function (response) {
         console.log(response.status);
         if (response.status === 201) {
-            setSuccessMessage('Successfully registered. You can now login.');               
+            setSuccessMessage('Successfully registered. You can now login.');  
+            navigate('/login')             
             
         } else {                
             setErrorMessage('Registration Failed');
