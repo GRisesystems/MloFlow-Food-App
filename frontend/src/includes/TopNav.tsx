@@ -106,7 +106,7 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
     setshowProfileIcon(!setshowProfileIcon)
     setIsAuthenticated(false)
-    navigate('/login')
+    navigate('/')
   }
 
 

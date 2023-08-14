@@ -140,7 +140,7 @@ background-color: #F5F5F5; // Set your desired background color here
 `;
 
 const HomeScreen = () => {
-  const categories = [{"image":chef1,name:"Chefs"},{"image":farmproducts, name:"Farm Produce"},{"image":food1,name:"Food Delivery"}];
+  const categories = [{"image":chef1,name:"Chefs"},{"image":farmproducts, name:"Fresh Produce"},{"image":food1,name:"Food Delivery"}];
 
   return (
     // <Box sx={{display:"flex"}}> flexible container
