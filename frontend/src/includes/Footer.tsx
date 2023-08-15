@@ -192,7 +192,7 @@ const FooterColumnTwo: React.FC<{ children: React.ReactNode }> = ({
 
 const FooterTitleFirst: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <h5 style={{color: "white", overflow: "visible", fontWeight: "bold", marginBottom: 2, marginTop: 2}}
+    <h5 style={{color: "white", overflow: "visible", fontSize: '18px', fontWeight: "bold", marginBottom: 2, marginTop: 2  }}
     >
       {children}
     </h5>

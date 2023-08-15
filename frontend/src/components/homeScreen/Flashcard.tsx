@@ -21,6 +21,11 @@ const WishlistButtonContainer = styled.button`
   border: none;
   cursor: pointer;
   font-weight: bold;
+  @media (max-width: 768px) {
+  margin-top: 10px;
+  margin-bottom: 10px;
+     
+  }
 `;
 
 const WishlistIcon = styled(FavoriteIcon)<{ liked: boolean }>`
@@ -62,7 +67,9 @@ const AddToCartButtonText = styled.span`
   color: white;
   font-size: 13px;
   font-weight:bold;
-  
+  @media (max-width: 768px) {
+    margin-right: 20px; /* Add some space between button and price */
+  }
  
 `;
 const AddToCartButton = styled.div`
@@ -80,6 +87,11 @@ const AddToCartButton = styled.div`
   display: flex;
   align-items: center;
   border-radius: 10px;
+  @media (max-width: 768px) {
+    margin-top: 10px; /* Add some space between button and price */
+  }
+
+ 
 `;
 
 const NextArrowButton = styled.button`
@@ -165,7 +177,27 @@ interface FlashCardProps {
   productItems: ProductItem[];
 }
 
+const FlashCardH3 = styled.h3`
+margin: 5px;
+text-align: center;
+position: absolute;
+bottom: 45px;
+left: 0px;
+background-color: black;
+color: white;
+padding: 0px;
+border-radius: 5px;
 
+ 
+`;
+const ProductPrice = styled.span`
+  font-size: 20px;
+  font-weight:bold;
+  color: black;
+  margin-left:15px;
+  margin-top:15px;
+  
+`;
 
 const FlashCardContainer = styled.div`
   display: inline;
@@ -180,32 +212,29 @@ const FlashCardContainer = styled.div`
 `;
 
 const FlashCardItem = styled.div`
-  flex: 0 0 calc(25% - 10px); /* Set the width to 25% minus the gap */
-  height: 330px;
-  margin: 0; 
-  overflow: visible;
-  border-radius: 0px;
-  transition: transform 0.3s ease;
-  display: flex;
+flex: 0;
   flex-direction: column;
-  position: relative;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 20%; /* Cover full width */
+  margin-bottom: 20px; /* Add some space between items */
+  height: auto;
+  display: flex; /* Ensure items stack vertically */
+  justify-content: space-between; /* Align items at the start and end */
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white; /* Add background color to each item */
 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   &:hover {
     transform: scale(0.95);
     
   }
-  
-}
 
-}
 @media (max-width: 768px) {
-  flex: 0 0 100%; /* Full width on smaller screens */
-  margin-bottom: 20px; /* Add some space between items */
-  height: auto;
-}
-${AddToCartButton} {
-  left: 10px;
+flex: 0; 
+flex-direction:column;/* Full width on smaller screens */
+margin-bottom: 20px; /* Add some space between items */
+height: auto;
 }
 `;
 
@@ -219,26 +248,7 @@ const FlashCardImg = styled.img`
 
 `;
 
-const FlashCardH3 = styled.h3`
-margin: 5px;
-text-align: left;
-position: absolute;
-bottom: 5px;
-left: 5px;
 
-color: white;
-padding: 0px;
-border-radius: 5px;
-
- 
-`;
-const ProductPrice = styled.span`
-  font-size: 20px;
-  font-weight:bold;
-  color: black;
-  margin-left:15px;
-  
-`;
 
 
 
