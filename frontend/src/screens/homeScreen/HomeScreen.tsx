@@ -21,35 +21,35 @@ const dummyProductItems: ProductItem[] = [
     name: 'Tomatoes',
     price: 19.99,
     discount: 5,
-    cover: '/src/assets/images/Fresh Produce/Tomatoes.jpg',
+    cover: '/public/Images/Fresh Produce/Tomatoes.jpg',
   },
   {
     id: 2,
     name: 'Pears',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fresh Produce/Pears.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fresh Produce/Pears.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 3,
     name: 'Berries',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fresh Produce/Berries.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fresh Produce/Berries.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 4,
     name: 'Onions',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fresh Produce/Onions.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fresh Produce/Onions.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 5,
     name: 'Carrots',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fresh Produce/Carrots.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fresh Produce/Carrots.jpg', // Add the URL or path to the product cover image
   },
 ]
 
@@ -60,35 +60,35 @@ const fishData: ProductItem[] = [
     name: 'Sardines',
     price: 19.99,
     discount: 5,
-    cover: '/src/assets/images/Fish/Sardines.jpg',
+    cover: '/public/Images/Fish/Sardines.jpg',
   },
   {
     id: 2,
     name: 'Sea Bass',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fish/SeaBass.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fish/SeaBass.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 3,
     name: 'Cod',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fish/Cod.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fish/Cod.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 4,
     name: 'Trout',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fish/Trout.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fish/Trout.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 5,
     name: 'Tuna',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Fish/Tuna.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Fish/Tuna.jpg', // Add the URL or path to the product cover image
   },
   
  
@@ -99,35 +99,35 @@ const poultryData: ProductItem[] = [
     name: 'Chicken',
     price: 19.99,
     discount: 5,
-    cover: '/src/assets/images/Poultry/Chicken.jpg',
+    cover: '/public/Images/Poultry/Chicken.jpg',
   },
   {
     id: 2,
     name: 'Turkey',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Poultry/Turkey.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Poultry/Turkey.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 3,
     name: 'Quail',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Poultry/Quail.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Poultry/Quail.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 4,
     name: 'Duck',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Poultry/Duck.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Poultry/Duck.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 5,
     name: 'Pheasant',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/src/assets/images/Poultry/Pheasant.jpg', // Add the URL or path to the product cover image
+    cover: '/public/Images/Poultry/Pheasant.jpg', // Add the URL or path to the product cover image
   },
   
  
@@ -155,8 +155,33 @@ const HomeScreen = () => {
         </Grid>
       </Container>
       <Box>
-        <h1 style={{ color: 'green' }}>Fresh Produce</h1>
+
+
+     <Box>
+  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between' }}>
+    Farm Produce
+    <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
+      <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
+        <li>Vegetables</li>
+        <li>Fruits</li>
+        <li>Grains</li>
+        <li>Beans</li>
+      </ul>
+      <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
+        Shop Here
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+        </svg>
+      </button>
+    </div>
+  </h1>
+</Box>
+
+
+
+
         <FlashCard productItems={dummyProductItems} />
+        
       </Box>  
       <Box>
       <h1 style={{ color: 'green' }}>Fish</h1>  
