@@ -20,12 +20,12 @@ const SignInScreen = () => {
     cursor: 'pointer',
   };
 
-  const handleMouseEnter = (e) => {
+  const handleMouseEnter = (e:any) => {
     e.currentTarget.style.color = 'black';
     e.currentTarget.style.backgroundColor = '#FFA000';
   };
 
-  const handleMouseLeave = (e) => {
+  const handleMouseLeave = (e:any) => {
     e.currentTarget.style.color = 'black';
     e.currentTarget.style.backgroundColor = showSignUp ? '#FFA000' : '#FFA000';
   };

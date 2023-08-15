@@ -22,6 +22,7 @@ import {BASE_URL} from './constants'
 const defaultTheme = createTheme();
 const SignIn = () => {
   const[errorMessage,setErrorMessage] = React.useState('')
+  console.log(errorMessage)
   const navigate = useNavigate()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log('hello')

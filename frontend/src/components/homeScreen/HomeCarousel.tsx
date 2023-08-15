@@ -34,7 +34,7 @@ const HomeCarousel: React.FC = () => {
         }}
       >
         <ul style={{ margin: '0', padding: '0', listStyle: 'none', display: 'flex' }}>
-          {React.Children.map(dots, (dot, index) => (
+          {React.Children.map(dots, (_, index) => (
             <li
               key={index}
               style={{
