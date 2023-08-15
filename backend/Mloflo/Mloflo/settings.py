@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-uc&_xy5q3skrh9yb^@(+k@6c03rkit6hrwt6=@$omy#*u!=b=$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'main',
     'authapp',
     'rest_framework',
+    'corsheaders',
     
     "phonenumber_field",
     #'django_use_email_as_username.apps.DjangoUseEmailAsUsernameConfig',
@@ -95,6 +96,7 @@ SPECTACULAR_SETTINGS = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -222,3 +224,6 @@ DJOSER = {
 
 
 AUTH_USER_MODEL = 'authapp.User'
+
+# CORS configuration
+CORS_ALLOW_ALL_ORIGINS = True

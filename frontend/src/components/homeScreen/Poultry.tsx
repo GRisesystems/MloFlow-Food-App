@@ -7,6 +7,16 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import styled from "styled-components";
 
+interface poultryFlashcard {
+    name: string;
+    cover: string;
+  }
+  
+  interface PoultryProps {
+    productItems: ProductItem[];
+    poultryData: poultryFlashcard[];
+  }
+
 const LikeButton = styled.div`
   display: none;
   position: absolute;
@@ -106,11 +116,13 @@ const SamplePrevArrow: React.FC<SamplePrevArrowProps> = ({ onClick }) => {
   );
 };
 
-interface FlashCardProps {
+interface PoultryProps {
   productItems: ProductItem[];
+  poultryData: poultryFlashcard[];
+
 }
 
-const FlashCardContainer = styled.div`
+const PoultryContainer = styled.div`
   display: inline;
   flex-wrap: nowrap;
   justify-content: center; /* Change to flex-start to fill the row space */
@@ -120,7 +132,7 @@ const FlashCardContainer = styled.div`
   padding: 10px;
 `;
 
-const FlashCardItem = styled.div`
+const PoultryItem = styled.div`
   flex: 0 0 calc(25% - 10px); /* Set the width to 25% minus the gap */
   height: 300px;
   margin: 0;
@@ -149,7 +161,7 @@ const FlashCardItem = styled.div`
 }
 `;
 
-const FlashCardImg = styled.img`
+const PoultryImg = styled.img`
   flex: 1;
   width: 100%;
   height: 100%;
@@ -157,7 +169,7 @@ const FlashCardImg = styled.img`
   border-radius: 10px 10px 0 0;
 `;
 
-const FlashCardH3 = styled.h3`
+const PoultryH3 = styled.h3`
   margin: 5px;
   text-align: center;
 `;
@@ -179,7 +191,7 @@ const AddToCartButtonSvg = styled(AddShoppingCartIcon)`
 `;
 
 
-const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
+const Poultry: React.FC<PoultryProps> = ({ productItems }) => {
   const [likedCards, setLikedCards] = useState<boolean[]>(Array(productItems.length).fill(false));
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -207,30 +219,30 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
   };
 
   return (
-    <FlashCardContainer>
+    <PoultryContainer>
       <Slider {...settings}>
         {productItems.map((product, index) => {
           return (
-            <FlashCardItem
+            <PoultryItem
               key={product.name}
               onClick={() => handleCardClick(index)}
               className={activeIndex === index ? "active" : ""}
             >
-              <FlashCardImg src={product.cover} alt={product.name} />
-              <FlashCardH3>{product.name}</FlashCardH3>
+              <PoultryImg src={product.cover} alt={product.name} />
+              <PoultryH3>{product.name}</PoultryH3>
               <LikeButton className={likedCards[index] ? "fill" : ""} onClick={() => handleLikeClick(index)}>
                 <LikeButtonSvg className={likedCards[index] ? "fill" : ""} />
               </LikeButton>
               <AddToCartButton>
                 <AddToCartButtonSvg />
               </AddToCartButton>
-            </FlashCardItem>
+            </PoultryItem>
           );
         })}
       </Slider>
-    </FlashCardContainer>
+    </PoultryContainer>
   );
 };
 
-export default FlashCard;
+export default Poultry;
 

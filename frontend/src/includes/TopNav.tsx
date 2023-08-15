@@ -22,9 +22,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 import { useMediaQuery, useTheme } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import logo from '../assets/mloflowlogo.jfif'
+import { useNavigate } from 'react-router-dom'
 
 
 const drawerWidth = 240;
@@ -41,7 +42,7 @@ const Search = styled('div')(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    // width: 'auto',
   },
 }));
 
@@ -70,11 +71,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function ClippedDrawer() {
+  const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [showProfileIcon, setshowProfileIcon] = useState(false);
   const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
+  const[isAuthenticated,setIsAuthenticated] = useState( (accessToken && refreshToken) ? true: false )
+  const navigate = useNavigate()
+  console.log(showProfileIcon)
+  useEffect(() => {
+    // Check authentication status on initial load
+    setIsAuthenticated(isAuthenticated);
+  }, []);
 
   useEffect(() => {
     // This will run whenever isMobileView changes
@@ -84,14 +95,18 @@ export default function ClippedDrawer() {
   }, [isMobileView]);
 
   const handleLogin = () => {
-    // Login function to redirect to sign up and login page
-    console.log('')
+    // nagigate to login screen
+    navigate('/login')
   }
 
   const handleLogout = () => {
     // Handle logout fucntionality
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     setIsDrawerVisible(!isDrawerVisible)
     setshowProfileIcon(!setshowProfileIcon)
+    setIsAuthenticated(false)
+    navigate('/')
   }
 
 
@@ -100,9 +115,9 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
   }
 
-  const handleDrawerOpen = () => {
-    setIsDrawerVisible(true)
-  }
+  // const handleDrawerOpen = () => {
+  //   setIsDrawerVisible(true)
+  // }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -117,15 +132,17 @@ export default function ClippedDrawer() {
               src={logo}
             />
           </Link>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <Box sx={{marginLeft:'auto',width:isMobileView ? '100%':'50%'}}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+          </Box>
           {isMobileView ?
             (
               <>
@@ -137,7 +154,7 @@ export default function ClippedDrawer() {
                   onClick={()=>console.log('mobile menu')}
                 >
                   <Badge >
-                    <MenuIcon />
+                    <MoreHorizIcon />
                   </Badge>
                 </IconButton>
               </>
@@ -146,7 +163,7 @@ export default function ClippedDrawer() {
             (
               <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto' }}>
                 <>
-                  {showProfileIcon ? (
+                  {isAuthenticated ? (
                     <IconButton
                       size="large"
                       aria-label="user Profile"
@@ -162,8 +179,21 @@ export default function ClippedDrawer() {
                   ) : (
 
                     <Button onClick={handleLogin}>Log In</Button>
+                    
 
                   )}
+                  {/* <IconButton
+                      size="large"
+                      aria-label="user Profile"
+                      color="inherit"
+                      aria-haspopup="true"
+                      onClick={handleProfileMenuOpen}
+                    >
+                      <Badge >
+                        <AccountCircle />
+                      </Badge>
+                      <Typography variant="body1">Isaac Kamula</Typography>
+                    </IconButton> */}
                   <IconButton
                     size="large"
                     aria-label="Cart"
