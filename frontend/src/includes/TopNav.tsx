@@ -76,19 +76,13 @@ export default function ClippedDrawer() {
 
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
-  const [showProfileIcon, setshowProfileIcon] = useState(false);
-  const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);  
+ 
   const navigate = useNavigate()
   console.log(isAuthenticated)
   
 
-  useEffect(() => {
-    // This will run whenever isMobileView changes
-    if (isMobileView) {
-      setshowmobileMenuIcon(!mobileMenuIcon)
-    }
-  }, [isMobileView]);
+  
 
   const handleLogin = () => {
     // nagigate to login screen
