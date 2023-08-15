@@ -5,7 +5,9 @@ import {
     Typography,
     TextField,
     Button,
-    Avatar
+    Avatar,
+    useMediaQuery,
+    useTheme
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 
@@ -16,6 +18,8 @@ const LoginForm = () => {
     const [recievedErrorMessage, setRecievedErrorMessage] = useState(false);
     const navigate = useNavigate()
     const { login, errorMessage } = useAuth();
+    const theme = useTheme()
+    const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
 
     const onSubmit = async (data: any) => {
         try {
@@ -31,7 +35,7 @@ const LoginForm = () => {
     };
 
     return (
-        <Box display="flex" justifyContent="center" alignItems="center" maxWidth="sm" sx={{ mt: 3 }}>
+        <Box display="flex" justifyContent="center" alignItems="center" maxWidth="sm" sx={{ mt: isMobileView ? 1: 3,mb:3 }}>
             <Box component="form" noValidate autoComplete="off"
                 onSubmit={
                     handleSubmit(onSubmit)
@@ -43,7 +47,7 @@ const LoginForm = () => {
                 width="100%"
                 maxWidth="400px"
                 sx={
-                    { boxShadow: 3, mt: 4 }
+                    { boxShadow: 3, mt: isMobileView ? 1: 4 }
                 }>
                 <Avatar alt="MloFlow Logo" src="/src/assets/mloflowlogo.jfif" sx={{ height: 54 }} />
                 {/* <Typography variant="h5" component="div" gutterBottom>
@@ -85,7 +89,7 @@ const LoginForm = () => {
                     } />
                 <Button variant="contained"
                     sx={
-                        { mt: 3 }
+                        { mt: 3,backgroundColor: "#FFA000" }
                     }
                     color="success"
                     type="submit">Login
