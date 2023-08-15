@@ -1,6 +1,6 @@
 import  { useState } from 'react';
-import Login from '../../components/signin/Login';
 import SignUp from '../../components/signin/SignUp';
+import LoginForm from '../../components/signin/LoginForm';
 
 const SignInScreen = () => {
   const [showSignUp, setShowSignUp] = useState(false);
@@ -47,7 +47,7 @@ const SignInScreen = () => {
         </button>
       </div>
       <div style={{ flex: 1 }}>
-        {showSignUp ? <SignUp /> : <Login />}
+        {showSignUp ? <SignUp /> : <LoginForm />}
       </div>
     </div>
   );
