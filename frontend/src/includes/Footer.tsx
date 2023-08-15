@@ -120,7 +120,7 @@ const FooterSocialLink: React.FC<{ href: string; icon: React.ReactNode }> = ({
         display: "block",
         marginBottom: 2,
         fontSize: 18,
-        color: "#a69b9b",
+        color: "white",
         "&:hover": { color: "#0b490b", transition: "200ms ease-in" },
       }}
     >
@@ -245,9 +245,9 @@ export function FooterContainer() {
             <FooterColumn>
               <FooterTitle>Contact Us</FooterTitle>
               <FooterLink href="#">Kenya</FooterLink>
-              <FooterLink href="#">Uganda</FooterLink>
+              <FooterLink href="#">Ghana</FooterLink>
               <FooterLink href="#">Nigeria</FooterLink>
-              <FooterLink href="#">Sierra Leone</FooterLink>
+              <FooterLink href="#">South Africa</FooterLink>
             </FooterColumn>
           </Grid>
           
