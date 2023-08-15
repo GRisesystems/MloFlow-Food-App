@@ -81,7 +81,7 @@ export default function ClippedDrawer() {
   const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
   const[isAuthenticated,setIsAuthenticated] = useState( (accessToken && refreshToken) ? true: false )
   const navigate = useNavigate()
-
+  console.log(showProfileIcon)
   useEffect(() => {
     // Check authentication status on initial load
     setIsAuthenticated(isAuthenticated);
@@ -115,9 +115,9 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
   }
 
-  const handleDrawerOpen = () => {
-    setIsDrawerVisible(true)
-  }
+  // const handleDrawerOpen = () => {
+  //   setIsDrawerVisible(true)
+  // }
 
   return (
     <Box sx={{ display: 'flex' }}>

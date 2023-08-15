@@ -244,8 +244,9 @@ const App: React.FC = () => {
                 name="agreeToTerms"
                 control={control}
                 rules={{ required: true }}
-                render={({ field }) => (
+                render={({  }) => (
                   <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
+                   
                    
                     
                   </div>
