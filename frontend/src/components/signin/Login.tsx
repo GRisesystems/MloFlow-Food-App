@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom'
 import {BASE_URL} from './constants'
 
 
-// TODO remove, this demo shouldn't need to reset the theme.
+
 const defaultTheme = createTheme();
 const SignIn = () => {
   const[errorMessage,setErrorMessage] = React.useState('')
