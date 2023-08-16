@@ -11,7 +11,7 @@ import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
 import FoodCategory from "../../components/homeScreen/Categories";
-import Subscription from "../../components/homeScreen/Subscribe";
+import Newsletter from "../../components/homeScreen/Newsletter";
 import Fish from "../../components/homeScreen/Fish";
 import Poultry from "../../components/homeScreen/Poultry";
 
@@ -166,12 +166,12 @@ const HomeScreen = () => {
         <h1 style={{ color: 'green' }}>Poultry</h1>
         <Poultry productItems={poultryData} poultryData={[]} />
       </Box>
+      <FoodCategory />      
       <PageContainer>
         <Wrapper />
        
       </PageContainer>   
-      <Subscription />
-      <FoodCategory />      
+      <Newsletter />
     </Box>
   );
 };

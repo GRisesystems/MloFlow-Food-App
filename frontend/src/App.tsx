@@ -3,7 +3,7 @@ import HomeScreen from "./screens/homeScreen/HomeScreen"
 import SignInScreen from './screens/SignInScreen/SignInScreen'
 import ChefDashBoardScreen from './screens/chefDashboardScreen/ChefDashBoardScreen'
 import Root from './Root'
-
+import FarmProduceScreen from './screens/farmProduceScreen/FarmProduceScreen'
 
 const router = createBrowserRouter(
   // App router configuration. 
@@ -12,6 +12,7 @@ const router = createBrowserRouter(
       <Route index element={<HomeScreen />} />
       <Route path='/login' element={<SignInScreen />} />
       <Route path='/chefs' element={<ChefDashBoardScreen />} />
+      <Route path='/farmproduce' element={<FarmProduceScreen />} />
     </Route>
   )
 )
