@@ -21,35 +21,35 @@ const dummyProductItems: ProductItem[] = [
     name: 'Tomatoes',
     price: 19.99,
     discount: 5,
-    cover: '/public/Images/Fresh Produce/Tomatoes.jpg',
+    cover: '/Images/Fresh Produce/Tomatoes.jpg',
   },
   {
     id: 2,
     name: 'Pears',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fresh Produce/Pears.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fresh Produce/Pears.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 3,
     name: 'Berries',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fresh Produce/Berries.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fresh Produce/Berries.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 4,
     name: 'Onions',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fresh Produce/Onions.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fresh Produce/Onions.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 5,
     name: 'Carrots',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fresh Produce/Carrots.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fresh Produce/Carrots.jpg', // Add the URL or path to the product cover image
   },
 ]
 
@@ -60,35 +60,35 @@ const fishData: ProductItem[] = [
     name: 'Sardines',
     price: 19.99,
     discount: 5,
-    cover: '/public/Images/Fish/Sardines.jpg',
+    cover: '/Images/Fish/Sardines.jpg',
   },
   {
     id: 2,
     name: 'Sea Bass',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fish/SeaBass.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fish/SeaBass.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 3,
     name: 'Cod',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fish/Cod.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fish/Cod.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 4,
     name: 'Trout',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fish/Trout.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fish/Trout.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 5,
     name: 'Tuna',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Fish/Tuna.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Fish/Tuna.jpg', // Add the URL or path to the product cover image
   },
   
  
@@ -99,35 +99,35 @@ const poultryData: ProductItem[] = [
     name: 'Chicken',
     price: 19.99,
     discount: 5,
-    cover: '/public/Images/Poultry/Chicken.jpg',
+    cover: '/Images/Poultry/Chicken.jpg',
   },
   {
     id: 2,
     name: 'Turkey',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Poultry/Turkey.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Poultry/Turkey.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 3,
     name: 'Quail',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Poultry/Quail.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Poultry/Quail.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 4,
     name: 'Duck',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Poultry/Duck.jpg', // Add the URL or path to the product cover image
+    cover: 'Images/Poultry/Duck.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 5,
     name: 'Pheasant',
     price: 29.99,
     discount: 10, // Add a discount value
-    cover: '/public/Images/Poultry/Pheasant.jpg', // Add the URL or path to the product cover image
+    cover: '/Images/Poultry/Pheasant.jpg', // Add the URL or path to the product cover image
   },
   
  
@@ -140,7 +140,7 @@ background-color: #F5F5F5; // Set your desired background color here
 `;
 
 const HomeScreen = () => {
-  const categories = [{"image":chef1,name:"Chefs"},{"image":farmproducts, name:"Fresh Produce"},{"image":food1,name:"Food Delivery"}];
+  const categories = [{"image":chef1,name:"Chefs",btn_title:'Request now'},{"image":farmproducts, name:"Fresh Produce",btn_title:'Order now'},{"image":food1,name:"Food Delivery",btn_title:'Order now'}];
 
   return (
     // <Box sx={{display:"flex"}}> flexible container
@@ -150,7 +150,7 @@ const HomeScreen = () => {
       <Container sx={{ mt: 3 }}>
         <Grid container spacing={7}>
           {categories.map((category, index) => (
-            <HomeServiceCategoryCard key={index} background_image={category.image} category_name={category.name}/>
+            <HomeServiceCategoryCard key={index} background_image={category.image} category_name={category.name} button_title={category.btn_title}/>
           ))}
         </Grid>
       </Container>
