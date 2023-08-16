@@ -8,83 +8,81 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Berries from '../../public/images/Fresh Produce/Berries.jpg';
-import Carrots from '../../public/images/Fresh Produce/Carrots.jpg';
-import Onions from '../../public/images/Fresh Produce/Onions.jpg';
-import Pears from '../../public/images/Fresh Produce/Pears.jpg';
-import Tomatoes from '../../public/images/Fresh Produce/Tomatoes.jpg';
+// import Berries from '../../public/images/Fresh Produce/Berries.jpg';
+// import Carrots from '../../public/images/Fresh Produce/Carrots.jpg';
+// import Onions from '../../public/images/Fresh Produce/Onions.jpg';
+// import Pears from '../../public/images/Fresh Produce/Pears.jpg';
+// import Tomatoes from '../../public/images/Fresh Produce/Tomatoes.jpg';
 import { FavoriteBorder } from '@mui/icons-material';
 import { ShuffleOutlined } from '@mui/icons-material';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from 'react-router-dom';
-interface FarmProduceImages {
-  imageUrl: string;
-}
+
 const products = [
   {
     id:1,
-    imageUrl: {Berries},
+    // imageUrl: {Berries},
     producename: "Berries",
     price: "$ 80.00",
   },
   {
     id:2,
-    imageUrl: {Carrots},
+    // imageUrl: {Carrots},
     producename: "Carrots",
     price: "$ 40.00",
   },
   {
     id:3,
-    imageUrl: {Onions},
+    // imageUrl: {Onions},
     producename: "Onions",
     price: "$ 1.00 per Kg",
   },
   {
     id:4,
-    imageUrl: {Pears},
+    // imageUrl: {Pears},
     producename: "Pears",
     price: "$ 10.00 per Kg",
   },
   {
     id:5,
-    imageUrl: {Tomatoes},
+    // imageUrl: {Tomatoes},
     producename: "Tomatoes",
     price: "$ 100.00 per Kg",
   },
   {
     id:6,
-    imageUrl: {Tomatoes},
+    // imageUrl: {Tomatoes},
     producename: "Kales",
     price: "$ 100.00 per Kg",
   },
   {
     id:7,
-    imageUrl: {Onions},
+    // imageUrl: {Onions},
     producename: "Guava",
     price: "$ 100.00 per Kg",
   },
   {
     id:8,
-    imageUrl: {Pears},
+    // imageUrl: {Pears},
     producename: "Oranges",
     price: "$ 100.00 per Kg",
   },
   {
     id:9,
-    imageUrl: {Carrots},
+    // imageUrl: {Carrots},
     producename: "Cabbage",
     price: "$ 100.00 per Kg",
   },
   {
     id:10,
-    imageUrl: {Berries},
+    // imageUrl: {Berries},
     producename: "Lemon",
     price: "$ 100.00 per Kg",
   },
 ];
 
 const defaultTheme = createTheme();
-const FarmProduce: React.FC<FarmProduceImages> = ({ imageUrl }) => {
+const FarmProduce = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -97,7 +95,6 @@ const FarmProduce: React.FC<FarmProduceImages> = ({ imageUrl }) => {
                   sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardMedia key={product.id} >
-                   <img src={imageUrl}alt="" />
                   </CardMedia>
                   <CardContent sx={{ flexGrow: 1 }}>
                   <CardActions sx={{opacity:0, color:'#FFA000', "&:hover": {opacity: 1 },}}>
