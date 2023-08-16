@@ -17,53 +17,8 @@ interface poultryFlashcard {
     productItems: ProductItem[];
     poultryData: poultryFlashcard[];
   }
-  // interface WishlistButtonProps {
-  //   initialLiked: boolean;
-  //   onToggleLike: () => void;
-  //   amount: number; // Add the amount prop
-  // }
-  
-  // const WishlistButtonContainer = styled.button`
-  //   display: flex;
-  //   align-items: center;
-  //   background: none;
-  //   border: none;
-  //   cursor: pointer;
-  //   font-weight: bold;
-  // `;
-  
-  // const WishlistIcon = styled(FavoriteIcon)<{ liked: boolean }>`
-  //   width: 20px;
-  //   height: 10px;
-  //   fill: ${props => (props.liked ? "red" : "white")};
-  //   margin-right: 5px;
-  // `;
   
   
-  // const WishlistAmount = styled.span`
-  //   font-size: 13px;
-  //   color: black;
-   
-  // `;
-  // const WishlistButton: React.FC<WishlistButtonProps> = ({
-  //   initialLiked,
-  //   onToggleLike,
-  //   amount,
-  // }) => {
-  //   const [liked, setLiked] = useState(initialLiked);
-  
-  //   const handleToggleLike = () => {
-  //     setLiked(!liked);
-  //     onToggleLike();
-  //   };
-  
-  //   return (
-  //     <WishlistButtonContainer onClick={handleToggleLike}>
-  //       <WishlistIcon liked={liked} />
-  //       <WishlistAmount>{amount}</WishlistAmount>
-  //     </WishlistButtonContainer>
-  //   );
-  // };
   
   const AddToCartButtonText = styled.span`
     display: inline-block;
@@ -245,8 +200,6 @@ object-fit: cover;
 border-radius: 10px 10px 10px 10px;
 
 `;
-
-
 
 
 
