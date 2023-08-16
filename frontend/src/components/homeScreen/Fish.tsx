@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Slider, { Settings } from "react-slick";
 import { ProductItem } from "./productItem";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
 // import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import styled from "styled-components";
 import WishlistBtn from "../homeScreen/WishlistBtn";
@@ -18,53 +18,35 @@ interface FishFlashcard {
     fishData: FishFlashcard[]; // Define the FishFlashcard type
   }
 
-interface WishlistButtonProps {
-  initialLiked: boolean;
-  onToggleLike: () => void;
-  amount: number; // Add the amount prop
-}
+// interface WishlistButtonProps {
+//   initialLiked: boolean;
+//   onToggleLike: () => void;
+//   amount: number; // Add the amount prop
+// }
 
-const WishlistButtonContainer = styled.button`
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-`;
+// const WishlistButtonContainer = styled.button`
+//   display: flex;
+//   align-items: center;
+//   background: none;
+//   border: none;
+//   cursor: pointer;
+//   font-weight: bold;
+// `;
 
-const WishlistIcon = styled(FavoriteIcon)<{ liked: boolean }>`
-  width: 20px;
-  height: 10px;
-  fill: ${props => (props.liked ? "red" : "white")};
-  margin-right: 5px;
-`;
+// const WishlistIcon = styled(FavoriteIcon)<{ liked: boolean }>`
+//   width: 20px;
+//   height: 10px;
+//   fill: ${props => (props.liked ? "red" : "white")};
+//   margin-right: 5px;
+// `;
 
 
-const WishlistAmount = styled.span`
-  font-size: 13px;
-  color: black;
+// const WishlistAmount = styled.span`
+//   font-size: 13px;
+//   color: black;
  
-`;
-const WishlistButton: React.FC<WishlistButtonProps> = ({
-  initialLiked,
-  onToggleLike,
-  amount,
-}) => {
-  const [liked, setLiked] = useState(initialLiked);
+// `;
 
-  const handleToggleLike = () => {
-    setLiked(!liked);
-    onToggleLike();
-  };
-
-  return (
-    <WishlistButtonContainer onClick={handleToggleLike}>
-      <WishlistIcon liked={liked} />
-      <WishlistAmount>{amount}</WishlistAmount>
-    </WishlistButtonContainer>
-  );
-};
 
 const AddToCartButtonText = styled.span`
   display: inline-block;
@@ -300,4 +282,3 @@ const Fish: React.FC<FishProps> = ({ productItems }) => {
 };
 
 export default Fish;
-
