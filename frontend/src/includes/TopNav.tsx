@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -26,6 +26,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import logo from '../assets/mloflowlogo.jfif'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../utils/AuthContext'
 
 
 const drawerWidth = 240;
@@ -71,28 +72,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function ClippedDrawer() {
-  const accessToken = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
-  
+  const { isAuthenticated, logout } = useAuth();
+
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
-  const [showProfileIcon, setshowProfileIcon] = useState(false);
-  const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
-  const[isAuthenticated,setIsAuthenticated] = useState( (accessToken && refreshToken) ? true: false )
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);  
+ 
   const navigate = useNavigate()
+  console.log(isAuthenticated)
+  
 
-  useEffect(() => {
-    // Check authentication status on initial load
-    setIsAuthenticated(isAuthenticated);
-  }, []);
-
-  useEffect(() => {
-    // This will run whenever isMobileView changes
-    if (isMobileView) {
-      setshowmobileMenuIcon(!mobileMenuIcon)
-    }
-  }, [isMobileView]);
+  
 
   const handleLogin = () => {
     // nagigate to login screen
@@ -101,12 +91,9 @@ export default function ClippedDrawer() {
 
   const handleLogout = () => {
     // Handle logout fucntionality
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    setIsDrawerVisible(!isDrawerVisible)
-    setshowProfileIcon(!setshowProfileIcon)
-    setIsAuthenticated(false)
-    navigate('/login')
+    logout()
+    setIsDrawerVisible(!isDrawerVisible)     
+    navigate('/')
   }
 
 
@@ -115,10 +102,8 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
   }
 
-  const handleDrawerOpen = () => {
-    setIsDrawerVisible(true)
-  }
-
+ 
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />

@@ -7,11 +7,21 @@ const WrapperContainer = styled.section`
   text-align: center;
   display: inline-block;
   background-color: lightbrown;
+
+  
 `;
 
 const WrapperGrid = styled.div`
   display: flex;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+   gap:20px;
+   align-items:center;
+   padding: 20px;
+  }
+  
 `;
 
 const WrapperImg = styled.div`

@@ -34,7 +34,7 @@ const HomeCarousel: React.FC = () => {
         }}
       >
         <ul style={{ margin: '0', padding: '0', listStyle: 'none', display: 'flex' }}>
-          {React.Children.map(dots, (dot, index) => (
+          {React.Children.map(dots, (_, index) => (
             <li
               key={index}
               style={{
@@ -81,11 +81,10 @@ const CarouselSlide: React.FC<CarouselSlideProps> = ({ image }) => {
         color="white"
         textAlign="center"
       >
-        <Typography variant="h5">Image Carousel</Typography>
-        <Typography variant="body1">This is a simple image carousel with buttons and text above the images.</Typography>
+        <Typography variant="h5" sx={{fontWeight:'bold'}}>Kenya's Exclusive One-Stop Shop for all things food!</Typography>        
         <Box mt={2}>
-          <Button variant="contained" color="primary">
-            Click Me
+          <Button variant="contained" color="success" >
+            Shop Now
           </Button>
         </Box>
       </Box>
