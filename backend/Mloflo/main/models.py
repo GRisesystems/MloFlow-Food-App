@@ -1,8 +1,6 @@
 from django.db import models
 import uuid
 #from django.contrib.auth.models import User
-
-
 # Create your models here.
 
 class Customer(models.Model): 
@@ -10,8 +8,6 @@ class Customer(models.Model):
     #user = models.OneToOneField(User,null = True, on_delete = models.CASCADE,blank=True )
     home_address = models.CharField(max_length = 200,null = True)
     office_address = models.CharField(max_length = 200,null = True)
-   
-    
     class Meta:
         verbose_name_plural = "Customers"
         ordering = ["customer_id"]
@@ -41,7 +37,7 @@ class Vendor(models.Model):
 
 class Chef(models.Model):
     chef_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-   # user = models.OneToOneField(User,null = True, on_delete = models.CASCADE,blank=True )
+    #user = models.OneToOneField(User,null = True, on_delete = models.CASCADE,blank=True )
     speciality = models.CharField(max_length = 100,null = True, blank = False)
     description = models.TextField(max_length = 250,null = True, blank = False)
     qualifications = models.CharField(max_length = 200,null = True, blank = False)

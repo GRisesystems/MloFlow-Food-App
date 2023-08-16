@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'main',
     'authapp',
+    'Category',
+    'products',
     'rest_framework',
     'corsheaders',
     
@@ -62,7 +64,8 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
      
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAdminUser'
     ],
     
     'DEFAULT_FILTER_BACKENDS': [
@@ -71,6 +74,8 @@ REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+
     ],
     
     'DEFAULT_SCHEMA_CLASS':'drf_spectacular.openapi.AutoSchema',
@@ -199,9 +204,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
         'user_create':'authapp.serializers.UserCreateSerializer',
