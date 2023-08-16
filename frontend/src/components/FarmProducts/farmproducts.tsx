@@ -3,99 +3,158 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import Berries from '../../public/images/Fresh Produce/Berries.jpg';
-// import Carrots from '../../public/images/Fresh Produce/Carrots.jpg';
-// import Onions from '../../public/images/Fresh Produce/Onions.jpg';
-// import Pears from '../../public/images/Fresh Produce/Pears.jpg';
-// import Tomatoes from '../../public/images/Fresh Produce/Tomatoes.jpg';
 import { FavoriteBorder } from '@mui/icons-material';
 import { ShuffleOutlined } from '@mui/icons-material';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from 'react-router-dom';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+
+import carrot from "../../assets/farmProduce/Carrots.jpg";
+import berries from "../../assets/farmProduce/Berries.jpg";
+import onion from "../../assets/farmProduce/Onions.jpg";
+import pears from "../../assets/farmProduce/Pears.jpg";
+import tomato from "../../assets/farmProduce/Tomatoes.jpg";
 
 const products = [
   {
     id:1,
-    // imageUrl: {Berries},
+    photo: {berries},
     producename: "Berries",
-    price: "$ 80.00",
+    price: "$ 3.20 per Kg",
   },
   {
     id:2,
-    // imageUrl: {Carrots},
+    photo: {carrot},
     producename: "Carrots",
-    price: "$ 40.00",
+    price: "$ 4.20 per Kg",
   },
   {
     id:3,
-    // imageUrl: {Onions},
+    photo: {onion},
     producename: "Onions",
-    price: "$ 1.00 per Kg",
+    price: "$ 7.49 per Kg",
   },
   {
     id:4,
-    // imageUrl: {Pears},
+    photo: {pears},
     producename: "Pears",
-    price: "$ 10.00 per Kg",
+    price: "$ 19.99, per Kg",
   },
   {
     id:5,
-    // imageUrl: {Tomatoes},
+    photo: {tomato},
     producename: "Tomatoes",
-    price: "$ 100.00 per Kg",
+    price: "$ 10.00 per Kg",
   },
   {
     id:6,
-    // imageUrl: {Tomatoes},
+     photo: {berries},
     producename: "Kales",
-    price: "$ 100.00 per Kg",
+    price: "$ 4.00 per Kg",
   },
   {
     id:7,
-    // imageUrl: {Onions},
+      photo: {berries},
     producename: "Guava",
-    price: "$ 100.00 per Kg",
+    price: "$ 3.00 per Kg",
   },
   {
     id:8,
-    // imageUrl: {Pears},
+      photo: {berries},
     producename: "Oranges",
-    price: "$ 100.00 per Kg",
+    price: "$ 10.00 per Kg",
   },
   {
     id:9,
-    // imageUrl: {Carrots},
+     photo: {berries},
     producename: "Cabbage",
-    price: "$ 100.00 per Kg",
+    price: "$ 8.00 per Kg",
   },
   {
     id:10,
-    // imageUrl: {Berries},
+      photo: {berries},
     producename: "Lemon",
-    price: "$ 100.00 per Kg",
+    price: "$ 6.80 per Kg",
+  },
+  {
+    id:11,
+      photo: {berries},
+    producename: "Avocado",
+    price: "$ 3.00 per Kg",
+  },
+  {
+    id:12,
+      photo: {berries},
+    producename: "Pawpaw",
+    price: "$ 5.49 per Kg",
+  },
+  {
+    id:13,
+      photo: {berries},
+    producename: "Pepper",
+    price: "$ 2.49 per Kg",
+  },
+  {
+    id:14,
+     photo: {berries},
+    producename: "Beans",
+    price: "$ 8.49 per Kg",
+  },
+  {
+    id:15,
+      photo: {berries},
+    producename: "Cassava",
+    price: "$ 8.49 per Kg",
+  },
+  {
+    id:16,
+      photo: {berries},
+    producename: "Cassava",
+    price: "$ 8.49 per Kg",
+  },
+  {
+    id:17,
+     photo: {berries},
+    producename: "Maize",
+    price: "$ 8.49 per Kg",
+  },
+  {
+    id:18,
+      photo: {berries},
+    producename: "Spinach",
+    price: "$ 8.49 per Kg",
+  },
+  {
+    id:19,
+      photo: {berries},
+    producename: "Spinach",
+    price: "$ 8.49 per Kg",
+  },
+  {
+    id:20,
+      photo: {berries},
+    producename: "Spinach",
+    price: "$ 8.49 per Kg",
   },
 ];
 
-const defaultTheme = createTheme();
 const FarmProduce = () => {
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
-      <main>
         <Box sx={{ py: 8, m: 6 }} >
-          <Grid container spacing={2}>
+          <Grid container spacing={2} >
             {products.map((product) => (
-              <Grid  sx={{ display: 'flex', flexWrap: 'wrap', maxWidth:'100vw' }}>
+              <Grid  sx={{ display: 'flex', flexWrap: 'wrap', maxWidth:'15vw', m:4}}>
                 <Card 
                   sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
                 >
-                  <CardMedia key={product.id} >
-                  </CardMedia>
+                       <CardMedia
+                              component="img"
+                              image="{product.photo}"
+                              alt="Paella dish"
+                            />
                   <CardContent sx={{ flexGrow: 1 }}>
                   <CardActions sx={{opacity:0, color:'#FFA000', "&:hover": {opacity: 1 },}}>
                   <FavoriteBorder />
@@ -109,7 +168,7 @@ const FarmProduce = () => {
                    {product.price}
                     </Typography>
                     <Typography sx={{fontWeight:700, color:'000'}}>
-                   <Link to={'/'} color='primary'>Select Options </Link>
+                   <Link to={'/'} >Select Options <DoubleArrowIcon sx={{color:'#FFA000'}}/></Link>
                     </Typography>
                   </CardContent>
                 </Card>
@@ -117,9 +176,6 @@ const FarmProduce = () => {
             ))}
           </Grid>
         </Box>
-      </main>
-
-    </ThemeProvider>
   );
 }
 export default FarmProduce;
