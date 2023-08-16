@@ -53,6 +53,7 @@ const App: React.FC = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword((prevShowConfirmPassword) => !prevShowConfirmPassword);
   };
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const onSubmit = async (data: FormData) => {
     console.log(data)
@@ -228,20 +229,26 @@ const App: React.FC = () => {
               {errors.re_password && <span>This field is required</span>}
             </Grid>
             <Grid item xs={12}>
-  <Controller
-    name="agreeToTerms"
-    control={control}
-    rules={{ required: true }}
-    render={({ field }) => (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <Checkbox {...field} style={{color:"black"}}/>
-        <span>
-          I agree to the <a href="#" style={{ color: "#FFA000" }}>terms and conditions</a>
-        </span>
-      </div>
-    )}
-  />
-  {errors.agreeToTerms && <span style={{ color: "#FFA000" }}>You must agree to the terms and conditions</span>}
+            <Controller
+  name="agreeToTerms"
+  control={control}
+  rules={{ required: true }}
+  render={({ field }) => (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Checkbox
+        {...field}
+        style={{ color: "black" }}
+        onChange={(e) => setAgreeToTerms(e.target.checked)}
+      />
+      <span>
+        I agree to the{" "}
+        <a href="#" style={{ color: "#FFA000" }}>
+          terms and conditions
+        </a>
+      </span>
+    </div>
+  )}
+/>
 </Grid>
 
 
@@ -257,12 +264,18 @@ const App: React.FC = () => {
                 )}
               />
             <Grid item xs={12}>
+            
             <Button
   type="submit"
   variant="contained"
   color="primary"
   fullWidth
-  style={{ backgroundColor: "#FFA000", color: "white" }}
+  style={{
+    backgroundColor: "#FFA000",
+    color: "white",
+    pointerEvents: agreeToTerms ? "auto" : "none", // Disable or enable based on agreeToTerms
+    opacity: agreeToTerms ? 1 : 0.5, // Adjust opacity based on agreeToTerms
+  }}
 >
   Create Account
 </Button>
