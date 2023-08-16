@@ -8,39 +8,6 @@ import WishlistBtn from "../homeScreen/WishlistBtn";
 // import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import styled from "styled-components";
 
-// interface WishlistButtonProps {
-//   initialLiked: boolean;
-//   onToggleLike: () => void;
-//   amount: number; // Add the amount prop
-// }
-
-// const WishlistButtonContainer = styled.button`
-//   display: flex;
-//   align-items: center;
-//   background: none;
-//   border: none;
-//   cursor: pointer;
-//   font-weight: bold;
-//   @media (max-width: 768px) {
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-     
-//   }
-// `;
-
-// const WishlistIcon = styled(FavoriteIcon)<{ liked: boolean }>`
-//   width: 20px;
-//   height: 10px;
-//   fill: ${props => (props.liked ? "red" : "white")};
-//   margin-right: 5px;
-// `;
-
-
-// const WishlistAmount = styled.span`
-//   font-size: 13px;
-//   color: black;
- 
-// `;
 
 const AddToCartButtonText = styled.span`
   display: inline-block;
@@ -228,12 +195,6 @@ const FlashCardImg = styled.img`
   
 
 `;
-
-
-
-
-
-
 
 
 // const AddToCartButtonSvg = styled(AddShoppingCartIcon)`

@@ -18,35 +18,7 @@ interface FishFlashcard {
     fishData: FishFlashcard[]; // Define the FishFlashcard type
   }
 
-// interface WishlistButtonProps {
-//   initialLiked: boolean;
-//   onToggleLike: () => void;
-//   amount: number; // Add the amount prop
-// }
-
-// const WishlistButtonContainer = styled.button`
-//   display: flex;
-//   align-items: center;
-//   background: none;
-//   border: none;
-//   cursor: pointer;
-//   font-weight: bold;
-// `;
-
-// const WishlistIcon = styled(FavoriteIcon)<{ liked: boolean }>`
-//   width: 20px;
-//   height: 10px;
-//   fill: ${props => (props.liked ? "red" : "white")};
-//   margin-right: 5px;
-// `;
-
-
-// const WishlistAmount = styled.span`
-//   font-size: 13px;
-//   color: black;
  
-// `;
-
 
 const AddToCartButtonText = styled.span`
   display: inline-block;
