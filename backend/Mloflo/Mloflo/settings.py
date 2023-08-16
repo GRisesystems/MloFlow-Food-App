@@ -127,10 +127,10 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'django.core.mail.backends.smtp.EmailBackend',
-]
+#AUTHENTICATION_BACKENDS = [
+ #   'django.contrib.auth.backends.ModelBackend',
+  #  'django.core.mail.backends.smtp.EmailBackend',
+#]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com' 
