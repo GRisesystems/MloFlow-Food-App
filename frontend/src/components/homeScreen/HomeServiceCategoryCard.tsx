@@ -30,7 +30,7 @@ const HomeServiceCategoryCard : React.FC<HomeServiceCategoryCardProps> = ({ back
           </Typography>
         </CardContent>
         <CardActions sx={{ml:3}}>
-          <Button size="small" sx={{textTransform:'none'}} color='success' variant="contained">{button_title}</Button>
+          <Button size="small" sx={{textTransform:'none',backgroundColor: '#FFC107'}} color='success' variant="contained">{button_title}</Button>
         </CardActions>
       </Paper>
     </Grid>
