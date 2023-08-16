@@ -1,5 +1,5 @@
 // import React from "react";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { Container, Grid, Box,CssBaseline } from "@mui/material";
 import HomeCarousel from "../../components/homeScreen/HomeCarousel";
@@ -169,14 +169,15 @@ const HomeScreen = () => {
         <li>Grains</li>
         <li>Beans</li>
       </ul>
-      {/* <Link to="/FarmProducts/farmproducts.tsx" style={{ textDecoration: 'none' }}> */}
+
+      <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
   <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
     Shop Here
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
       <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
     </svg>
   </button>
-{/* </Link> */}
+</Link>
     </div>
   </h1>
 </Box>
