@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Slider, { Settings } from "react-slick";
 import { ProductItem } from "./productItem";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
+// import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import styled from "styled-components";
+import WishlistBtn from "../homeScreen/WishlistBtn";
 
 interface FishFlashcard {
     name: string;
@@ -17,26 +18,35 @@ interface FishFlashcard {
     fishData: FishFlashcard[]; // Define the FishFlashcard type
   }
 
-const LikeButton = styled.div`
-  display: none;
+ 
+
+const AddToCartButtonText = styled.span`
+  display: inline-block;
+  margin: 10px;
+  color: white;
+  font-size: 13px;
+  font-weight:bold;
+  
+ 
+`;
+const AddToCartButton = styled.div`
+  display: block;
   position: absolute;
-  bottom: 5px;
-  left: 5px;
-  background-color: rgba(169, 144, 3, 0.8);
-  padding: 5px;
-  border-radius: 50%;
+  bottom: 13px;
+  display: right;
+  right: 25px;
+  padding: 4px;
+  background-color: #FFA000;
+  width: auto; 
+  height: 20px;
+  padding:0px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
 `;
 
-const AddToCartButton = styled.div`
-  display: none;
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  padding: 5px;
-  background-color: rgba(169, 144, 3, 0.8);
-  margin-left: 35px;
-  border-radius: 50%;
-`;
+
 const NextArrowButton = styled.button`
   position: absolute;
   top: 50%;
@@ -122,88 +132,86 @@ interface FishProps {
 }
 
 const FishContainer = styled.div`
-  display: inline;
-  flex-wrap: nowrap;
-  justify-content: center; /* Change to flex-start to fill the row space */
-  gap: 20px; /* Set the desired gap between each flashcard */
-  max-width: 1000px;
-  overflow-x: auto;
-  padding: 10px;
+display: inline;
+flex-wrap: nowrap;
+justify-content: center; /* Change to flex-start to fill the row space */
+height: 100px;
+max-width: 1000px;
+overflow-x: auto;
+padding: 0px;
+background-color: #f0d469;
+`;
+const FishH3 = styled.h3`
+margin: 5px;
+display:block;
+text-align: left;
+position: absolute;
+bottom: 45px;
+background-color: black;
+left: 5px;
+color: white;
+padding: 0px;
+border-radius: 5px;
+`;
+
+
+
+const ProductPrice = styled.span`
+  font-size: 20px;
+  font-weight:bold;
+  color: black;
+  margin-left:15px;
+  
 `;
 
 const FishItem = styled.div`
-  flex: 0 0 calc(25% - 10px); /* Set the width to 25% minus the gap */
-  height: 300px;
-  margin: 0;
-  overflow: visible;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-  display: flex;
+flex: 0;
   flex-direction: column;
-  position: relative;
+  width: 20%; /* Cover full width */
+  margin-bottom: 20px; /* Add some space between items */
+  height: auto;
+  display: flex; /* Ensure items stack vertically */
+  justify-content: space-between; /* Align items at the start and end */
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white; /* Add background color to each item */
 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   &:hover {
     transform: scale(0.95);
-    ${LikeButton} {
-      display: block;
+    
   }
-  ${AddToCartButton} {
-    display: block;
-  }
+
+@media (max-width: 768px) {
+flex: 0; 
+flex-direction:column;/* Full width on smaller screens */
+margin-bottom: 20px; /* Add some space between items */
+height: auto;
 }
-&.active {
-  ${LikeButton} {
-    display: block;
-    background-color: red;
-  }
-}
+
 `;
 
 const FishImg = styled.img`
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-`;
-
-const FishH3 = styled.h3`
-  margin: 5px;
-  text-align: center;
+flex: 1;
+width: 97%;
+height: 100%;
+object-fit: cover;
+border-radius: 10px 10px 10px 10px;
 `;
 
 
 
-const LikeButtonSvg = styled(FavoriteIcon)`
-  width: 20px;
-  height: 20px;
-  fill: white;
-`;
 
-
-
-const AddToCartButtonSvg = styled(AddShoppingCartIcon)`
-  width: 20px;
-  height: 20px;
-  fill: black;
-`;
+// const AddToCartButtonSvg = styled(AddShoppingCartIcon)`
+//   width: 20px;
+//   height: 20px;
+//   fill: black;
+// `;
 
 
 const Fish: React.FC<FishProps> = ({ productItems }) => {
-  const [likedCards, setLikedCards] = useState<boolean[]>(Array(productItems.length).fill(false));
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  const handleLikeClick = (index: number) => {
-    const newLikedCards = [...likedCards];
-    newLikedCards[index] = !newLikedCards[index];
-    setLikedCards(newLikedCards);
-  };
-
-  const handleCardClick = (index: number) => {
-    setActiveIndex(index);
-  };
-
+ 
 
   const settings: Settings = {
     dots: false,
@@ -220,21 +228,23 @@ const Fish: React.FC<FishProps> = ({ productItems }) => {
   return (
     <FishContainer>
       <Slider {...settings}>
-        {productItems.map((product, index) => {
+        {productItems.map((product) => {
           return (
-            <FishItem
-              key={product.name}
-              onClick={() => handleCardClick(index)}
-              className={activeIndex === index ? "active" : ""}
-            >
+            <FishItem key={product.id}>  
               <FishImg src={product.cover} alt={product.name} />
               <FishH3>{product.name}</FishH3>
-              <LikeButton className={likedCards[index] ? "fill" : ""} onClick={() => handleLikeClick(index)}>
-                <LikeButtonSvg className={likedCards[index] ? "fill" : ""} />
-              </LikeButton>
-              <AddToCartButton>
-                <AddToCartButtonSvg />
-              </AddToCartButton>
+              
+              <WishlistBtn
+              initialLiked={false}
+              onToggleLike={() => {
+                // Handle like toggle logic here
+              }}
+              amount={product.price}
+            />
+            <AddToCartButton>
+              <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
+            </AddToCartButton>
+            <ProductPrice>{`$${product.price}`}</ProductPrice>
             </FishItem>
           );
         })}
@@ -244,4 +254,3 @@ const Fish: React.FC<FishProps> = ({ productItems }) => {
 };
 
 export default Fish;
-

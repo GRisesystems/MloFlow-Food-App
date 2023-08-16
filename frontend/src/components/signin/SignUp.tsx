@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import {BASE_URL} from './constants'
 
+import RegisterAlert from "./RegisterAlert";
 
 
 
@@ -43,6 +44,7 @@ const App: React.FC = () => {
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const[showRegisterSuccessModal,setShowRegisterSuccessModal] = useState(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -58,7 +60,8 @@ const App: React.FC = () => {
         console.log(response.status);
         if (response.status === 201) {
             setSuccessMessage('Successfully registered. You can now login.');  
-            navigate('/login')             
+            setShowRegisterSuccessModal(!showRegisterSuccessModal)
+            window.location.reload()             
             
         } else {                
             setErrorMessage('Registration Failed');
@@ -75,7 +78,7 @@ const App: React.FC = () => {
 
   return (
     <Container component="main" maxWidth="sm">
-      <Paper elevation={3} style={{ padding: "20px" }}>
+      <Paper elevation={3} style={{ padding: "20px" }}>        
         <Typography variant="h4" align="center" gutterBottom>
           Create an Account
         </Typography>
@@ -120,7 +123,9 @@ const App: React.FC = () => {
                 )}
               />
             </Grid>
-            
+            {showRegisterSuccessModal &&
+              <RegisterAlert/>
+            }
 
             <Grid item xs={12}>
               <Controller
@@ -244,9 +249,8 @@ const App: React.FC = () => {
                 name="agreeToTerms"
                 control={control}
                 rules={{ required: true }}
-                render={({  }) => (
+                render={({ field }) => (
                   <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
-                   
                    
                     
                   </div>
