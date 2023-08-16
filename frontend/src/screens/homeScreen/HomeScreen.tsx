@@ -150,7 +150,7 @@ const HomeScreen = () => {
       <Container sx={{ mt: 3 }}>
         <Grid container spacing={7}>
           {categories.map((category, index) => (
-            <HomeServiceCategoryCard key={index} background_image={category.image} category_name={category.name} button_title={category.btn_title}/>
+            <HomeServiceCategoryCard key={index} background_image={category.image} category_name={category.name} button_title={category.btn_title} />
           ))}
         </Grid>
       </Container>
