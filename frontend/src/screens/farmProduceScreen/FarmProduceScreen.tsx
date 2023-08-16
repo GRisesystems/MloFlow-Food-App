@@ -5,9 +5,8 @@ import FarmProduce from "../../components/FarmProducts/farmproducts";
 const FarmProduceScreen = () => {
   return (
     <Box >
-
-                   <FarmProduce />
-                    <Paginated  />
+      <FarmProduce />
+      <Paginated />
     </Box>
   );
 }
