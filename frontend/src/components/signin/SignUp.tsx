@@ -39,7 +39,7 @@ const App: React.FC = () => {
     control,
     handleSubmit,
     setError, // Import setError from useForm
-    formState: { errors },
+    formState: { errors, isDirty, dirtyFields },
   } = methods;
   const navigate = useNavigate()
 
@@ -78,7 +78,7 @@ const App: React.FC = () => {
 
 
   return (
-    <Container component="main" maxWidth="sm" sx={{mt:3}}>
+    <Container component="main" maxWidth="sm" sx={{ mt: 3 }}>
       <Paper elevation={3} style={{ padding: "20px" }}>
         <Typography variant="h4" align="center" gutterBottom>
           Create an Account
@@ -173,7 +173,7 @@ const App: React.FC = () => {
             </Grid>
 
             {/* select Account type */}
-            <Grid item xs={12} sx={{mb:2}}>
+            <Grid item xs={12} sx={{ mb: 2 }}>
               <Controller
                 name="category"
                 control={control}
@@ -289,6 +289,7 @@ const App: React.FC = () => {
                   color="primary"
                   fullWidth
                   style={{ backgroundColor: "#FFA000", color: "white" }}
+                  disabled={!isDirty || (!dirtyFields.agreeToTerms && Object.keys(dirtyFields).length === 1)}
                 >
                   Create Account
                 </Button>
