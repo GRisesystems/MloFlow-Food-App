@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Paper } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import logo from '../assets/mloflow.png'
 
 import {BASE_URL} from './constants'
 
@@ -59,7 +60,7 @@ const SignIn = () => {
             alignItems: 'center',
           }}
         >
-      <Avatar alt="MloFlow Logo" src="/src/assets/mloflowlogo.jfif" sx={{width:'150px', height:'150px'}}  />
+      <Avatar alt="MloFlow Logo" src={logo} sx={{width:'150px', height:'150px'}}  />
           <Typography component="h1" variant="h4">
             Sign in
           </Typography>
