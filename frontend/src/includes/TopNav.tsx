@@ -27,6 +27,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import logo from '../assets/mloflow.png'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
+import { useCart } from '../components/homeScreen/Cart/CartUtils'
+import { Link as RouterLink } from 'react-router-dom';
+
 
 
 const drawerWidth = 240;
@@ -71,7 +74,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+
 export default function ClippedDrawer() {
+  
+  const { cart } = useCart(); // Access the cart data
   const { isAuthenticated, logout } = useAuth();
 
   const theme = useTheme()
@@ -102,7 +109,6 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
   }
 
- 
   
   return (
     <Box sx={{ display: 'flex' }}>
@@ -179,16 +185,21 @@ export default function ClippedDrawer() {
                       </Badge>
                       <Typography variant="body1">Isaac Kamula</Typography>
                     </IconButton> */}
+                  
                   <IconButton
-                    size="large"
-                    aria-label="Cart"
-                    color="inherit"
+  size="large"
+  aria-label="Cart"
+  color="inherit"
+>
+<Link to="/cart" component={RouterLink} color="inherit" underline="none">
+        <IconButton size="large" aria-label="Cart" color="inherit">
+          <Badge badgeContent={cart.reduce((total, item) => total + item.quantity, 0)} color="error">
+            <ShoppingCartCheckoutRoundedIcon />
+          </Badge>
+        </IconButton>
+      </Link>
+</IconButton>
 
-                  >
-                    <Badge badgeContent={6} color="error">
-                      <ShoppingCartCheckoutRoundedIcon />
-                    </Badge>
-                  </IconButton>
                   <IconButton
                     size="large"
                     aria-label="show favourites"

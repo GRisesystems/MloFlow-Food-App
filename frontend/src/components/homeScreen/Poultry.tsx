@@ -52,7 +52,7 @@ const NextArrowButton = styled.button`
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
-  background-color: #f0d469; /* Yellow-green background color */
+  background-color: #FFA000; /* Yellow-green background color */
   border: none;
   width: 30px;
   height: 30px;
@@ -73,7 +73,7 @@ const PrevArrowButton = styled.button`
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
-  background-color: #f0d469; /* Yellow-green background color */
+  background-color: #FFA000; /* Yellow-green background color */
   border: none;
   width: 30px;
   height: 30px;
@@ -132,12 +132,13 @@ interface PoultryProps {
 
 }
 const PoultryH3 = styled.h3`
-margin: 25px;
-text-align: center;
+margin: 5px;
+display:block;
+text-align: left;
 position: absolute;
 bottom: 45px;
+background-color: #FFA000;
 left: 1px;
-background-color: black;
 color: white;
 padding: 0px;
 border-radius: 5px;
@@ -148,7 +149,7 @@ border-radius: 5px;
 const ProductPrice = styled.span`
   font-size: 20px;
   font-weight:bold;
-  color: black;
+  color: #FFA000;
   margin-left:15px;
   
 `;

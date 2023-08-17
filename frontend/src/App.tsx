@@ -4,6 +4,8 @@ import SignInScreen from './screens/SignInScreen/SignInScreen'
 import ChefDashBoardScreen from './screens/chefDashboardScreen/ChefDashBoardScreen'
 import Root from './Root'
 import FarmProduceScreen from './screens/farmProduceScreen/FarmProduceScreen'
+
+import Cart from './components/homeScreen/Cart/Cart'
 import AboutScreen from './screens/aboutScreen/AboutScreen'
 import VendorDashboardScreen from './screens/vendorDashboardScreen/VendorDashboardScreen'
 import CustomerDashboardScreen from './screens/customerDashBoardScreen/CustomerDashboardScreen'
@@ -11,6 +13,7 @@ import CheckoutScreen from './screens/checkoutScreen/CheckoutScreen'
 import FishProductsScreen from './screens/fishProductsScreen/FishProductsScreen'
 import CookedProductsScreen from './screens/cookedProductsScreen/CookedProductsScreen'
 import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProductsScreen'
+
 
 const router = createBrowserRouter(
   // App router configuration. 
@@ -25,8 +28,13 @@ const router = createBrowserRouter(
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
+
+      <Route path='/cart' element={<Cart onClose={function (): void {
+        throw new Error('Function not implemented.')
+      } } />} />
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />
+
     </Route>
   )
 )
