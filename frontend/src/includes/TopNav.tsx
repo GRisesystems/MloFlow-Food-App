@@ -24,7 +24,7 @@ import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartChe
 import { useMediaQuery, useTheme } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import logo from '../assets/mloflowlogo.jfif'
+import logo from '../assets/mloflow.png'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
 import { useCart } from '../components/homeScreen/Cart/CartUtils'
@@ -118,7 +118,7 @@ export default function ClippedDrawer() {
           <Link href="/">
             <Box
               component="img"
-              sx={{ height: 54 }}
+              sx={{ height: 64 }}
               alt="MloFlow Logo"
               src={logo}
             />
