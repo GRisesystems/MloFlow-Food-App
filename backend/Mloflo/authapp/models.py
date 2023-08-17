@@ -72,13 +72,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    if_first_time_login = models.BooleanField(default=True)
+    is_first_time_login = models.BooleanField(default=True)
 
 
 
     # {
     #     'category':'chef',
-    #     'if_first_time_login':'True/False',
+    #     'is_first_time_login':'True/False',
     #     'access_token':""
     #     'refresh_token':""
     # }
