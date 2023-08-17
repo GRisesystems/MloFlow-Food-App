@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Typography, Box,Button } from '@mui/material';
+import { Typography, Box, Button } from '@mui/material';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
@@ -67,7 +67,7 @@ const HomeCarousel: React.FC = () => {
 const CarouselSlide: React.FC<CarouselSlideProps> = ({ image }) => {
   return (
     <Box position="relative" width="100%" height="400px"> {/* Set a fixed height for the carousel */}
-      <img src={image} alt={`Image ${image}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      <img src={image} alt={`Image ${image}`} style={{ width: '100%', height: '100%', objectFit: 'cover',filter: 'blur(3px)',  }} />
       <Box
         position="absolute"
         top={80}
@@ -81,7 +81,7 @@ const CarouselSlide: React.FC<CarouselSlideProps> = ({ image }) => {
         color="white"
         textAlign="center"
       >
-        <Typography variant="h5" sx={{fontWeight:'bold'}}>Kenya's Exclusive One-Stop Shop for all things food!</Typography>        
+        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Kenya's Exclusive One-Stop Shop for all things food!</Typography>
         <Box mt={2}>
           <Button variant="contained" color="success" >
             Shop Now

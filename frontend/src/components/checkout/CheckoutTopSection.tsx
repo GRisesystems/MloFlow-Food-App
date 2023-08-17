@@ -1,6 +1,5 @@
-import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import farm_produce from './farm_produce.jpg';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
 const CheckoutTopSection = () => {
@@ -18,8 +17,8 @@ const CheckoutTopSection = () => {
         <Container sx={{ height: '100%', display: 'flex', alignItems: 'center' }}>
           <Typography variant='h5' sx={{ color: 'green', fontWeight: 'bold', textAlign: 'center' }}>
             Check Out
-          </Typography>          
-        </Container>        
+          </Typography>
+        </Container>
       </Box>
     </Box>
   );
