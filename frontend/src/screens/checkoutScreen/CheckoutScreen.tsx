@@ -1,18 +1,21 @@
 import { Box, Container,Grid } from "@mui/material"
 import CheckOutBilingDetailsForm from "../../components/checkout/CheckOutBilingDetailsForm"
 import OrderDetails from "../../components/checkout/OrderDetails"
+import CheckoutTopSection from "../../components/checkout/CheckoutTopSection"
+import ApplyCouponAccordion from "../../components/checkout/ApplyCouponAccordion"
 
 
 const CheckoutScreen = () => {
   return (
     <Box>
-        CheckoutScreen
+        <CheckoutTopSection/>
         <Container>
+            <ApplyCouponAccordion/> 
             <Grid container spacing={2}>
-                <Grid xs={12} md={8}>
+                <Grid xs={12} md={7}>
                     <CheckOutBilingDetailsForm/>
                 </Grid>
-                <Grid xs={12} md={4} sx={{border:'4px solid #a5a8ad'}}>
+                <Grid xs={12} md={5}>
                     <OrderDetails/>
                 </Grid>
 
