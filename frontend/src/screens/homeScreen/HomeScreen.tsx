@@ -23,6 +23,7 @@ const dummyProductItems: ProductItem[] = [
     name: 'Tomatoes',
     price: 19.99,
     discount: 5,
+    description: 'Vegetable',
     cover: '/Images/Fresh Produce/Tomatoes.jpg',
   },
   {
@@ -30,6 +31,7 @@ const dummyProductItems: ProductItem[] = [
     name: 'Pears',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Fresh Produce/Pears.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -37,6 +39,7 @@ const dummyProductItems: ProductItem[] = [
     name: 'Berries',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Fresh Produce/Berries.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -44,12 +47,14 @@ const dummyProductItems: ProductItem[] = [
     name: 'Onions',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Fresh Produce/Onions.jpg', // Add the URL or path to the product cover image
   },
   {
     id: 5,
     name: 'Carrots',
     price: 29.99,
+    description: 'Vegetable',
     discount: 10, // Add a discount value
     cover: '/Images/Fresh Produce/Carrots.jpg', // Add the URL or path to the product cover image
   },
@@ -62,6 +67,7 @@ const fishData: ProductItem[] = [
     name: 'Sardines',
     price: 19.99,
     discount: 5,
+    description: 'Vegetable',
     cover: '/Images/Fish/Sardines.jpg',
   },
   {
@@ -69,6 +75,7 @@ const fishData: ProductItem[] = [
     name: 'Sea Bass',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Fish/SeaBass.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -76,6 +83,7 @@ const fishData: ProductItem[] = [
     name: 'Cod',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Fish/Cod.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -83,6 +91,7 @@ const fishData: ProductItem[] = [
     name: 'Trout',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Fish/Trout.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -90,6 +99,7 @@ const fishData: ProductItem[] = [
     name: 'Tuna',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Fish/Tuna.jpg', // Add the URL or path to the product cover image
   },
   
@@ -101,6 +111,7 @@ const poultryData: ProductItem[] = [
     name: 'Chicken',
     price: 19.99,
     discount: 5,
+    description: 'Vegetable',
     cover: '/Images/Poultry/Chicken.jpg',
   },
   {
@@ -108,6 +119,7 @@ const poultryData: ProductItem[] = [
     name: 'Turkey',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Poultry/Turkey.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -115,6 +127,7 @@ const poultryData: ProductItem[] = [
     name: 'Quail',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Poultry/Quail.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -122,6 +135,7 @@ const poultryData: ProductItem[] = [
     name: 'Duck',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: 'Images/Poultry/Duck.jpg', // Add the URL or path to the product cover image
   },
   {
@@ -129,6 +143,7 @@ const poultryData: ProductItem[] = [
     name: 'Pheasant',
     price: 29.99,
     discount: 10, // Add a discount value
+    description: 'Vegetable',
     cover: '/Images/Poultry/Pheasant.jpg', // Add the URL or path to the product cover image
   },
   
@@ -193,10 +208,8 @@ const HomeScreen = () => {
     Fish
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
-        <li>Vegetables</li>
-        <li>Fruits</li>
-        <li>Grains</li>
-        <li>Beans</li>
+      <li>Freshwater Fish</li>
+        <li>Saltwater Fish</li>
       </ul>
 
       <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
@@ -220,8 +233,9 @@ const HomeScreen = () => {
     Poultry
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
-        <li>Freshwater Fish</li>
-        <li>Saltwater Fish</li>
+       <li>Chicken</li>
+       <li>Poultry</li>
+       <li>Wild birds</li>
         
       </ul>
 

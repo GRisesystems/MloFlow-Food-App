@@ -250,7 +250,7 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
             <ProductPrice>{`$${product.price}`}</ProductPrice>
-            <ProductPrice>{`$${product.price}`}</ProductPrice>
+            
           </FlashCardItem>
         ))}
       </Slider>
