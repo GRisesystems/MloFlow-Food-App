@@ -36,7 +36,7 @@ const CheckOutBilingDetailsForm = () => {
 
   return (
     <Box sx={{ m: 3 }}>
-      <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>Billing Address</Typography>
+      <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>Billing Details</Typography>
       <Box
 
         component="form"
@@ -46,24 +46,26 @@ const CheckOutBilingDetailsForm = () => {
       >
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
+            <label>First Name <span style={{color:'red'}}>*</span></label>
             <Controller
               name="first_name"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField {...field} label="First Name" variant="outlined" fullWidth error={!!errors.first_name} />
+                <TextField {...field}   variant="outlined" fullWidth error={!!errors.first_name} />
               )}
             />
             {errors.first_name && <span>This field is required</span>}
           </Grid>
 
           <Grid item xs={12} sm={6} >
+            <label>Last Name <span style={{color:'red'}}>*</span></label>
             <Controller
               name="last_name"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField  {...field} label="Last Name" variant="outlined" fullWidth error={!!errors.first_name} />
+                <TextField  {...field}  variant="outlined" fullWidth error={!!errors.first_name} />
               )}
             />
             {errors.last_name && <span>This field is required</span>}
@@ -71,23 +73,25 @@ const CheckOutBilingDetailsForm = () => {
         </Grid>
 
         <Box sx={{ mt: 2 }}>
+          <label>Company Name (Optional)</label>
           <Controller
             name="company_name"
             control={control}
             rules={{ required: false }}
             render={({ field }) => (
-              <TextField {...field} label="Company Name (Optional)" variant="outlined" fullWidth />
+              <TextField {...field} variant="outlined" fullWidth />
             )}
           />
         </Box>
 
         <Box sx={{ mt: 2 }}>
+          <label>Country <span style={{color:'red'}}>*</span></label>
           <Controller
             name="country"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <Select {...field} label="Country" variant="outlined" fullWidth error={!!errors.country}>
+              <Select {...field} variant="outlined" fullWidth error={!!errors.country}>
                 {countryData.map((country: { code: string; label: string }) => (
                   <MenuItem key={country.label} value={country.code}>
                     {country.label}
@@ -100,12 +104,13 @@ const CheckOutBilingDetailsForm = () => {
         </Box>
 
         <Box sx={{ mt: 2 }}>
+          <label>Street address <span style={{color:'red'}}>*</span></label>
           <Controller
             name="street_address"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <TextField  {...field} label="Street address" variant="outlined" fullWidth error={!!errors.street_address} />
+              <TextField  {...field} placeholder='House Number and street name'  variant="outlined" fullWidth error={!!errors.street_address} />
             )}
           />
           {errors.street_address && <span>This field is required</span>}
@@ -123,59 +128,64 @@ const CheckOutBilingDetailsForm = () => {
         </Box>
 
         <Box sx={{ mt: 2 }}>
+          <label>Town/City <span style={{color:'red'}}>*</span></label>
           <Controller
             name="town"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <TextField  {...field} label="Town/City" variant="outlined" fullWidth error={!!errors.town} />
+              <TextField  {...field}  variant="outlined" fullWidth error={!!errors.town} />
             )}
           />
           {errors.town && <span>This field is required</span>}
         </Box>
 
         <Box sx={{ mt: 2 }}>
+          <label>County (Optional) </label>
           <Controller
             name="county"
             control={control}
             rules={{ required: false }}
             render={({ field }) => (
-              <TextField  {...field} label="County (Optional)" variant="outlined" fullWidth />
+              <TextField  {...field}  variant="outlined" fullWidth />
             )}
           />
         </Box>
 
         <Box sx={{ mt: 2 }}>
+          <label>Post Code <span style={{color:'red'}}>*</span></label>
           <Controller
             name="post_code"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <TextField  {...field} label="Post Code" variant="outlined" fullWidth error={!!errors.post_code} />
+              <TextField  {...field}  variant="outlined" fullWidth error={!!errors.post_code} />
             )}
           />
           {errors.post_code && <span>This field is required</span>}
         </Box>
 
         <Box sx={{ mt: 2 }}>
+          <label>Phone <span style={{color:'red'}}>*</span></label>
           <Controller
             name="phone_number"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <TextField  {...field} label="Phone *" variant="outlined" fullWidth error={!!errors.phone_number} />
+              <TextField  {...field}  variant="outlined" fullWidth error={!!errors.phone_number} />
             )}
           />
           {errors.phone_number && <span>This field is required</span>}
         </Box>
 
         <Box sx={{ mt: 2 }}>
+          <label>Email <span style={{color:'red'}}>*</span></label>
           <Controller
             name="email"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <TextField  {...field} label="Email *" variant="outlined" fullWidth error={!!errors.email} />
+              <TextField  {...field} variant="outlined" fullWidth error={!!errors.email} />
             )}
           />
           {errors.email && <span>This field is required</span>}
