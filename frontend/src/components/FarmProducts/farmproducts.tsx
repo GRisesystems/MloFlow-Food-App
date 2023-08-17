@@ -17,143 +17,128 @@ import berries from "../../assets/farmProduce/Berries.jpg";
 import onion from "../../assets/farmProduce/Onions.jpg";
 import pears from "../../assets/farmProduce/Pears.jpg";
 import tomato from "../../assets/farmProduce/Tomatoes.jpg";
+import avocado from "../../assets/farmProduce/Avocado.jpg";
+import kales from "../../assets/farmProduce/Kales.jpg";
+import cabbage from "../../assets/farmProduce/Cabbage.jpg";
+import bean from "../../assets/farmProduce/Beans.jpg";
+import apple from "../../assets/farmProduce/Apples.jpg";
+import frenchbean from "../../assets/farmProduce/Frenchbean.jpg";
+import watermelon from "../../assets/farmProduce/Watermelon.jpg";
+import orange from "../../assets/farmProduce/Oranges.jpg";
+import maize  from "../../assets/farmProduce/Maize.jpg";
+import banana  from "../../assets/farmProduce/Banana.jpg";
+
 
 const products = [
   {
     id:1,
-    photo: {berries},
-    producename: "Berries",
+    photo: cabbage,
+    producename: "Cabbage",
     price: "$ 3.20 per Kg",
   },
   {
     id:2,
-    photo: {carrot},
+    photo: carrot,
     producename: "Carrots",
     price: "$ 4.20 per Kg",
   },
   {
     id:3,
-    photo: {onion},
+    photo: onion,
     producename: "Onions",
     price: "$ 7.49 per Kg",
   },
   {
     id:4,
-    photo: {pears},
-    producename: "Pears",
+    photo: kales,
+    producename: "Kales",
     price: "$ 19.99, per Kg",
   },
   {
     id:5,
-    photo: {tomato},
+    photo: tomato,
     producename: "Tomatoes",
     price: "$ 10.00 per Kg",
   },
   {
     id:6,
-     photo: {berries},
-    producename: "Kales",
+    photo: frenchbean,
+    producename: "French Beans",
     price: "$ 4.00 per Kg",
   },
   {
     id:7,
-      photo: {berries},
-    producename: "Guava",
+    photo: maize,
+    producename: "Maize",
     price: "$ 3.00 per Kg",
   },
   {
     id:8,
-      photo: {berries},
-    producename: "Oranges",
+    photo: bean,
+    producename: "Beans",
     price: "$ 10.00 per Kg",
   },
   {
     id:9,
-     photo: {berries},
-    producename: "Cabbage",
+    photo: avocado,
+    producename: "Avocado",
     price: "$ 8.00 per Kg",
   },
   {
     id:10,
-      photo: {berries},
-    producename: "Lemon",
+    photo: banana,
+    producename: "Banana",
     price: "$ 6.80 per Kg",
   },
   {
     id:11,
-      photo: {berries},
-    producename: "Avocado",
-    price: "$ 3.00 per Kg",
+    photo: apple,
+    producename: "Apples",
+    price: "$ 6.80 per Kg",
   },
   {
     id:12,
-      photo: {berries},
-    producename: "Pawpaw",
-    price: "$ 5.49 per Kg",
+    photo: pears,
+    producename: "Pears",
+    price: "$ 6.80 per Kg",
   },
   {
     id:13,
-      photo: {berries},
-    producename: "Pepper",
-    price: "$ 2.49 per Kg",
+    photo: orange,
+    producename: "Oranges",
+    price: "$ 6.80 per Kg",
   },
   {
     id:14,
-     photo: {berries},
-    producename: "Beans",
-    price: "$ 8.49 per Kg",
+    photo: berries,
+    producename: "Berries",
+    price: "$ 6.80 per Kg",
   },
   {
     id:15,
-      photo: {berries},
-    producename: "Cassava",
-    price: "$ 8.49 per Kg",
+    photo: watermelon,
+    producename: "Watermelon",
+    price: "$ 6.80 per Kg",
   },
-  {
-    id:16,
-      photo: {berries},
-    producename: "Cassava",
-    price: "$ 8.49 per Kg",
-  },
-  {
-    id:17,
-     photo: {berries},
-    producename: "Maize",
-    price: "$ 8.49 per Kg",
-  },
-  {
-    id:18,
-      photo: {berries},
-    producename: "Spinach",
-    price: "$ 8.49 per Kg",
-  },
-  {
-    id:19,
-      photo: {berries},
-    producename: "Spinach",
-    price: "$ 8.49 per Kg",
-  },
-  {
-    id:20,
-      photo: {berries},
-    producename: "Spinach",
-    price: "$ 8.49 per Kg",
-  },
+ 
 ];
 
 const FarmProduce = () => {
   return (
         <Box sx={{ py: 8, m: 6 }} >
-          <Grid container spacing={2} >
-            {products.map((product) => (
-              <Grid  sx={{ display: 'flex', flexWrap: 'wrap', maxWidth:'15vw', m:4}}>
+             <Typography variant='h3' sx={{mb:3, textAlign:'center', color:'#FFA000'}}>
+            Fresh farm Produce 
+          </Typography>
+          <Grid container spacing={1} >
+            {products.map((product, id) => (
+              <Grid key={product.id} sx={{ display: 'flex', flexWrap: 'wrap', maxWidth:'16vw', m:2}}>
                 <Card 
                   sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
                 >
                        <CardMedia
                               component="img"
-                              image="{product.photo}"
-                              alt="Paella dish"
+                              image={product.photo}
+                              alt={product.producename}
                             />
                   <CardContent sx={{ flexGrow: 1 }}>
                   <CardActions sx={{opacity:0, color:'#FFA000', "&:hover": {opacity: 1 },}}>

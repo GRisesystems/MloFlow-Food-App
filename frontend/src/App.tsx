@@ -8,6 +8,9 @@ import AboutScreen from './screens/aboutScreen/AboutScreen'
 import VendorDashboardScreen from './screens/vendorDashboardScreen/VendorDashboardScreen'
 import CustomerDashboardScreen from './screens/customerDashBoardScreen/CustomerDashboardScreen'
 import CheckoutScreen from './screens/checkoutScreen/CheckoutScreen'
+import FishProductsScreen from './screens/fishProductsScreen/FishProductsScreen'
+import CookedProductsScreen from './screens/cookedProductsScreen/CookedProductsScreen'
+import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProductsScreen'
 
 const router = createBrowserRouter(
   // App router configuration. 
@@ -18,7 +21,10 @@ const router = createBrowserRouter(
       <Route path='/chef-dashboard' element={<ChefDashBoardScreen />} />
       <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
       <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />
-      <Route path='/farmproduce' element={<FarmProduceScreen />} />
+      <Route path='/farm-produce' element={<FarmProduceScreen />} />
+      <Route path='/fish-products' element={<FishProductsScreen />} />
+      <Route path='/poultry-products' element={<PoultryProductsScreen />} />
+      <Route path='/cooked-food' element={<CookedProductsScreen />} />
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />
     </Route>
