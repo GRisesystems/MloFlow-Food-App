@@ -6,16 +6,11 @@ import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-import {BASE_URL} from './constants'
-
-=======
 import { useNavigate } from 'react-router-dom'
 import {BASE_URL} from './constants'
 
 import RegisterAlert from "./RegisterAlert";
 
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
 
 
 
@@ -45,17 +40,11 @@ const App: React.FC = () => {
     setError, // Import setError from useForm
     formState: { errors },
   } = methods;
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-=======
   const navigate = useNavigate()
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const[showRegisterSuccessModal,setShowRegisterSuccessModal] = useState(false)
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -70,13 +59,9 @@ const App: React.FC = () => {
     await axios.post(`${BASE_URL}/auth/users/`, data).then(function (response) {
         console.log(response.status);
         if (response.status === 201) {
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-            setSuccessMessage('Successfully registered. You can now login.');               
-=======
             setSuccessMessage('Successfully registered. You can now login.');  
             setShowRegisterSuccessModal(!showRegisterSuccessModal)
             window.location.reload()             
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
             
         } else {                
             setErrorMessage('Registration Failed');
@@ -138,13 +123,9 @@ const App: React.FC = () => {
                 )}
               />
             </Grid>
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-            
-=======
             {showRegisterSuccessModal &&
               <RegisterAlert/>
             }
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
 
             <Grid item xs={12}>
               <Controller
