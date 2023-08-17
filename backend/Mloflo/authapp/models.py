@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 # Create your models here.
 
 class UserAccountManager(BaseUserManager):
-    def _create_user(self, email, first_name, surname, phone, home_address, password=None, **extra_fields):
+    def _create_user(self, email, first_name, surname, phone, home_address,category, password=None, **extra_fields):
         if not email:
             raise ValueError("Email must be provided")
         if not password:
@@ -22,6 +22,7 @@ class UserAccountManager(BaseUserManager):
             surname = surname,
             phone = phone,
             home_address = home_address,
+            category =category,
             **extra_fields
         )
         
@@ -31,26 +32,26 @@ class UserAccountManager(BaseUserManager):
 
         
         
-    def create_user(self, email, first_name, surname, phone, home_address,password, **extra_fields):
+    def create_user(self, email, first_name, surname, phone, home_address,category,password, **extra_fields):
         extra_fields.setdefault('is_staff',False)
         extra_fields.setdefault('is_active',True)
         extra_fields.setdefault('is_superuser',False)
-        return self._create_user(email, first_name, surname, phone, home_address, password, **extra_fields)
+        return self._create_user(email, first_name, surname, phone, home_address,category, password, **extra_fields)
     
     
-    def create_superuser(self, email, first_name, surname, phone, home_address, password, **extra_fields):
+    def create_superuser(self, email, first_name, surname, phone, home_address,category, password, **extra_fields):
         extra_fields.setdefault('is_staff',True)
         extra_fields.setdefault('is_active',True)
         extra_fields.setdefault('is_superuser',True)
-        return self._create_user(email, first_name, surname, phone, home_address, password, **extra_fields)
+        return self._create_user(email, first_name, surname, phone, home_address,category, password, **extra_fields)
        
 
 
 class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
-        ('admin','admin'),
-        ('chef','chef'),
-        ('vendor','vendor'),
+        ('customer','Customer'),
+        ('chef','Chef'),
+        ('vendor','Vendor'),
     ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
     email = models.EmailField(max_length=255, unique=True)
@@ -71,6 +72,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    if_first_time_login = models.BooleanField(default=True)
+    #Terms_and_condition = models.BooleanField(default=True)
 
 
 
@@ -86,11 +89,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
     
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name","surname", "phone","home_address"]
+    REQUIRED_FIELDS = ["first_name","surname", "phone","category","home_address"]
     
     
     
     def __str__(self):
         return self.email
 
-# Create your models here.

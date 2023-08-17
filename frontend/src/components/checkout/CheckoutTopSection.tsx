@@ -1,15 +1,15 @@
 import { Box, Container, Typography } from '@mui/material';
-import backgroundimage from './backgroundimage.jpeg';
+import farm_produce from './farm_produce.jpg';
 
 
-const TopSection = () => {
+const CheckoutTopSection = () => {
   return (
     <Box sx={{ height: '45vh' }}>
       <Box
         sx={{
           width: '100vw',
           height: '100%',
-          background: `url(${backgroundimage}) no-repeat center/cover`,
+          background: `url(${farm_produce}) no-repeat center/cover`,
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -24,4 +24,4 @@ const TopSection = () => {
   );
 };
 
-export default TopSection;
+export default CheckoutTopSection;
