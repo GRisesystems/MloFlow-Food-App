@@ -1,12 +1,14 @@
-import React from "react";
-import Slider, { Settings } from "react-slick";
-import { ProductItem } from "./productItem";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
-import WishlistBtn from "../homeScreen/WishlistBtn";
-// import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import styled from "styled-components";
+import React from 'react';
+import Slider, { Settings } from 'react-slick';
+import styled from 'styled-components';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import WishlistBtn from '../homeScreen/WishlistBtn';
+import { useCart } from '../homeScreen/Cart/CartUtils'
+import { ProductItem } from './productItem';
+
+
+
 
 
 const AddToCartButtonText = styled.span`
@@ -21,10 +23,9 @@ const AddToCartButtonText = styled.span`
  
 `;
 const AddToCartButton = styled.div`
-  display: block;
+  
   position: absolute;
-  bottom: 13px;
-  display: right;
+  bottom: 13px;  
   right: 25px;
   padding: 4px;
   background-color: #FFA000;
@@ -35,6 +36,13 @@ const AddToCartButton = styled.div`
   display: flex;
   align-items: center;
   border-radius: 10px;
+  z-index: 1; /* Ensure the button is above the flashcard content */
+  opacity: 0.8; /* Adjust the opacity to make it slightly visible */
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1; /* Show the button fully on hover */
+  }
   @media (max-width: 768px) {
     margin-top: 10px; /* Add some space between button and price */
   }
@@ -47,7 +55,7 @@ const NextArrowButton = styled.button`
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
-  background-color: #f0d469; /* Yellow-green background color */
+  background-color: #FFA000; /* Yellow-green background color */
   border: none;
   width: 30px;
   height: 30px;
@@ -68,7 +76,7 @@ const PrevArrowButton = styled.button`
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
-  background-color: #f0d469; /* Yellow-green background color */
+  background-color: #FFA000; /* Yellow-green background color */
   border: none;
   width: 30px;
   height: 30px;
@@ -130,8 +138,8 @@ margin: 5px;
 text-align: center;
 position: absolute;
 bottom: 45px;
-left: 0px;
-background-color: black;
+left: 1px;
+background-color: orange;
 color: white;
 padding: 0px;
 border-radius: 5px;
@@ -141,7 +149,7 @@ border-radius: 5px;
 const ProductPrice = styled.span`
   font-size: 20px;
   font-weight:bold;
-  color: black;
+  color: orange;
   margin-left:15px;
   margin-top:15px;
   
@@ -151,20 +159,20 @@ const FlashCardContainer = styled.div`
   display: inline;
   flex-wrap: nowrap;
   justify-content: center; /* Change to flex-start to fill the row space */
-  height: 100px;
+  height: 200px;
   max-width: 1000px;
-  overflow-x: auto;
+  // overflow-x: auto;
   padding: 0px;
   background-color: #f0d469;
   
 `;
 
 const FlashCardItem = styled.div`
-flex: 0;
+
   flex-direction: column;
   width: 20%; /* Cover full width */
   margin-bottom: 20px; /* Add some space between items */
-  height: auto;
+  height: 300px;
   display: flex; /* Ensure items stack vertically */
   justify-content: space-between; /* Align items at the start and end */
   padding: 10px;
@@ -205,6 +213,10 @@ const FlashCardImg = styled.img`
 
 
 const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
+  const { addToCart } = useCart();
+
+ 
+  
   
 
 
@@ -234,13 +246,16 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
               }}
               amount={product.price}
             />
-            <AddToCartButton>
+            <AddToCartButton onClick={() => addToCart(product)}>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
+            <ProductPrice>{`$${product.price}`}</ProductPrice>
             <ProductPrice>{`$${product.price}`}</ProductPrice>
           </FlashCardItem>
         ))}
       </Slider>
+
+      
     </FlashCardContainer>
   );
 };

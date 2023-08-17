@@ -160,7 +160,7 @@ const HomeScreen = () => {
 
 
      <Box>
-  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between' }}>
+  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', margin: 15}}>
     Farm Produce
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
@@ -172,7 +172,7 @@ const HomeScreen = () => {
 
       <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
   <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
-    Shop Here
+    Shop All
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
       <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
     </svg>
@@ -189,13 +189,57 @@ const HomeScreen = () => {
         
       </Box>  
       <Box>
-      <h1 style={{ color: 'green' }}>Fish</h1>  
+  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', margin: 15}}>
+    Fish
+    <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
+      <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
+        <li>Vegetables</li>
+        <li>Fruits</li>
+        <li>Grains</li>
+        <li>Beans</li>
+      </ul>
+
+      <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
+  <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
+    Shop All
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
+      <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+    </svg>
+  </button>
+</Link>
+    </div>
+  </h1>
+</Box>
+      <Box>
+      
       <Fish productItems={fishData} fishData={[]} />
 </Box>
 <Box>
-        <h1 style={{ color: 'green' }}>Poultry</h1>
+<Box>
+  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', margin: 15}}>
+    Poultry
+    <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
+      <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
+        <li>Freshwater Fish</li>
+        <li>Saltwater Fish</li>
+        
+      </ul>
+
+      <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
+  <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
+    Shop All
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
+      <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+    </svg>
+  </button>
+</Link>
+    </div>
+  </h1>
+</Box>
+       
         <Poultry productItems={poultryData} poultryData={[]} />
       </Box>
+     
       <FoodCategory />      
       <PageContainer>
        
