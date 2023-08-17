@@ -147,8 +147,8 @@ display:block;
 text-align: left;
 position: absolute;
 bottom: 45px;
-background-color: black;
-left: 5px;
+background-color: #FFA000;
+left: 1px;
 color: white;
 padding: 0px;
 border-radius: 5px;
@@ -159,7 +159,7 @@ border-radius: 5px;
 const ProductPrice = styled.span`
   font-size: 20px;
   font-weight:bold;
-  color: black;
+  color: #FFA000;
   margin-left:15px;
   
 `;
