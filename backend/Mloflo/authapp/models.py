@@ -49,14 +49,9 @@ class UserAccountManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
-<<<<<<< HEAD
-        ('chef','chef'),
-        ('vendor','vendor'),
-=======
         ('customer','Customer'),
         ('chef','Chef'),
         ('vendor','Vendor'),
->>>>>>> Development
     ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
     email = models.EmailField(max_length=255, unique=True)
@@ -77,10 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-<<<<<<< HEAD
-=======
     if_first_time_login = models.BooleanField(default=True)
->>>>>>> Development
 
 
 
@@ -103,8 +95,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-<<<<<<< HEAD
-# Create your models here.
-=======
-
->>>>>>> Development
