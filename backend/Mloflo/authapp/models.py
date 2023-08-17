@@ -73,6 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     if_first_time_login = models.BooleanField(default=True)
+    #Terms_and_condition = models.BooleanField(default=True)
 
 
 
