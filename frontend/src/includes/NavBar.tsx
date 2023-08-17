@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Badge, Stack, useMediaQuery, useTheme } from '@mui/material';
+import { Badge, Link, Stack, useMediaQuery, useTheme } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 
@@ -77,15 +77,56 @@ function NavBar() {
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
+              <Button                
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
               >
-                {page}
+                Home
               </Button>
-            ))}
+
+              <Button                
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+              >
+                Chefs
+              </Button>
+
+              <Button                
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+              >
+                Vendors
+              </Button>
+
+              <Link href="/farmproduce" style={{ textDecoration: 'none' }}>
+                <Button                
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                >
+                  Farm Produce
+                </Button>
+              </Link>
+
+              <Button                
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+              >
+                Contact
+              </Button>
+              <Button                
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+              >
+                Blog
+              </Button>
+              <Link href="/about" style={{ textDecoration: 'none' }}>
+                <Button                
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                >
+                  About
+                </Button>
+              </Link>
           </Box>
           {isMobileView && 
             <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto',color:'black' }}>

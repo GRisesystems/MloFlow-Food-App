@@ -120,7 +120,7 @@ const FooterSocialLink: React.FC<{ href: string; icon: React.ReactNode }> = ({
         display: "block",
         marginBottom: 2,
         fontSize: 18,
-        color: "#a69b9b",
+        color: "white",
         "&:hover": { color: "#0b490b", transition: "200ms ease-in" },
       }}
     >
@@ -192,7 +192,7 @@ const FooterColumnTwo: React.FC<{ children: React.ReactNode }> = ({
 
 const FooterTitleFirst: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <h5 style={{color: "white", overflow: "visible", fontWeight: "bold", marginBottom: 2, marginTop: 2}}
+    <h5 style={{color: "white", overflow: "visible", fontSize: '18px', fontWeight: "bold", marginBottom: 2, marginTop: 2  }}
     >
       {children}
     </h5>
@@ -245,9 +245,9 @@ export function FooterContainer() {
             <FooterColumn>
               <FooterTitle>Contact Us</FooterTitle>
               <FooterLink href="#">Kenya</FooterLink>
-              <FooterLink href="#">Uganda</FooterLink>
+              <FooterLink href="#">Ghana</FooterLink>
               <FooterLink href="#">Nigeria</FooterLink>
-              <FooterLink href="#">Sierra Leone</FooterLink>
+              <FooterLink href="#">South Africa</FooterLink>
             </FooterColumn>
           </Grid>
           

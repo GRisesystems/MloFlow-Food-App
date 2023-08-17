@@ -1,6 +1,6 @@
 import { Box, Typography, TextField, InputAdornment} from '@mui/material';
 import {ArrowRightAltSharp, Drafts }from '@mui/icons-material';
-const Subscription = () => {
+const Newsletter = () => {
   return (
     <Box
         sx={{
@@ -14,7 +14,7 @@ const Subscription = () => {
     >
             <Drafts  sx={{color:'#ffffff', fontSize:'4rem', margin: '8px',}}/>
           <Typography variant="h3" component="div" >
-            Subscribe Us
+          Sign up for our newsletter
           </Typography>
           <Typography variant='h5' sx={{ m: 3, color: '#ffffff', fontWeight: 600}}>
           Sign up and get a voucher of worth $250.00
@@ -37,4 +37,4 @@ const Subscription = () => {
   );
 }
 
-export default Subscription;
+export default Newsletter;

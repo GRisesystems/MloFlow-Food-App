@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -26,6 +26,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import logo from '../assets/mloflowlogo.jfif'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../utils/AuthContext'
 
 
 const drawerWidth = 240;
@@ -42,7 +43,7 @@ const Search = styled('div')(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    // width: 'auto',
   },
 }));
 
@@ -71,19 +72,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function ClippedDrawer() {
+  const { isAuthenticated, logout } = useAuth();
+
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
-  const [showProfileIcon, setshowProfileIcon] = useState(false);
-  const [mobileMenuIcon, setshowmobileMenuIcon] = useState(false);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);  
+ 
   const navigate = useNavigate()
+  console.log(isAuthenticated)
+  
 
-  useEffect(() => {
-    // This will run whenever isMobileView changes
-    if (isMobileView) {
-      setshowmobileMenuIcon(!mobileMenuIcon)
-    }
-  }, [isMobileView]);
+  
 
   const handleLogin = () => {
     // nagigate to login screen
@@ -92,8 +91,9 @@ export default function ClippedDrawer() {
 
   const handleLogout = () => {
     // Handle logout fucntionality
-    setIsDrawerVisible(!isDrawerVisible)
-    setshowProfileIcon(!setshowProfileIcon)
+    logout()
+    setIsDrawerVisible(!isDrawerVisible)     
+    navigate('/')
   }
 
 
@@ -102,10 +102,8 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
   }
 
-  const handleDrawerOpen = () => {
-    setIsDrawerVisible(true)
-  }
-
+ 
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -119,15 +117,17 @@ export default function ClippedDrawer() {
               src={logo}
             />
           </Link>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <Box sx={{marginLeft:'auto',width:isMobileView ? '100%':'50%'}}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+          </Box>
           {isMobileView ?
             (
               <>
@@ -148,7 +148,7 @@ export default function ClippedDrawer() {
             (
               <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto' }}>
                 <>
-                  {showProfileIcon ? (
+                  {isAuthenticated ? (
                     <IconButton
                       size="large"
                       aria-label="user Profile"
@@ -164,8 +164,21 @@ export default function ClippedDrawer() {
                   ) : (
 
                     <Button onClick={handleLogin}>Log In</Button>
+                    
 
                   )}
+                  {/* <IconButton
+                      size="large"
+                      aria-label="user Profile"
+                      color="inherit"
+                      aria-haspopup="true"
+                      onClick={handleProfileMenuOpen}
+                    >
+                      <Badge >
+                        <AccountCircle />
+                      </Badge>
+                      <Typography variant="body1">Isaac Kamula</Typography>
+                    </IconButton> */}
                   <IconButton
                     size="large"
                     aria-label="Cart"

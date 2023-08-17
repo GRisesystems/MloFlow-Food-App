@@ -4,9 +4,10 @@ import { Paper, Grid, CardContent, CardActions, Button, Typography } from '@mui/
 interface HomeServiceCategoryCardProps {
   background_image: string; 
   category_name: string; 
+  button_title: string; 
 }
 
-const HomeServiceCategoryCard : React.FC<HomeServiceCategoryCardProps> = ({ background_image,category_name }) => {
+const HomeServiceCategoryCard : React.FC<HomeServiceCategoryCardProps> = ({ background_image,category_name,button_title }) => {
   return (
     <Grid item xs={12} sm={4} sx={{ height: '25vw' }}>
       <Paper
@@ -29,7 +30,7 @@ const HomeServiceCategoryCard : React.FC<HomeServiceCategoryCardProps> = ({ back
           </Typography>
         </CardContent>
         <CardActions sx={{ml:3}}>
-          <Button size="small">Learn More</Button>
+          <Button size="small" sx={{textTransform:'none',backgroundColor: '#FFC107'}} color='success' variant="contained">{button_title}</Button>
         </CardActions>
       </Paper>
     </Grid>
