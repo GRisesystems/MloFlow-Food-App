@@ -12,8 +12,8 @@ import { ProductItem } from './productItem';
 
 
 const AddToCartButtonText = styled.span`
-  display: inline-block;
-  margin: 10px;
+  display: ;
+  margin: 5px;
   color: white;
   font-size: 13px;
   font-weight:bold;
@@ -23,7 +23,7 @@ const AddToCartButtonText = styled.span`
  
 `;
 const AddToCartButton = styled.div`
-  
+  display: flex;
   position: absolute;
   bottom: 13px;  
   right: 25px;
@@ -135,6 +135,7 @@ interface FlashCardProps {
 
 const FlashCardH3 = styled.h3`
 margin: 5px;
+display: flex;
 text-align: center;
 position: absolute;
 bottom: 45px;

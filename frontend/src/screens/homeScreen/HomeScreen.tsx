@@ -175,7 +175,7 @@ const HomeScreen = () => {
 
 
      <Box>
-  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', margin: 15}}>
+  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '35', marginLeft: 30, marginTop: 40}}>
     Farm Produce
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
@@ -204,7 +204,7 @@ const HomeScreen = () => {
         
       </Box>  
       <Box>
-  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', margin: 15}}>
+  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', marginLeft: 30, marginTop: 40}}>
     Fish
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
@@ -229,7 +229,7 @@ const HomeScreen = () => {
 </Box>
 <Box>
 <Box>
-  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', margin: 15}}>
+  <h1 style={{ color: 'green', fontSize: '24px', display: 'flex', justifyContent: 'space-between', padding: '5', marginLeft: 30, marginTop: 40}}>
     Poultry
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '16px', alignItems: 'center' }}>
