@@ -185,7 +185,7 @@ const HomeScreen = () => {
         <li>Beans</li>
       </ul>
 
-      <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
+      <Link to='/farm-produce' style={{ textDecoration: 'none' }}>
   <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
     Shop All
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -212,7 +212,7 @@ const HomeScreen = () => {
         <li>Saltwater Fish</li>
       </ul>
 
-      <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
+      <Link to='/fish-products' style={{ textDecoration: 'none' }}>
   <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
     Shop All
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -239,7 +239,7 @@ const HomeScreen = () => {
         
       </ul>
 
-      <Link to='/farmproduce' style={{ textDecoration: 'none' }}>
+      <Link to='/poultry-products' style={{ textDecoration: 'none' }}>
   <button style={{ backgroundColor: 'transparent', color:  '#FFA000', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
     Shop All
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
