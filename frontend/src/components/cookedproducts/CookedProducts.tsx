@@ -16,6 +16,10 @@ import beef from "../../assets/Cooked/Beef.jpg";
 import chicken from "../../assets/Cooked/Chicken.jpg";
 import chip from "../../assets/Cooked/Chipo.jpg";
 import choma from "../../assets/Cooked/Choma.jpg";
+import cod from "../../assets/Cooked/Cod.jpg";
+import ugali from "../../assets/Cooked/ugali.jpg";
+import seabass from "../../assets/Cooked/SeaBass.jpg";
+import trout from "../../assets/Cooked/Trout.jpg";
 import kuku from "../../assets/Cooked/Kuku.jpg";
 
 const products = [
@@ -45,6 +49,36 @@ const products = [
   },
   {
     id:5,
+    photo: chicken,
+    producename: "Chicken",
+    price: "$ 6.80 per Kg",
+  },
+  {
+    id:6,
+    photo: cod,
+    producename: "Cod",
+    price: "$ 4.20 per Kg",
+  },
+  {
+    id:7,
+    photo: seabass,
+    producename: "SeaBass",
+    price: "$ 7.49 per Kg",
+  },
+  {
+    id:8,
+    photo: ugali,
+    producename: "Ugali",
+    price: "$ 10.00 per Kg",
+  },
+  {
+    id:9,
+    photo: trout,
+    producename: "Trout",
+    price: "$ 6.80 per Kg",
+  },
+  {
+    id:10,
     photo: chicken,
     producename: "Chicken",
     price: "$ 6.80 per Kg",
