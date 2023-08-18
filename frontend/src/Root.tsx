@@ -2,7 +2,7 @@
 import { Outlet } from 'react-router-dom'
 import TopNav from './includes/TopNav'
 import NavBar from './includes/NavBar'
-// import { FooterContainer } from './includes/Footer'
+import { FooterContainer } from './includes/Footer'
 import {AuthProvider} from './utils/AuthContext'
 // import Cart from './components/homeScreen/Cart/Cart'
 
@@ -13,7 +13,7 @@ const Root = () => {
         <TopNav/>        
         <NavBar/>
             <Outlet/>
-        {/* <FooterContainer />        */}
+        <FooterContainer />       
         {/* <Cart onClose={function (): void {
         throw new Error('Function not implemented.')
       } } /> */}
