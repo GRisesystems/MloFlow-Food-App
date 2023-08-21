@@ -26,7 +26,7 @@ const router = createBrowserRouter(
       <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />
       <Route path='/farm-produce' element={<FarmProduceScreen />} />
       <Route path='/fish-products' element={<FishProductsScreen />} />
-      <Route path='/poultry-products' element={<PoultryProductsScreen />} />
+      {/* <Route path='/poultry-products' element={<PoultryProductsScreen />} /> */}
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
 
       <Route path='/cart' element={<Cart onClose={function (): void {

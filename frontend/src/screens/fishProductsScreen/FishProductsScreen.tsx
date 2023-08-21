@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Paginated from "../../components/farmproducts/Pagination";
+import Paginated from "../../components/farmProducts/Paginated";
 import FishProducts from "../../components/fishproducts/FishProducts";
 
 const FishProductsScreen = () => {
