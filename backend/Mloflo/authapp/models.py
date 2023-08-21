@@ -50,6 +50,7 @@ class UserAccountManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
         ('customer','Customer'),
+        ('admin','admin'),
         ('chef','Chef'),
         ('vendor','Vendor'),
     ]
