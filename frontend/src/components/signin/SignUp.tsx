@@ -197,28 +197,7 @@ const App: React.FC = () => {
               {errors.category && <span>This field is required</span>}
             </Grid>
 
-            <Grid item xs={12}>
-            <Controller
-  name="agreeToTerms"
-  control={control}
-  rules={{ required: true }}
-  render={({ field }) => (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <Checkbox
-        {...field}
-        style={{ color: "black" }}
-        onChange={(e) => setAgreeToTerms(e.target.checked)}
-      />
-      <span>
-        I agree to the{" "}
-        <a href="#" style={{ color: "#FFA000" }}>
-          terms and conditions
-        </a>
-      </span>
-    </div>
-  )}
-/>
-</Grid>
+           
 
 
 
@@ -279,21 +258,27 @@ const App: React.FC = () => {
                 {errors.re_password && <span>This field is required</span>}
               </Grid>
               <Grid item xs={12}>
-                <Controller
-                  name="agreeToTerms"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <Checkbox {...field} style={{ color: "black" }} />
-                      <span>
-                        I agree to the <a href="#" style={{ color: "#FFA000" }}>terms and conditions</a>
-                      </span>
-                    </div>
-                  )}
-                />
-                {errors.agreeToTerms && <span style={{ color: "#FFA000" }}>You must agree to the terms and conditions</span>}
-              </Grid>
+            <Controller
+  name="agreeToTerms"
+  control={control}
+  rules={{ required: true }}
+  render={({ field }) => (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Checkbox
+        {...field}
+        style={{ color: "black" }}
+        onChange={(e) => setAgreeToTerms(e.target.checked)}
+      />
+      <span>
+        I agree to the{" "}
+        <a href="#" style={{ color: "#FFA000" }}>
+          terms and conditions
+        </a>
+      </span>
+    </div>
+  )}
+/>
+</Grid>
 
 
               <Controller

@@ -20,30 +20,41 @@ interface FishFlashcard {
 
  
 
-const AddToCartButtonText = styled.span`
-  display: inline-block;
-  margin: 10px;
-  color: white;
-  font-size: 13px;
-  font-weight:bold;
-  
- 
-`;
-const AddToCartButton = styled.div`
+  const AddToCartButtonText = styled.span`
   display: block;
-  position: absolute;
-  bottom: 13px;
-  display: right;
-  right: 25px;
-  padding: 4px;
-  background-color: #FFA000;
-  width: auto; 
+  margin: 0px;
+  color: white;
+  margin-bottom: 0px;
+  font-size: 13px;
+  font-weight: bold;
+  @media (max-width: 768px) {
+    margin-right: 20px;
+  }
+    
+   
+  `;
+const AddToCartButton = styled.div`
+  position: relative; /* or position: relative; based on parent container */
+  bottom: 30px;
+  left: 180px;
+  padding: 14px;
+  background-color: #ffa000;
+  width: 120px;
   height: 20px;
-  padding:0px;
   cursor: pointer;
   display: flex;
   align-items: center;
   border-radius: 10px;
+  z-index: 1;
+  opacity: 1;
+  &:hover {
+    background-color: #d5b542; /* Darker shade on hover */
+  }
+  /* Media query for responsive design */
+  @media (max-width: 768px) {
+    margin-top: 40px;
+    position: static; /* Resetting position for smaller screens */
+  }
 `;
 
 
@@ -143,12 +154,13 @@ background-color: #f0d469;
 `;
 const FishH3 = styled.h3`
 margin: 5px;
-display:block;
-text-align: left;
-position: absolute;
-bottom: 45px;
-background-color: #FFA000;
+display: flex;
+text-align: center;
+// position: absolute;
+bottom: 5px;
 left: 1px;
+width: 100px;
+background-color: orange;
 color: white;
 padding: 0px;
 border-radius: 5px;
@@ -159,8 +171,9 @@ border-radius: 5px;
 const ProductPrice = styled.span`
   font-size: 20px;
   font-weight:bold;
-  color: #FFA000;
-  margin-left:15px;
+  color: orange;
+  margin-left:10px;
+  margin-top:0px;
   
 `;
 
@@ -241,10 +254,12 @@ const Fish: React.FC<FishProps> = ({ productItems }) => {
               }}
               amount={product.price}
             />
+            
+            <ProductPrice>{`$${product.price}`}</ProductPrice>
             <AddToCartButton>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
-            <ProductPrice>{`$${product.price}`}</ProductPrice>
+           
             </FishItem>
           );
         })}

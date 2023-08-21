@@ -12,43 +12,39 @@ import { ProductItem } from './productItem';
 
 
 const AddToCartButtonText = styled.span`
-  display: ;
-  margin: 5px;
-  color: white;
-  font-size: 13px;
-  font-weight:bold;
-  @media (max-width: 768px) {
-    margin-right: 20px; /* Add some space between button and price */
-  }
+display: block;
+margin: 0px;
+color: white;
+margin-bottom: 0px;
+font-size: 13px;
+font-weight: bold;
+@media (max-width: 768px) {
+  margin-right: 20px;
+}
  
 `;
 const AddToCartButton = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 13px;  
-  right: 25px;
-  padding: 4px;
-  background-color: #FFA000;
-  width: auto; 
+  position: relative; /* or position: relative; based on parent container */
+  bottom: 30px;
+  left: 180px;
+  padding: 14px;
+  background-color: #ffa000;
+  width: 120px;
   height: 20px;
-  padding:0px;
   cursor: pointer;
   display: flex;
   align-items: center;
   border-radius: 10px;
-  z-index: 1; /* Ensure the button is above the flashcard content */
-  opacity: 0.8; /* Adjust the opacity to make it slightly visible */
-  transition: opacity 0.3s ease;
+  z-index: 1;
+  opacity: 1;
 
-  &:hover {
-    opacity: 1; /* Show the button fully on hover */
-  }
+  /* Media query for responsive design */
   @media (max-width: 768px) {
-    margin-top: 10px; /* Add some space between button and price */
+    margin-top: 40px;
+    position: static; /* Resetting position for smaller screens */
   }
-
- 
 `;
+
 
 const NextArrowButton = styled.button`
   position: absolute;
@@ -137,28 +133,30 @@ const FlashCardH3 = styled.h3`
 margin: 5px;
 display: flex;
 text-align: center;
-position: absolute;
-bottom: 45px;
+// position: absolute;
+bottom: 5px;
 left: 1px;
+width: 100px;
 background-color: orange;
 color: white;
 padding: 0px;
 border-radius: 5px;
-
  
 `;
 const ProductPrice = styled.span`
   font-size: 20px;
+  padding: 0px;
   font-weight:bold;
   color: orange;
-  margin-left:15px;
-  margin-top:15px;
+  margin-left:10px;
+  margin-top:40px;
   
 `;
 
 const FlashCardContainer = styled.div`
   display: inline;
   flex-wrap: nowrap;
+  position: relative;
   justify-content: center; /* Change to flex-start to fill the row space */
   height: 200px;
   max-width: 1000px;
@@ -238,6 +236,7 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
       <Slider {...settings}>
         {productItems.map((product) => (
           <FlashCardItem key={product.id}>
+            
             <FlashCardImg src={product.cover} alt={product.name} />
             <FlashCardH3>{product.name}</FlashCardH3>
             <WishlistBtn
@@ -247,10 +246,11 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
               }}
               amount={product.price}
             />
+             <ProductPrice>{`$${product.price}`}</ProductPrice>
             <AddToCartButton onClick={() => addToCart(product)}>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
-            <ProductPrice>{`$${product.price}`}</ProductPrice>
+           
             
           </FlashCardItem>
         ))}
