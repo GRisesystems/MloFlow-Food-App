@@ -177,8 +177,8 @@ padding: 0px;
 const PoultryItem = styled.div`
 flex-direction: column;
   width: 20%;
-  margin-bottom: 20px;
-  height: 300px;
+  margin-bottom: 10px;
+  height: 200px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -220,7 +220,7 @@ const WeightRangeDropdown = styled.select`
 const CounterWrapper = styled.div`
   display: flex;
   margin-left: 190px;
-  margin-top: 20px;
+  margin-top: 0px;
   
 `;
 

@@ -1,4 +1,4 @@
-import  { SetStateAction, useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import ListedProductsTab from './ListedProductsTab';
 import AllSuppliesTab from './AllSuppliesTab';
 import RequestedProductsTab from './RequestedProducts';
@@ -13,16 +13,18 @@ const VendorDashboard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ display: 'flex', marginBottom: '20px' }}>
+      <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'left' }}>Welcome, Beatrice!</h2>
+      <div style={{ display: 'flex', marginBottom: '20px', justifyContent: 'center' }}>
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 0 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 0 ? '#ffa000' : '#f0f0f0',
             color: selectedTab === 0 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',
             margin: '0 10px',
             cursor: 'pointer',
+            transition: 'background-color 0.3s, color 0.3s',
           }}
           onClick={() => handleTabChange(0)}
         >
@@ -31,7 +33,7 @@ const VendorDashboard = () => {
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 1 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 1 ? '#ffa000' : '#f0f0f0',
             color: selectedTab === 1 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',
@@ -45,7 +47,7 @@ const VendorDashboard = () => {
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 2 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 2 ? '#ffa000' : '#f0f0f0',
             color: selectedTab === 2 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',
@@ -59,7 +61,7 @@ const VendorDashboard = () => {
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 3 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 3 ? '#ffa000' : '#f0f0f0',
             color: selectedTab === 3 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',

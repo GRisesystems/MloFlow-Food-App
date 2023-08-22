@@ -117,7 +117,7 @@ const PrevArrowIcon = styled(ChevronLeftIcon)`
 const CounterWrapper = styled.div`
   display: flex;
   margin-left: 190px;
-  margin-top: 20px;
+  margin-top: 0px;
   
 `;
 
@@ -211,7 +211,7 @@ padding: 0px;
 font-weight: bold;
 color: orange;
 margin-left: 10px;
-margin-top: 60px;
+margin-top: 0px;
   
 `;
 
