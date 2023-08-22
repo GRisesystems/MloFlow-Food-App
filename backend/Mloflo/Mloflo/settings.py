@@ -14,6 +14,10 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
 from datetime import timedelta
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,36 +58,35 @@ INSTALLED_APPS = [
     'products',
     'rest_framework',
     'corsheaders',
-    
+
     "phonenumber_field",
     'rest_framework_simplejwt.token_blacklist',
-   
-    
+
+
     'drf_spectacular',
     'djoser',
 ]
 
 
-
 REST_FRAMEWORK = {
-     
+
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.IsAdminUser'
     ],
-    
+
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
-    
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
 
     ],
-    
-    'DEFAULT_SCHEMA_CLASS':'drf_spectacular.openapi.AutoSchema',
-    
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
 }
 
 
@@ -156,16 +159,16 @@ TEMPLATES = [
     },
 ]
 
-#AUTHENTICATION_BACKENDS = [
- #   'django.contrib.auth.backends.ModelBackend',
-  #  'django.core.mail.backends.smtp.EmailBackend',
-#]
+# AUTHENTICATION_BACKENDS = [
+#   'django.contrib.auth.backends.ModelBackend',
+#  'django.core.mail.backends.smtp.EmailBackend',
+# ]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True  
-EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_HOST_USER = 'faithsang001@gmail.com'  
-EMAIL_HOST_PASSWORD = 'mzoxvivicpxnngvn'  
-EMAIL_PORT = 587  
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'faithsang001@gmail.com'
+EMAIL_HOST_PASSWORD = 'mzoxvivicpxnngvn'
+EMAIL_PORT = 587
 
 PASSWORD_RESET_TIMEOUT = 1400
 
@@ -238,29 +241,52 @@ DJOSER = {
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
-        'user_create':'authapp.serializers.UserCreateSerializer',
-        'user':'authapp.serializers.UserCreateSerializer',
-        'user_delete':'djoser.serializers.UserDeleteSerializer',
-        #'token_create': 'authapp.serializers.CustomTokenCreateSerializer',
-        #'JWT_PAYLOAD_HANDLER': 'my_app.serializers.CustomTokenCreateSerializer',
-            
-        },
+
+        'user_create': 'authapp.serializers.UserCreateSerializer',
+        'user': 'authapp.serializers.UserCreateSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
+
+    },
+
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_USERNAME_RETYPE': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+
+
+
+
+        'user_create': 'authapp.serializers.UserCreateSerializer',
+        'user': 'authapp.serializers.UserCreateSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
+        # 'token_create': 'authapp.serializers.CustomTokenCreateSerializer',
+        # 'JWT_PAYLOAD_HANDLER': 'my_app.serializers.CustomTokenCreateSerializer',
+
     
-    'LOGIN_FIELD':'email',
-    'USER_CREATE_PASSWORD_RETYPE':True,
-    'USERNAME_CHANGED_EMAIL_CONFIRMATION':True,
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION':True,
-    'SEND_CONFIRMATION_EMAIL':True,
-    'SET_USERNAME_RETYPE':True,
-    'SET_PASSWORD_RETYPE':True,
-    'PASSWORD_RESET_CONFIRM_RETYPE':True,
-    
-        
-    
+
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_USERNAME_RETYPE': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+
 }
+
 
 
 AUTH_USER_MODEL = 'authapp.User'
 
 # CORS configuration
 CORS_ALLOW_ALL_ORIGINS = True
+
+# MPESA Configuration variables
+MPESA_CONSUMER_KEY = os.environ.get('MPESA_CONSUMER_KEY') or None
+MPESA_CONSUMER_SECRET = os.environ.get('MPESA_CONSUMER_SECRET') or None
+MPESA_PASS_KEY = os.environ.get('MPESA_PASS_KEY') or None
