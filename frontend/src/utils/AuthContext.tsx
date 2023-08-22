@@ -4,8 +4,16 @@ import { BASE_URL } from '../components/signin/constants';
 
 interface AuthContextProps {
   isAuthenticated: boolean;
-  errorMessage:String,  
-  login: (email: string, password: string) => Promise<{ access: string; refresh: string }>;
+  errorMessage: string;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<{
+    access: string;
+    refresh: string;
+    category: string; // user category as string
+    first_time_login: boolean; // user first_time_login as boolean
+  }>;
   logout: () => void;
 }
 
@@ -26,12 +34,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   
     const login = async (email: string, password: string) => {
       try {
-        const response = await axios.post(`${BASE_URL}/auth/jwt/create/`, { email, password });
+        const response = await axios.post(`${BASE_URL}/authapp/token/`, { email, password });
   
         if (response.status === 200) {
             
           const data = response.data; 
           setIsAuthenticated(true);
+          
           return data; // Returning the response data
         } else {
           setErrorMessage('Invalid email or password');
