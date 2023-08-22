@@ -19,7 +19,13 @@ interface FishFlashcard {
     fishData: FishFlashcard[]; // Define the FishFlashcard type
   }
 
- 
+  const WeightRangeDropdown = styled.select`
+  margin-top: 40px;
+  padding: 5px;
+  color: #FFA000;
+  margin-bottom: 0px;
+  border: solid #FFA000;
+`;
 
   const AddToCartButtonText = styled.span`
   display: block;
@@ -256,6 +262,13 @@ border-radius: 10px 10px 10px 10px;
 const Fish: React.FC<FishProps> = ({ productItems }) => {
   const { addToCart } = useCart();
   const [counts, setCounts] = useState<{ [productId: string]: number }>({});
+  // const [selectedWeightRange, setSelectedWeightRange] = useState<string>('0.5-1');
+
+
+//  // ... (inside FlashCardItem)
+// const handleWeightRangeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+//   setSelectedWeightRange(event.target.value);
+// };
 
  
   const handleIncrement = (productId: string) => {
@@ -293,8 +306,14 @@ const Fish: React.FC<FishProps> = ({ productItems }) => {
           return (
             <FishItem key={product.id}>  
               <FishImg src={product.cover} alt={product.name} />
+              <WeightRangeDropdown>
+  <option value="0.5-1">0.5 - 1 kg</option>
+  <option value="1-3">1 - 3 kg</option>
+  <option value="3-5">3 - 5 kg</option>
+</WeightRangeDropdown>
               <div className="counter-wrapper">
               <CounterWrapper>
+              
                 <CounterButton onClick={() => handleDecrement(product.id.toString())}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path d="M19 13H5v-2h14v2z"/>

@@ -210,6 +210,13 @@ object-fit: cover;
 border-radius: 10px 10px 10px 10px;
 
 `;
+const WeightRangeDropdown = styled.select`
+  margin-top: 40px;
+  padding: 5px;
+  color: #FFA000;
+  margin-bottom: 0px;
+  border: solid #FFA000;
+`;
 const CounterWrapper = styled.div`
   display: flex;
   margin-left: 190px;
@@ -298,6 +305,11 @@ const Poultry: React.FC<PoultryProps> = ({ productItems }) => {
           return (
             <PoultryItem key={product.id}>
               <PoultryImg src={product.cover} alt={product.name} />
+              <WeightRangeDropdown>
+  <option value="0.5-1">0.5 - 1 kg</option>
+  <option value="1-3">1 - 3 kg</option>
+  <option value="3-5">3 - 5 kg</option>
+</WeightRangeDropdown>
               <div className="counter-wrapper">
               <CounterWrapper>
                 <CounterButton onClick={() => handleDecrement(product.id.toString())}>
