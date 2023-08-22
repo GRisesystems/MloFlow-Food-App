@@ -33,7 +33,7 @@ const FlashCardContainer = styled.div`
   flex-wrap: nowrap;
   position: relative;
   justify-content: center;
-  height: 200px;
+  height: 60px;
   max-width: 1000px;
   padding: 0px;
   background-color: #f0d469;
@@ -59,7 +59,7 @@ const FlashCardItem = styled.div`
   @media (max-width: 768px) {
     flex: 0;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     height: auto;
   }
 `;
@@ -72,6 +72,13 @@ const FlashCardImg = styled.img`
   border-radius: 10px 10px 10px 10px;
 `;
 
+const WeightRangeDropdown = styled.select`
+  margin-top: 40px;
+  padding: 5px;
+  color: #FFA000;
+  margin-bottom: 0px;
+  border: solid #FFA000;
+`;
 const AddToCartButtonText = styled.span`
   display: block;
   margin: 0px;
@@ -158,7 +165,7 @@ const PrevArrowIcon = styled(ChevronLeftIcon)`
 const CounterWrapper = styled.div`
   display: flex;
   margin-left: 190px;
-  margin-top: 20px;
+  margin-top: 0px;
   
 `;
 
@@ -224,8 +231,15 @@ interface FlashCardProps {
 const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
   const { addToCart } = useCart();
   const [counts, setCounts] = useState<{ [productId: string]: number }>({});
+  // ... (inside FlashCardItem)
+// const [selectedWeightRange, setSelectedWeightRange] = useState<string>('0.5-1');
 
- 
+
+//  // ... (inside FlashCardItem)
+// const handleWeightRangeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+//   setSelectedWeightRange(event.target.value);
+// };
+
   const handleIncrement = (productId: string) => {
     setCounts((prevCounts) => {
       const currentCount = prevCounts[productId] || 0;
@@ -261,6 +275,11 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
           <FlashCardItem key={product.id}>
             <FlashCardImg src={product.cover} alt={product.name} />
             <div className="counter-wrapper">
+            <WeightRangeDropdown>
+  <option value="0.5-1">0.5 - 1 kg</option>
+  <option value="1-3">1 - 3 kg</option>
+  <option value="3-5">3 - 5 kg</option>
+</WeightRangeDropdown>
               <CounterWrapper>
                 <CounterButton onClick={() => handleDecrement(product.id.toString())}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
