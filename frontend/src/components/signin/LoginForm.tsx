@@ -25,7 +25,7 @@ const LoginForm = () => {
     const navigate = useNavigate();
 
 
-    const userRole: UserRole = 'chef';
+    const userRole: UserRole = 'vendor';
 
     const onSubmit = async (data: any) => {
         try {
