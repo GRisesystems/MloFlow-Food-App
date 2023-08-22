@@ -1,21 +1,16 @@
 // import "mui-tel-input/dist/index.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Checkbox, Button, TextField, Container, Paper, Typography, Grid, IconButton, InputAdornment } from "@mui/material";
+import { Checkbox, Button, TextField, Container, Paper, Typography, Grid, IconButton, InputAdornment, MenuItem } from "@mui/material";
 import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-import {BASE_URL} from './constants'
-
-=======
 import { useNavigate } from 'react-router-dom'
-import {BASE_URL} from './constants'
+import { BASE_URL } from './constants'
 
 import RegisterAlert from "./RegisterAlert";
 
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
 
 
 
@@ -29,6 +24,7 @@ type FormData = {
   phone: string;
   home_address: string;
   username: string;
+  category: string,
   password: string;
   re_password: string;
   agreeToTerms: boolean;
@@ -43,19 +39,13 @@ const App: React.FC = () => {
     control,
     handleSubmit,
     setError, // Import setError from useForm
-    formState: { errors },
+    formState: { errors, isDirty, dirtyFields },
   } = methods;
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-=======
   const navigate = useNavigate()
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const[showRegisterSuccessModal,setShowRegisterSuccessModal] = useState(false)
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
+  const [showRegisterSuccessModal, setShowRegisterSuccessModal] = useState(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -64,36 +54,33 @@ const App: React.FC = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword((prevShowConfirmPassword) => !prevShowConfirmPassword);
   };
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const onSubmit = async (data: FormData) => {
     console.log(data)
     await axios.post(`${BASE_URL}/auth/users/`, data).then(function (response) {
-        console.log(response.status);
-        if (response.status === 201) {
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-            setSuccessMessage('Successfully registered. You can now login.');               
-=======
-            setSuccessMessage('Successfully registered. You can now login.');  
-            setShowRegisterSuccessModal(!showRegisterSuccessModal)
-            window.location.reload()             
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
-            
-        } else {                
-            setErrorMessage('Registration Failed');
-        }
-    }).catch(function (error) {
-        console.log(error);
+      console.log(response.status);
+      if (response.status === 201) {
+        setSuccessMessage('Successfully registered. You can now login.');
+        setShowRegisterSuccessModal(!showRegisterSuccessModal)
+        window.location.reload()
+
+      } else {
         setErrorMessage('Registration Failed');
+      }
+    }).catch(function (error) {
+      console.log(error);
+      setErrorMessage('Registration Failed');
     });
 
-};
+  };
 
-// const history = useHistory();
+  // const history = useHistory();
 
 
   return (
-    <Container component="main" maxWidth="sm">
-      <Paper elevation={3} style={{ padding: "20px" }}>        
+    <Container component="main" maxWidth="sm" sx={{ mt: 3 }}>
+      <Paper elevation={3} style={{ padding: "20px" }}>
         <Typography variant="h4" align="center" gutterBottom>
           Create an Account
         </Typography>
@@ -138,19 +125,15 @@ const App: React.FC = () => {
                 )}
               />
             </Grid>
-<<<<<<< HEAD:frontend/src/components/signin/SignUp.tsx
-            
-=======
             {showRegisterSuccessModal &&
-              <RegisterAlert/>
+              <RegisterAlert />
             }
->>>>>>> Development:frontend/src/components/homeScreen/SignUp.tsx
 
             <Grid item xs={12}>
               <Controller
                 name="phone"
                 control={control}
-                rules={{ required: true, minLength:10 }}
+                rules={{ required: true, minLength: 10 }}
                 render={({ field }) => (
                   <MuiTelInput
                     {...field}
@@ -178,7 +161,7 @@ const App: React.FC = () => {
               />
               {errors.phone && <span>This field is required</span>}
             </Grid>
-            <Grid item xs={12} sx={{mb:2}}>
+            <Grid item xs={12} sx={{ mb: 2 }}>
               <Controller
                 name="home_address"
                 control={control}
@@ -190,103 +173,145 @@ const App: React.FC = () => {
               {errors.home_address && <span>This field is required</span>}
             </Grid>
 
-            <Grid container spacing={2}>
-            {/* ... other fields */}
-            <Grid item xs={12} sm={6}>
+            {/* select Account type */}
+            <Grid item xs={12} sx={{ mb: 2 }}>
               <Controller
-                name="password"
-                control={control}
-                rules={{ required: true, minLength:8 }}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    type={showPassword ? "text" : "password"}
-                    label="Password"
-                    variant="outlined"
-                    fullWidth
-                    error={!!errors.password}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={togglePasswordVisibility}>
-                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                )}
-              />
-              {errors.password && <span>This field is required</span>}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name="re_password"
+                name="category"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    type={showConfirmPassword ? "text" : "password"}
-                    label="Confirm Password"
+                    label="Select Account type"
                     variant="outlined"
                     fullWidth
-                    error={!!errors.re_password}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={toggleConfirmPasswordVisibility}>
-                            {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+                    select
+                    error={!!errors.category}
+                  >
+                    <MenuItem value="chef">Chef</MenuItem>
+                    <MenuItem value="customer">Customer</MenuItem>
+                    <MenuItem value="vendor">Vendor</MenuItem>
+                  </TextField>
                 )}
               />
-              {errors.re_password && <span>This field is required</span>}
+              {errors.category && <span>This field is required</span>}
             </Grid>
-            <Grid item xs={12}>
-  <Controller
-    name="agreeToTerms"
-    control={control}
-    rules={{ required: true }}
-    render={({ field }) => (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <Checkbox {...field} style={{color:"black"}}/>
-        <span>
-          I agree to the <a href="#" style={{ color: "#FFA000" }}>terms and conditions</a>
-        </span>
-      </div>
-    )}
-  />
-  {errors.agreeToTerms && <span style={{ color: "#FFA000" }}>You must agree to the terms and conditions</span>}
+
+           
+
+
+
+            <Grid container spacing={2}>
+              {/* ... other fields */}
+              <Grid item xs={12} sm={6}>
+                <Controller
+                  name="password"
+                  control={control}
+                  rules={{ required: true, minLength: 8 }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      type={showPassword ? "text" : "password"}
+                      label="Password"
+                      variant="outlined"
+                      fullWidth
+                      error={!!errors.password}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={togglePasswordVisibility}>
+                              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  )}
+                />
+                {errors.password && <span>This field is required</span>}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Controller
+                  name="re_password"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      type={showConfirmPassword ? "text" : "password"}
+                      label="Confirm Password"
+                      variant="outlined"
+                      fullWidth
+                      error={!!errors.re_password}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={toggleConfirmPasswordVisibility}>
+                              {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  )}
+                />
+                {errors.re_password && <span>This field is required</span>}
+              </Grid>
+              <Grid item xs={12}>
+            <Controller
+  name="agreeToTerms"
+  control={control}
+  rules={{ required: true }}
+  render={({ field }) => (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Checkbox
+        {...field}
+        style={{ color: "black" }}
+        onChange={(e) => setAgreeToTerms(e.target.checked)}
+      />
+      <span>
+        I agree to the{" "}
+        <a href="#" style={{ color: "#FFA000" }}>
+          terms and conditions
+        </a>
+      </span>
+    </div>
+  )}
+/>
 </Grid>
 
 
-            <Controller
+              <Controller
                 name="agreeToTerms"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <div style={{ display: "flex", alignItems: "center" ,marginLeft: 40, marginTop:20}}>
-                   
-                    
+                  <div style={{ display: "flex", alignItems: "center", marginLeft: 40, marginTop: 20 }}>
+
+
                   </div>
                 )}
               />
+
             <Grid item xs={12}>
+            
             <Button
   type="submit"
   variant="contained"
   color="primary"
   fullWidth
-  style={{ backgroundColor: "#FFA000", color: "white" }}
+  style={{
+    backgroundColor: "#FFA000",
+    color: "white",
+    pointerEvents: agreeToTerms ? "auto" : "none", // Disable or enable based on agreeToTerms
+    opacity: agreeToTerms ? 1 : 0.5, // Adjust opacity based on agreeToTerms
+  }}
 >
   Create Account
 </Button>
 
-            </Grid>
+
+              </Grid>
             </Grid>
           </Grid>
         </form>

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import Paginated from "../../components/FarmProducts/pagination";
-import FarmProduce from "../../components/FarmProducts/farmproducts";
+import Paginated from "../../components/farmProducts/Paginated";
+import FarmProduce from "../../components/farmProducts/FarmProduce";
 
 const FarmProduceScreen = () => {
   return (

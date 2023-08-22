@@ -13,49 +13,25 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Paper } from '@mui/material';
 import axios from 'axios';
-<<<<<<< HEAD:frontend/src/components/signin/Login.tsx
-
-import {BASE_URL} from './constants'
-=======
 import { useNavigate } from 'react-router-dom'
+import logo from '../assets/mloflow.png'
 
 import {BASE_URL} from './constants'
 
->>>>>>> Development:frontend/src/components/homeScreen/Login.tsx
 
 
 const defaultTheme = createTheme();
-<<<<<<< HEAD:frontend/src/components/signin/Login.tsx
- const SignIn = () => {
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-=======
 const SignIn = () => {
   const[errorMessage,setErrorMessage] = React.useState('')
   const navigate = useNavigate()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log('hello')
->>>>>>> Development:frontend/src/components/homeScreen/Login.tsx
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // console.log({
     //   email: data.get('email'),
     //   password: data.get('password'),
     // });
-<<<<<<< HEAD:frontend/src/components/signin/Login.tsx
-    await axios.post(`${BASE_URL}/auth/jwt/create/`, data).then(function (response) {
-      console.log(response.status);
-      if (response.status === 200) {
-          // const { access, refresh } = response.data;
-          // localStorage.setItem('accessToken', access);
-          // localStorage.setItem('refreshToken', refresh);
-          // navigate('/home')
-
-      } else {
-          // setErrorMessage('Invalid phone number or password');
-      }
-  }).catch(function (error) {
-    console.log(error)
-=======
     await axios.post(`${BASE_URL}/auth/jwt/create/`, data).then(function (response) {      
       if (response.status === 200) {
           const { access, refresh } = response.data;
@@ -68,7 +44,6 @@ const SignIn = () => {
   }).catch(function (error) {
     console.log(error)
     
->>>>>>> Development:frontend/src/components/homeScreen/Login.tsx
       // setErrorMessage('Invalid phone number or password');
   });
   };
@@ -85,7 +60,7 @@ const SignIn = () => {
             alignItems: 'center',
           }}
         >
-      <Avatar alt="MloFlow Logo" src="/src/assets/mloflowlogo.jfif" sx={{width:'150px', height:'150px'}}  />
+      <Avatar alt="MloFlow Logo" src={logo} sx={{width:'150px', height:'150px'}}  />
           <Typography component="h1" variant="h4">
             Sign in
           </Typography>

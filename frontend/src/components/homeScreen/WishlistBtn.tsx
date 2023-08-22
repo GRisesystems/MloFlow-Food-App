@@ -22,11 +22,11 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({
   return (
     <IconButton
       style={{
-        color: liked ? "orange" : "black",
-        border: `0.08px solid ${liked ? "orange" : "black"}`,
+        color: liked ? "black" : "orange",
+        border: `0.08px solid ${liked ? "black" : "orange"}`,
         borderRadius: "10px",
         padding: "5px",
-        marginTop: "4px",
+        marginTop: "0px",
       }}
       aria-label="Add to Wishlist"
       onClick={handleLikeToggle}

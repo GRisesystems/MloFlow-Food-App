@@ -1,29 +1,19 @@
-import React from 'react';
-import { Card, CardContent, Container, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import { CardContent, Grid, Paper, Typography } from "@mui/material"
 
-const FullWidthCard = styled(Card)`
-  width: 100%;
-`;
+const ServicesCard = () => {
+  return (
+    <Grid item xs={12} sm={4}>
+      <Paper
+        elevation={3}
+      >
+        <CardContent>
+          <Typography variant="body1">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur eum placeat sint incidunt! Ratione explicabo harum alias cum veniam, neque officia, eaque, repellendus aspernatur natus quae veritatis sit. Asperiores, eveniet?
+          </Typography>
+        </CardContent>
+      </Paper>
+    </Grid>
+  )
+}
 
-const FullWidthCardContent = styled(CardContent)`
-  // display: flex;
-  
-`;
-
-const ServicesCard: React.FC = () => (
-  <FullWidthCard>
-    <FullWidthCardContent>
-      <Container sx={{boxShadow: 3}}>
-        <Typography variant="h6">
-          Card Content
-        </Typography>
-        <Typography variant="body1" >
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, tempore laboriosam molestiae ipsum veritatis nesciunt. Omnis, ullam! Quam obcaecati itaque assumenda necessitatibus explicabo ipsa, dolores, debitis sequi reprehenderit hic corporis.
-        </Typography>
-      </Container>
-    </FullWidthCardContent>
-  </FullWidthCard>
-);
-
-export default ServicesCard;
+export default ServicesCard

@@ -14,6 +14,7 @@ import {
 import { useAuth } from '../../utils/AuthContext'
 import { navigateToDashboard,UserRole  } from "../../utils/navigateToDashboard";
 import { useNavigate } from "react-router";
+import logo from '../../assets/mloflow.png'
 
 const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: { email: "", password: "" } });
@@ -54,7 +55,7 @@ const LoginForm = () => {
                 sx={
                     { boxShadow: 3, mt: isMobileView ? 1: 4 }
                 }>
-                <Avatar alt="MloFlow Logo" src="/src/assets/mloflowlogo.jfif" sx={{ height: 54 }} />
+                <Avatar alt="MloFlow Logo" src={logo} sx={{ height: 54 }} />
                 {/* <Typography variant="h5" component="div" gutterBottom>
                     <LoginIcon fontSize="large" />
                 </Typography> */}

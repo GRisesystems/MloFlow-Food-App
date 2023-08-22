@@ -1,5 +1,6 @@
-import { Box, Grid, List, Divider, Typography,  Link} from '@mui/material';
-import LocalPizzaIcon from '@mui/icons-material/LocalPizza';
+import { Container, Grid, List, Divider, Typography,  Link} from '@mui/material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+
 const categories = [
   {
     title: 'Fruits & Vegetables',
@@ -21,27 +22,20 @@ const categories = [
     title: 'Health & Wellness',
     description: ['Sea Food', 'Grains', 'Veggies', 'Water', 'Roughages' ],
   },
-  {
-    title: 'Grocery & Staples',
-    description: ['Oatmeal', 'Rice',  'Beans', 'Soy Sauce', 'Spice' ],
-  },
-  
 ];
 const FoodCategory = () => {
 
   return (
-  <Box
+  <Container
   component='div'
   sx={{
     position:'relative',
-    marginTop:'8px',
-    width: '100vw',
   }}
   >
             <Typography variant="h3" sx={{m:3,}}>
          Categories
         </Typography>
-        <Divider sx={{width:'90vw', marginLeft:5, }} />
+        <Divider sx={{width:'90%', marginLeft:5, marginRight:5,  }} />
   <Grid  spacing={0}  sx={{ display: 'flex', flexWrap: 'wrap', }}  >
     {categories.map((category) => (
       <Grid item  key={category.title} sx={{padding: 4,}} >
@@ -52,14 +46,14 @@ const FoodCategory = () => {
           {category.description.map((item) => (
             <List sx={{paddingLeft:3,}}>
                 <Link  href="#"  sx={{color:"#000",textDecoration: 'none', "&:hover": {color: '#FFA000' },}} >
-                  <LocalPizzaIcon sx={{mr:2}}/>  {item}
+                  <ArrowRightIcon sx={{mr:1, color:'#FFA000',}}/>  {item}
                 </Link>
               </List>
           ))}
       </Grid>
     ))}
   </Grid>
-  </Box>
+  </Container>
   );
-          };
+}
 export default FoodCategory;
