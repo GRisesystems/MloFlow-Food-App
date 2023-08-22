@@ -31,6 +31,13 @@ def generate_mpesa_base_64_key():
 
 
 
+def generate_lipa_na_mpesa_passkey(timestamp):
+    shortcode = "174379"
+    passkey = settings.MPESA_PASS_KEY
+    concatenated = f"{shortcode}{passkey}{timestamp}"
+    passkey_encoded = base64.b64encode(concatenated.encode()).decode()
+    return passkey_encoded
+
     
 
     
