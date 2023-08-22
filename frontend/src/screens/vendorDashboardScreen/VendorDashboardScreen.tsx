@@ -3,6 +3,7 @@ import ListedProductsTab from './ListedProductsTab';
 import AllSuppliesTab from './AllSuppliesTab';
 import RequestedProductsTab from './RequestedProducts';
 import GraphTab from './GraphTab';
+import UploadProductTab from './UploadProductsTab';
 
 const VendorDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -12,12 +13,12 @@ const VendorDashboard = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
       <div style={{ display: 'flex', marginBottom: '20px' }}>
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 0 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 0 ? '#FFA000' : '#f0f0f0',
             color: selectedTab === 0 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',
@@ -31,7 +32,7 @@ const VendorDashboard = () => {
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 1 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 1 ? '#FFA000' : '#f0f0f0',
             color: selectedTab === 1 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',
@@ -45,7 +46,7 @@ const VendorDashboard = () => {
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 2 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 2 ? '#FFA000' : '#f0f0f0',
             color: selectedTab === 2 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',
@@ -59,7 +60,7 @@ const VendorDashboard = () => {
         <button
           style={{
             padding: '10px 20px',
-            backgroundColor: selectedTab === 3 ? '#007bff' : '#f0f0f0',
+            backgroundColor: selectedTab === 3 ? '#FFA000' : '#f0f0f0',
             color: selectedTab === 3 ? 'white' : 'black',
             border: 'none',
             borderRadius: '5px',
@@ -69,6 +70,20 @@ const VendorDashboard = () => {
           onClick={() => handleTabChange(3)}
         >
           Graph
+        </button>
+        <button
+          style={{
+            padding: '10px 20px',
+            backgroundColor: selectedTab === 4 ? '#FFA000' : '#f0f0f0',
+            color: selectedTab === 4 ? 'white' : 'black',
+            border: 'none',
+            borderRadius: '5px',
+            margin: '0 10px',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleTabChange(4)}
+        >
+          Upload Product
         </button>
       </div>
       <div
@@ -84,6 +99,7 @@ const VendorDashboard = () => {
         {selectedTab === 1 && <AllSuppliesTab />}
         {selectedTab === 2 && <RequestedProductsTab />}
         {selectedTab === 3 && <GraphTab />}
+        {selectedTab === 4 && <UploadProductTab />}
       </div>
     </div>
   );
