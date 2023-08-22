@@ -25,11 +25,13 @@ const LoginForm = () => {
     const navigate = useNavigate();
 
 
-    const userRole: UserRole = 'chef';
+    
+    
 
     const onSubmit = async (data: any) => {
         try {
-            const { access, refresh } = await login(data.email, data.password);
+            const { access, refresh,category,first_time_login } = await login(data.email, data.password);
+            const userRole: UserRole = category as UserRole;
             localStorage.setItem('access_token', access);
             localStorage.setItem('refresh_token', refresh);
             navigateToDashboard(userRole, navigate);
