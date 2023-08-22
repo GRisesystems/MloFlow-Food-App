@@ -241,6 +241,8 @@ DJOSER = {
         'user_create':'authapp.serializers.UserCreateSerializer',
         'user':'authapp.serializers.UserCreateSerializer',
         'user_delete':'djoser.serializers.UserDeleteSerializer',
+        #'token_create': 'authapp.serializers.CustomTokenCreateSerializer',
+        #'JWT_PAYLOAD_HANDLER': 'my_app.serializers.CustomTokenCreateSerializer',
             
         },
     

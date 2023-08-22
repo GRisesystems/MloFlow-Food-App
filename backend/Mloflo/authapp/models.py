@@ -80,7 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # {
     #     'category':'chef',
-    #     'if_first_time_login':'True/False',
+    #     'is_first_time_login':'True/False',
     #     'access_token':""
     #     'refresh_token':""
     # }
