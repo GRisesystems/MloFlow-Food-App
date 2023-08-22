@@ -1,31 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider, { Settings } from 'react-slick';
 import styled from 'styled-components';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import WishlistBtn from '../homeScreen/WishlistBtn';
-import { useCart } from '../homeScreen/Cart/CartUtils'
+import { useCart } from '../homeScreen/Cart/CartUtils';
 import { ProductItem } from './productItem';
 
+const FlashCardH3 = styled.h3`
+  margin: 5px;
+  display: flex;
+  text-align: center;
+  margin-top: 0px;  
+  left: 5px;
+  width: 90px;
+  background-color: orange;
+  color: white;
+  border-radius: 5px;
+`;
 
+const ProductPrice = styled.span`
+  font-size: 20px;
+  padding: 0px;
+  font-weight: bold;
+  color: orange;
+  margin-left: 10px;
+  margin-top: 60px;
+`;
 
+const FlashCardContainer = styled.div`
+  display: inline;
+  flex-wrap: nowrap;
+  position: relative;
+  justify-content: center;
+  height: 200px;
+  max-width: 1000px;
+  padding: 0px;
+  background-color: #f0d469;
+`;
 
+const FlashCardItem = styled.div`
+  flex-direction: column;
+  width: 20%;
+  margin-bottom: 20px;
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 768px) {
+    flex: 0;
+    flex-direction: column;
+    margin-bottom: 20px;
+    height: auto;
+  }
+`;
+
+const FlashCardImg = styled.img`
+  flex: 1;
+  width: 97%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 10px 10px;
+`;
 
 const AddToCartButtonText = styled.span`
-display: block;
-margin: 0px;
-color: white;
-margin-bottom: 0px;
-font-size: 13px;
-font-weight: bold;
-@media (max-width: 768px) {
-  margin-right: 20px;
-}
- 
+  display: block;
+  margin: 0px;
+  color: white;
+  margin-bottom: 0px;
+  font-size: 13px;
+  font-weight: bold;
+  @media (max-width: 768px) {
+    margin-right: 20px;
+  }
 `;
+
 const AddToCartButton = styled.div`
-  position: relative; /* or position: relative; based on parent container */
-  bottom: 30px;
+  position: relative;
+  bottom: 40px;
   left: 180px;
   padding: 14px;
   background-color: #ffa000;
@@ -37,42 +98,18 @@ const AddToCartButton = styled.div`
   border-radius: 10px;
   z-index: 1;
   opacity: 1;
-
-  /* Media query for responsive design */
   @media (max-width: 768px) {
     margin-top: 40px;
-    position: static; /* Resetting position for smaller screens */
+    position: static;
   }
 `;
-
 
 const NextArrowButton = styled.button`
   position: absolute;
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
-  background-color: #FFA000; /* Yellow-green background color */
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index:2;
-
-  &:hover {
-    background-color: #d5b542; /* Darker shade on hover */
-  }
-`;
-
-const PrevArrowButton = styled.button`
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-  background-color: #FFA000; /* Yellow-green background color */
+  background-color: #ffa000;
   border: none;
   width: 30px;
   height: 30px;
@@ -82,9 +119,28 @@ const PrevArrowButton = styled.button`
   align-items: center;
   cursor: pointer;
   z-index: 2;
-
   &:hover {
-    background-color: #d5b542; /* Darker shade on hover */
+    background-color: #d5b542;
+  }
+`;
+
+const PrevArrowButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  background-color: #ffa000;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+  &:hover {
+    background-color: #d5b542;
   }
 `;
 
@@ -99,6 +155,43 @@ const PrevArrowIcon = styled(ChevronLeftIcon)`
   height: 20px;
   fill: white;
 `;
+const CounterWrapper = styled.div`
+  display: flex;
+  margin-left: 190px;
+  margin-top: 20px;
+  
+`;
+
+const CounterButton = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffa000;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+
+  &:hover {
+    background-color: #d5b542;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
+`;
+
+const CounterNum = styled.span`
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 10px;
+  color: #FFA000;
+`;
 
 interface SampleNextArrowProps {
   onClick: () => void;
@@ -107,11 +200,10 @@ interface SampleNextArrowProps {
 const SampleNextArrow: React.FC<SampleNextArrowProps> = ({ onClick }) => {
   return (
     <NextArrowButton onClick={onClick}>
-    <NextArrowIcon />
-  </NextArrowButton>
-);
+      <NextArrowIcon />
+    </NextArrowButton>
+  );
 };
-    
 
 interface SamplePrevArrowProps {
   onClick: () => void;
@@ -129,95 +221,26 @@ interface FlashCardProps {
   productItems: ProductItem[];
 }
 
-const FlashCardH3 = styled.h3`
-margin: 5px;
-display: flex;
-text-align: center;
-// position: absolute;
-bottom: 5px;
-left: 1px;
-width: 100px;
-background-color: orange;
-color: white;
-padding: 0px;
-border-radius: 5px;
- 
-`;
-const ProductPrice = styled.span`
-  font-size: 20px;
-  padding: 0px;
-  font-weight:bold;
-  color: orange;
-  margin-left:10px;
-  margin-top:40px;
-  
-`;
-
-const FlashCardContainer = styled.div`
-  display: inline;
-  flex-wrap: nowrap;
-  position: relative;
-  justify-content: center; /* Change to flex-start to fill the row space */
-  height: 200px;
-  max-width: 1000px;
-  // overflow-x: auto;
-  padding: 0px;
-  background-color: #f0d469;
-  
-`;
-
-const FlashCardItem = styled.div`
-
-  flex-direction: column;
-  width: 20%; /* Cover full width */
-  margin-bottom: 20px; /* Add some space between items */
-  height: 300px;
-  display: flex; /* Ensure items stack vertically */
-  justify-content: space-between; /* Align items at the start and end */
-  padding: 10px;
-  border-radius: 10px;
-  background-color: white; /* Add background color to each item */
-
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: scale(0.95);
-    
-  }
-
-@media (max-width: 768px) {
-flex: 0; 
-flex-direction:column;/* Full width on smaller screens */
-margin-bottom: 20px; /* Add some space between items */
-height: auto;
-}
-`;
-
-const FlashCardImg = styled.img`
-  flex: 1;
-  width: 97%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px 10px 10px 10px;
-  
-
-`;
-
-
-// const AddToCartButtonSvg = styled(AddShoppingCartIcon)`
-//   width: 20px;
-//   height: 20px;
-//   fill: black;
-// `;
-
-
 const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
   const { addToCart } = useCart();
+  const [counts, setCounts] = useState<{ [productId: string]: number }>({});
 
  
-  
-  
+  const handleIncrement = (productId: string) => {
+    setCounts((prevCounts) => {
+      const currentCount = prevCounts[productId] || 0;
+      const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
+      return newCounts;
+    });
+  };
 
+  const handleDecrement = (productId: string) => {
+    setCounts((prevCounts) => {
+      const currentCount = prevCounts[productId] || 0;
+      const newCounts = { ...prevCounts, [productId]: currentCount > 0 ? currentCount - 1 : 0 };
+      return newCounts;
+    });
+  };
 
   const settings: Settings = {
     dots: false,
@@ -225,20 +248,38 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    autoplay: true, // Add this line
-  autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 3000,
     nextArrow: <SampleNextArrow onClick={() => {}} />,
     prevArrow: <SamplePrevArrow onClick={() => {}} />,
   };
-  
+
   return (
     <FlashCardContainer>
       <Slider {...settings}>
         {productItems.map((product) => (
           <FlashCardItem key={product.id}>
-            
             <FlashCardImg src={product.cover} alt={product.name} />
+            <div className="counter-wrapper">
+              <CounterWrapper>
+                <CounterButton onClick={() => handleDecrement(product.id.toString())}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M19 13H5v-2h14v2z"/>
+                  </svg>
+                </CounterButton>
+                <CounterNum>
+                  {/* Display "00" as default */}
+                  {counts[product.id] === undefined ? '00' : counts[product.id] < 10 ? `0${counts[product.id]}` : counts[product.id]}
+                </CounterNum>
+                <CounterButton onClick={() => handleIncrement(product.id.toString())}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/>
+                  </svg>
+                </CounterButton>
+              </CounterWrapper>
+            </div>
             <FlashCardH3>{product.name}</FlashCardH3>
+            
             <WishlistBtn
               initialLiked={false}
               onToggleLike={() => {
@@ -246,17 +287,16 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
               }}
               amount={product.price}
             />
-             <ProductPrice>{`$${product.price}`}</ProductPrice>
+             
+
+            <ProductPrice>{`$${product.price}`}</ProductPrice>
             <AddToCartButton onClick={() => addToCart(product)}>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
            
-            
           </FlashCardItem>
         ))}
       </Slider>
-
-      
     </FlashCardContainer>
   );
 };
