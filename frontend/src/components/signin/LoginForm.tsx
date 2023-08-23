@@ -26,12 +26,6 @@ const LoginForm = () => {
 
 
 
-    const userRole: UserRole = 'vendor';
-=======
-    
-    
-
-
     const onSubmit = async (data: any) => {
         try {
             const { access, refresh,category,first_time_login } = await login(data.email, data.password);
