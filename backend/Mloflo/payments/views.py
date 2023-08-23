@@ -38,10 +38,10 @@ def initiate_stk_push(request):
             "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMTYwMjE2MTY1NjI3",    
             "Timestamp":"20160216165627",    
             "TransactionType": "CustomerPayBillOnline",    
-            "Amount": "1",    
+            "Amount": amount,    
             "PartyA":"254795510186",    
             "PartyB":"174379",    
-            "PhoneNumber":"254795510186",    
+            "PhoneNumber":phone_number,    
             "CallBackURL": "https://mydomain.com/pat",    
             "AccountReference":"Test",    
             "TransactionDesc":"Test"
