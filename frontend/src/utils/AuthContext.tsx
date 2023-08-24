@@ -4,6 +4,8 @@ import { BASE_URL } from '../components/signin/constants';
 
 interface AuthContextProps {
   isAuthenticated: boolean;
+  loading: boolean;
+  isFirstTimeLogin: boolean;
   errorMessage: string;
   login: (
     email: string,
@@ -28,7 +30,9 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isFirstTimeLogin, setIsFirstTimeLogin] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     
   
@@ -40,6 +44,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             
           const data = response.data; 
           setIsAuthenticated(true);
+          setIsFirstTimeLogin(data.first_time_login)
+          setLoading(false)
           
           return data; // Returning the response data
         } else {
@@ -58,7 +64,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   
     return (
-      <AuthContext.Provider value={{ isAuthenticated,errorMessage,login, logout }}>
+      <AuthContext.Provider value={{ isAuthenticated,errorMessage,login, logout,loading,isFirstTimeLogin }}>
         {children}
       </AuthContext.Provider>
     );
