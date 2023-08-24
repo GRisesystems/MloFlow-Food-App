@@ -4,16 +4,23 @@ import AllSuppliesTab from './AllSuppliesTab';
 import RequestedProductsTab from './RequestedProducts';
 import GraphTab from './GraphTab';
 import UploadProductTab from './UploadProductsTab';
+import { useAuth } from '../../utils/AuthContext';
+import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 
 const VendorDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const { loading,isFirstTimeLogin} =  useAuth();
+  console.log(loading)
 
   const handleTabChange = (newValue: SetStateAction<number>) => {
     setSelectedTab(newValue);
   };
 
+
+  
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
+      {isFirstTimeLogin && <VendorFirstLoginForm is_first_time_login={isFirstTimeLogin}/>}
       <div style={{ display: 'flex', marginBottom: '20px' }}>
         <button
           style={{
