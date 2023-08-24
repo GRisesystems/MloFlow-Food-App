@@ -15,7 +15,7 @@ const Container = styled.div`
 const StyledTableContainer = styled(TableContainer)`
   margin-left: 5px;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const StyledTable = styled(Table)`
@@ -23,7 +23,7 @@ const StyledTable = styled(Table)`
   border-collapse: separate;
   border-spacing: 0 8px; /* Add spacing between rows */
   border-collapse: separate;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const StyledTableCell = styled(TableCell)`
@@ -31,14 +31,24 @@ const StyledTableCell = styled(TableCell)`
   font-weight: bold;
  
 `;
+const StyledImageCell = styled(TableCell)`
+  padding: 10px;
+  width: 100px;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 0 0 10px 10px;
+`;
 
 const SuppliesTabContent: React.FC = () => {
   const suppliesData = [
-    { serialNumber: 1, productName: 'Tomatoes', quantity: 50, price: 2.5 },
-    { serialNumber: 2, productName: 'Onions', quantity: 30, price: 1.0 },
-    { serialNumber: 3, productName: 'Pears', quantity: 20, price: 0.8 },
-    { serialNumber: 4, productName: 'Chicken', quantity: 10, price: 5.0 },
-    { serialNumber: 5, productName: 'Trout', quantity: 15, price: 3.5 },
+    { serialNumber: 1, productName: 'Tomatoes', quantity: 50, price: 2.5, imageSrc: '/public/Images/Fresh Produce/Tomatoes.jpg' },
+    { serialNumber: 2, productName: 'Onions', quantity: 30, price: 1.0, imageSrc: '/public/Images/Fresh Produce/Onions.jpg' },
+    { serialNumber: 3, productName: 'Pears', quantity: 20, price: 0.8, imageSrc: '/public/Images/Fresh Produce/Pears.jpg'},
+    { serialNumber: 4, productName: 'Chicken', quantity: 10, price: 5.0, imageSrc: '/public/Images/Poultry/Chicken.jpg' },
+    { serialNumber: 5, productName: 'Trout', quantity: 15, price: 3.5, imageSrc: '/public/Images/Fish/Trout.jpg' }
   ];
 
   return (
@@ -47,6 +57,7 @@ const SuppliesTabContent: React.FC = () => {
         <StyledTable>
           <TableHead>
             <TableRow>
+            <StyledImageCell></StyledImageCell> {/* Empty cell for images */}
               <StyledTableCell>Serial Number</StyledTableCell>
               <StyledTableCell>Product Name</StyledTableCell>
               <StyledTableCell>Quantity</StyledTableCell>
@@ -56,6 +67,7 @@ const SuppliesTabContent: React.FC = () => {
           <TableBody>
             {suppliesData.map((supply) => (
               <TableRow key={supply.serialNumber}>
+                <StyledImageCell><Image src={supply.imageSrc} alt={supply.productName} /></StyledImageCell>
                 <StyledTableCell>{supply.serialNumber}</StyledTableCell>
                 <StyledTableCell>{supply.productName}</StyledTableCell>
                 <StyledTableCell>{supply.quantity}</StyledTableCell>

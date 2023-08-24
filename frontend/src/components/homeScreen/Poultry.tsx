@@ -24,10 +24,10 @@ interface poultryFlashcard {
   const AddToCartButtonText = styled.span`
   display: block;
   margin: 0px;
-  color: white;
+  color: #0C0B0B;
   margin-bottom: 0px;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: bolder;
   @media (max-width: 768px) {
     margin-right: 20px;
   }
@@ -39,7 +39,7 @@ interface poultryFlashcard {
   bottom: 30px;
   left: 180px;
   padding: 14px;
-  background-color: #ffa000;
+  background-color: #FFB31D;
   width: 120px;
   height: 20px;
   cursor: pointer;
@@ -62,7 +62,7 @@ const NextArrowButton = styled.button`
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
-  background-color: #FFA000; /* Yellow-green background color */
+  background-color: #FFB31D; /* Yellow-green background color */
   border: none;
   width: 30px;
   height: 30px;
@@ -83,7 +83,7 @@ position: absolute;
 top: 50%;
 left: 5px;
 transform: translateY(-50%);
-background-color: #ffa000;
+background-color: #ffb31d;
 border: none;
 width: 30px;
 height: 30px;
@@ -101,13 +101,13 @@ z-index: 2;
 const NextArrowIcon = styled(ChevronRightIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 
 const PrevArrowIcon = styled(ChevronLeftIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 
 interface SampleNextArrowProps {
@@ -147,8 +147,8 @@ margin: 5px;
   margin-top: 0px;  
   left: 5px;
   width: 90px;
-  background-color: orange;
-  color: white;
+  background-color: #fbb31d;
+  color: #0C0B0B;
   border-radius: 5px;
 `;
 
@@ -158,7 +158,7 @@ const ProductPrice = styled.span`
 font-size: 20px;
 padding: 0px;
 font-weight: bold;
-color: orange;
+color: #0C0B0B;
 margin-left: 10px;
 margin-top: 60px;
   
@@ -213,9 +213,9 @@ border-radius: 10px 10px 10px 10px;
 const WeightRangeDropdown = styled.select`
   margin-top: 40px;
   padding: 5px;
-  color: #FFA000;
+  color: #0C0B0B;
   margin-bottom: 0px;
-  border: solid #FFA000;
+  border: narrow #0C0B0B;
 `;
 const CounterWrapper = styled.div`
   display: flex;
@@ -231,8 +231,8 @@ const CounterButton = styled.span`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #ffa000;
-  color: white;
+  background-color: #fbb31d;
+  color: #0C0B0B;
   cursor: pointer;
   transition: background-color 0.3s ease;
   
@@ -244,7 +244,7 @@ const CounterButton = styled.span`
   svg {
     width: 20px;
     height: 20px;
-    fill: white;
+    fill: #0C0B0B;
   }
 `;
 
@@ -252,7 +252,7 @@ const CounterNum = styled.span`
   font-size: 18px;
   font-weight: bold;
   margin: 0 10px;
-  color: #FFA000;
+  color: #0C0B0B;
 `;
 
 

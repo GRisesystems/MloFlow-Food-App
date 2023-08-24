@@ -13,7 +13,7 @@ const StyledTab = styled.div<{ active: boolean }>`
   cursor: pointer;
   color: ${({ active }) => (active ? '#FBB31D' : 'inherit')};
   border-radius: 0;
-  border-bottom: ${({ active }) => (active ? '10px solid #FBB31D' : 'none')};
+  border-bottom: ${({ active }) => (active ? '6px solid #FBB31D' : 'none')};
 `;
 
 const Tab: React.FC<TabProps> = ({ label, activeTab, tabName, onTabChange }) => {

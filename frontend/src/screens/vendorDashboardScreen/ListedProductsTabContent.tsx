@@ -16,7 +16,7 @@ const Container = styled.div`
 const StyledTableContainer = styled(TableContainer)`
   margin-left: 5px;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const StyledTable = styled(Table)`
@@ -32,11 +32,21 @@ const StyledTableCell = styled(TableCell)`
   font-weight: bold;
  
 `;
+const StyledImageCell = styled(TableCell)`
+  padding: 10px;
+  width: 100px;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 0 0 10px 10px;
+`;
 
 const listedProductsData = [
-  { serialNumber: 1, productName: 'Apples', quantity: 50, price: 1.0 },
-  { serialNumber: 2, productName: 'Bananas', quantity: 50, price: 0.5 },
-  { serialNumber: 3, productName: 'Grapes',quantity: 50, price: 2.0 },
+  { serialNumber: 1, productName: 'Berries', quantity: 50, price: 1.0 , imageSrc: '/public/Images/Fresh Produce/Berries.jpg'},
+  { serialNumber: 2, productName: 'Pears', quantity: 50, price: 0.5, imageSrc: '/public/Images/Fresh Produce/Pears.jpg' },
+  { serialNumber: 3, productName: 'Chicken',quantity: 50, price: 2.0 , imageSrc: '/public/Images/Poultry/Chicken.jpg'},
   // Add more data...
 ];
 
@@ -48,6 +58,7 @@ const ListedProductsTabContent: React.FC = () => {
         <StyledTable>
           <TableHead>
             <TableRow>
+            <StyledImageCell></StyledImageCell> {/* Empty cell for images */}
               <StyledTableCell>Serial Number</StyledTableCell>
               <StyledTableCell>Product Name</StyledTableCell>
               <StyledTableCell>Price ($)</StyledTableCell>
@@ -56,6 +67,7 @@ const ListedProductsTabContent: React.FC = () => {
           <TableBody>
             {listedProductsData.map((product) => (
               <TableRow key={product.serialNumber}>
+                 <StyledImageCell><Image src={product.imageSrc} alt={product.productName} /></StyledImageCell>
                 <StyledTableCell>{product.serialNumber}</StyledTableCell>
                 <StyledTableCell>{product.productName}</StyledTableCell>
                 <StyledTableCell>{product.price.toFixed(2)}</StyledTableCell>
