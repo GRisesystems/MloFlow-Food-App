@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useForm } from 'react-hook-form'
-import { Box, DialogContent, DialogContentText, DialogTitle,Divider} from '@mui/material';
+import { Controller, useForm } from 'react-hook-form'
+import { Box, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
 
 interface VendorFirstLoginFormProps {
@@ -24,7 +24,7 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
             open={open}
         >
             <DialogTitle>Vendors Information</DialogTitle>
-            <Divider/>
+            <Divider />
             <DialogContent>
                 <DialogContentText>
                     Kindly fill the information inorder to proceed
