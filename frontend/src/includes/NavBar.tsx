@@ -37,7 +37,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#FFC107',color:'white'}}>
+    <AppBar position="sticky" sx={{ backgroundColor:'#FBB31D',color: '#0C0B0B'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>          
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -79,21 +79,21 @@ function NavBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button                
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder' , "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Home
               </Button>
 
               <Button                
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                sx={{ my: 2, color: '#0C0B0B', display: 'block',fontWeight: 'bolder',  "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Chefs
               </Button>
 
               <Button                
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Vendors
               </Button>
@@ -101,7 +101,7 @@ function NavBar() {
               <Link href="/farmproduce" style={{ textDecoration: 'none' }}>
                 <Button                
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                  sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
                 >
                   Farm Produce
                 </Button>
@@ -109,20 +109,20 @@ function NavBar() {
 
               <Button                
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Contact
               </Button>
               <Button                
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Blog
               </Button>
               <Link href="/about" style={{ textDecoration: 'none' }}>
                 <Button                
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}
+                  sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
                 >
                   About
                 </Button>
