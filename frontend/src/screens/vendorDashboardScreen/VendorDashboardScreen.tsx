@@ -1,130 +1,75 @@
-import { SetStateAction, useState } from 'react';
-import ListedProductsTab from './ListedProductsTab';
-import AllSuppliesTab from './AllSuppliesTab';
-import RequestedProductsTab from './RequestedProducts';
-import GraphTab from './GraphTab';
-import UploadProductTab from './UploadProductsTab';
+// VendorDashboard.js
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
+import Tab from './Tab';
+import SuppliesTabContent from './SuppliesTabContent';
+import ListedProductsTabContent from './ListedProductsTabContent';
+import RequestedProductsTabContent from './RequestedProductsTabContent';
+import GraphTabContent from './GraphTabContent';
 
-const VendorDashboard = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
+const VendorDashboardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+`;
 
-  const handleTabChange = (newValue: SetStateAction<number>) => {
-    setSelectedTab(newValue);
+const TabMenu = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 20px; /* Adjust the padding as needed */
+  font-size: 18px;
+  font-weight: bold;
+  gap: 200px; /* Add space between each tab */
+`;
+
+const TabContentContainer = styled.div`
+  width: 100%;
+`;
+
+const VendorDashboard: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('supplies');
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
   };
 
   return (
-<<<<<<< HEAD
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'left' }}>Welcome, Beatrice!</h2>
-      <div style={{ display: 'flex', marginBottom: '20px', justifyContent: 'center' }}>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 0 ? '#ffa000' : '#f0f0f0',
-=======
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
-      <div style={{ display: 'flex', marginBottom: '20px' }}>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 0 ? '#FFA000' : '#f0f0f0',
->>>>>>> 9ae2a6f5eece45640427de7b2a3375f645fe50e2
-            color: selectedTab === 0 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s, color 0.3s',
-          }}
-          onClick={() => handleTabChange(0)}
-        >
-          Listed Products
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-<<<<<<< HEAD
-            backgroundColor: selectedTab === 1 ? '#ffa000' : '#f0f0f0',
-=======
-            backgroundColor: selectedTab === 1 ? '#FFA000' : '#f0f0f0',
->>>>>>> 9ae2a6f5eece45640427de7b2a3375f645fe50e2
-            color: selectedTab === 1 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(1)}
-        >
-          All Supplies
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-<<<<<<< HEAD
-            backgroundColor: selectedTab === 2 ? '#ffa000' : '#f0f0f0',
-=======
-            backgroundColor: selectedTab === 2 ? '#FFA000' : '#f0f0f0',
->>>>>>> 9ae2a6f5eece45640427de7b2a3375f645fe50e2
-            color: selectedTab === 2 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(2)}
-        >
-          Requested Products
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-<<<<<<< HEAD
-            backgroundColor: selectedTab === 3 ? '#ffa000' : '#f0f0f0',
-=======
-            backgroundColor: selectedTab === 3 ? '#FFA000' : '#f0f0f0',
->>>>>>> 9ae2a6f5eece45640427de7b2a3375f645fe50e2
-            color: selectedTab === 3 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(3)}
-        >
-          Graph
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 4 ? '#FFA000' : '#f0f0f0',
-            color: selectedTab === 4 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(4)}
-        >
-          Upload Product
-        </button>
-      </div>
-      <div
-        style={{
-          width: '100%',
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '5px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        {selectedTab === 0 && <ListedProductsTab />}
-        {selectedTab === 1 && <AllSuppliesTab />}
-        {selectedTab === 2 && <RequestedProductsTab />}
-        {selectedTab === 3 && <GraphTab />}
-        {selectedTab === 4 && <UploadProductTab />}
-      </div>
-    </div>
+    <VendorDashboardContainer>
+      <TabMenu>
+        <Tab
+          label="All Supplies"
+          activeTab={activeTab}
+          tabName="supplies"
+          onTabChange={handleTabChange}
+        />
+        <Tab
+          label="Listed Products"
+          activeTab={activeTab}
+          tabName="listed-products"
+          onTabChange={handleTabChange}
+        />
+        <Tab
+          label="Requested Products"
+          activeTab={activeTab}
+          tabName="requested-products"
+          onTabChange={handleTabChange}
+        />
+        <Tab
+          label="Graph"
+          activeTab={activeTab}
+          tabName="graph"
+          onTabChange={handleTabChange}
+        />
+      </TabMenu>
+      <TabContentContainer>
+        {activeTab === 'supplies' && <SuppliesTabContent />}
+        {activeTab === 'listed-products' && <ListedProductsTabContent />}
+        {activeTab === 'requested-products' && <RequestedProductsTabContent />}
+        {activeTab === 'graph' && <GraphTabContent />}
+      </TabContentContainer>
+    </VendorDashboardContainer>
   );
 };
 
