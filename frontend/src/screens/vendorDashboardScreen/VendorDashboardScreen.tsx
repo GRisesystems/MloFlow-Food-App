@@ -9,14 +9,15 @@ import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorF
 
 const VendorDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const { loading,isFirstTimeLogin} =  useAuth();
+  const { loading,isFirstTimeLogin,isAuthenticated} =  useAuth();
   console.log(loading)
 
   const handleTabChange = (newValue: SetStateAction<number>) => {
     setSelectedTab(newValue);
   };
 
-
+console.log(isAuthenticated)
+console.log(isFirstTimeLogin)
   
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
