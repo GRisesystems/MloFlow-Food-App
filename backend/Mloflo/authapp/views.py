@@ -75,7 +75,7 @@ class LoginView(APIView):
             if_first_time_login = user.if_first_time_login
             category = user.category
 
-            response = {"tokens": tokens, "email":email, "firstname":first_name, "surname":surname, "category":category, "if_first_time_login":if_first_time_login}
+            response = {"tokens": tokens, "email":email, "first_name":first_name, "surname":surname, "category":category, "first_time_login":if_first_time_login}
             return Response(data=response, status=status.HTTP_200_OK)
 
         else:

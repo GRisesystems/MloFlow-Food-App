@@ -43,16 +43,17 @@ class UserAccountManager(BaseUserManager):
         extra_fields.setdefault('is_staff',True)
         extra_fields.setdefault('is_active',True)
         extra_fields.setdefault('is_superuser',True)
+        extra_fields.setdefault('is_admin',True)
         return self._create_user(email, first_name, surname, phone, home_address,category, password, **extra_fields)
        
 
 
 class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
-        ('customer','Customer'),
-        ('admin','admin'),
-        ('chef','Chef'),
-        ('vendor','Vendor'),
+        ('customer','customer'),
+        #('admin','admin'),
+        ('chef','chef'),
+        ('vendor','vendor'),
     ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
     email = models.EmailField(max_length=255, unique=True)
@@ -70,10 +71,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_updated = models.DateTimeField(auto_now=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    #is_active = models.BooleanField(default=True)
+    #is_staff = models.BooleanField(default=False)
+    #is_superuser = models.BooleanField(default=False)
     if_first_time_login = models.BooleanField(default=True)
+    is_profile_complete = models.BooleanField(default=False)
     #Terms_and_condition = models.BooleanField(default=True)
 
 
