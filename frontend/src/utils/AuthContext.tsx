@@ -67,7 +67,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (response.status === 200) {
         const data = response.data;
         setIsAuthenticated(true);
-        setIsFirstTimeLogin(false);
+        setIsFirstTimeLogin(data.if_first_time_login);
         setFirstName(data.firstname)
         setSurname(data.surname)
         setLoading(false);

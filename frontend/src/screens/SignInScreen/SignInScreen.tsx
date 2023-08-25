@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import SignUp from '../../components/signin/SignUp';
 import LoginForm from '../../components/signin/LoginForm';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -69,7 +68,7 @@ const SignInScreen = () => {
           <Grid item xs={12} md={5}>
             <Box>
             {showSignUp ? <SignUpForm /> : <LoginForm />}
-            {/* {showSignUp ? <SignUp /> : <LoginForm />} */}
+            
             </Box>
           </Grid>
         </Grid> 
