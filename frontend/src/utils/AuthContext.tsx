@@ -67,11 +67,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (response.status === 200) {
         const data = response.data;
         setIsAuthenticated(true);
-        setIsFirstTimeLogin(data.first_time_login);
-        setFirstName(data.first_name)
+        setIsFirstTimeLogin(false);
+        setFirstName(data.firstname)
         setSurname(data.surname)
         setLoading(false);
-        localStorage.setItem('first_name', data.first_name);
+        localStorage.setItem('first_name', data.firstname);
         localStorage.setItem('surname', data.surname);
 
         return { ...data, first_name, surname };

@@ -49,10 +49,10 @@ class UserAccountManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
-        ('customer','Customer'),
+        ('customer','customer'),
         ('admin','admin'),
-        ('chef','Chef'),
-        ('vendor','Vendor'),
+        ('vhef','chef'),
+        ('vendor','vendor'),
     ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
     email = models.EmailField(max_length=255, unique=True)
