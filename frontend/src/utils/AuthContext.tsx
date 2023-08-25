@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post(`${BASE_URL}/authapp/token/`, { email, password });
+      const response = await axios.post(`${BASE_URL}/authapp/login/`, { email, password });
 
       if (response.status === 200) {
         const data = response.data;
