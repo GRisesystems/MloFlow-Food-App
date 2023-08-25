@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -77,19 +77,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 export default function ClippedDrawer() {
-  
-  const { cart } = useCart(); // Access the cart data
-  const { isAuthenticated, logout } = useAuth();
 
+  const { cart } = useCart(); // Access the cart data
+  const { isAuthenticated, logout,first_name, surname } = useAuth();
+  console.log('isAuthenticated')
+  console.log(isAuthenticated)
+  console.log(first_name)
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);  
- 
-  const navigate = useNavigate()
-  console.log(isAuthenticated)
-  
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   
+
+
+
+  const navigate = useNavigate()
+
+  
+
+
 
   const handleLogin = () => {
     // nagigate to login screen
@@ -99,7 +105,7 @@ export default function ClippedDrawer() {
   const handleLogout = () => {
     // Handle logout fucntionality
     logout()
-    setIsDrawerVisible(!isDrawerVisible)     
+    setIsDrawerVisible(!isDrawerVisible)
     navigate('/')
   }
 
@@ -109,7 +115,7 @@ export default function ClippedDrawer() {
     setIsDrawerVisible(!isDrawerVisible)
   }
 
-  
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -123,7 +129,7 @@ export default function ClippedDrawer() {
               src={logo}
             />
           </Link>
-          <Box sx={{marginLeft:'auto',width:isMobileView ? '100%':'50%'}}>
+          <Box sx={{ marginLeft: 'auto', width: isMobileView ? '100%' : '50%' }}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -142,7 +148,7 @@ export default function ClippedDrawer() {
                   aria-label="user Profile"
                   color="inherit"
                   aria-haspopup="true"
-                  onClick={()=>console.log('mobile menu')}
+                  onClick={() => console.log('mobile menu')}
                 >
                   <Badge >
                     <MoreHorizIcon />
@@ -165,12 +171,12 @@ export default function ClippedDrawer() {
                       <Badge >
                         <AccountCircle />
                       </Badge>
-                      <Typography variant="body1">Isaac Kamula</Typography>
+                      <Typography variant="body1">{first_name} {surname}</Typography>
                     </IconButton>
                   ) : (
 
                     <Button onClick={handleLogin}>Log In</Button>
-                    
+
 
                   )}
                   {/* <IconButton
@@ -185,20 +191,20 @@ export default function ClippedDrawer() {
                       </Badge>
                       <Typography variant="body1">Isaac Kamula</Typography>
                     </IconButton> */}
-                  
+
                   <IconButton
-  size="large"
-  aria-label="Cart"
-  color="inherit"
->
-<Link to="/cart" component={RouterLink} color="inherit" underline="none">
-        <IconButton size="large" aria-label="Cart" color="inherit">
-          <Badge badgeContent={cart.reduce((total, item) => total + item.quantity, 0)} color="error">
-            <ShoppingCartCheckoutRoundedIcon />
-          </Badge>
-        </IconButton>
-      </Link>
-</IconButton>
+                    size="large"
+                    aria-label="Cart"
+                    color="inherit"
+                  >
+                    <Link to="/cart" component={RouterLink} color="inherit" underline="none">
+                      <IconButton size="large" aria-label="Cart" color="inherit">
+                        <Badge badgeContent={cart.reduce((total, item) => total + item.quantity, 0)} color="error">
+                          <ShoppingCartCheckoutRoundedIcon />
+                        </Badge>
+                      </IconButton>
+                    </Link>
+                  </IconButton>
 
                   <IconButton
                     size="large"
