@@ -1,8 +1,11 @@
-from .models import Product
 from rest_framework import serializers
+from Category.models import Category
+from .models import Product
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = Product
-        fields = ("name", "description", "price", "stock")
-        fields = '__all__'
+        fields = ( "name","category","description", "price", "stock", "choose_weight")
+        read_only_fields = ['created_by']
+        fields ='__all__'
