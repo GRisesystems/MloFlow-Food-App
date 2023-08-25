@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from . serializers import *
 
 from drf_spectacular.utils import extend_schema
-from authapp.models import User
 
 # Create your views here.
 
@@ -28,8 +27,6 @@ def vendorInfo(request):
         serializer = VendorSerializer(data =request.data)
         if serializer.is_valid():
             serializer.save()
-            User.is_profile_complete ==True
-            
         
     return Response(serializer.data)
 
