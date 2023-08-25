@@ -36,20 +36,20 @@ const VendorDashboard = () => {
 
   const { loading,isFirstTimeLogin,isAuthenticated} =  useAuth();
   console.log(loading)
-  console.log(isAuthenticated)
-  console.log(isFirstTimeLogin)
+
   
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
-
+  console.log(isAuthenticated)
+  console.log(isFirstTimeLogin)
 
   
   return (
-
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
+    {isFirstTimeLogin && <VendorFirstLoginForm is_first_time_login={isFirstTimeLogin}/>}
     <VendorDashboardContainer>
-       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
-      {isFirstTimeLogin && <VendorFirstLoginForm is_first_time_login={isFirstTimeLogin}/>}
+  
       <TabMenu>
         <Tab
           label="All Supplies"
@@ -82,8 +82,9 @@ const VendorDashboard = () => {
         {activeTab === 'requested-products' && <RequestedProductsTabContent />}
         {activeTab === 'graph' && <GraphTabContent />}
       </TabContentContainer>
-      </div>
+      
     </VendorDashboardContainer>
+    </div>
          
         
   );
