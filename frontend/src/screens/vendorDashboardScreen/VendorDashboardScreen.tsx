@@ -1,11 +1,13 @@
-// VendorDashboard.js
-import React, { useState } from 'react';
+
+import  { useState } from 'react';
 import styled from '@emotion/styled';
 import Tab from './Tab';
 import SuppliesTabContent from './SuppliesTabContent';
 import ListedProductsTabContent from './ListedProductsTabContent';
 import RequestedProductsTabContent from './RequestedProductsTabContent';
 import GraphTabContent from './GraphTabContent';
+import { useAuth } from '../../utils/AuthContext';
+import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 
 const VendorDashboardContainer = styled.div`
   display: flex;
@@ -13,6 +15,7 @@ const VendorDashboardContainer = styled.div`
   align-items: center;
   margin-top: 20px;
   margin-left: 20px;
+  
 `;
 
 const TabMenu = styled.div`
@@ -28,15 +31,25 @@ const TabContentContainer = styled.div`
   width: 100%;
 `;
 
-const VendorDashboard: React.FC = () => {
+const VendorDashboard = () => {
   const [activeTab, setActiveTab] = useState('supplies');
 
+  const { loading,isFirstTimeLogin,isAuthenticated} =  useAuth();
+  console.log(loading)
+  console.log(isAuthenticated)
+  console.log(isFirstTimeLogin)
+  
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
 
+
+  
   return (
+
     <VendorDashboardContainer>
+       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
+      {isFirstTimeLogin && <VendorFirstLoginForm is_first_time_login={isFirstTimeLogin}/>}
       <TabMenu>
         <Tab
           label="All Supplies"
@@ -69,7 +82,10 @@ const VendorDashboard: React.FC = () => {
         {activeTab === 'requested-products' && <RequestedProductsTabContent />}
         {activeTab === 'graph' && <GraphTabContent />}
       </TabContentContainer>
+      </div>
     </VendorDashboardContainer>
+         
+        
   );
 };
 
