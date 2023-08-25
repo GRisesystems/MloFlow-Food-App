@@ -7,6 +7,8 @@ import { Typography, useMediaQuery, useTheme } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import SignUpForm from '../../components/signin/SignUpForm';
+
 const SignInScreen = () => {
   const theme = useTheme()
   const [showSignUp, setShowSignUp] = useState(false);
@@ -66,7 +68,8 @@ const SignInScreen = () => {
           </Grid>
           <Grid item xs={12} md={5}>
             <Box>
-            {showSignUp ? <SignUp /> : <LoginForm />}
+            {showSignUp ? <SignUpForm /> : <LoginForm />}
+            {/* {showSignUp ? <SignUp /> : <LoginForm />} */}
             </Box>
           </Grid>
         </Grid> 
