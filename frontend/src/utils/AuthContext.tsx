@@ -7,6 +7,8 @@ interface AuthContextProps {
   loading: boolean;
   isFirstTimeLogin: boolean;
   errorMessage: string;
+  first_name: string;
+  surname: string;
   login: (
     email: string,
     password: string
@@ -30,18 +32,26 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [loading, setLoading] = useState(true);
-    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+  const [loading, setLoading] = useState(true);
+  const [first_name, setFirstName] = useState(() => {
+    const storedFirstName = localStorage.getItem('first_name');
+    return storedFirstName || '';
+  });
+  const [surname, setSurname] = useState(() => {
+    const storedSurname = localStorage.getItem('surname');
+    return storedSurname || '';
+  });
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const storedAuth = localStorage.getItem('isAuthenticated');
     return storedAuth ? JSON.parse(storedAuth) : false;
   });
-    const [isFirstTimeLogin, setIsFirstTimeLogin] = useState(() => {
+  const [isFirstTimeLogin, setIsFirstTimeLogin] = useState(() => {
     const storedFirstTimeLogin = localStorage.getItem('isFirstTimeLogin');
     return storedFirstTimeLogin ? JSON.parse(storedFirstTimeLogin) : false;
   });
   const [errorMessage, setErrorMessage] = useState('');
 
-  
+
   useEffect(() => {
     localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
   }, [isAuthenticated]);
@@ -58,9 +68,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const data = response.data;
         setIsAuthenticated(true);
         setIsFirstTimeLogin(data.first_time_login);
+        setFirstName(data.first_name)
+        setSurname(data.surname)
         setLoading(false);
+        localStorage.setItem('first_name', data.first_name);
+        localStorage.setItem('surname', data.surname);
 
-        return data;
+        return { ...data, first_name, surname };
       } else {
         setErrorMessage('Invalid email or password');
       }
@@ -84,6 +98,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         logout,
         loading,
+        first_name,
+        surname,
         isFirstTimeLogin,
       }}
     >
