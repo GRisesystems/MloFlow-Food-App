@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from 'react-hook-form'
-import { Box, Button, DialogContent, DialogContentText, DialogTitle, Divider, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Box, Button, Checkbox, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, FormControlLabel, FormGroup, FormLabel, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
 import { Country, State, City } from 'country-state-city';
 
@@ -12,10 +12,21 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
     const countries = Country.getAllCountries()
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null); // Initialize with null
     const [selectedStates, setSelectedStates] = useState<State[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
     const [fullWidth, setFullWidth] = useState(true);
     const [open, setOpen] = useState(is_first_time_login);
     const [maxWidth, setMaxWidth] = useState<DialogProps['maxWidth']>('sm');
-    const { control, register, handleSubmit, formState: { errors } } = useForm()
+    const { control, register, handleSubmit, formState: { errors }, watch } = useForm()
+    // const selectedOptions = watch("selectedOptions", []);
+
+    const handleCheckboxChange = (value: string) => {
+        if (selectedOptions.includes(value)) {
+            setSelectedOptions(selectedOptions.filter((option) => option !== value));
+        } else {
+            setSelectedOptions([...selectedOptions, value]);
+        }
+    };
 
 
 
@@ -28,16 +39,17 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
                 setSelectedStates(countryStates);
             }
         }
-    }, [selectedCountry, countries]); // Also include `countries` as a dependency
+    }, [selectedCountry, countries]); // include `countries` as a dependency
 
 
     const onSubmit = (data: any) => {
         // Set the selected country in the form data
         data.country = selectedCountry;
-      
-        // Now you can log the form data
+        data.selectedOptions = selectedOptions;
+        console.log(selectedOptions)
+
         console.log(data);
-      };
+    };
 
 
 
@@ -126,6 +138,46 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
                             />
                             {errors.city && <span>This field is required</span>}
                         </Box>
+
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="farmProduce"
+                                        value="farmProduce"
+                                        checked={selectedOptions.includes("farmProduce")}
+                                        onChange={() => handleCheckboxChange("farmProduce")}
+                                    />
+                                }
+                                label="Farm Produce"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="poultry"
+                                        value="poultry"
+                                        checked={selectedOptions.includes("poultry")}
+                                        onChange={() => handleCheckboxChange("poultry")}
+                                    />
+                                }
+                                label="Poultry"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="fish"
+                                        value="fish"
+                                        checked={selectedOptions.includes("fish")}
+                                        onChange={() => handleCheckboxChange("fish")}
+                                    />
+                                }
+                                label="Fish"
+                            />
+                        </FormGroup>
+
+
+
+
                         <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
                             <Button variant="contained" color="primary" type="submit">
                                 Submit
