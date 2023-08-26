@@ -21,6 +21,7 @@ interface AuthContextProps {
     first_time_login: boolean;
   }>;
   logout: () => void;
+  updateProfileData: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -87,6 +88,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return storedProfileComplete ? JSON.parse(storedProfileComplete) : false;
   });
 
+  // update profile function
+  const updateProfileData = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Include the accessToken
+      },
+    };
+    try {
+      const response = await axios.get(`${BASE_URL}/api/v1/vendors/profile`,config); // Replace with your actual API endpoint
+
+      if (response.status === 200) {
+        const data = response.data;
+        setIsProfileComplete(data.is_profile_complete);
+        localStorage.setItem('is_profile_complete', JSON.stringify(data.is_profile_complete));
+        return data;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   const login = async (email: string, password: string) => {
     try {
@@ -136,6 +157,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isFirstTimeLogin,
         accessToken,
         isProfileComplete,
+        updateProfileData,
       }}
     >
       {children}

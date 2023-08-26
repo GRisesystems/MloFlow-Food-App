@@ -11,9 +11,11 @@ import { BASE_URL } from '../../components/signin/constants';
 
 const VendorDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const {  isFirstTimeLogin,isProfileComplete } = useAuth();
+  const { isProfileComplete } = useAuth();
   const [categories, setCategories] = useState([])
 
+  
+  console.log('is profile complete:',isProfileComplete)
  
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const VendorDashboard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem' }}>
-      {!isProfileComplete && categories.length > 0 && (
+      {isProfileComplete ? <></> :  (
         <VendorFirstLoginForm
           is_profile_complete={isProfileComplete}
           product_categories={categories}
