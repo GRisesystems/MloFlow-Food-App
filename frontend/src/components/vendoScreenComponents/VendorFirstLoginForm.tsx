@@ -59,7 +59,7 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
         };
         
         try {
-            const response = await axios.post(`${BASE_URL}/your-api-endpoint`, data, config);
+            const response = await axios.post(`${BASE_URL}/api/v1/vendors/`, data, config);
             console.log('API Response:', response.data);
             
         } catch (error) {
