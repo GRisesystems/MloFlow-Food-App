@@ -177,13 +177,8 @@ export default function ClippedDrawer() {
                     </IconButton>
                   ) : (
 
-<<<<<<< HEAD
-                    <Button conClick={handleLogin}>Log In</Button>
-                    
-=======
                     <Button onClick={handleLogin}>Log In</Button>
 
->>>>>>> da9f3a654da22294674fe902a430e7c5a3186cfe
 
                   )}
                   {/* <IconButton

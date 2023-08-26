@@ -13,10 +13,10 @@ const style = {
     p: 4,
 };
 
-export default function RegisterAlert() {
+export default function RegisterAlert(message: any) {
     return (
         <Box sx={style}>
-            <Alert severity="success">Successfully Created an Account. Check your email for Account Activation details</Alert>
+            <Alert severity="success">{message}</Alert>
         </Box>
     );
 }

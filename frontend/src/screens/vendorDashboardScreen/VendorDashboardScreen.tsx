@@ -32,9 +32,11 @@ const TabContentContainer = styled.div`
 `;
 
 const VendorDashboard = () => {
+
   const [activeTab, setActiveTab] = useState('supplies');
 
-  const { loading,isFirstTimeLogin,isAuthenticated} =  useAuth();
+  const { loading,isFirstTimeLogin} =  useAuth();
+
   console.log(loading)
 
   
