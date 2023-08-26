@@ -19,14 +19,13 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
     const [fullWidth, setFullWidth] = useState(true);
-    const [open, setOpen] = useState(is_profile_complete);
+    const [open, setOpen] = useState(!is_profile_complete);
     const [maxWidth, setMaxWidth] = useState<DialogProps['maxWidth']>('sm');
     const { control, register, handleSubmit, formState: { errors }, watch } = useForm()
-    console.log('hello')
-    console.log(product_categories)
+    
 
-    // get access toke from Auth Context
-    const { accessToken } = useAuth();
+    // get access token from Auth Context
+    const { accessToken,updateProfileData } = useAuth();
 
 
     const handleCheckboxChange = (value: string) => {
@@ -55,7 +54,7 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
 
         data.country = selectedCountry;
         data.selectedOptions = selectedOptions;
-        console.log(data)
+        
         const config = {
             headers: {
                 Authorization: `Bearer ${accessToken}`, // Include the accessToken
@@ -64,7 +63,11 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
 
         try {
             const response = await axios.post(`${BASE_URL}/api/v1/vendors/`, data, config);
-            console.log('API Response:', response.data);
+            if (response.status == 201){
+                const updatedData = await updateProfileData()   
+                console.log(updatedData)
+
+            }
 
         } catch (error) {
             console.error('API Error:', error);

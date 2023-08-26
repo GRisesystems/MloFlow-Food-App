@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from Category.models import Category
 from .models import Vendor
+from authapp.models import User
+from authapp.serializers import UserCreateSerializer
 
 
 @api_view(['POST'])
@@ -43,3 +45,13 @@ def update_vendor_details(request):
         context = {'error': str(e)}
         print(e)
         return Response(context, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def fetch_updated_user_profile(request):
+    context = {}
+    user_id = request.user.id
+    updated_user = User.objects.get(id=request.user.id)
+    serializer = UserCreateSerializer(updated_user)    
+    return Response(serializer.data,status = status.HTTP_200_OK)
