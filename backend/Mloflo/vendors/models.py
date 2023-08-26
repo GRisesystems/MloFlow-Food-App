@@ -13,6 +13,7 @@ class Vendor(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     country = models.CharField(max_length=200)
     state = models.CharField(max_length=200)
+    city = models.CharField(max_length=200, blank=True, null=True)
     product_category = models.ManyToManyField(Category)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

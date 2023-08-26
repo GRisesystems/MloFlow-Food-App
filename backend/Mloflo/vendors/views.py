@@ -15,6 +15,7 @@ def update_vendor_details(request):
         state = data.get('state')
         city = data.get('city')
         selected_options = data.get('selectedOptions')
+        logged_in_user = request.user
 
         # Retrieve  the vendor's product categories
         product_categories = [Category.objects.get(
@@ -22,14 +23,19 @@ def update_vendor_details(request):
 
         # create vendor data
         vendor = Vendor.objects.create(
-            vendor=request.user,
+            vendor=logged_in_user,
             country=country,
             state=state,
             city=city,
         )
         # set product categories
         vendor.product_category.set(product_categories)
+        try:
+            logged_in_user.is_profile_complete = True
+            logged_in_user.save()
 
+        except User.DoesNotExist:
+            pass
         context = {'message': 'Vendor details updated successfully'}
         return Response(context, status=status.HTTP_201_CREATED)
 
