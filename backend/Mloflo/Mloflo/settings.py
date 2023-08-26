@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'main',
     'authapp',
     'payments',
+    'vendors',
 
 
     'Category',
