@@ -9,6 +9,7 @@ interface AuthContextProps {
   errorMessage: string;
   first_name: string;
   surname: string;
+  accessToken: string;
   login: (
     email: string,
     password: string
@@ -33,24 +34,42 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
+
+  // set logged in user first name
   const [first_name, setFirstName] = useState(() => {
     const storedFirstName = localStorage.getItem('first_name');
     return storedFirstName || '';
   });
+  // Set logged in user surname
   const [surname, setSurname] = useState(() => {
     const storedSurname = localStorage.getItem('surname');
     return storedSurname || '';
   });
+  // set User Authentication status
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const storedAuth = localStorage.getItem('isAuthenticated');
     return storedAuth ? JSON.parse(storedAuth) : false;
   });
+  // set first Time Login
   const [isFirstTimeLogin, setIsFirstTimeLogin] = useState(() => {
     const storedFirstTimeLogin = localStorage.getItem('isFirstTimeLogin');
     return storedFirstTimeLogin ? JSON.parse(storedFirstTimeLogin) : false;
   });
+
+  // set logged in user access token
+  const [accessToken, setAccessToken] = useState(() => {
+    const storedAccessToken = localStorage.getItem('access_token');
+    return storedAccessToken || '';
+  });
+  
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(() => {
+    if (accessToken) {
+      localStorage.setItem('access_token', accessToken);
+      console.log('access Token',accessToken)
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
@@ -65,12 +84,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const response = await axios.post(`${BASE_URL}/authapp/login/`, { email, password });
 
       if (response.status === 200) {
-        const data = response.data;
+        const data = response.data;        
         setIsAuthenticated(true);
-        setIsFirstTimeLogin(data.if_first_time_login);
+        setIsFirstTimeLogin(true);
         setFirstName(data.firstname)
         setSurname(data.surname)
         setLoading(false);
+
+        setAccessToken(data.tokens.access);        
         localStorage.setItem('first_name', data.firstname);
         localStorage.setItem('surname', data.surname);
 
@@ -101,6 +122,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         first_name,
         surname,
         isFirstTimeLogin,
+        accessToken,
       }}
     >
       {children}

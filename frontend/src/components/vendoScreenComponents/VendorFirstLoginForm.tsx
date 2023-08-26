@@ -3,6 +3,9 @@ import { Controller, useForm } from 'react-hook-form'
 import { Box, Button, Checkbox, DialogContent, DialogContentText, DialogTitle, Divider, FormControl, FormControlLabel, FormGroup, FormLabel, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
 import { Country, State, City } from 'country-state-city';
+import { useAuth } from "../../utils/AuthContext";
+import { BASE_URL } from "../signin/constants";
+import axios from "axios";
 
 interface VendorFirstLoginFormProps {
     is_first_time_login: boolean; // Specify the type of the prop
@@ -18,7 +21,10 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
     const [open, setOpen] = useState(is_first_time_login);
     const [maxWidth, setMaxWidth] = useState<DialogProps['maxWidth']>('sm');
     const { control, register, handleSubmit, formState: { errors }, watch } = useForm()
-    // const selectedOptions = watch("selectedOptions", []);
+
+    // get access toke from Auth Context
+    const { accessToken } = useAuth();
+
 
     const handleCheckboxChange = (value: string) => {
         if (selectedOptions.includes(value)) {
@@ -42,13 +48,24 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
     }, [selectedCountry, countries]); // include `countries` as a dependency
 
 
-    const onSubmit = (data: any) => {
-        // Set the selected country in the form data
+    const onSubmit =    async (data: any) => {
+
         data.country = selectedCountry;
         data.selectedOptions = selectedOptions;
-        console.log(selectedOptions)
-
-        console.log(data);
+        const config = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`, // Include the accessToken
+            },
+        };
+        
+        try {
+            const response = await axios.post(`${BASE_URL}/your-api-endpoint`, data, config);
+            console.log('API Response:', response.data);
+            
+        } catch (error) {
+            console.error('API Error:', error);
+            
+        }
     };
 
 
