@@ -1,4 +1,4 @@
-import  { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import ListedProductsTab from './ListedProductsTab';
 import AllSuppliesTab from './AllSuppliesTab';
 import RequestedProductsTab from './RequestedProducts';
@@ -6,21 +6,43 @@ import GraphTab from './GraphTab';
 import UploadProductTab from './UploadProductsTab';
 import { useAuth } from '../../utils/AuthContext';
 import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
+import axios from 'axios';
+import { BASE_URL } from '../../components/signin/constants';
 
 const VendorDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const { loading,isFirstTimeLogin} =  useAuth();
-  console.log(loading)
+  const {  isFirstTimeLogin,isProfileComplete } = useAuth();
+  const [categories, setCategories] = useState([])
+
+ 
+
+  useEffect(() => {
+    // Fetch categories when the component mounts
+    axios.get(`${BASE_URL}/api/v1/categories`) // Replace with your API endpoint
+      .then(response => {
+        setCategories(response.data.categories);
+
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+  }, []);
 
   const handleTabChange = (newValue: SetStateAction<number>) => {
     setSelectedTab(newValue);
   };
 
 
-  
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'1rem'}}>
-      {isFirstTimeLogin && <VendorFirstLoginForm is_first_time_login={isFirstTimeLogin}/>}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem' }}>
+      {!isProfileComplete && categories.length > 0 && (
+        <VendorFirstLoginForm
+          is_profile_complete={isProfileComplete}
+          product_categories={categories}
+        />
+      )}
+
       <div style={{ display: 'flex', marginBottom: '20px' }}>
         <button
           style={{

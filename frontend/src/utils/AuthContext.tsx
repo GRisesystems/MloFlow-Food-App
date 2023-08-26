@@ -6,6 +6,7 @@ interface AuthContextProps {
   isAuthenticated: boolean;
   loading: boolean;
   isFirstTimeLogin: boolean;
+  isProfileComplete: boolean;
   errorMessage: string;
   first_name: string;
   surname: string;
@@ -34,6 +35,8 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
+  // const [isProfileComplete, setIsProfileComplete] = useState(false);
+
 
   // set logged in user first name
   const [first_name, setFirstName] = useState(() => {
@@ -61,13 +64,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const storedAccessToken = localStorage.getItem('access_token');
     return storedAccessToken || '';
   });
-  
+
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (accessToken) {
       localStorage.setItem('access_token', accessToken);
-      console.log('access Token',accessToken)
+      console.log('access Token', accessToken)
     }
   }, [accessToken]);
 
@@ -79,21 +82,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem('isFirstTimeLogin', JSON.stringify(isFirstTimeLogin));
   }, [isFirstTimeLogin]);
 
+  const [isProfileComplete, setIsProfileComplete] = useState(() => {
+    const storedProfileComplete = localStorage.getItem('is_profile_complete');
+    return storedProfileComplete ? JSON.parse(storedProfileComplete) : false;
+  });
+
+
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.post(`${BASE_URL}/authapp/login/`, { email, password });
 
       if (response.status === 200) {
-        const data = response.data;        
+        const data = response.data;
         setIsAuthenticated(true);
         setIsFirstTimeLogin(true);
+        setIsProfileComplete(data.is_profile_complete);
         setFirstName(data.firstname)
         setSurname(data.surname)
         setLoading(false);
 
-        setAccessToken(data.tokens.access);        
+        setAccessToken(data.tokens.access);
+
         localStorage.setItem('first_name', data.firstname);
         localStorage.setItem('surname', data.surname);
+        localStorage.setItem('is_profile_complete', data.is_profile_complete);
 
         return { ...data, first_name, surname };
       } else {
@@ -123,6 +135,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         surname,
         isFirstTimeLogin,
         accessToken,
+        isProfileComplete,
       }}
     >
       {children}
