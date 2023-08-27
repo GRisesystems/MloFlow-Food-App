@@ -8,22 +8,24 @@ import { BASE_URL } from "../signin/constants";
 import axios from "axios";
 
 interface VendorFirstLoginFormProps {
-    is_first_time_login: boolean; // Specify the type of the prop
+    is_profile_complete: boolean;
+    product_categories: any[];
 }
 
-const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps) => {
+const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: VendorFirstLoginFormProps) => {
     const countries = Country.getAllCountries()
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null); // Initialize with null
     const [selectedStates, setSelectedStates] = useState<State[]>([]);
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
     const [fullWidth, setFullWidth] = useState(true);
-    const [open, setOpen] = useState(is_first_time_login);
+    const [open, setOpen] = useState(!is_profile_complete);
     const [maxWidth, setMaxWidth] = useState<DialogProps['maxWidth']>('sm');
     const { control, register, handleSubmit, formState: { errors }, watch } = useForm()
+    
 
-    // get access toke from Auth Context
-    const { accessToken } = useAuth();
+    // get access token from Auth Context
+    const { accessToken,updateProfileData } = useAuth();
 
 
     const handleCheckboxChange = (value: string) => {
@@ -48,23 +50,28 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
     }, [selectedCountry, countries]); // include `countries` as a dependency
 
 
-    const onSubmit =    async (data: any) => {
+    const onSubmit = async (data: any) => {
 
         data.country = selectedCountry;
         data.selectedOptions = selectedOptions;
+        
         const config = {
             headers: {
                 Authorization: `Bearer ${accessToken}`, // Include the accessToken
             },
         };
-        
+
         try {
-            const response = await axios.post(`${BASE_URL}/your-api-endpoint`, data, config);
-            console.log('API Response:', response.data);
-            
+            const response = await axios.post(`${BASE_URL}/api/v1/vendors/`, data, config);
+            if (response.status == 201){
+                const updatedData = await updateProfileData()   
+                console.log(updatedData)
+
+            }
+
         } catch (error) {
             console.error('API Error:', error);
-            
+
         }
     };
 
@@ -157,40 +164,22 @@ const VendorFirstLoginForm = ({ is_first_time_login }: VendorFirstLoginFormProps
                         </Box>
 
                         <FormGroup>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        name="farmProduce"
-                                        value="farmProduce"
-                                        checked={selectedOptions.includes("farmProduce")}
-                                        onChange={() => handleCheckboxChange("farmProduce")}
-                                    />
-                                }
-                                label="Farm Produce"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        name="poultry"
-                                        value="poultry"
-                                        checked={selectedOptions.includes("poultry")}
-                                        onChange={() => handleCheckboxChange("poultry")}
-                                    />
-                                }
-                                label="Poultry"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        name="fish"
-                                        value="fish"
-                                        checked={selectedOptions.includes("fish")}
-                                        onChange={() => handleCheckboxChange("fish")}
-                                    />
-                                }
-                                label="Fish"
-                            />
+                            {product_categories.map(category => (
+                                <FormControlLabel
+                                    key={category.id}
+                                    control={
+                                        <Checkbox
+                                            name={category.name}
+                                            value={category.id}
+                                            checked={selectedOptions.includes(category.id)}
+                                            onChange={() => handleCheckboxChange(category.id)}
+                                        />
+                                    }
+                                    label={category.name}
+                                />
+                            ))}
                         </FormGroup>
+
 
 
 
