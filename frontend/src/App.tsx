@@ -35,7 +35,8 @@ const router = createBrowserRouter(
       <Route index element={<HomeScreen />} />
       <Route path='/login' element={<SignInScreen />} />
       <Route path='/chef-dashboard' element={<ChefDashBoardScreen />} />
-      <Route path="/vendor-dashboard" element={<ProtectedRoute element={VendorDashboardScreen} />} />
+      {/* <Route path="/vendor-dashboard" element={<ProtectedRoute element={VendorDashboardScreen} />} /> */}
+      <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
       <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />
       <Route path='/farm-produce' element={<FarmProduceScreen />} />
       <Route path='/fish-products' element={<FishProductsScreen />} />

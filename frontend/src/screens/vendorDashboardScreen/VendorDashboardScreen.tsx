@@ -1,4 +1,5 @@
 import { SetStateAction, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import ListedProductsTab from './ListedProductsTabContent';
 import AllSuppliesTab from './SuppliesTabContent';
 import RequestedProductsTab from './RequestedProductsTabContent';
@@ -53,7 +54,7 @@ const VendorDashboard = () => {
   }, []);
 
   
-  const handleTabChange = (tab: string) => {
+  const handleTabChange = (tab) => {
     setSelectedTab(tab);
   };
   // console.log(isAuthenticated)
@@ -61,13 +62,14 @@ const VendorDashboard = () => {
 
 
   return (
+    <VendorDashboardContainer>
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem' }}>
-      {isProfileComplete ? <></> :  (
+      {/* {isProfileComplete ? <></> :  (
         <VendorFirstLoginForm
           is_profile_complete={isProfileComplete}
           product_categories={categories}
         />
-      )}
+      )} */}
 
       <div style={{ display: 'flex', marginBottom: '20px' }}>
         <button
@@ -141,6 +143,7 @@ const VendorDashboard = () => {
           Upload Product
         </button>
       </div>
+     
       <div
         style={{
           width: '100%',
@@ -157,7 +160,8 @@ const VendorDashboard = () => {
         {selectedTab === 4 && <UploadProductTab />}
       </div>
     </div>
-         
+    
+    </VendorDashboardContainer> 
         
   );
 };
