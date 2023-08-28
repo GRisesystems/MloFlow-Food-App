@@ -36,7 +36,7 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  // const [isProfileComplete, setIsProfileComplete] = useState(false);
+
 
 
   // set logged in user first name
@@ -85,8 +85,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [isProfileComplete, setIsProfileComplete] = useState(() => {
     const storedProfileComplete = localStorage.getItem('is_profile_complete');
-    return storedProfileComplete ? JSON.parse(storedProfileComplete) : false;
+    try {
+      return storedProfileComplete ? JSON.parse(storedProfileComplete) : false;
+    } catch (error) {
+      console.error('Error parsing storedProfileComplete:', error);
+      return false;
+    }
   });
+
 
   // update profile function
   const updateProfileData = async () => {
@@ -96,7 +102,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       },
     };
     try {
-      const response = await axios.get(`${BASE_URL}/api/v1/vendors/profile`,config); // Replace with your actual API endpoint
+      const response = await axios.get(`${BASE_URL}/api/v1/vendors/profile`, config); // Replace with your actual API endpoint
 
       if (response.status === 200) {
         const data = response.data;
@@ -115,17 +121,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (response.status === 200) {
         const data = response.data;
+        console.log(data)
         setIsAuthenticated(true);
         setIsFirstTimeLogin(true);
         setIsProfileComplete(data.is_profile_complete);
-        setFirstName(data.firstname)
+        setFirstName(data.first_name)
         setSurname(data.surname)
         setLoading(false);
 
         setAccessToken(data.tokens.access);
 
-        localStorage.setItem('first_name', data.firstname);
+        localStorage.setItem('first_name', data.first_name);
         localStorage.setItem('surname', data.surname);
+
         localStorage.setItem('is_profile_complete', data.is_profile_complete);
 
         return { ...data, first_name, surname };

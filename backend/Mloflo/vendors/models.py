@@ -5,7 +5,7 @@ from django.conf import settings
 from Category.models import Category
 
 
-class Vendor(models.Model):
+class VendorTestTable(models.Model):
     '''Holds vendor data'''
     id = models.UUIDField(primary_key=True, unique=True,
                           editable=False, default=uuid.uuid4)

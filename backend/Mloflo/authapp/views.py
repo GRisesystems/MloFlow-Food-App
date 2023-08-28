@@ -76,7 +76,7 @@ class LoginView(APIView):
             is_profile_complete = user.is_profile_complete
             category = user.category
 
-            response = {"tokens": tokens, "email":email, "first_name":first_name, "surname":surname, "category":category, "first_time_login":if_first_time_login}
+            response = {"tokens": tokens, "email":email, "first_name":first_name, "surname":surname, "category":category, "first_time_login":if_first_time_login,'is_profile_complete':is_profile_complete}
             return Response(data=response, status=status.HTTP_200_OK)
 
         else:
