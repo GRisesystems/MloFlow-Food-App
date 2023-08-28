@@ -51,13 +51,8 @@ class UserAccountManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
         ('customer','customer'),
-<<<<<<< HEAD
-        ('admin','admin'),
-        ('vhef','chef'),
-=======
-        #('admin','admin'),
+        #('admin', 'admin'),
         ('chef','chef'),
->>>>>>> origin/ft_kamakia3
         ('vendor','vendor'),
     ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
