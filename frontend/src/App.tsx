@@ -12,7 +12,8 @@ import CheckoutScreen from './screens/checkoutScreen/CheckoutScreen'
 import FishProductsScreen from './screens/fishProductsScreen/FishProductsScreen'
 import CookedProductsScreen from './screens/cookedProductsScreen/CookedProductsScreen'
 import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProductsScreen'
-import { useAuth } from './utils/AuthContext';// 
+
+import { useAuth } from './utils/AuthContext';
 
 
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
+      <Route path='/products' element={<AllProductScreen />} />
 
       {/* <Route path='/cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')
