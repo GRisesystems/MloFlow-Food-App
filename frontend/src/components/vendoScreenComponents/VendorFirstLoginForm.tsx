@@ -22,10 +22,10 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
     const [open, setOpen] = useState(!is_profile_complete);
     const [maxWidth, setMaxWidth] = useState<DialogProps['maxWidth']>('sm');
     const { control, register, handleSubmit, formState: { errors }, watch } = useForm()
-    
+
 
     // get access token from Auth Context
-    const { accessToken,updateProfileData } = useAuth();
+    const { accessToken, updateProfileData } = useAuth();
 
 
     const handleCheckboxChange = (value: string) => {
@@ -54,7 +54,7 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
 
         data.country = selectedCountry;
         data.selectedOptions = selectedOptions;
-        
+
         const config = {
             headers: {
                 Authorization: `Bearer ${accessToken}`, // Include the accessToken
@@ -63,8 +63,8 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
 
         try {
             const response = await axios.post(`${BASE_URL}/api/v1/vendors/`, data, config);
-            if (response.status == 201){
-                const updatedData = await updateProfileData()   
+            if (response.status == 201) {
+                const updatedData = await updateProfileData()
                 console.log(updatedData)
 
             }
@@ -83,12 +83,13 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
             maxWidth={maxWidth}
             open={open}
         >
-            <DialogTitle>Vendors Information</DialogTitle>
+            <DialogTitle sx={{ color: 'black' }}>Vendors Information</DialogTitle>
             <Divider />
             <DialogContent>
-                <DialogContentText>
+                <DialogContentText sx={{ color: 'black' }}>
                     Kindly fill the information inorder to proceed
                 </DialogContentText>
+
                 <Box sx={{ mt: 2 }} >
                     <Box component="form" noValidate autoComplete="off"
                         onSubmit={
@@ -125,29 +126,30 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
                                 </>
                             )}
                         />
-
-                        <InputLabel id="demo-simple-select-label">Select State</InputLabel>
-                        <Controller
-                            name="state"
-                            control={control}
-                            rules={{ required: true }}
-                            render={({ field }) => (
-                                <Select
-                                    {...field}
-                                    fullWidth
-                                    inputProps={{
-                                        name: 'state',
-                                        id: 'state',
-                                    }}
-                                >
-                                    {selectedStates && selectedStates.map(state => (
-                                        <MenuItem key={state.stateCode} value={state.name}>
-                                            {state.name}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            )}
-                        />
+                        <Box sx={{mt:2}}>
+                            <InputLabel id="demo-simple-select-label">Select State</InputLabel>
+                            <Controller
+                                name="state"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({ field }) => (
+                                    <Select
+                                        {...field}
+                                        fullWidth
+                                        inputProps={{
+                                            name: 'state',
+                                            id: 'state',
+                                        }}
+                                    >
+                                        {selectedStates && selectedStates.map(state => (
+                                            <MenuItem key={state.stateCode} value={state.name}>
+                                                {state.name}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                )}
+                            />
+                        </Box>
 
 
                         <Box sx={{ mt: 2 }}>
@@ -163,7 +165,8 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }: Vendo
                             {errors.city && <span>This field is required</span>}
                         </Box>
 
-                        <FormGroup>
+                        <FormGroup sx={{mt:2}} >
+                            <InputLabel sx={{color:'black'}} id="demo-simple-select-label">Select Product Category</InputLabel>                            
                             {product_categories.map(category => (
                                 <FormControlLabel
                                     key={category.id}

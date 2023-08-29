@@ -81,8 +81,7 @@ export default function ClippedDrawer() {
 
   const { cart } = useCart(); // Access the cart data
   const { isAuthenticated, logout,first_name, surname } = useAuth();
-  console.log('isAuthenticated')
-  console.log(isAuthenticated)
+  console.log('first name')
   console.log(first_name)
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
