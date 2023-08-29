@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ListedProductsTab from './ListedProductsTabContent';
 import AllSuppliesTab from './SuppliesTabContent';
@@ -6,7 +6,7 @@ import RequestedProductsTab from './RequestedProductsTabContent';
 import GraphTab from './GraphTabContent';
 import UploadProductTab from './UploadProductsTab';
 import { useAuth } from '../../utils/AuthContext';
-import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
+// import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 import axios from 'axios';
 import { BASE_URL } from '../../components/signin/constants';
 
@@ -18,15 +18,29 @@ const VendorDashboardContainer = styled.div`
   margin-left: 20px;
   
 `;
+const WelcomeMessage = styled.h1`
+  font-size: 24px;
+  margin-bottom: 20px;
+  
+
+`;
 
 const TabMenu = styled.div`
   display: flex;
   width: 100%;
-  padding: 20px; /* Adjust the padding as needed */
   font-size: 18px;
   font-weight: bold;
-  gap: 200px; /* Add space between each tab */
 `;
+
+const TabButton = styled.button<{ isActive: boolean }>` // <-- Add backtick here
+  flex: 1;
+  padding: 20px;
+  background-color: ${props => (props.isActive ? '#FFA000' : '#f0f0f0')};
+  color: ${props => (props.isActive ? 'black' : 'black')};
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+`; 
 
 const TabContentContainer = styled.div`
   width: 100%;
@@ -54,116 +68,50 @@ const VendorDashboard = () => {
   }, []);
 
   
-  const handleTabChange = (tab) => {
+  const handleTabChange = (tab: number) => {
     setSelectedTab(tab);
   };
   // console.log(isAuthenticated)
   // console.log(isFirstTimeLogin)
-
-
-  return (
-    <VendorDashboardContainer>
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem' }}>
-      {/* {isProfileComplete ? <></> :  (
+ {/* {isProfileComplete ? <></> :  (
         <VendorFirstLoginForm
           is_profile_complete={isProfileComplete}
           product_categories={categories}
         />
       )} */}
 
-      <div style={{ display: 'flex', marginBottom: '20px' }}>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 0 ? '#FFA000' : '#f0f0f0',
-            color: selectedTab === 0 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(0)}
-        >
-          Listed Products
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 1 ? '#FFA000' : '#f0f0f0',
-            color: selectedTab === 1 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(1)}
-        >
-          All Supplies
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 2 ? '#FFA000' : '#f0f0f0',
-            color: selectedTab === 2 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(2)}
-        >
-          Requested Products
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 3 ? '#FFA000' : '#f0f0f0',
-            color: selectedTab === 3 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(3)}
-        >
-          Graph
-        </button>
-        <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: selectedTab === 4 ? '#FFA000' : '#f0f0f0',
-            color: selectedTab === 4 ? 'white' : 'black',
-            border: 'none',
-            borderRadius: '5px',
-            margin: '0 10px',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleTabChange(4)}
-        >
-          Upload Product
-        </button>
-      </div>
+   return(
      
-      <div
-        style={{
-          width: '100%',
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '5px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        {selectedTab === 0 && <ListedProductsTab />}
-        {selectedTab === 1 && <AllSuppliesTab />}
-        {selectedTab === 2 && <RequestedProductsTab />}
-        {selectedTab === 3 && <GraphTab />}
-        {selectedTab === 4 && <UploadProductTab />}
-      </div>
-    </div>
-    
-    </VendorDashboardContainer> 
-        
-  );
+  <VendorDashboardContainer>
+     <WelcomeMessage>Welcome Isaac!</WelcomeMessage>
+  <TabMenu>
+    <TabButton isActive={selectedTab === 0} onClick={() => handleTabChange(0)}>
+     All Supplies
+    </TabButton>
+    <TabButton isActive={selectedTab === 1} onClick={() => handleTabChange(1)}>
+    Listed Products
+    </TabButton>
+    <TabButton isActive={selectedTab === 2} onClick={() => handleTabChange(2)}>
+      Requested Products
+    </TabButton>
+    <TabButton isActive={selectedTab === 3} onClick={() => handleTabChange(3)}>
+      Graph
+    </TabButton>
+    <TabButton isActive={selectedTab === 4} onClick={() => handleTabChange(4)}>
+      Upload Product
+    </TabButton>
+  </TabMenu>
+
+  <TabContentContainer>
+   
+    {selectedTab === 0 && <AllSuppliesTab />}
+    {selectedTab === 1 && <ListedProductsTab />}
+    {selectedTab === 2 && <RequestedProductsTab />}
+    {selectedTab === 3 && <GraphTab />}
+    {selectedTab === 4 && <UploadProductTab />}
+  </TabContentContainer>
+</VendorDashboardContainer>
+);
 };
 
 export default VendorDashboard;
