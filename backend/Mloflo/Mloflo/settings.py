@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
 
     'Category',
-    'products',
+    'products.apps.ProductsConfig',
     'rest_framework',
     'corsheaders',
 
@@ -258,8 +258,6 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
 
 
-
-
         'user_create': 'authapp.serializers.UserCreateSerializer',
         'user': 'authapp.serializers.UserCreateSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
@@ -285,6 +283,11 @@ AUTH_USER_MODEL = 'authapp.User'
 
 # CORS configuration
 CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS-Django Connection
+CORS__ORIGIN_WHITELIST = ['http://localhost:5173']
+
+
 
 # MPESA Configuration variables
 MPESA_CONSUMER_KEY = os.environ.get('MPESA_CONSUMER_KEY') or None

@@ -98,7 +98,7 @@ function NavBar() {
                 Vendors
               </Button>
 
-              <Link href="/farmproduce" style={{ textDecoration: 'none' }}>
+              <Link href="/farm-produce" style={{ textDecoration: 'none' }}>
                 <Button                
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block',  "&:hover": { color: "#0b490b", transition: "200ms ease-in" }, }}

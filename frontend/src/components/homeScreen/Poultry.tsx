@@ -31,8 +31,7 @@ interface poultryFlashcard {
   @media (max-width: 768px) {
     margin-right: 20px;
   }
-    
-   
+       
   `;
   const AddToCartButton = styled.div`
   position: relative; /* or position: relative; based on parent container */
