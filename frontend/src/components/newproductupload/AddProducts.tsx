@@ -15,7 +15,7 @@ const AddProductsForm: any = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null)
-    const [weight, setWeight] = useState('')
+    const [choose_weight, setChooseWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
 
@@ -30,7 +30,7 @@ const AddProductsForm: any = () => {
         formField.append('category', category)
         formField.append('name', name)
         formField.append('description', description)
-        formField.append('weight', weight)
+        formField.append('choose_weight', choose_weight)
         formField.append('price', price)
         formField.append('stock', stock)
         if (image !== null) {
@@ -117,8 +117,8 @@ const AddProductsForm: any = () => {
     <Row >
         <Field label="Select Weight" >
           <WeightRangeDropdown  name="weight"
-      value={weight}
-      onChange={(e) => setWeight(e.target.value)}>
+      value={choose_weight}
+      onChange={(e) => setChooseWeight(e.target.value)}>
         <option value="1">1 kg</option>
         <option value="5">5 kg</option>
         <option value="10">10 kg</option>

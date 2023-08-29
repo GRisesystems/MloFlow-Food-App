@@ -14,6 +14,7 @@ import CookedProductsScreen from './screens/cookedProductsScreen/CookedProductsS
 import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProductsScreen'
 
 import { useAuth } from './utils/AuthContext';
+import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
 
 
 
