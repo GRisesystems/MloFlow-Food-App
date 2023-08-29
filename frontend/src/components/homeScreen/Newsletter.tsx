@@ -8,7 +8,7 @@ const Newsletter = () => {
             marginTop:'8px',
             height: 'auto',
             padding: '1rem',
-            backgroundColor: '#FFA000',
+            backgroundColor: '#FFB31D',
             textAlign: 'center',
         }}
     >
@@ -24,7 +24,7 @@ const Newsletter = () => {
             endAdornment: (
                 <InputAdornment position='start' sx={{fontWeight:900,}}>
                     <ArrowRightAltSharp sx={{ "&:hover": {
-    backgroundColor: "#FFA000",  padding: '1rem 1.6rem', color: '#ffffff', right:0, outline:'1px solid #000000', borderRadius:'0 3rem 3rem 0'
+    backgroundColor: "#FFB31D",  padding: '1rem 1.6rem', color: '#ffffff', right:0, outline:'1px solid #000000', borderRadius:'0 3rem 3rem 0'
   },
   }}/>
                 </InputAdornment>

@@ -22,15 +22,17 @@ interface FishFlashcard {
   const WeightRangeDropdown = styled.select`
   margin-top: 40px;
   padding: 5px;
-  color: #FFA000;
+  color: #0C0B0B;
   margin-bottom: 0px;
-  border: solid #FFA000;
+  font-weight: bold;
+  border: narrow ##0C0B0B;
 `;
 
   const AddToCartButtonText = styled.span`
   display: block;
   margin: 0px;
-  color: white;
+  color: #0C0B0B;
+  font-weight: bolder;
   margin-bottom: 0px;
   font-size: 13px;
   font-weight: bold;
@@ -66,7 +68,7 @@ const NextArrowButton = styled.button`
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
-  background-color: #f0d469; /* Yellow-green background color */
+  background-color: #fbb31d;
   border: none;
   width: 30px;
   height: 30px;
@@ -87,7 +89,7 @@ const PrevArrowButton = styled.button`
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
-  background-color: #f0d469; /* Yellow-green background color */
+  background-color: #fbb31d; /* Yellow-green background color */
   border: none;
   width: 30px;
   height: 30px;
@@ -106,18 +108,18 @@ const PrevArrowButton = styled.button`
 const NextArrowIcon = styled(ChevronRightIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 
 const PrevArrowIcon = styled(ChevronLeftIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 const CounterWrapper = styled.div`
   display: flex;
   margin-left: 190px;
-  margin-top: 20px;
+  margin-top: 0px;
   
 `;
 
@@ -128,8 +130,8 @@ const CounterButton = styled.span`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #ffa000;
-  color: white;
+  background-color: #ffb31d;
+  color: #0C0B0B;
   cursor: pointer;
   transition: background-color 0.3s ease;
   
@@ -141,7 +143,7 @@ const CounterButton = styled.span`
   svg {
     width: 20px;
     height: 20px;
-    fill: white;
+    fill: #0C0B0B;
   }
 `;
 
@@ -149,7 +151,7 @@ const CounterNum = styled.span`
   font-size: 18px;
   font-weight: bold;
   margin: 0 10px;
-  color: #FFA000;
+  color: #0C0B0B;
 `;
 interface SampleNextArrowProps {
   onClick: () => void;
@@ -189,7 +191,7 @@ height: 100px;
 max-width: 1000px;
 overflow-x: auto;
 padding: 0px;
-background-color: #f0d469;
+background-color: white;
 `;
 const FishH3 = styled.h3`
 margin: 5px;
@@ -198,8 +200,8 @@ text-align: center;
 margin-top: 0px;  
 left: 5px;
 width: 90px;
-background-color: orange;
-color: white;
+background-color: #fbb31d;
+color: #0C0B0B;
 border-radius: 5px;
 `;
 
@@ -209,9 +211,9 @@ const ProductPrice = styled.span`
 font-size: 20px;
 padding: 0px;
 font-weight: bold;
-color: orange;
+color: #0C0B0B;
 margin-left: 10px;
-margin-top: 60px;
+margin-top: 0px;
   
 `;
 

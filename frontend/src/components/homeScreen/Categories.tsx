@@ -39,14 +39,14 @@ const FoodCategory = () => {
   <Grid  spacing={0}  sx={{ display: 'flex', flexWrap: 'wrap', }}  >
     {categories.map((category) => (
       <Grid item  key={category.title} sx={{padding: 4,}} >
-        <Typography variant="h6" color="#FFF" sx={{backgroundColor:'#FFA000', padding:'4px 6px', borderRadius:'24px',
+        <Typography variant="h6" color="#FFF" sx={{backgroundColor:'#FFB31D', padding:'4px 6px', borderRadius:'24px',
         mb:3}} >
           {category.title}
         </Typography>
           {category.description.map((item) => (
             <List sx={{paddingLeft:3,}}>
-                <Link  href="#"  sx={{color:"#000",textDecoration: 'none', "&:hover": {color: '#FFA000' },}} >
-                  <ArrowRightIcon sx={{mr:1, color:'#FFA000',}}/>  {item}
+                <Link  href="#"  sx={{color:"#000",textDecoration: 'none', "&:hover": {color: '#FFB31D' },}} >
+                  <ArrowRightIcon sx={{mr:1, color:'#FFB31D',}}/>  {item}
                 </Link>
               </List>
           ))}

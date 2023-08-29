@@ -32,6 +32,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 
 
+
 const drawerWidth = 240;
 
 const Search = styled('div')(({ theme }) => ({
@@ -120,6 +121,7 @@ export default function ClippedDrawer() {
       <CssBaseline />
       <AppBar elevation={0} position="static" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'white', color: 'black' }}>
         <Toolbar>
+       
           <Link href="/">
             <Box
               component="img"
@@ -285,8 +287,10 @@ export default function ClippedDrawer() {
               </ListItem>
             </List>
           </Box>
+          
         </Drawer>
       )}
     </Box>
+    
   );
 }
