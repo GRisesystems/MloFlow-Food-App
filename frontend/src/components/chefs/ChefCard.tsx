@@ -12,9 +12,11 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleOpenDialog = () => {
+        // dialog onOpen function
         setDialogOpen(true);
     };
     const handleCloseDialog = () => {
+        // Dialog OnClose Function
         setDialogOpen(false);
       };
 
@@ -58,6 +60,7 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
                     <Button style={{ order: 3 }} variant='outlined' sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'none' } }} onClick={() => handleDetailsPageNavigation(1)}>Details {'>>'}</Button>
                 </CardActions>
             </CardContent>
+            {/* pass dialog open props & handleclose functions */}
             <BookNowForm open={dialogOpen} onClose={handleCloseDialog}/>
         </Card>
     );

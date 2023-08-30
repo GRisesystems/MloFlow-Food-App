@@ -1,8 +1,7 @@
 import { Button, Dialog, DialogActions } from '@mui/material';
 import { useState } from 'react';
 
-const BookNowForm = ({ open, onClose }: any) => {
-  const [isOpen, setIsOpen] = useState(open)
+const BookNowForm = ({ open, onClose }: any) => {  
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
   const [specialty, setSpecialty] = useState('');
@@ -23,9 +22,11 @@ const BookNowForm = ({ open, onClose }: any) => {
       date,
       phoneNumber,
     });
+    // close Dialog after submitting the form
     onClose();
 
   };
+  // Function to handle Dialog Close Button On Click event
   const handleClose = () => {
     onClose();
   };
@@ -73,6 +74,7 @@ const BookNowForm = ({ open, onClose }: any) => {
           />
         </label>
         <br />
+        {/* Dialog buttons */}
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
           <Button type="submit">Request</Button>
