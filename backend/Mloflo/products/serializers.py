@@ -2,7 +2,7 @@ from rest_framework import serializers
 from Category.models import Category
 from .models import Product
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
