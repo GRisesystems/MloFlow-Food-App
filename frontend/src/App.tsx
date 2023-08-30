@@ -17,8 +17,12 @@ import ChefsScreen from './screens/chefsScreen/ChefsScreen'
 
 import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
+
 // import Form from './Form'; // Import your Form component
 import BookNowForm from './components/chefs/BookNowForm';
+
+import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
+
 
 
 
@@ -43,6 +47,7 @@ const router = createBrowserRouter(
       <Route path='/activate/:uuid/:token' element={<ActivateAccountScreen />} />
       <Route path="/chef-dashboard" element={<ProtectedRoute element={ChefDashBoardScreen} />} />
       <Route path='/chefs' element={<ChefsScreen/>} />
+      <Route path='/chefs/:id' element={<ChefDetailScreen/>} />
       {/* <Route path="/vendor-dashboard" element={<ProtectedRoute element={VendorDashboardScreen} />} /> */}
       <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
       <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />

@@ -1,25 +1,28 @@
 import { useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarIcon from '@mui/icons-material/Star';
-import { yellow } from '@mui/material/colors';
+
+
 import { Button, Card, CardActions, CardContent, CardMedia, Stack, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+
+import { orange } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
+
+
 import chef from './chef.jpeg';
 import { Link } from 'react-router-dom';
 import BookNowForm from './BookNowForm';
 
+
 const ChefCard = ({ chef_name }: { chef_name: string }) => { // Destructure chef_name from props
-    const [open, setOpen] = useState(false);
+   const [open, setOpen] = useState(false);
+  
+    const navigate = useNavigate()
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    const handleDetailsPageNavigation = (id:any) => {
+        navigate(`/chefs/${id}`);
+    }
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-    
-    
-    
     return (
         <Card>
             <CardMedia
@@ -29,7 +32,7 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => { // Destructure chef
                 alt="Chef"
             />
             <CardContent>
-                <Typography sx={{fontWeight:'bold'}} gutterBottom variant="h6" component="div">
+                <Typography sx={{ fontWeight: 'bold' }} gutterBottom variant="h6" component="div">
                     {chef_name}
                 </Typography>
                 <Typography variant="body1" >
@@ -39,20 +42,21 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => { // Destructure chef
                     Speciality: Sea Food
                 </Typography>
                 <Stack sx={{ mt: 3 }} direction="row" spacing={0.2}>
-                    <StarIcon sx={{ color: yellow[500] }} />
-                    <StarIcon sx={{ color: yellow[500] }} />
-                    <StarIcon sx={{ color: yellow[500] }} />
-                    <StarIcon sx={{ color: yellow[500] }} />
-                    <StarIcon sx={{ color: yellow[500] }} />
+                    <StarIcon sx={{ color: orange[500] }} />
+                    <StarIcon sx={{ color: orange[500] }} />
+                    <StarIcon sx={{ color: orange[500] }} />
+                    <StarIcon sx={{ color: orange[500] }} />
+                    <StarIcon sx={{ color: orange[500] }} />
                 </Stack>
                 <CardActions
                     sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        
+
                     }}
                 >
+
                     <Link to="/book-now">
                     <Button
                     style={{ order: 1 }}
@@ -65,6 +69,7 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => { // Destructure chef
         </Link>
                     <Button  style={{ order: 3 }} variant='outlined' sx={{ textTransform:'none','&:hover': { backgroundColor: 'orange' } }}>Details {'>>'}</Button>
                    
+
                 </CardActions>
                 
             </CardContent>
