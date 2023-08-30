@@ -5,7 +5,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // import FavoriteIcon from "@mui/icons-material/Favorite";
 // import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useCart } from '../homeScreen/Cart/CartUtils';
+// import { useCart } from '../homeScreen/Cart/CartUtils';
 import styled from "styled-components";
 import WishlistBtn from "../homeScreen/WishlistBtn";
 
@@ -264,7 +264,7 @@ const CounterNum = styled.span`
 
 
 const Poultry: React.FC<PoultryProps> = ({ productItems }) => {
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
   const [counts, setCounts] = useState<{ [productId: string]: number }>({});
 
  
@@ -336,7 +336,7 @@ const Poultry: React.FC<PoultryProps> = ({ productItems }) => {
               amount={product.price}
             />
              <ProductPrice>{`$${product.price}`}</ProductPrice>
-             <AddToCartButton onClick={() => addToCart(product)}>
+             <AddToCartButton>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
          

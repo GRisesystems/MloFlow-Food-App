@@ -17,7 +17,12 @@ import ChefsScreen from './screens/chefsScreen/ChefsScreen'
 
 import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
+
+// import Form from './Form'; // Import your Form component
+import BookNowForm from './components/chefs/BookNowForm';
+
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
+
 
 
 
@@ -50,9 +55,11 @@ const router = createBrowserRouter(
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
-      <Route path='/products' element={<AllProductScreen />} />
+      <Route path='/products' element={<AllProductScreen />} />t
+      {/* <Route exact path="/" component={Form} /> */}
+      <Route path="/book-now" element={<BookNowForm />} />
 
-      {/* <Route path='/cart' element={<Cart onClose={function (): void {
+      {/* <Route path='/Cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')
       }} />} /> */}
       <Route path='/checkout' element={<CheckoutScreen />} />

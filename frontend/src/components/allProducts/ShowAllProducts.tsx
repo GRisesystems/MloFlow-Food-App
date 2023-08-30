@@ -4,7 +4,7 @@ import { Box, Card, CardActions, CardContent, CardMedia, Grid, Link, Typography 
 import axios from 'axios';
 import { FavoriteBorder, ShuffleOutlined } from '@mui/icons-material';
 import { Visibility } from '@mui/icons-material';
-import { useCart } from '../homeScreen/Cart/CartUtils';
+// import { useCart } from '../homeScreen/Cart/CartUtils';
 import styled from "styled-components";
 
 const ShowAllProducts = () => {

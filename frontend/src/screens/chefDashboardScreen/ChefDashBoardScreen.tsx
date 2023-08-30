@@ -73,7 +73,7 @@ const ChefDashboard = () => {
       {/* <WelcomeMessage>Welcome Chef!</WelcomeMessage> */}
       {isProfileComplete ? <></>: <ChefFirstLoginForm/>}
       <AvailabilityContainer>
-        <p>Your Availability:</p>
+        <p>Welcome Chef! Your Availability:</p>
         <Switch checked={isAvailable} onChange={handleAvailabilityChange} />
       </AvailabilityContainer>
       <TabMenu>
