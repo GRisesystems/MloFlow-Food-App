@@ -25,6 +25,9 @@ urlpatterns = [
     path('authapp/', include('authapp.urls')),    
     path('category/', include('Category.urls')),
     path('products/', include('products.urls')),
+    path('chef/',include('Chef.urls')),
+    #path('customer/', include('Customer.urls')),
+    path('vendor/', include('Vendor.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name="schema"),
     path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name="schema")),
     path('auth/', include("djoser.urls")),
@@ -33,5 +36,5 @@ urlpatterns = [
     # payments app routes
     path('api/v1/payments/', include("payments.urls")),
     path('api/v1/vendors/', include("vendors.urls")),
-    path('api/v1/categories/', include("Category.urls")),
+    #path('api/v1/categories/', include("Category.urls")),
 ]
