@@ -1,6 +1,7 @@
+import { Button, Dialog, DialogActions } from '@mui/material';
 import { useState } from 'react';
 
-const Form = () => {
+const BookNowForm = ({ open, onClose }: any) => {  
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
   const [specialty, setSpecialty] = useState('');
@@ -9,7 +10,7 @@ const Form = () => {
   const [date, setDate] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     // Here you can handle the form submission, e.g., sending data to a server
     console.log('Form submitted:', {
@@ -21,10 +22,17 @@ const Form = () => {
       date,
       phoneNumber,
     });
+    // close Dialog after submitting the form
+    onClose();
+
+  };
+  // Function to handle Dialog Close Button On Click event
+  const handleClose = () => {
+    onClose();
   };
 
   return (
-    <div>
+    <Dialog open={open} onClose={handleClose}>
       <h2>Request Form</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -66,10 +74,14 @@ const Form = () => {
           />
         </label>
         <br />
-        <button type="submit">Request</button>
+        {/* Dialog buttons */}
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+          <Button type="submit">Request</Button>
+        </DialogActions>
       </form>
-    </div>
+    </Dialog>
   );
 };
 
-export default Form;
+export default BookNowForm;
