@@ -200,7 +200,7 @@ export default function ClippedDrawer() {
                   >
                     <Link to="/Cart" component={RouterLink} color="inherit" underline="none">
                       <IconButton size="large" aria-label="Cart" color="inherit">
-                        <Badge badgeContent={cart.reduce((total, item) => total + item.quantity, 0)} color="error">
+                        <Badge>
                           <ShoppingCartCheckoutRoundedIcon />
                         </Badge>
                       </IconButton>
