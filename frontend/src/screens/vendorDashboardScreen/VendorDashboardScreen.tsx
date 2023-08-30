@@ -52,7 +52,7 @@ const VendorDashboard = () => {
   const [categories, setCategories] = useState([])
 
   
-  console.log('is profile complete:',isProfileComplete)
+  
  
 
   useEffect(() => {

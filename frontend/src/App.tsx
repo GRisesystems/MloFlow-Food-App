@@ -1,6 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from 'react-router-dom'
 import HomeScreen from "./screens/homeScreen/HomeScreen"
 import SignInScreen from './screens/SignInScreen/SignInScreen'
+import ActivateAccountScreen from './screens/activateAccountScreen/ActivateAccountScreen'
 import ChefDashBoardScreen from './screens/chefDashboardScreen/ChefDashBoardScreen'
 import Root from './Root'
 import FarmProduceScreen from './screens/farmProduceScreen/FarmProduceScreen'
@@ -12,7 +13,10 @@ import CheckoutScreen from './screens/checkoutScreen/CheckoutScreen'
 import FishProductsScreen from './screens/fishProductsScreen/FishProductsScreen'
 import CookedProductsScreen from './screens/cookedProductsScreen/CookedProductsScreen'
 import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProductsScreen'
-import { useAuth } from './utils/AuthContext';// 
+import ChefsScreen from './screens/chefsScreen/ChefsScreen'
+
+import { useAuth } from './utils/AuthContext';
+import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
 
 
 
@@ -34,7 +38,9 @@ const router = createBrowserRouter(
     <Route path='/' element={<Root />}>
       <Route index element={<HomeScreen />} />
       <Route path='/login' element={<SignInScreen />} />
-      <Route path='/chef-dashboard' element={<ChefDashBoardScreen />} />
+      <Route path='/activate/:uuid/:token' element={<ActivateAccountScreen />} />
+      <Route path="/chef-dashboard" element={<ProtectedRoute element={ChefDashBoardScreen} />} />
+      <Route path='/chefs' element={<ChefsScreen/>} />
       {/* <Route path="/vendor-dashboard" element={<ProtectedRoute element={VendorDashboardScreen} />} /> */}
       <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
       <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />
@@ -42,6 +48,7 @@ const router = createBrowserRouter(
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
+      <Route path='/products' element={<AllProductScreen />} />
 
       <Route path='/Cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')

@@ -4,8 +4,6 @@ from Category.models import Category
 from rest_framework import serializers
 from authapp.models import User
 import uuid
-
-
 # Create your models here.
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
