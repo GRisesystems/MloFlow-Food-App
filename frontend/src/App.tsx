@@ -43,9 +43,9 @@ const router = createBrowserRouter(
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
 
-      {/* <Route path='/cart' element={<Cart onClose={function (): void {
+      <Route path='/Cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')
-      }} />} /> */}
+      }} />} />
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />
 

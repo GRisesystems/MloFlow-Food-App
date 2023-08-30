@@ -67,7 +67,7 @@ const ChefDashboard = () => {
     <ChefDashboardContainer>
       {/* <WelcomeMessage>Welcome Chef!</WelcomeMessage> */}
       <AvailabilityContainer>
-        <p>Your Availability:</p>
+        <p>Welcome Chef! Your Availability:</p>
         <Switch checked={isAvailable} onChange={handleAvailabilityChange} />
       </AvailabilityContainer>
       <TabMenu>

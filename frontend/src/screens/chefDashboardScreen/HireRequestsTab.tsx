@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 
 const Container = styled.div`
   padding: 10px;
@@ -37,11 +37,7 @@ const ButtonContainer = styled.div`
   gap: 10px;
 `;
 
-const AvailabilityContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`;
+
 
 
 
@@ -94,18 +90,15 @@ const hireRequestsData = [
 ];
 
 const HireRequestsTab: React.FC = () => {
-  const [isAvailable, setIsAvailable] = useState(false);
+  // const [isAvailable, setIsAvailable] = useState(false);
 
-  const handleAvailabilityChange = () => {
-    setIsAvailable(!isAvailable);
-  };
+  // const handleAvailabilityChange = () => {
+  //   setIsAvailable(!isAvailable);
+  // };
 
   return (
     <Container>
-      <AvailabilityContainer>
-        <p>Welcome Chef! Your Availability:</p>
-        <Switch checked={isAvailable} onChange={handleAvailabilityChange} />
-      </AvailabilityContainer>
+     
       <StyledTableContainer>
         <StyledTable>
           <TableHead>
