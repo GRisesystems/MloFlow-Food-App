@@ -9,18 +9,11 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = "__all__"
        
         
-        
-class VendorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Vendor
-        fields = "__all__"
+    
         
         
         
-class ChefSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Chef
-        fields = "__all__"
+
         
         
         

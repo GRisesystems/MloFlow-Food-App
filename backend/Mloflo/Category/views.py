@@ -17,11 +17,11 @@ class CategoryViewSet(viewsets.ModelViewSet):
 # Test Endpoint
 
 
-@api_view(['GET'])
-@permission_classes([permissions.AllowAny])
-def categories(request):
-    context = {}
-    categories = Category.objects.all()
-    serializer = CategorySerializer(categories, many=True)
-    context['categories'] = serializer.data
-    return Response(context, status=status.HTTP_200_OK)
+# @api_view(['GET'])
+# @permission_classes([permissions.AllowAny])
+# def categories(request):
+#     context = {}
+#     categories = Category.objects.all()
+#     serializer = CategorySerializer(categories, many=True)
+#     context['categories'] = serializer.data
+#     return Response(context, status=status.HTTP_200_OK)
