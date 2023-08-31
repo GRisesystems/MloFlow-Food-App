@@ -1,6 +1,6 @@
 from django.contrib import admin
-from . models import ChefTestTable
+from . models import Chef
 
 # Register your models here.
 
-admin.site.register(ChefTestTable)
+admin.site.register(Chef)
