@@ -1,7 +1,14 @@
 from django.db import models
 import uuid
 from authapp.models import User
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
+
+
+class CustomUser(AbstractUser):
+    # Add your custom fields if needed
+    pass
+
 
 class Customer(models.Model): 
     customer_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
