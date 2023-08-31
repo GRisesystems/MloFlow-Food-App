@@ -11,6 +11,7 @@ class Vendor(models.Model):
     country = models.CharField(max_length=200)
     county = models.CharField(max_length=200)
     city = models.CharField(max_length=200, blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_images/',null = True, blank = False)
     product_category = models.ManyToManyField(Category)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

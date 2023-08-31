@@ -29,6 +29,7 @@ from authapp.models import User
 #         return self.name
     
 
+#added differnt table for product images and function for scaling
 def product_images_directory(instance, filename):
     # Use the existing directory structure for images
     return f'images/{instance.product.id}/{filename}'
@@ -51,7 +52,8 @@ class Product(models.Model):
     description = models.CharField(max_length=250)
     price = models.FloatField()
     stock = models.PositiveIntegerField(validators=[MinValueValidator(10)])
-    choose_weight = models.FloatField()
+    #changed the choose_weight variable
+    weight = models.FloatField()
     is_available = models.BooleanField(default=True, blank=True)
     is_sold = models.BooleanField(default=False, blank=True)
     created_by = models.ForeignKey(User, related_name='created_products', on_delete=models.CASCADE)

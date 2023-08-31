@@ -1,12 +1,14 @@
 from rest_framework import viewsets
-from .models import Chef
-from .serializers import ChefSerializer
+from .models import Chef, Review
+from .serializers import ChefSerializer, ReviewSerializer
 
 class ChefViewSet(viewsets.ModelViewSet):
     queryset = Chef.objects.all()
     serializer_class = ChefSerializer
 
-
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
 
 
