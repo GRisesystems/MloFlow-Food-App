@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 // import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
@@ -7,8 +6,14 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-// import Paper from '@mui/material/Paper';
+import React, { useEffect, useMemo, useState } from 'react';
+// import { MaterialReactTable } from 'material-react-table';
 
+// import Paper from '@mui/material/Paper';
+import ProductControllar from '../../components/allProducts/ProductControls';
+import UpdateProductForm from '../../components/newproductupload/UpdateProduct';
+import axios from 'axios';
+import { Button } from '@mui/material';
 const Container = styled.div`
   padding: 10px;
 `;
@@ -43,14 +48,24 @@ const Image = styled.img`
   border-radius: 0 0 10px 10px;
 `;
 
-const listedProductsData = [
-  { serialNumber: 1, productName: 'Berries', quantity: 50, price: 1.0 , imageSrc: '/public/Images/Fresh Produce/Berries.jpg'},
-  { serialNumber: 2, productName: 'Pears', quantity: 50, price: 0.5, imageSrc: '/public/Images/Fresh Produce/Pears.jpg' },
-  { serialNumber: 3, productName: 'Chicken',quantity: 50, price: 2.0 , imageSrc: '/public/Images/Poultry/Chicken.jpg'},
-  // Add more data...
-];
 
 const ListedProductsTabContent: React.FC = () => {
+  const [products, setProducts] = useState([])
+
+const getProducts = async () => {
+  const response = await axios.get('http://localhost:8000/products/')
+    setProducts(response.data)
+    console.log(response.data)
+  }
+
+  useEffect(() =>{
+    getProducts();
+  }, [])
+
+     const deleteProduct = async (id) => {
+      await axios.delete('http://localhost:8000/products/${id}')
+
+      }
   return (
    <Container>
       
@@ -61,16 +76,26 @@ const ListedProductsTabContent: React.FC = () => {
             <StyledImageCell></StyledImageCell> {/* Empty cell for images */}
               <StyledTableCell>Serial Number</StyledTableCell>
               <StyledTableCell>Product Name</StyledTableCell>
-              <StyledTableCell>Price ($)</StyledTableCell>
+              <StyledTableCell>Price (Ksh)</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {listedProductsData.map((product) => (
-              <TableRow key={product.serialNumber}>
-                 <StyledImageCell><Image src={product.imageSrc} alt={product.productName} /></StyledImageCell>
-                <StyledTableCell>{product.serialNumber}</StyledTableCell>
-                <StyledTableCell>{product.productName}</StyledTableCell>
-                <StyledTableCell>{product.price.toFixed(2)}</StyledTableCell>
+            {products.map((product) => (
+              <TableRow key={product.id}>
+                 <StyledImageCell><Image src={product.image} alt={product.name} /></StyledImageCell>
+                <StyledTableCell>{product.id}</StyledTableCell>
+                <StyledTableCell>{product.name}</StyledTableCell>
+                <StyledTableCell>{product.price}</StyledTableCell>
+                <StyledTableCell>{product.price}</StyledTableCell>
+                <StyledTableCell>
+               <UpdateProductForm />
+                  </StyledTableCell>
+                <StyledTableCell>
+
+                  <Button variant="contained" color="error"     sx={{  padding:'6px', margin:3 }} onClick={deleteProduct}>
+                        DELETE
+                  </Button>
+                  </StyledTableCell>
               </TableRow>
             ))}
           </TableBody>

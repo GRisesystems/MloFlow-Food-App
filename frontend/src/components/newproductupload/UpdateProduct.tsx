@@ -1,12 +1,13 @@
-import {  useState } from "react";
+import {  useState, useEffect } from "react";
 import { useForm } from 'react-hook-form'
-import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle, Typography } from '@mui/material';
+import { useNavigate, useParams } from "react-router";
+import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle, Paper } from '@mui/material';
 import { Field } from './Field';
 import { Label } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import axios from "axios";
 
-const AddProductsForm: any = () => {
+const UpdateProductForm: any = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -15,42 +16,61 @@ const AddProductsForm: any = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null)
-    const [choose_weight, setChooseWeight] = useState('')
+    const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
 
 
     const {  register,  formState: { errors }, watch } = useForm()
     
-    // const history = useHistory()
+    // const hist = useNavigate()
+    const {id} = useParams()
 
-      const AddProductInfo = async () => {
-        const formField = new FormData()
+      const loadProducts = async () => {    
 
-        formField.append('category', category)
-        formField.append('name', name)
-        formField.append('description', description)
-        formField.append('weight', weight)
-        formField.append('price', price)
-        formField.append('stock', stock)
-        if (image !== null) {
-          formField.append('image', image)
-        }
-      
-
-      await axios({
-        method: 'post',
-        url: 'http://localhost:8000/products/',
-        data: formField
-
-      }).then((response) => {
-        console.log(response.data);
-      })
+      const {data} = await axios.get( 'http://localhost:8000/products/${id}');
+        console.log(data)
+        setCategory(data.category)
+        setName(data.name)
+        setDescription(data.description)
+        setImage(data.image)
+        setWeight(data.weight)
+        setPrice(data.price)
+        setStock(data.stock)
     }
+    useEffect(() =>{
+      loadProducts()
+    },[])
+
+
+    const UpdateProductInfo = async () => {
+      const formField = new FormData()
+
+      formField.append('category', category)
+      formField.append('name', name)
+      formField.append('description', description)
+      formField.append('weight', weight)
+      formField.append('price', price)
+      formField.append('stock', stock)
+      if (image !== null) {
+        formField.append('image', image)
+      }
+    
+
+    await axios({
+      method: 'put',
+      url: 'http://localhost:8000/products/${id}',
+      data: formField
+
+    }).then((response) => {
+      console.log(response.data);
+
+    })
+  }
 
   return (
-    <Box>
-      <Typography  onClick={handleOpen} >Add Products</Typography>
+    <Paper>
+      <Button variant="contained" sx={{backgroundColor:'#0C0B0B',  m:3, color:'#FBB31D'}} onClick={handleOpen}>Update Product</Button>
       <Dialog
         keepMounted
         open={open}
@@ -58,13 +78,13 @@ const AddProductsForm: any = () => {
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
-        <DialogTitle  sx={{backgroundColor:'#FBB31D',   textAlign:'center'}}>Add New Product</DialogTitle>
+        <DialogTitle  sx={{backgroundColor:'#FBB31D',   textAlign:'center'}}>Update Product</DialogTitle>
         {/* #FBB31D, #0C0B0B */}
         <DialogContentText variant="h5" sx={{backgroundColor:'#0C0B0B', color:'gray', padding:'8px'}}>
-            Please enter your products details accurately in the form provided below.
+            Please edit your product details accurately in the form provided below.
           </DialogContentText>
         <DialogContent sx={{ mt: 2 }} >
-            <Box component="form" noValidate autoComplete="off" onSubmit={AddProductInfo}
+            <Box component="form" noValidate autoComplete="off" onSubmit={UpdateProductInfo}
             >
                       <Field label="Select Category"  >
           <WeightRangeDropdown name="category"
@@ -93,9 +113,8 @@ const AddProductsForm: any = () => {
       type="file"
       id="image"
       name="image"
-      multiple
       src={image}
-      onChange={(e) => setImage(e.target.files[0, 1])}
+      onChange={(e) => setImage(e.target.files[0])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>
@@ -118,14 +137,14 @@ const AddProductsForm: any = () => {
     <Row >
         <Field label="Select Weight" >
           <WeightRangeDropdown  name="weight"
-      value={choose_weight}
-      onChange={(e) => setChooseWeight(e.target.value)}>
+      value={weight}
+      onChange={(e) => setWeight(e.target.value)}>
         <option value="1">1 kg</option>
         <option value="5">5 kg</option>
         <option value="10">10 kg</option>
       </WeightRangeDropdown>
       </Field>
-      <Field label="Product Price" >
+      <Field label="Product Price">
           <Input
             type="number"
             name="price"
@@ -143,17 +162,17 @@ const AddProductsForm: any = () => {
             onChange={(e) => setStock(e.target.value)}
           />
         </Field>
-  <DialogActions>
-  <Button  onClick={handleClose} sx={{color:'#FBB31D', marginRight:44, backgroundColor:'#0C0B0B'}}>Cancel</Button>
-  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}} onClick={handleClose} >Add</Button>
+  <DialogActions sx={{fontWeight:600}}>
+  <Button  onClick={handleClose} sx={{color:'#FBB31D', marginRight:42, backgroundColor:'#0C0B0B'}}>Cancel</Button>
+  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}} onClick={handleClose} >Update</Button>
 </DialogActions>
 </Box>
         </DialogContent>
     </Dialog>
-  </Box>
+  </Paper>
   );
 };
-export default AddProductsForm;
+export default UpdateProductForm;
 
 
 const Row = styled.div`
@@ -172,11 +191,11 @@ const Row = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 11px;
-  width: 100%;
-  border: 1px solid #d9d9d9;
-  border-radius: 6px;
-  margin: 4px;
+padding: 11px;
+width: 100%;
+border: 1px solid #d9d9d9;
+border-radius: 6px;
+margin: 4px;
 `;
 
 const TextArea = styled.textarea`

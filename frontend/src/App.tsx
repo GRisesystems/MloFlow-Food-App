@@ -15,7 +15,7 @@ import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProduc
 
 import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
-
+import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScreen';
 
 
 const ProtectedRoute = ({ element: Element, ...rest }: { element: React.ElementType }) => {
@@ -45,6 +45,7 @@ const router = createBrowserRouter(
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
       <Route path='/products' element={<AllProductScreen />} />
+      <Route path='/products/:id' element={<ProductDetailScreen />} />
 
       {/* <Route path='/cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')

@@ -4,7 +4,7 @@ import ListedProductsTab from './ListedProductsTabContent';
 import AllSuppliesTab from './SuppliesTabContent';
 import RequestedProductsTab from './RequestedProductsTabContent';
 import GraphTab from './GraphTabContent';
-import UploadProductTab from './UploadProductsTab';
+import AddProductsForm from '../../components/newproductupload/AddProducts';
 import { useAuth } from '../../utils/AuthContext';
 // import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 import axios from 'axios';
@@ -35,7 +35,7 @@ const TabMenu = styled.div`
 const TabButton = styled.button<{ isActive: boolean }>` // <-- Add backtick here
   flex: 1;
   padding: 20px;
-  background-color: ${props => (props.isActive ? '#FFA000' : '#f0f0f0')};
+  background-color: ${props => (props.isActive ? '#FBB31D' : '#f0f0f0')};
   color: ${props => (props.isActive ? 'black' : 'black')};
   border: none;
   border-radius: 0;
@@ -98,7 +98,7 @@ const VendorDashboard = () => {
       Graph
     </TabButton>
     <TabButton isActive={selectedTab === 4} onClick={() => handleTabChange(4)}>
-      Upload Product
+    <AddProductsForm />
     </TabButton>
   </TabMenu>
 
@@ -108,7 +108,7 @@ const VendorDashboard = () => {
     {selectedTab === 1 && <ListedProductsTab />}
     {selectedTab === 2 && <RequestedProductsTab />}
     {selectedTab === 3 && <GraphTab />}
-    {selectedTab === 4 && <UploadProductTab />}
+
   </TabContentContainer>
 </VendorDashboardContainer>
 );
