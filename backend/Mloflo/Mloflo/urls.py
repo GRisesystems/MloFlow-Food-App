@@ -26,11 +26,14 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    re_path(r'^.*$', TemplateView.as_view(template_name="index.html")),
+    #re_path(r'^.*$', TemplateView.as_view(template_name="index.html")),
     path('main/', include('main.urls')),
     path('authapp/', include('authapp.urls')),    
     path('category/', include('Category.urls')),
     path('products/', include('products.urls')),
+    path('chef/',include('Chef.urls')),
+    #path('customer/', include('Customer.urls')),
+    path('vendor/', include('Vendor.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name="schema"),
     path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name="schema")),
     path('auth/', include("djoser.urls")),
@@ -39,7 +42,5 @@ urlpatterns = [
     # payments app routes
     path('api/v1/payments/', include("payments.urls")),
     path('api/v1/vendors/', include("vendors.urls")),
-    path('api/v1/categories/', include("Category.urls")),
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
+    #path('api/v1/categories/', include("Category.urls")),
+]

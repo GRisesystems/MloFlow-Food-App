@@ -19,28 +19,9 @@ def customerInfo(request):
         
     return Response(serializer.data)
 
-@extend_schema(responses=VendorSerializer)
-@api_view(["POST"])
-def vendorInfo(request):
-     
-    if request.method =="POST":
-        serializer = VendorSerializer(data =request.data)
-        if serializer.is_valid():
-            serializer.save()
-        
-    return Response(serializer.data)
 
 
-@extend_schema(responses=ChefSerializer)
-@api_view(["POST"])
-def chefInfo(request):
-  
-    if request.method =="POST":
-        serializer = ChefSerializer(data =request.data)
-        if serializer.is_valid():
-            serializer.save()
-        
-    return Response(serializer.data)
+
 
 @api_view(["GET"])
 def index(request):
@@ -55,13 +36,3 @@ def index(request):
     }
     return Response(api_urls)
 
-
-@extend_schema(responses=ChefSerializer)
-@api_view(["GET"])
-def getChef(request):
-    
-    #permission_classes = [IsAuthenticated]         
-    chef = Chef.objects.all()
-    serializer = ChefSerializer(chef, many = True)
-            
-    return Response(serializer.data)

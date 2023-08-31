@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     'payments',
     'vendors',
 
+#added the separate client apps
+    'Vendor',
+    'Chef',
+    'Customer',
 
     'Category',
     'products.apps.ProductsConfig',
@@ -140,6 +144,14 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_WHITELIST = True
+
+# Add the specific origins you want to allow in the whitelist
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    #"https://yourfrontenddomain.com",   Example: Your frontend's production domain
 ]
 
 ROOT_URLCONF = "Mloflo.urls"
