@@ -43,7 +43,7 @@ def initiate_stk_push(request):
             "PartyB":"174379",    
             "PhoneNumber":phone_number,    
             "CallBackURL": "https://mydomain.com/pat",    
-            "AccountReference":"Test",    
+            "AccountReference":"Mlo Flow",    
             "TransactionDesc":"Test"
         }
 

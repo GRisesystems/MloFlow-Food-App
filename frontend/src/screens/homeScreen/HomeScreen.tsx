@@ -157,6 +157,7 @@ background-color: #F5F5F5; // Set your desired background color here
 `;
 
 const HomeScreen = () => {
+ 
   const categories = [{"image":chef1,name:"Chefs",btn_title:'Hire now'},{"image":farmproducts, name:"Fresh Produce",btn_title:'Shop now'},{"image":food1,name:"Food Delivery",btn_title:'Shop now'}];
 
   return (
