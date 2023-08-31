@@ -27,8 +27,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import logo from '../assets/mloflow.png'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
-import { useCart } from '../components/homeScreen/Cart/CartUtils'
+
 import { Link as RouterLink } from 'react-router-dom';
+
 
 
 
@@ -78,7 +79,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function ClippedDrawer() {
 
-  const { cart } = useCart(); // Access the cart data
+  // const { cart } = useCart(); // Access the cart data
   const { isAuthenticated, logout,first_name, surname } = useAuth();
   console.log('first name')
   console.log(first_name)
@@ -120,6 +121,7 @@ export default function ClippedDrawer() {
       <CssBaseline />
       <AppBar elevation={0} position="static" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'white', color: 'black' }}>
         <Toolbar>
+       
           <Link href="/">
             <Box
               component="img"
@@ -196,9 +198,9 @@ export default function ClippedDrawer() {
                     aria-label="Cart"
                     color="inherit"
                   >
-                    <Link to="/cart" component={RouterLink} color="inherit" underline="none">
+                    <Link to="/Cart" component={RouterLink} color="inherit" underline="none">
                       <IconButton size="large" aria-label="Cart" color="inherit">
-                        <Badge badgeContent={cart.reduce((total, item) => total + item.quantity, 0)} color="error">
+                        <Badge>
                           <ShoppingCartCheckoutRoundedIcon />
                         </Badge>
                       </IconButton>
@@ -285,8 +287,10 @@ export default function ClippedDrawer() {
               </ListItem>
             </List>
           </Box>
+          
         </Drawer>
       )}
     </Box>
+    
   );
 }

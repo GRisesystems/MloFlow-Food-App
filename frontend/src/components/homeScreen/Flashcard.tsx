@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import WishlistBtn from '../homeScreen/WishlistBtn';
-import { useCart } from '../homeScreen/Cart/CartUtils';
+// import { useCart } from '../homeScreen/Cart/CartUtils';
 import { ProductItem } from './productItem';
 
 const FlashCardH3 = styled.h3`
@@ -14,8 +14,8 @@ const FlashCardH3 = styled.h3`
   margin-top: 0px;  
   left: 5px;
   width: 90px;
-  background-color: orange;
-  color: white;
+  background-color: #fbb31d;
+  color: #0C0B0B;
   border-radius: 5px;
 `;
 
@@ -23,7 +23,7 @@ const ProductPrice = styled.span`
   font-size: 20px;
   padding: 0px;
   font-weight: bold;
-  color: orange;
+  color: #0C0B0B;
   margin-left: 10px;
   margin-top: 60px;
 `;
@@ -36,7 +36,7 @@ const FlashCardContainer = styled.div`
   height: 60px;
   max-width: 1000px;
   padding: 0px;
-  background-color: #f0d469;
+  background-color: white;
 `;
 
 const FlashCardItem = styled.div`
@@ -75,17 +75,19 @@ const FlashCardImg = styled.img`
 const WeightRangeDropdown = styled.select`
   margin-top: 40px;
   padding: 5px;
-  color: #FFA000;
+  color: #0C0B0B;
   margin-bottom: 0px;
-  border: solid #FFA000;
+  border: narrow #0C0B0B;
+  font-weight: bold;
 `;
 const AddToCartButtonText = styled.span`
+font-weight: bolder;
   display: block;
   margin: 0px;
-  color: white;
+ 
+  color: #0C0B0B;
   margin-bottom: 0px;
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 13px;  
   @media (max-width: 768px) {
     margin-right: 20px;
   }
@@ -96,7 +98,7 @@ const AddToCartButton = styled.div`
   bottom: 40px;
   left: 180px;
   padding: 14px;
-  background-color: #ffa000;
+  background-color: #FBB31D;
   width: 120px;
   height: 20px;
   cursor: pointer;
@@ -105,6 +107,7 @@ const AddToCartButton = styled.div`
   border-radius: 10px;
   z-index: 1;
   opacity: 1;
+  
   @media (max-width: 768px) {
     margin-top: 40px;
     position: static;
@@ -116,7 +119,7 @@ const NextArrowButton = styled.button`
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
-  background-color: #ffa000;
+  background-color: #ffb31d;
   border: none;
   width: 30px;
   height: 30px;
@@ -136,7 +139,7 @@ const PrevArrowButton = styled.button`
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
-  background-color: #ffa000;
+  background-color: #ffb31d;
   border: none;
   width: 30px;
   height: 30px;
@@ -154,18 +157,19 @@ const PrevArrowButton = styled.button`
 const NextArrowIcon = styled(ChevronRightIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 
 const PrevArrowIcon = styled(ChevronLeftIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 const CounterWrapper = styled.div`
   display: flex;
   margin-left: 190px;
   margin-top: 0px;
+ 
   
 `;
 
@@ -176,8 +180,8 @@ const CounterButton = styled.span`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #ffa000;
-  color: white;
+  background-color: #ffb31d;
+  color:#0C0B0B;
   cursor: pointer;
   transition: background-color 0.3s ease;
   
@@ -189,7 +193,7 @@ const CounterButton = styled.span`
   svg {
     width: 20px;
     height: 20px;
-    fill: white;
+    fill: #0C0B0B;
   }
 `;
 
@@ -197,7 +201,7 @@ const CounterNum = styled.span`
   font-size: 18px;
   font-weight: bold;
   margin: 0 10px;
-  color: #FFA000;
+  color: #0C0B0B;
 `;
 
 interface SampleNextArrowProps {
@@ -229,7 +233,7 @@ interface FlashCardProps {
 }
 
 const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
   const [counts, setCounts] = useState<{ [productId: string]: number }>({});
   // ... (inside FlashCardItem)
 // const [selectedWeightRange, setSelectedWeightRange] = useState<string>('0.5-1');
@@ -309,7 +313,7 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
              
 
             <ProductPrice>{`$${product.price}`}</ProductPrice>
-            <AddToCartButton onClick={() => addToCart(product)}>
+            <AddToCartButton>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
            

@@ -3,11 +3,14 @@ from django.core.validators import MinValueValidator
 from Category.models import Category
 from authapp.models import User
 import uuid
+<<<<<<< HEAD
 from PIL import Image  # This is required to handle image resizing
 import os
 from authapp.models import User
 
 
+=======
+>>>>>>> origin/Development
 # Create your models here.
 # class Product(models.Model):
 #     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

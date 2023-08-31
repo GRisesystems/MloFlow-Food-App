@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'Customer',
 
     'Category',
-    'products',
+    'products.apps.ProductsConfig',
     'rest_framework',
     'corsheaders',
 
@@ -159,7 +159,7 @@ ROOT_URLCONF = "Mloflo.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR, 'frontend/dist'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -235,8 +235,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'frontend/dist/assets'),
+    os.path.join(BASE_DIR, 'static'),
 ]
+
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
@@ -271,8 +273,6 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
 
 
-
-
         'user_create': 'authapp.serializers.UserCreateSerializer',
         'user': 'authapp.serializers.UserCreateSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
@@ -298,6 +298,11 @@ AUTH_USER_MODEL = 'authapp.User'
 
 # CORS configuration
 CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS-Django Connection
+CORS__ORIGIN_WHITELIST = ['http://localhost:5173']
+
+
 
 # MPESA Configuration variables
 MPESA_CONSUMER_KEY = os.environ.get('MPESA_CONSUMER_KEY') or None

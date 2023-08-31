@@ -18,7 +18,7 @@ const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
       component="footer"
       sx={{
         py: 4,
-        background: "#FFA000",
+        background: "#FBB31D",
         position: "relative",
         bottom: 0,
         left: 0,
@@ -86,7 +86,7 @@ const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({
         display: "block",
         marginBottom: 2,
         fontSize: 18,
-        color: "#F5F5F5",
+        color: "#0C0B0B",
         "&:hover": { color: "#AC8F00", transition: "200ms ease-in" },
       }}
     >
@@ -99,7 +99,7 @@ const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({
 const FooterTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <h5 style={{
-     color: "white", fontWeight: "bold", fontSize: 18, marginBottom: 4 }}
+     color: "#0C0B0B", fontWeight: "bold", fontSize: 18, marginBottom: 4 }}
     >
       {children}
     </h5>
@@ -120,7 +120,7 @@ const FooterSocialLink: React.FC<{ href: string; icon: React.ReactNode }> = ({
         display: "block",
         marginBottom: 2,
         fontSize: 18,
-        color: "white",
+        color: "#0C0B0B",
         "&:hover": { color: "#0b490b", transition: "200ms ease-in" },
       }}
     >
@@ -134,7 +134,7 @@ const NewFooterColumn: React.FC = () => {
     <Grid item xs={12} sm={6} md={3}>
       <FooterColumn>       
         <FooterTitle>Store Location</FooterTitle>
-        <Box style ={{ color: "white" }}>
+        <Box style ={{ color: "#0C0B0B" }}>
         <p>P.O. BOX 1234</p>
         <p>Kisumu, Kenya</p>
         </Box>
@@ -192,7 +192,7 @@ const FooterColumnTwo: React.FC<{ children: React.ReactNode }> = ({
 
 const FooterTitleFirst: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <h5 style={{color: "white", overflow: "visible", fontSize: '18px', fontWeight: "bold", marginBottom: 2, marginTop: 2  }}
+    <h5 style={{color: "#0C0B0B", overflow: "visible", fontSize: '18px', fontWeight: "bold", marginBottom: 2, marginTop: 2  }}
     >
       {children}
     </h5>
@@ -256,7 +256,7 @@ export function FooterContainer() {
         
       </FooterWrapper>
       <FooterRow>
-     <p style={{alignItems: "center", color: "white",fontSize: 12, marginBottom: 2, marginTop: 2}}>Copyright GRISE Systems 2023.</p>
+     <p style={{display: "center", color: "#0C0B0B",fontSize: 12, marginBottom: 2, marginTop: 2}}>Copyright GRISE Systems 2023.</p>
         </FooterRow>
     </Footer>
   );

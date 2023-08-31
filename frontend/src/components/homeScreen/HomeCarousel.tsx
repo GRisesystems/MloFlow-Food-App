@@ -42,7 +42,7 @@ const HomeCarousel: React.FC = () => {
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                background: index === 0 ? '#fff' : 'green', // Make the first dot white, and the rest green
+                background: index === 0 ? '#FFB31D' : '#FFB31D', // Make the first dot white, and the rest green
                 margin: '0 4px',
                 cursor: 'pointer',
               }}

@@ -5,7 +5,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // import FavoriteIcon from "@mui/icons-material/Favorite";
 // import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useCart } from '../homeScreen/Cart/CartUtils';
+// import { useCart } from '../homeScreen/Cart/CartUtils';
 import styled from "styled-components";
 import WishlistBtn from "../homeScreen/WishlistBtn";
 
@@ -24,22 +24,21 @@ interface poultryFlashcard {
   const AddToCartButtonText = styled.span`
   display: block;
   margin: 0px;
-  color: white;
+  color: #0C0B0B;
   margin-bottom: 0px;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: bolder;
   @media (max-width: 768px) {
     margin-right: 20px;
   }
-    
-   
+       
   `;
   const AddToCartButton = styled.div`
   position: relative; /* or position: relative; based on parent container */
   bottom: 30px;
   left: 180px;
   padding: 14px;
-  background-color: #ffa000;
+  background-color: #FFB31D;
   width: 120px;
   height: 20px;
   cursor: pointer;
@@ -62,7 +61,7 @@ const NextArrowButton = styled.button`
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
-  background-color: #FFA000; /* Yellow-green background color */
+  background-color: #FFB31D; /* Yellow-green background color */
   border: none;
   width: 30px;
   height: 30px;
@@ -83,7 +82,7 @@ position: absolute;
 top: 50%;
 left: 5px;
 transform: translateY(-50%);
-background-color: #ffa000;
+background-color: #ffb31d;
 border: none;
 width: 30px;
 height: 30px;
@@ -101,13 +100,13 @@ z-index: 2;
 const NextArrowIcon = styled(ChevronRightIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 
 const PrevArrowIcon = styled(ChevronLeftIcon)`
   width: 20px;
   height: 20px;
-  fill: white;
+  fill: #0C0B0B;
 `;
 
 interface SampleNextArrowProps {
@@ -147,8 +146,8 @@ margin: 5px;
   margin-top: 0px;  
   left: 5px;
   width: 90px;
-  background-color: orange;
-  color: white;
+  background-color: #fbb31d;
+  color: #0C0B0B;
   border-radius: 5px;
 `;
 
@@ -158,7 +157,7 @@ const ProductPrice = styled.span`
 font-size: 20px;
 padding: 0px;
 font-weight: bold;
-color: orange;
+color: #0C0B0B;
 margin-left: 10px;
 margin-top: 60px;
   
@@ -177,8 +176,8 @@ padding: 0px;
 const PoultryItem = styled.div`
 flex-direction: column;
   width: 20%;
-  margin-bottom: 20px;
-  height: 300px;
+  margin-bottom: 10px;
+  height: 200px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -213,14 +212,14 @@ border-radius: 10px 10px 10px 10px;
 const WeightRangeDropdown = styled.select`
   margin-top: 40px;
   padding: 5px;
-  color: #FFA000;
+  color: #0C0B0B;
   margin-bottom: 0px;
-  border: solid #FFA000;
+  border: narrow #0C0B0B;
 `;
 const CounterWrapper = styled.div`
   display: flex;
   margin-left: 190px;
-  margin-top: 20px;
+  margin-top: 0px;
   
 `;
 
@@ -231,8 +230,8 @@ const CounterButton = styled.span`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #ffa000;
-  color: white;
+  background-color: #fbb31d;
+  color: #0C0B0B;
   cursor: pointer;
   transition: background-color 0.3s ease;
   
@@ -244,7 +243,7 @@ const CounterButton = styled.span`
   svg {
     width: 20px;
     height: 20px;
-    fill: white;
+    fill: #0C0B0B;
   }
 `;
 
@@ -252,7 +251,7 @@ const CounterNum = styled.span`
   font-size: 18px;
   font-weight: bold;
   margin: 0 10px;
-  color: #FFA000;
+  color: #0C0B0B;
 `;
 
 
@@ -265,7 +264,7 @@ const CounterNum = styled.span`
 
 
 const Poultry: React.FC<PoultryProps> = ({ productItems }) => {
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
   const [counts, setCounts] = useState<{ [productId: string]: number }>({});
 
  
@@ -337,7 +336,7 @@ const Poultry: React.FC<PoultryProps> = ({ productItems }) => {
               amount={product.price}
             />
              <ProductPrice>{`$${product.price}`}</ProductPrice>
-             <AddToCartButton onClick={() => addToCart(product)}>
+             <AddToCartButton>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
          
