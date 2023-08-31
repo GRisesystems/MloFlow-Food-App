@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     'payments',
     'vendors',
 
+#added the separate client apps
+    'Vendor',
+    'Chef',
+    'Customer',
 
     'Category',
     'products.apps.ProductsConfig',
@@ -141,13 +145,21 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_WHITELIST = True
+
+# Add the specific origins you want to allow in the whitelist
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    #"https://yourfrontenddomain.com",   Example: Your frontend's production domain
+]
 
 ROOT_URLCONF = "Mloflo.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR, 'frontend/dist'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -223,8 +235,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'frontend/dist/assets'),
+    os.path.join(BASE_DIR, 'static'),
 ]
+
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',

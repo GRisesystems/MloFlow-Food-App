@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,11 +13,11 @@ import { Badge, Link, Stack, useMediaQuery, useTheme } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 
-const pages = ['Home','Chefs', 'Vendors', 'Farm Produce','Contact' ,'Blog'];
+const pages = ['Home', 'Chefs', 'Vendors', 'Farm Produce', 'Contact', 'Blog'];
 
 function NavBar() {
   const theme = useTheme()
-  const isMobileView = useMediaQuery(theme.breakpoints.down('sm')); 
+  const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
 
@@ -37,9 +37,9 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor:'#FBB31D',color: '#0C0B0B'}}>
+    <AppBar position="sticky" sx={{ backgroundColor: '#FBB31D', color: '#0C0B0B' }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>          
+        <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -71,86 +71,88 @@ function NavBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" sx={{fontWeight:'bold'}}>{page}</Typography>
+                  <Typography textAlign="center" sx={{ fontWeight: 'bold' }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button                
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder' , "&:hover": { color: "white", transition: "200ms ease-in" }, }}
-              >
-                Home
-              </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+            >
+              Home
+            </Button>
 
-              <Button                
+            <Link href='/chefs' sx={{textDecoration:'none'}}>
+              <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#0C0B0B', display: 'block',fontWeight: 'bolder',  "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Chefs
               </Button>
+            </Link>
 
-              <Button                
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+            >
+              Vendors
+            </Button>
+
+            <Link href="/farm-produce" style={{ textDecoration: 'none' }}>
+              <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
-                Vendors
+                Farm Produce
               </Button>
+            </Link>
 
-              <Link href="/farm-produce" style={{ textDecoration: 'none' }}>
-                <Button                
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
-                >
-                  Farm Produce
-                </Button>
-              </Link>
-
-              <Button                
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+            >
+              Contact
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+            >
+              Blog
+            </Button>
+            <Link href="/about" style={{ textDecoration: 'none' }}>
+              <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
-                Contact
+                About
               </Button>
-              <Button                
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
-              >
-                Blog
-              </Button>
-              <Link href="/about" style={{ textDecoration: 'none' }}>
-                <Button                
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
-                >
-                  About
-                </Button>
-              </Link>
+            </Link>
           </Box>
-          {isMobileView && 
-            <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto',color:'black' }}>
-            <IconButton
-              size="large"
-              aria-label="Cart"
-              color="inherit"
+          {isMobileView &&
+            <Stack direction='row' spacing={1} sx={{ marginLeft: 'auto', color: 'black' }}>
+              <IconButton
+                size="large"
+                aria-label="Cart"
+                color="inherit"
 
-            >
-              <Badge badgeContent={6} color="error">
-                <ShoppingCartCheckoutRoundedIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show favourites"
-              color="inherit"
-              onClick={() => console.log('Profile clicked')}
-            >
-              <Badge badgeContent={17} color="error">
-                <FavoriteBorderIcon />
-              </Badge>
-            </IconButton>
-          </Stack>
+              >
+                <Badge badgeContent={6} color="error">
+                  <ShoppingCartCheckoutRoundedIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                size="large"
+                aria-label="show favourites"
+                color="inherit"
+                onClick={() => console.log('Profile clicked')}
+              >
+                <Badge badgeContent={17} color="error">
+                  <FavoriteBorderIcon />
+                </Badge>
+              </IconButton>
+            </Stack>
           }
         </Toolbar>
       </Container>

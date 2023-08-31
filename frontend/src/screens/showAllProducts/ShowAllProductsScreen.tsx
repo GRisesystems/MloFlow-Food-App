@@ -1,4 +1,4 @@
-import React from 'react';
+
 import ShowAllProducts from '../../components/allProducts/ShowAllProducts';
 import Paginated from '../../components/farmProducts/Paginated';
 import { Box } from '@mui/material';

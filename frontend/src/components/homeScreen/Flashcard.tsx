@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import WishlistBtn from '../homeScreen/WishlistBtn';
-import { useCart } from '../homeScreen/Cart/CartUtils';
+// import { useCart } from '../homeScreen/Cart/CartUtils';
 import { ProductItem } from './productItem';
 
 const FlashCardH3 = styled.h3`
@@ -233,7 +233,7 @@ interface FlashCardProps {
 }
 
 const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
   const [counts, setCounts] = useState<{ [productId: string]: number }>({});
   // ... (inside FlashCardItem)
 // const [selectedWeightRange, setSelectedWeightRange] = useState<string>('0.5-1');
@@ -313,7 +313,7 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
              
 
             <ProductPrice>{`$${product.price}`}</ProductPrice>
-            <AddToCartButton onClick={() => addToCart(product)}>
+            <AddToCartButton>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
            
