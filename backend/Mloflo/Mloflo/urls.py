@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name="schema")),
     path('auth/', include("djoser.urls")),
     path('auth/', include("djoser.urls.jwt")),
+    path('api/', include('chef.urls')),
 
     # payments app routes
     path('api/v1/payments/', include("payments.urls")),
