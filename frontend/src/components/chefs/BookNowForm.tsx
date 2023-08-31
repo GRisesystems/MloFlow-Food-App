@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions } from '@mui/material';
 import { useState } from 'react';
 
-const BookNowForm = ({ open, onClose }: any) => {  
+const BookNowForm = ({ open, onClose }: any) => {    
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
   const [specialty, setSpecialty] = useState('');
