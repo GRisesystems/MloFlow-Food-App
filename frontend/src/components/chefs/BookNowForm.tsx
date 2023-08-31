@@ -1,34 +1,7 @@
-import React, { useState } from 'react';
-import { Box, Button, FormControl, InputAdornment, MenuItem, Select, Typography } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
-import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { BASE_URL } from './constants';
+import { Button, Dialog, DialogActions } from '@mui/material';
+import { useState } from 'react';
 
-const BookNowForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const { control, handleSubmit, formState: { errors }, watch } = useForm({});
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword((prevShowConfirmPassword) => !prevShowConfirmPassword);
-  };
-
-  const onSubmit = async (data) => {
-    // Handle form submission
-    console.log('Form submitted:', data);
-  };
-
-  const password = watch('password');
-
-  // State for form fields
+const BookNowForm = ({ open, onClose }: any) => {    
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
   const [specialty, setSpecialty] = useState('');
@@ -36,16 +9,32 @@ const BookNowForm = () => {
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [country, setCountry] = useState('Kenya'); // Default value is Kenya
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    // Here you can handle the form submission, e.g., sending data to a server
+    console.log('Form submitted:', {
+      firstName,
+      surname,
+      specialty,
+      occasion,
+      location,
+      date,
+      phoneNumber,
+    });
+    // close Dialog after submitting the form
+    onClose();
+
+  };
+  // Function to handle Dialog Close Button On Click event
+  const handleClose = () => {
+    onClose();
+  };
 
   return (
-    <Box sx={{ mt: 3 }}>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <Typography variant="h5" align="center" gutterBottom>
-          Book Now Form
-        </Typography>
-
-        {/* Form fields */}
+    <Dialog open={open} onClose={handleClose}>
+      <h2>Request Form</h2>
+      <form onSubmit={handleSubmit}>
         <label>
           First Name:
           <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -85,9 +74,13 @@ const BookNowForm = () => {
           />
         </label>
         <br />
-        <button type="submit">Request</button>
+        {/* Dialog buttons */}
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+          <Button type="submit">Request</Button>
+        </DialogActions>
       </form>
-    </Box>
+    </Dialog>
   );
 };
 
