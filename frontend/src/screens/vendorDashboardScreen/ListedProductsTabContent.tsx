@@ -14,7 +14,7 @@ import { useParams } from 'react-router';
 
 import UpdateProductForm from '../../components/newproductupload/UpdateProduct';
 import axios from 'axios';
-import { Box, Button, Checkbox} from '@mui/material';
+import { Button, Checkbox} from '@mui/material';
 const Container = styled.div`
   padding: 5px;
 `;
@@ -52,7 +52,7 @@ const Image = styled.img`
 
 const ListedProductsTabContent: React.FC = () => {
   const [selectProduct, setSelectedProduct] = useState(false);
-  const id = useParams()
+  const {id} = useParams()
   const [products, setProducts] = useState([])
     const loadProducts = async () => {    
 
@@ -91,7 +91,7 @@ const ListedProductsTabContent: React.FC = () => {
                 <StyledTableCell>  
                   <Checkbox onChange={(e) => setSelectedProduct(e.target.checked)}  />
                 </StyledTableCell>
-                 <StyledImageCell><Image src={product.images.id} alt={product.name} /></StyledImageCell>
+                 <StyledImageCell><Image src={product.images.image} alt={product.name} /></StyledImageCell>
                 <StyledTableCell>{product.id}</StyledTableCell>
                 <StyledTableCell>{product.name}</StyledTableCell>
                 <StyledTableCell >{product.price}</StyledTableCell>

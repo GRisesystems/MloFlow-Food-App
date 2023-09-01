@@ -52,7 +52,7 @@ const UpdateProductForm: any = () => {
       formField.append('weight', weight)
       formField.append('price', price)
       formField.append('stock', stock)
-      if (image !== null) {
+      if (images !== null) {
         formField.append('images', images)
       }
     
@@ -70,7 +70,7 @@ const UpdateProductForm: any = () => {
 
   return (
     <Paper>
-      <Typography  sx={{backgroundColor:'#0C0B0B',  color:'#FBB31D', padding:'8px'}} onClick={handleOpen}>Update </Typography>
+      <Typography  sx={{backgroundColor:'#0C0B0B',  color:'#FBB31D', padding:'6px', borderRadius:'6px'}} onClick={handleOpen}>Update </Typography>
       <Dialog
         keepMounted
         open={open}
