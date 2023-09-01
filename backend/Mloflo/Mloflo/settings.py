@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'Customer',
 
     'Category',
-    'products.apps.ProductsConfig',
+    'products',
     'rest_framework',
     'corsheaders',
 
@@ -150,7 +150,7 @@ CORS_ALLOW_WHITELIST = True
 
 # Add the specific origins you want to allow in the whitelist
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
+    "http://localhost:5173",
     #"https://yourfrontenddomain.com",   Example: Your frontend's production domain
 ]
 
@@ -295,12 +295,6 @@ DJOSER = {
 
 
 AUTH_USER_MODEL = 'authapp.User'
-
-# CORS configuration
-CORS_ALLOW_ALL_ORIGINS = True
-
-# CORS-Django Connection
-CORS__ORIGIN_WHITELIST = ['http://localhost:5173']
 
 
 

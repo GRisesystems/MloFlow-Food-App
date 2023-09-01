@@ -1,7 +1,7 @@
 import {  useState, useEffect } from "react";
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from "react-router";
-import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle, Paper } from '@mui/material';
+import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle, Paper, Typography } from '@mui/material';
 import { Field } from './Field';
 import { Label } from "@mui/icons-material";
 import styled from "@emotion/styled";
@@ -15,17 +15,16 @@ const UpdateProductForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
+    const [images, setImages] = useState(null)
     const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
-
 
     const {  register,  formState: { errors }, watch } = useForm()
     
     // const hist = useNavigate()
     const {id} = useParams()
-
+    const [products, setProducts] = useState([])
       const loadProducts = async () => {    
 
       const {data} = await axios.get( 'http://localhost:8000/products/${id}');
@@ -33,10 +32,11 @@ const UpdateProductForm: any = () => {
         setCategory(data.category)
         setName(data.name)
         setDescription(data.description)
-        setImage(data.image)
+        setImages(data.images)
         setWeight(data.weight)
         setPrice(data.price)
         setStock(data.stock)
+  
     }
     useEffect(() =>{
       loadProducts()
@@ -53,7 +53,7 @@ const UpdateProductForm: any = () => {
       formField.append('price', price)
       formField.append('stock', stock)
       if (image !== null) {
-        formField.append('image', image)
+        formField.append('images', images)
       }
     
 
@@ -70,7 +70,7 @@ const UpdateProductForm: any = () => {
 
   return (
     <Paper>
-      <Button variant="contained" sx={{backgroundColor:'#0C0B0B',  m:3, color:'#FBB31D'}} onClick={handleOpen}>Update Product</Button>
+      <Typography  sx={{backgroundColor:'#0C0B0B',  color:'#FBB31D', padding:'8px'}} onClick={handleOpen}>Update </Typography>
       <Dialog
         keepMounted
         open={open}
@@ -78,7 +78,7 @@ const UpdateProductForm: any = () => {
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
-        <DialogTitle  sx={{backgroundColor:'#FBB31D',   textAlign:'center'}}>Update Product</DialogTitle>
+        <DialogTitle  sx={{backgroundColor:'#FBB31D',  borderRadius:'8px',   textAlign:'center'}}>Update Product</DialogTitle>
         {/* #FBB31D, #0C0B0B */}
         <DialogContentText variant="h5" sx={{backgroundColor:'#0C0B0B', color:'gray', padding:'8px'}}>
             Please edit your product details accurately in the form provided below.
@@ -112,9 +112,9 @@ const UpdateProductForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="image"
+      name="images"
       src={image}
-      onChange={(e) => setImage(e.target.files[0])}
+      onChange={(e) => setImages(e.target.files[0])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>

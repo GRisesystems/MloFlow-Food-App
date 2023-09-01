@@ -14,8 +14,8 @@ const AddProductsForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
-    const [choose_weight, setChooseWeight] = useState('')
+    const [images, setImages] = useState(null)
+    const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
 
@@ -24,33 +24,42 @@ const AddProductsForm: any = () => {
     
     // const history = useHistory()
 
-      const AddProductInfo = async () => {
-        const formField = new FormData()
-
-        formField.append('category', category)
-        formField.append('name', name)
-        formField.append('description', description)
-        formField.append('weight', weight)
-        formField.append('price', price)
-        formField.append('stock', stock)
-        if (image !== null) {
-          formField.append('image', image)
-        }
-      
-
-      await axios({
-        method: 'post',
-        url: 'http://localhost:8000/products/',
-        data: formField
-
-      }).then((response) => {
-        console.log(response.data);
-      })
+  const AddProductInfo = (event) => {
+    // get the selected file from the input
+    const file = event.target.files[0];
+    // create a new FormData object and append the file to it
+    const formField = new FormData();
+    formField.append('category', category)
+    formField.append('name', name)
+    formField.append('description', description)
+    formField.append('weight', weight)
+    formField.append('price', price)
+    formField.append('stock', stock)
+    if (images !== null) {
+      formField.append('images', images)
     }
+    // make a POST request to the File Upload API with the FormData object and Rapid API headers
+    axios
+      .post("http://localhost:8000/products/'", formField, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+      })
+      .then((response) => {
+		// handle the response
+        console.log(response);
+      })
+      .catch((error) => {
+        // handle errors
+        console.log(error);
+      });
+  };
+  // render a simple input element with an onChange event listener that calls the handleFileUpload function
+
 
   return (
     <Box>
-      <Typography  onClick={handleOpen} >Add Products</Typography>
+      <Typography  onClick={handleOpen} sx={{fontSize:'13px'}} >Add Products</Typography>
       <Dialog
         keepMounted
         open={open}
@@ -92,10 +101,10 @@ const AddProductsForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="image"
+      name="images"
       multiple
-      src={image}
-      onChange={(e) => setImage(e.target.files[0, 1])}
+      src={images}
+      onChange={(e) => setImages(e.target.files[0, 1])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>
@@ -118,8 +127,8 @@ const AddProductsForm: any = () => {
     <Row >
         <Field label="Select Weight" >
           <WeightRangeDropdown  name="weight"
-      value={choose_weight}
-      onChange={(e) => setChooseWeight(e.target.value)}>
+      value={weight}
+      onChange={(e) => setWeight(e.target.value)}>
         <option value="1">1 kg</option>
         <option value="5">5 kg</option>
         <option value="10">10 kg</option>

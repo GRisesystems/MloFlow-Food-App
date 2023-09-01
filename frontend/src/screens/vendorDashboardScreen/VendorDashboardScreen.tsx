@@ -98,7 +98,7 @@ const VendorDashboard = () => {
       Graph
     </TabButton>
     <TabButton isActive={selectedTab === 4} onClick={() => handleTabChange(4)}>
-    <AddProductsForm />
+    <AddProductsForm  />
     </TabButton>
   </TabMenu>
 

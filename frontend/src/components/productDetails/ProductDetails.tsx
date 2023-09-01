@@ -4,7 +4,7 @@ import { Box, Card,  CardContent, CardMedia,  Typography } from '@mui/material';
 import axios from 'axios';
 // import { FavoriteBorder, ShuffleOutlined } from '@mui/icons-material';
 // import { Visibility } from '@mui/icons-material';
-import { useCart } from '../homeScreen/Cart/CartUtils';
+// import { useCart } from '../homeScreen/Cart/CartUtils';
 import styled from "styled-components";
 
 const ProductDetailed = () => {
@@ -44,7 +44,7 @@ font-weight: bold;
 }
      
 `;
-    const { addToCart } = useCart();
+    // const { addToCart } = useCart();
     const { id } = useParams()
     const [product, setProduct] = useState([])
 
@@ -65,7 +65,7 @@ font-weight: bold;
               <Card >
                      <CardMedia
                             component="img"
-                            image={product.image}
+                            image={product.images}
                             alt={product.name}
                           />
                 <CardContent sx={{ flexGrow: 1 }}>
@@ -78,9 +78,9 @@ font-weight: bold;
                     {product.name}
                   </Typography>
                   <ProductPrice> Ksh {product.price}</ProductPrice>
-             <AddToCartButton onClick={() => addToCart(product)}>
-              <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
-            </AddToCartButton>
+             {/* <AddToCartButton onClick={() => addToCart(product)}>
+              <AddToCartButtonText>ADD TO CART</AddToCartButtonText> 
+            </AddToCartButton> */}
                   <Typography  sx={{mt:3, }}>
                       {product.description}
                   </Typography>
