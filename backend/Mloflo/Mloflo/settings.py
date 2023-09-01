@@ -285,10 +285,11 @@ DJOSER = {
 AUTH_USER_MODEL = 'authapp.User'
 
 # CORS configuration
+
 CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS-Django Connection
-CORS__ORIGIN_WHITELIST = ['http://localhost:5173']
+
+
 
 
 

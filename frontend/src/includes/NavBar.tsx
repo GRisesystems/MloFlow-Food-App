@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Badge, Link, Stack, useMediaQuery, useTheme } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
+import {useLocation} from 'react-router-dom'
 
 const pages = ['Home', 'Chefs', 'Vendors', 'Farm Produce', 'Contact', 'Blog'];
 
@@ -19,6 +20,7 @@ function NavBar() {
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const location = useLocation();
 
 
   // useEffect(() => {
@@ -79,15 +81,21 @@ function NavBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+              sx={{ 
+                backgroundColor: location.pathname === '/' ? 'white' : 'transparent',
+                my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
             >
               Home
             </Button>
 
-            <Link href='/chefs' sx={{textDecoration:'none'}}>
+            <Link href='/chefs' sx={{              
+              textDecoration:'none'}}
+              >
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+                sx={{ 
+                  backgroundColor: location.pathname === '/chefs' ? 'white' : 'transparent',
+                  my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Chefs
               </Button>
@@ -103,7 +111,9 @@ function NavBar() {
             <Link href="/farm-produce" style={{ textDecoration: 'none' }}>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+                sx={{ 
+                  backgroundColor: location.pathname === '/farm-produce' ? 'white' : 'transparent',
+                  my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 Farm Produce
               </Button>
@@ -124,7 +134,9 @@ function NavBar() {
             <Link href="/about" style={{ textDecoration: 'none' }}>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+                sx={{
+                  backgroundColor: location.pathname === '/about' ? 'white' : 'transparent',
+                   my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
                 About
               </Button>
