@@ -8,16 +8,16 @@ from drf_spectacular.utils import extend_schema
 # Create your views here.
 
 
-@extend_schema(responses=CustomerSerializer)
-@api_view(["POST"])
-def customerInfo(request):
+#@extend_schema(responses=CustomerSerializer)
+#@api_view(["POST"])
+#def customerInfo(request):
              
-    if request.method =="POST":
-        serializer = CustomerSerializer(data =request.data)
-        if serializer.is_valid():
-            serializer.save()
+    #if request.method =="POST":
+       # serializer = CustomerSerializer(data =request.data)
+       # if serializer.is_valid():
+          #  serializer.save()
         
-    return Response(serializer.data)
+    #return Response(serializer.data)
 
 
 
