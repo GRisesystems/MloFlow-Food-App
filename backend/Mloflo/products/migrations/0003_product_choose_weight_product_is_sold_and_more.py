@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='product',
-            name='choose_weight',
+            name='weight',
             field=models.FloatField(default=1),
         ),
         migrations.AddField(

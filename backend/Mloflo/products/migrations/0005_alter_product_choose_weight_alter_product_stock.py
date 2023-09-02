@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='product',
-            name='choose_weight',
+            name='weight',
             field=models.FloatField(blank=True, default=1),
         ),
         migrations.AlterField(

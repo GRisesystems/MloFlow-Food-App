@@ -61,7 +61,7 @@ const SuppliesTabContent: React.FC = () => {
               <StyledTableCell>Serial Number</StyledTableCell>
               <StyledTableCell>Product Name</StyledTableCell>
               <StyledTableCell>Quantity</StyledTableCell>
-              <StyledTableCell>Price ($)</StyledTableCell>
+              <StyledTableCell>Price (Ksh)</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

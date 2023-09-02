@@ -36,16 +36,16 @@ opacity: 1;
   position: static; /* Resetting position for smaller screens */
 }
 `;
-const AddToCartButtonText = styled.span`
-color: white;
-font-size: 13px;
-font-weight: bold;
-@media (max-width: 768px) {
-  margin-right: 10px;
-}
+// const AddToCartButtonText = styled.span`
+// color: white;
+// font-size: 13px;
+// font-weight: bold;
+// @media (max-width: 768px) {
+//   margin-right: 10px;
+// }
      
-`;
-    const { addToCart } = useCart();
+// `;
+    // const { addToCart } = useCart();
     const [products, setProducts] = useState([])
 
     const getProducts = async () => {
@@ -70,7 +70,7 @@ font-weight: bold;
               >
                      <CardMedia
                             component="img"
-                            image={product.image}
+                            image={product.images.image}
                             alt={product.name}
                           />
                 <CardContent sx={{ flexGrow: 1 }}>
@@ -83,12 +83,12 @@ font-weight: bold;
                     {product.name}
                   </Typography>
                   <ProductPrice> Ksh {product.price}</ProductPrice>
-             <AddToCartButton onClick={() => addToCart(product)}>
+             {/* <AddToCartButton onClick={() => addToCart(product)}>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
-            </AddToCartButton>
-                  <Typography variant='h6' sx={{mt:3,  "&:hover": {textDecoration:'underline' }}}>
-                 <Link sx={{ color:'#0C0B0B', cursor:'pointer', textDecoration: 'none'}} to={'/'} >Product details </Link>
-                  </Typography>
+            </AddToCartButton> */}
+                  {/* <Typography variant='h6' sx={{mt:3,  "&:hover": {textDecoration:'underline' }}}>
+                 <Link  to={'/products/${id}'} >Product details </Link>
+                  </Typography> */}
                 </CardContent>
               </Card>
             </Grid>

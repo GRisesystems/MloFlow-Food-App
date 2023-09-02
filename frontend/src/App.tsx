@@ -17,13 +17,12 @@ import ChefsScreen from './screens/chefsScreen/ChefsScreen'
 
 import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
+import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScreen';
 
 // import Form from './Form'; // Import your Form component
 import BookNowForm from './components/chefs/BookNowForm';
 
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
-
-
 
 
 const ProtectedRoute = ({ element: Element, ...rest }: { element: React.ElementType }) => {
@@ -55,9 +54,12 @@ const router = createBrowserRouter(
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
+      <Route path='/products' element={<AllProductScreen />} />
+      <Route path='/products/:id' element={<ProductDetailScreen />} />
       <Route path='/products' element={<AllProductScreen />} />t
       {/* <Route exact path="/" component={Form} /> */}
       <Route path="/book-now" element={<BookNowForm />} />
+
 
       {/* <Route path='/Cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')
