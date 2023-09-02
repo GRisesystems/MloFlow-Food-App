@@ -52,6 +52,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
         ('admin','admin'),       
         ('customer','customer'),
+<<<<<<< HEAD
+=======
+        #('admin', 'admin'),
+>>>>>>> ft_kamakia3
         ('chef','chef'),
         ('vendor','vendor'),
     ]
