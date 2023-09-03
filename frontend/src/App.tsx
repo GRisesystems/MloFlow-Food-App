@@ -5,7 +5,6 @@ import ActivateAccountScreen from './screens/activateAccountScreen/ActivateAccou
 import ChefDashBoardScreen from './screens/chefDashboardScreen/ChefDashBoardScreen'
 import Root from './Root'
 import FarmProduceScreen from './screens/farmProduceScreen/FarmProduceScreen'
-// import Cart from './components/homeScreen/Cart/Cart'
 import AboutScreen from './screens/aboutScreen/AboutScreen'
 import VendorDashboardScreen from './screens/vendorDashboardScreen/VendorDashboardScreen'
 import CustomerDashboardScreen from './screens/customerDashBoardScreen/CustomerDashboardScreen'
@@ -17,10 +16,7 @@ import ChefsScreen from './screens/chefsScreen/ChefsScreen'
 
 import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
-
-// import Form from './Form'; // Import your Form component
 import BookNowForm from './components/chefs/BookNowForm';
-
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
 
 
@@ -57,7 +53,7 @@ const router = createBrowserRouter(
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
       <Route path='/products' element={<AllProductScreen />} />t
       {/* <Route exact path="/" component={Form} /> */}
-      <Route path="/book-now" element={<BookNowForm />} />
+      <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} />} />
 
       {/* <Route path='/Cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')

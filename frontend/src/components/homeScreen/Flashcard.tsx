@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Slider, { Settings } from 'react-slick';
 import styled from 'styled-components';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import WishlistBtn from '../homeScreen/WishlistBtn';
-// import { useCart } from '../homeScreen/Cart/CartUtils';
 import { ProductItem } from './productItem';
+import { CartContext, ItemType, CartContextType } from '../../Context/CartContext'; // Added ItemType for better type checking
+import Cart from './Cart';
 
 const FlashCardH3 = styled.h3`
   margin: 5px;
@@ -80,18 +81,18 @@ const WeightRangeDropdown = styled.select`
   border: narrow #0C0B0B;
   font-weight: bold;
 `;
-const AddToCartButtonText = styled.span`
-font-weight: bolder;
-  display: block;
-  margin: 0px;
+// const AddToCartButtonText = styled.span`
+// font-weight: bolder;
+//   display: block;
+//   margin: 0px;
  
-  color: #0C0B0B;
-  margin-bottom: 0px;
-  font-size: 13px;  
-  @media (max-width: 768px) {
-    margin-right: 20px;
-  }
-`;
+//   color: #0C0B0B;
+//   margin-bottom: 0px;
+//   font-size: 13px;  
+//   @media (max-width: 768px) {
+//     margin-right: 20px;
+//   }
+// `;
 
 const AddToCartButton = styled.div`
   position: relative;
@@ -232,96 +233,140 @@ interface FlashCardProps {
   productItems: ProductItem[];
 }
 
-const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
-  // const { addToCart } = useCart();
+const FlashCard: React.FC<{ productItems: ProductItem[] }> = ({ productItems }) => {
+  const [showModal, setshowModal] = useState(false);
   const [counts, setCounts] = useState<{ [productId: string]: number }>({});
+  const { cartItems, addToCart } = useContext<CartContextType>(CartContext); // Use CartContextType
+
+  const toggle = () => {
+    setshowModal(!showModal);
+  };
+
+  async function getProducts() {
+    try {
+      const response = await fetch('https://dummyjson.com/products'); // Added try-catch block
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(data.products);
+      } else {
+        console.error('Failed to fetch products');
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+ 
+  // const [counts, setCounts] = useState<{ [productId: string]: number }>({});
   // ... (inside FlashCardItem)
 // const [selectedWeightRange, setSelectedWeightRange] = useState<string>('0.5-1');
 
 
-//  // ... (inside FlashCardItem)
-// const handleWeightRangeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//   setSelectedWeightRange(event.target.value);
-// };
+// async function getProducts() {
+//   const response = await fetch('https://dummyjson.com/products');
+//   const data = await response.json();
+//   // Update the state with the fetched data.
+//   setProducts(data.products);
+// }
 
-  const handleIncrement = (productId: string) => {
-    setCounts((prevCounts) => {
-      const currentCount = prevCounts[productId] || 0;
-      const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
-      return newCounts;
-    });
-  };
+// useEffect(() => {
+//   getProducts();
+// }, []);
 
-  const handleDecrement = (productId: string) => {
-    setCounts((prevCounts) => {
-      const currentCount = prevCounts[productId] || 0;
-      const newCounts = { ...prevCounts, [productId]: currentCount > 0 ? currentCount - 1 : 0 };
-      return newCounts;
-    });
-  };
+const handleIncrement = (productId: string) => {
+  setCounts((prevCounts) => {
+    const currentCount = prevCounts[productId] || 0;
+    const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
+    return newCounts;
+  });
+};
 
-  const settings: Settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    nextArrow: <SampleNextArrow onClick={() => {}} />,
-    prevArrow: <SamplePrevArrow onClick={() => {}} />,
-  };
+const handleDecrement = (productId: string) => {
+  setCounts((prevCounts) => {
+    const currentCount = prevCounts[productId] || 0;
+    const newCounts = { ...prevCounts, [productId]: currentCount > 0 ? currentCount - 1 : 0 };
+    return newCounts;
+  });
+};
 
-  return (
-    <FlashCardContainer>
-      <Slider {...settings}>
-        {productItems.map((product) => (
-          <FlashCardItem key={product.id}>
-            <FlashCardImg src={product.cover} alt={product.name} />
-            <div className="counter-wrapper">
+const settings: Settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  nextArrow: <SampleNextArrow onClick={() => {}} />,
+  prevArrow: <SamplePrevArrow onClick={() => {}} />,
+};
+
+return (
+  <FlashCardContainer>
+    <Slider {...settings}>
+      {productItems.map((product) => (
+        <FlashCardItem key={product.id}>
+          <FlashCardImg src={product.cover} alt={product.name} />
+          <div className="counter-wrapper">
             <WeightRangeDropdown>
-  <option value="0.5-1">0.5 - 1 kg</option>
-  <option value="1-3">1 - 3 kg</option>
-  <option value="3-5">3 - 5 kg</option>
-</WeightRangeDropdown>
-              <CounterWrapper>
-                <CounterButton onClick={() => handleDecrement(product.id.toString())}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M19 13H5v-2h14v2z"/>
-                  </svg>
-                </CounterButton>
-                <CounterNum>
-                  {/* Display "00" as default */}
-                  {counts[product.id] === undefined ? '00' : counts[product.id] < 10 ? `0${counts[product.id]}` : counts[product.id]}
-                </CounterNum>
-                <CounterButton onClick={() => handleIncrement(product.id.toString())}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/>
-                  </svg>
-                </CounterButton>
-              </CounterWrapper>
-            </div>
-            <FlashCardH3>{product.name}</FlashCardH3>
-            
-            <WishlistBtn
-              initialLiked={false}
-              onToggleLike={() => {
-                // Handle like toggle logic here
-              }}
-              amount={product.price}
-            />
-             
+              <option value="0.5-1">0.5 - 1 kg</option>
+              <option value="1-3">1 - 3 kg</option>
+              <option value="3-5">3 - 5 kg</option>
+            </WeightRangeDropdown>
 
-            <ProductPrice>{`$${product.price}`}</ProductPrice>
-            <AddToCartButton>
-              <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
-            </AddToCartButton>
-           
-          </FlashCardItem>
-        ))}
-      </Slider>
-    </FlashCardContainer>
-  );
+            <CounterWrapper>
+              <CounterButton onClick={() => handleDecrement(product.id.toString())}>
+                {/* Display "00" as default */}
+                {counts[product.id] === undefined ? '00' : counts[product.id] < 10 ? `0${counts[product.id]}` : counts[product.id]}
+              </CounterButton>
+              <CounterNum>{product.name}</CounterNum>
+              <CounterButton onClick={() => handleIncrement(product.id.toString())}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z" />
+                </svg>
+              </CounterButton>
+            </CounterWrapper>
+          </div>
+          <FlashCardH3>{product.name}</FlashCardH3>
+
+          <WishlistBtn
+            initialLiked={false}
+            onToggleLike={() => {
+              // Handle like toggle logic here
+            }}
+            amount={product.price}
+          />
+
+          <ProductPrice>{`$${product.price}`}</ProductPrice>
+          <AddToCartButton
+            className='px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
+            onClick={() => {
+              addToCart(product);
+            }}
+          >
+            Add to cart
+          </AddToCartButton>
+          <Cart showModal={showModal} toggle={toggle} /> {/* Pass showModal and toggle as props */}
+
+        </FlashCardItem>
+      ))}
+    </Slider>
+
+    <h1 className='text-2xl uppercase font-bold mt-10 text-center mb-10'>Shop</h1>
+    {!showModal && (
+      <button
+        className='px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
+        onClick={toggle}
+      >
+        Cart ({cartItems.length})
+      </button>
+    )}
+  </FlashCardContainer>
+);
 };
 
 export default FlashCard;
