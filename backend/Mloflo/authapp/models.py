@@ -52,6 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
         ('admin','admin'),       
         ('customer','customer'),
+        #('admin', 'admin'),
         ('chef','chef'),
         ('vendor','vendor'),
     ]
