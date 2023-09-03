@@ -147,26 +147,50 @@ const BookNowForm = ({ open, onClose }) => {
           )}
         />
 
-        <Controller
-          name="date"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field, fieldState }) => (
-            <TextField
-              label="Date"
-              variant="outlined"
-              fullWidth
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              {...field}
-              error={Boolean(fieldState.error)}
-              helperText={fieldState.error ? 'This field is required' : ''}
-            />
-          )}
-        />
+         {/* Date Range Input */}
+         <div>
+            <InputLabel sx={{ mt: 2 }}>Date Range</InputLabel>
+            <div style={{ display: 'flex', gap: '30px', width:'2000px' }}>
+              <Controller
+                name="fromDate"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    label="From"
+                    variant="outlined"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    {...field}
+                    error={Boolean(fieldState.error)}
+                    helperText={fieldState.error ? 'This field is required' : ''}
+                  />
+                )}
+              />
+              <Controller
+                name="toDate"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    label="To"
+                    variant="outlined"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    {...field}
+                    error={Boolean(fieldState.error)}
+                    helperText={fieldState.error ? 'This field is required' : ''}
+                  />
+                )}
+              />
+            </div>
+          </div>
 
 <InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
                 <Controller
