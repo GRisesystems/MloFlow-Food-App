@@ -18,6 +18,7 @@ import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
 import BookNowForm from './components/chefs/BookNowForm';
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
+import ContactScreen from './screens/ContactScreen/ContactScreen';
 
 
 
@@ -44,7 +45,6 @@ const router = createBrowserRouter(
       <Route path="/chef-dashboard" element={<ProtectedRoute element={ChefDashBoardScreen} />} />
       <Route path='/chefs' element={<ChefsScreen/>} />
       <Route path='/chefs/:id' element={<ChefDetailScreen/>} />
-      {/* <Route path="/vendor-dashboard" element={<ProtectedRoute element={VendorDashboardScreen} />} /> */}
       <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
       <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />
       <Route path='/farm-produce' element={<FarmProduceScreen />} />
@@ -52,7 +52,6 @@ const router = createBrowserRouter(
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
       <Route path='/products' element={<AllProductScreen />} />t
-      {/* <Route exact path="/" component={Form} /> */}
       <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} />} />
 
       {/* <Route path='/Cart' element={<Cart onClose={function (): void {
@@ -60,6 +59,7 @@ const router = createBrowserRouter(
       }} />} /> */}
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />
+      <Route path='/contact' element={<ContactScreen />} />
 
     </Route>
   )

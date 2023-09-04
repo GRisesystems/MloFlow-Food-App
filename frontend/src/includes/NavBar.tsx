@@ -109,12 +109,16 @@ function NavBar() {
               </Button>
             </Link>
 
+            <Link href="/contact" style={{ textDecoration: 'none' }}>
+
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
             >
               Contact
             </Button>
+            </Link>
+
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}

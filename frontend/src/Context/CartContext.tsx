@@ -21,8 +21,7 @@ export interface CartContextType {
 // Create the CartContext and provide the initial value (undefined)
 export const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider: React.FC = ({ children }) => {
-  const [cartItems, setCartItems] = useState<ItemType[]>(
+export const CartProvider: React.FC = ({ children }) => {  const [cartItems, setCartItems] = useState<ItemType[]>(
     localStorage.getItem('cartItems')
       ? JSON.parse(localStorage.getItem('cartItems'))
       : []

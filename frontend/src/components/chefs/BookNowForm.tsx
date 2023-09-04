@@ -32,20 +32,20 @@ const BookNowForm = ({ open, onClose }) => {
     setDialogOpen(false); // Close the dialog
     onClose(); // Close the main dialog as well if needed
   };
-  // const showAlertDialog = () => {
-  //   // Using the browser's alert function to display the message
-  //   alert('Request received. A notification will be sent to your email.');
-  //   handleDialogClose(); // Close the dialog after alert is shown
-  // };
-  // Trigger the showAlertDialog function when the "Request" button is clicked
-  // const handleRequestClick = async () => {
-  //   try {
-  //     const formData = await handleSubmit(onSubmit)();
-  //     showAlertDialog(); // This will show the alert
-  //   } catch (error) {
-  //     console.error("Form submission error:", error);
-  //   }
-  // };
+  const showAlertDialog = () => {
+    // Using the browser's alert function to display the message
+    alert('Request received. A notification will be sent to your email.');
+    handleDialogClose(); // Close the dialog after alert is shown
+  };
+  
+  const handleRequestClick = async () => {
+    try {
+      const formData = await handleSubmit(onSubmit)();
+      showAlertDialog(); // This will show the alert
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
+  };
 
   return (
     <>
@@ -217,7 +217,7 @@ const BookNowForm = ({ open, onClose }) => {
           <DialogActions>
           <Button
             type="submit"
-            onClick={onClose} 
+            onClick={handleRequestClick} 
             disabled={formState.isSubmitting}
             sx={{
               backgroundColor: '#FFB31D',
@@ -241,7 +241,7 @@ const BookNowForm = ({ open, onClose }) => {
         </DialogContent>
         <DialogActions>
           <Button >Close</Button>
-          {/* onClick={showAlertDialog} */}
+          onClick={showAlertDialog}
         </DialogActions>
         
       </Dialog>
