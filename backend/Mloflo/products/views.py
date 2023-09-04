@@ -10,8 +10,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     # def perform_create(self, serializer):
     #     user = self.request.user  # Assuming the user is authenticated
-    #     # product = serializer.save(created_by=user)
+    #     product = serializer.save(created_by=user)
     #     # Handle images and associate them with the product
-    #     # images = self.request.FILES.getlist('images')
+    #     images = self.request.FILES.getlist('images')
     #     for image in images:
     #         ProductImage.objects.create(product=product, image=image)

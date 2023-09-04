@@ -32,7 +32,7 @@ urlpatterns = [
     path('category/', include('Category.urls')),
     path('products/', include('products.urls')),
     path('chef/',include('Chef.urls')),
-    #path('customer/', include('Customer.urls')),
+    path('customer/', include('Customer.urls')),
     path('vendor/', include('Vendor.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name="schema"),
     path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name="schema")),
