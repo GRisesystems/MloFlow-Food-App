@@ -48,26 +48,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     'main',
     'authapp',
     'payments',
     'vendors',
-
 #added the separate client apps
     'Vendor',
     'Chef',
     'Customer',
-
     'Category',
-    'products',
+    'products.apps.ProductsConfig',
     'rest_framework',
     'corsheaders',
-
     "phonenumber_field",
     'rest_framework_simplejwt.token_blacklist',
-
-
     'drf_spectacular',
     'djoser',
 ]
@@ -159,7 +153,7 @@ ROOT_URLCONF = "Mloflo.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR, 'frontend/dist'],
+        "DIRS": [BASE_DIR, 'frontend/'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -238,6 +232,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/dist/assets'),
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_ROOT  =     os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL  =' /uploads/'
 
 
 MESSAGE_TAGS = {

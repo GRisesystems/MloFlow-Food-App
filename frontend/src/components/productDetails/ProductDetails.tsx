@@ -1,6 +1,6 @@
 import  {useState, useEffect} from 'react';
 import { useParams } from 'react-router';
-import { Box, Card,  CardContent, CardMedia,  Typography } from '@mui/material';
+import { Box, Card,  CardContent, CardMedia,  Grid,  Typography } from '@mui/material';
 import axios from 'axios';
 // import { FavoriteBorder, ShuffleOutlined } from '@mui/icons-material';
 // import { Visibility } from '@mui/icons-material';
@@ -48,47 +48,37 @@ font-weight: bold;
     const { id } = useParams()
     const [product, setProduct] = useState([])
 
-    const getProduct = async () => {
+    const getProduct = async (id) => {
     const {data} = await axios.get('http://localhost:8000/products/${id}')
       setProduct(data)
       console.log(data)
     }
 
     useEffect(() =>{
-      getProduct();
+      getProduct(product.id);
     }, [])
 
   return (
       <Box sx={{maxWidth:'sm', margin:'auto'}}>
         <Typography variant="h3" sx={{backgroundColor:'#FBB31D',  mt:4, mb:2, textAlign:'center'}}>Product Details</Typography>
         {/* #FBB31D, #0C0B0B */}
-              <Card >
-                     <CardMedia
-                            component="img"
-                            image={product.images}
-                            alt={product.name}
-                          />
-                <CardContent sx={{ flexGrow: 1 }}>
-                {/* <CardActions >
-                <FavoriteBorder sx={{ marginRight:'8px'}}/>
-                <ShuffleOutlined sx={{ marginRight:'8px'}}/>
-                <Visibility />
-                </CardActions> */}
-                  <Typography gutterBottom variant="h4" component="h2" sx={{textAlign:'center'}}>
+       < Grid container spacing={4} >
+        <Grid item xs={12} md={8}>
+          <CardMedia  image={product.image} title={product.name}/>
+        </Grid>
+        <Grid item xs={12} md={4}>
+              <Typography gutterBottom variant="h4" component="h2" sx={{textAlign:'center'}}>
                     {product.name}
                   </Typography>
-                  <ProductPrice> Ksh {product.price}</ProductPrice>
-             {/* <AddToCartButton onClick={() => addToCart(product)}>
-              <AddToCartButtonText>ADD TO CART</AddToCartButtonText> 
-            </AddToCartButton> */}
-                  <Typography  sx={{mt:3, }}>
+                  <Typography component="p"  sx={{mt:3, }}>
                       {product.description}
                   </Typography>
-                  <Typography  sx={{mt:3, }}>
+                  <ProductPrice> Ksh {product.price}</ProductPrice>
+                    <Typography  sx={{mt:3, }}>
                       {product.category}
                   </Typography>
-                </CardContent>
-              </Card>
+        </Grid>
+       </Grid>
       </Box>
   );
 }

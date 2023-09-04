@@ -9,6 +9,8 @@ import { useAuth } from '../../utils/AuthContext';
 // import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 import axios from 'axios';
 import { BASE_URL } from '../../components/signin/constants';
+import { Box } from '@mui/material';
+import "./styles.css";
 
 const VendorDashboardContainer = styled.div`
   display: flex;
@@ -83,7 +85,10 @@ const VendorDashboard = () => {
    return(
      
   <VendorDashboardContainer>
+    <Box className="vendor"  >
      <WelcomeMessage>Welcome Isaac!</WelcomeMessage>
+     <AddProductsForm />
+    </Box>
   <TabMenu>
     <TabButton isActive={selectedTab === 0} onClick={() => handleTabChange(0)}>
      All Supplies
@@ -96,9 +101,6 @@ const VendorDashboard = () => {
     </TabButton>
     <TabButton isActive={selectedTab === 3} onClick={() => handleTabChange(3)}>
       Graph
-    </TabButton>
-    <TabButton isActive={selectedTab === 4} onClick={() => handleTabChange(4)}>
-    <AddProductsForm  />
     </TabButton>
   </TabMenu>
 

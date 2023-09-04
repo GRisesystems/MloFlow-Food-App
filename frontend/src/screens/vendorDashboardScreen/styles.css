@@ -1,0 +1,9 @@
+.MuiBox-root.vendor {
+    display: flex;
+}
+/* .MuiBox-root.vendor h1{
+    margin-left: 20vw;
+} */
+.MuiBox-root.vendor button{
+    margin-left: 20vw;
+}

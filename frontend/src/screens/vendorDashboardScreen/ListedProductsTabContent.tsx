@@ -46,7 +46,7 @@ const StyledImageCell = styled(TableCell)`
 const Image = styled.img`
   width: 100%;
   height: auto;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
 `;
 
 
@@ -75,14 +75,14 @@ const ListedProductsTabContent: React.FC = () => {
         <StyledTable>
           <TableHead>
             <TableRow>
-            <StyledTableCell>Select Product</StyledTableCell> {/* Empty cell for images */}
-            <StyledTableCell>Product Image</StyledTableCell> {/* Empty cell for images */}
+            <StyledTableCell>Select</StyledTableCell> {/* Empty cell for images */}
+            <StyledTableCell> Image</StyledTableCell> {/* Empty cell for images */}
               <StyledTableCell>Serial Number</StyledTableCell>
-              <StyledTableCell>Product Name</StyledTableCell>
+              <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell >Price (Ksh)</StyledTableCell>
      
-              <StyledTableCell sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>Modify Product</StyledTableCell>
-              <StyledTableCell sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>Delete Product</StyledTableCell>
+              <StyledTableCell sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>Modify</StyledTableCell>
+              <StyledTableCell sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -91,7 +91,7 @@ const ListedProductsTabContent: React.FC = () => {
                 <StyledTableCell>  
                   <Checkbox onChange={(e) => setSelectedProduct(e.target.checked)}  />
                 </StyledTableCell>
-                 <StyledImageCell><Image src={product.images.image} alt={product.name} /></StyledImageCell>
+                 <StyledImageCell><Image src={product.image} alt={product.name} /></StyledImageCell>
                 <StyledTableCell>{product.id}</StyledTableCell>
                 <StyledTableCell>{product.name}</StyledTableCell>
                 <StyledTableCell >{product.price}</StyledTableCell>
@@ -100,13 +100,13 @@ const ListedProductsTabContent: React.FC = () => {
                   </StyledTableCell> */}
                 <StyledTableCell>
 
-                  <Button sx={{   display: selectProduct ? 'block' : 'none'  }}>
+                  <Button sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>
                       <UpdateProductForm  />
                   </Button>
                   </StyledTableCell>
                 <StyledTableCell>
 
-                  <Button variant="contained" color="error"     sx={{  padding:'6px',  display: selectProduct ? 'block' : 'none'  }}
+                  <Button variant="contained" color="error"     sx={{  padding:'6px',  visibility: selectProduct ? 'visible': 'hidden'   }}
                      onClick={deleteProduct}>
                         DELETE
                   </Button>
