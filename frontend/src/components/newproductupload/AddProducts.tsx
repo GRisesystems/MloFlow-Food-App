@@ -1,6 +1,6 @@
 import {  useState } from "react";
 import { useForm } from 'react-hook-form'
-import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle } from '@mui/material';
+import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle, Typography } from '@mui/material';
 import { Field } from './Field';
 import { Label } from "@mui/icons-material";
 import styled from "@emotion/styled";
@@ -14,8 +14,8 @@ const AddProductsForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
-    const [choose_weight, setChooseWeight] = useState('')
+    const [images, setImages] = useState(null)
+    const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
 
@@ -24,33 +24,42 @@ const AddProductsForm: any = () => {
     
     // const history = useHistory()
 
-      const AddProductInfo = async () => {
-        const formField = new FormData()
-
-        formField.append('category', category)
-        formField.append('name', name)
-        formField.append('description', description)
-        formField.append('choose_weight', choose_weight)
-        formField.append('price', price)
-        formField.append('stock', stock)
-        if (image !== null) {
-          formField.append('image', image)
-        }
-      
-
-      await axios({
-        method: 'post',
-        url: 'http://localhost:8000/products/',
-        data: formField
-
-      }).then((response) => {
-        console.log(response.data);
-      })
+  const AddProductInfo = (event) => {
+    // get the selected file from the input
+    const file = event.target.files[0];
+    // create a new FormData object and append the file to it
+    const formField = new FormData();
+    formField.append('category', category)
+    formField.append('name', name)
+    formField.append('description', description)
+    formField.append('weight', weight)
+    formField.append('price', price)
+    formField.append('stock', stock)
+    if (images !== null) {
+      formField.append('images', images)
     }
+    // make a POST request to the File Upload API with the FormData object and Rapid API headers
+    axios
+      .post("http://localhost:8000/products/'", formField, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+      })
+      .then((response) => {
+		// handle the response
+        console.log(response);
+      })
+      .catch((error) => {
+        // handle errors
+        console.log(error);
+      });
+  };
+  // render a simple input element with an onChange event listener that calls the handleFileUpload function
+
 
   return (
     <Box>
-      <Button variant="contained" sx={{backgroundColor:'#FBB31D',  m:3, color:'#0C0B0B'}} onClick={handleOpen}>Add Products</Button>
+      <Typography  onClick={handleOpen} sx={{fontSize:'13px'}} >Add Products</Typography>
       <Dialog
         keepMounted
         open={open}
@@ -92,9 +101,10 @@ const AddProductsForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="image"
-      src={image}
-      onChange={(e) => setImage(e.target.files[0])}
+      name="images"
+      multiple
+      src={images}
+      onChange={(e) => setImages(e.target.files[0, 1])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>
@@ -117,17 +127,18 @@ const AddProductsForm: any = () => {
     <Row >
         <Field label="Select Weight" >
           <WeightRangeDropdown  name="weight"
-      value={choose_weight}
-      onChange={(e) => setChooseWeight(e.target.value)}>
+      value={weight}
+      onChange={(e) => setWeight(e.target.value)}>
         <option value="1">1 kg</option>
         <option value="5">5 kg</option>
         <option value="10">10 kg</option>
       </WeightRangeDropdown>
       </Field>
-      <Field label="Product Price">
+      <Field label="Product Price" >
           <Input
             type="number"
             name="price"
+            placeholder="Kenya Shillings"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
@@ -142,8 +153,8 @@ const AddProductsForm: any = () => {
           />
         </Field>
   <DialogActions>
-  <Button variant="outlined" sx={{outlineColor:'#FBB31D'}} onClick={handleClose}>Cancel</Button>
-  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D'}} onClick={handleClose} >Add </Button>
+  <Button  onClick={handleClose} sx={{color:'#FBB31D', marginRight:44, backgroundColor:'#0C0B0B'}}>Cancel</Button>
+  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}} onClick={handleClose} >Add</Button>
 </DialogActions>
 </Box>
         </DialogContent>
@@ -170,10 +181,11 @@ const Row = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 10px;
+  padding: 11px;
   width: 100%;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
+  margin: 4px;
 `;
 
 const TextArea = styled.textarea`
@@ -183,7 +195,7 @@ const TextArea = styled.textarea`
 `;
 
 const WeightRangeDropdown = styled.select`
-  margin-top: 6px;
+  margin-top: 5px;
   padding: 8px;
   color: #0C0B0B;
   max-width: 100%;

@@ -1,86 +1,230 @@
-import { Button, Dialog, DialogActions } from '@mui/material';
+
 import { useState } from 'react';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  InputLabel,
+  TextField,
+} from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 
-const BookNowForm = ({ open, onClose }: any) => {    
-  const [firstName, setFirstName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [specialty, setSpecialty] = useState('');
-  const [occasion, setOccasion] = useState('');
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+const BookNowForm = ({ open, onClose }) => {
+  const { control, handleSubmit, formState } = useForm();
+  // const [requestSubmitted, setRequestSubmitted] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false); // State for the dialog
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    // Here you can handle the form submission, e.g., sending data to a server
-    console.log('Form submitted:', {
-      firstName,
-      surname,
-      specialty,
-      occasion,
-      location,
-      date,
-      phoneNumber,
-    });
-    // close Dialog after submitting the form
-    onClose();
-
+  const onSubmit = (data) => {
+    console.log('Form submitted:', data);
+    // setRequestSubmitted(true);
+    setDialogOpen(true); // Open the dialog after request is submitted
   };
-  // Function to handle Dialog Close Button On Click event
+
   const handleClose = () => {
     onClose();
   };
 
+  const handleDialogClose = () => {
+    setDialogOpen(false); // Close the dialog
+    onClose(); // Close the main dialog as well if needed
+  };
+  // const showAlertDialog = () => {
+  //   // Using the browser's alert function to display the message
+  //   alert('Request received. A notification will be sent to your email.');
+  //   handleDialogClose(); // Close the dialog after alert is shown
+  // };
+  // Trigger the showAlertDialog function when the "Request" button is clicked
+  // const handleRequestClick = async () => {
+  //   try {
+  //     const formData = await handleSubmit(onSubmit)();
+  //     showAlertDialog(); // This will show the alert
+  //   } catch (error) {
+  //     console.error("Form submission error:", error);
+  //   }
+  // };
+
   return (
+    <>
     <Dialog open={open} onClose={handleClose}>
-      <h2>Request Form</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          First Name:
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Surname:
-          <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Specialty:
-          <input type="text" value={specialty} onChange={(e) => setSpecialty(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Occasion:
-          <input type="text" value={occasion} onChange={(e) => setOccasion(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Location:
-          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Date:
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Phone Number:
-          <input
-            type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </label>
-        <br />
-        {/* Dialog buttons */}
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-          <Button type="submit">Request</Button>
+        <h2 style={{ marginBottom: '20px', textAlign: 'center' }}>Request Form</h2>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '20px',
+            gap: '20px',
+            width: '600px', // Set the desired width here
+          }}
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+        <Controller
+          name="firstName"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="First Name"
+              variant="outlined"
+              fullWidth
+              {...field}
+              error={Boolean(fieldState.error)}
+              helperText={fieldState.error ? 'This field is required' : ''}
+            />
+          )}
+        />
+
+        <Controller
+          name="surname"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Surname"
+              variant="outlined"
+              fullWidth
+              {...field}
+              error={Boolean(fieldState.error)}
+              helperText={fieldState.error ? 'This field is required' : ''}
+            />
+          )}
+        />
+
+        <Controller
+          name="specialty"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Specialty"
+              variant="outlined"
+              fullWidth
+              {...field}
+              error={Boolean(fieldState.error)}
+              helperText={fieldState.error ? 'This field is required' : ''}
+            />
+          )}
+        />
+
+        <Controller
+          name="occasion"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Occasion"
+              variant="outlined"
+              fullWidth
+              {...field}
+              error={Boolean(fieldState.error)}
+              helperText={fieldState.error ? 'This field is required' : ''}
+            />
+          )}
+        />
+
+        <Controller
+          name="location"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Location"
+              variant="outlined"
+              fullWidth
+              {...field}
+              error={Boolean(fieldState.error)}
+              helperText={fieldState.error ? 'This field is required' : ''}
+            />
+          )}
+        />
+
+        <Controller
+          name="date"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Date"
+              variant="outlined"
+              fullWidth
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              {...field}
+              error={Boolean(fieldState.error)}
+              helperText={fieldState.error ? 'This field is required' : ''}
+            />
+          )}
+        />
+
+<InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
+                <Controller
+                    control={control}
+                    rules={{
+                        validate: matchIsValidTel
+                    }}
+
+                    render={({ field, fieldState }) => (
+                        <MuiTelInput
+                            fullWidth
+                            value={field.value}
+                            onChange={(value) => field.onChange(value)}
+                            defaultCountry="KE"
+                            helperText={fieldState.invalid ? "Tel is invalid" : ""}
+                            error={fieldState.invalid}
+                        />
+                    )}
+                    name="phone"
+                />
+          
+        
+
+          <DialogActions>
+          <Button
+            type="submit"
+            onClick={onClose} 
+            disabled={formState.isSubmitting}
+            sx={{
+              backgroundColor: '#FFB31D',
+              color: 'black',
+              width: '100%',
+              alignSelf: 'center',
+             
+            }}
+          >
+            Request
+          </Button>
         </DialogActions>
-      </form>
-    </Dialog>
+        </Box>
+      </Dialog>
+
+      <Dialog open={dialogOpen} onClose={handleDialogClose}>
+        <DialogContent>
+          <DialogContentText>
+            Request received. A notification will be sent to your email.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button >Close</Button>
+          {/* onClick={showAlertDialog} */}
+        </DialogActions>
+        
+      </Dialog>
+      
+    </>
+    
+    
   );
 };
 
