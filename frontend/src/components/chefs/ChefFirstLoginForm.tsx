@@ -25,7 +25,7 @@ import FileUpload from './FileUpload'; // Adjust the path as needed
 import axios from 'axios';
 
 
-const ChefFirstLoginForm = () => {    
+const ChefFirstLoginForm = () => {
     const specialities = ['sea food', 'fried chicken', 'Mukimo', 'Pilau', 'Fufu'];
     const { accessToken, updateProfileData } = useAuth();
     const {
@@ -212,21 +212,25 @@ const ChefFirstLoginForm = () => {
                         />
                     </Box>
 
-                    {showFileUpload && (
-                        <Box sx={{ mt: 2 }}>
-                            <InputLabel sx={{ color: 'black' }}>Additional Files</InputLabel>
-                            <FileUpload onFileDataChange={setAdditionalFileData} additionalFileData={additionalFileData} />
-                        </Box>
-                    )}
+                    <Box sx={{mt:2, border:1,p:2,borderColor: 'grey.500'}}>
+                        <InputLabel sx={{ color: 'black' }}>Upload certificates</InputLabel>
+                        {showFileUpload && (
+                            <Box sx={{ mt: 2 }}>
+                                <InputLabel sx={{ color: 'black' }}>Additional Files</InputLabel>
+                                <FileUpload onFileDataChange={setAdditionalFileData} additionalFileData={additionalFileData} />
+                            </Box>
+                        )}
 
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={toggleFileUpload}
-                        sx={{ mt: 2 }}
-                    >
-                        {showFileUpload ? 'Hide File Upload' : 'Show File Upload'}
-                    </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            disa
+                            onClick={toggleFileUpload}
+                            sx={{ mt: 2 }}
+                        >
+                            {showFileUpload ? 'Hide File Upload' : 'Show File Upload'}
+                        </Button>
+                    </Box>
 
                     <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
                         <Button variant="contained" color="primary" type="submit">
