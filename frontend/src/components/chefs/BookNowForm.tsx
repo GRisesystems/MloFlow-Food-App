@@ -12,16 +12,23 @@ import {
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
+import axios from 'axios';
+
 
 const BookNowForm = ({ open, onClose }) => {
   const { control, handleSubmit, formState } = useForm();
   // const [requestSubmitted, setRequestSubmitted] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false); // State for the dialog
 
-  const onSubmit = (data) => {
-    console.log('Form submitted:', data);
-    // setRequestSubmitted(true);
-    setDialogOpen(true); // Open the dialog after request is submitted
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/customer/chef-bookings/', data);
+      console.log('Form submitted:', data);
+      console.log('Server response:', response.data);
+      setDialogOpen(true); // Open the dialog after request is submitted
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
   };
 
   const handleClose = () => {
@@ -40,10 +47,10 @@ const BookNowForm = ({ open, onClose }) => {
   
   const handleRequestClick = async () => {
     try {
-      const formData = await handleSubmit(onSubmit)();
+      await handleSubmit(onSubmit)();
       showAlertDialog(); // This will show the alert
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error('Form submission error:', error);
     }
   };
 
@@ -192,7 +199,7 @@ const BookNowForm = ({ open, onClose }) => {
             </div>
           </div>
 
-<InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
+          <InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
                 <Controller
                     control={control}
                     rules={{

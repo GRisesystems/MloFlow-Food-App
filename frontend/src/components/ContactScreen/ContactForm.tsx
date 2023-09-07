@@ -1,7 +1,8 @@
-import { Box, Grid, MenuItem, Select, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Grid, InputLabel, TextField, Typography,  useTheme } from '@mui/material';
+import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 import { Controller, useForm } from 'react-hook-form'
-import { Flag } from 'react-world-flags';
-import CountryList from 'react-select-country-list';
+
+// import CountryList from 'react-select-country-list';
 
 
 
@@ -24,7 +25,13 @@ const ContactForm = () => {
     console.log(data)
   };
 
-  const countryData = CountryList().getData();
+  const MAX_WORD_COUNT = 200; // Define the maximum word count
+
+  const calculateWordCount = (text: string) => {
+    if (!text) return 0; // Return 0 if text is undefined or empty
+    const words = text.split(/\s+/); // Split text by spaces to count words
+    return words.length;
+  };
 
 
   return (
@@ -67,18 +74,25 @@ const ContactForm = () => {
 
            
 
-        <Box sx={{ mt: 2 }}>
-          <label>Phone <span style={{color:'red'}}>*</span></label>
-          <Controller
-            name="phone_number"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <TextField  {...field}  variant="outlined" fullWidth error={!!errors.phone_number} />
-            )}
-          />
-          {errors.phone_number && <span>This field is required</span>}
-        </Box>
+        <InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
+                <Controller
+                    control={control}
+                    rules={{
+                        validate: matchIsValidTel
+                    }}
+
+                    render={({ field, fieldState }) => (
+                        <MuiTelInput
+                            fullWidth
+                            value={field.value}
+                            onChange={(value) => field.onChange(value)}
+                            defaultCountry="KE"
+                            helperText={fieldState.invalid ? "Tel is invalid" : ""}
+                            error={fieldState.invalid}
+                        />
+                    )}
+                    name="phone"
+                />
 
         <Box sx={{ mt: 2 }}>
           <label>Email <span style={{color:'red'}}>*</span></label>
@@ -93,28 +107,52 @@ const ContactForm = () => {
           {errors.email && <span>This field is required</span>}
         </Box>
         <Box sx={{ mt: 3 }}>
-          <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>Write to us</Typography>
-          <Box sx={{ mt: 2 }}>
-            <Controller
-              name="message"
-              control={control}
-              rules={{ required: false }}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Send a Message"
-                  variant="outlined"
-                  fullWidth
-                  multiline
-                  rows={4}
-                />
-              )}
-            />
-          </Box>
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>
+          Write to us
+        </Typography>
+        <Box sx={{ mt: 2 }}>
+        <Controller
+  name="message"
+  control={control}
+  rules={{ required: false }}
+  render={({ field }) => {
+    const fieldValue = field.value; // Capture the field value here
+    return (
+      <div>
+        <TextField
+          {...field}
+          label="Send a Message"
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={4}
+          onChange={(e) => {
+            const text = e.target.value;
+            const wordCount = calculateWordCount(text);
+            if (wordCount <= MAX_WORD_COUNT) {
+              field.onChange(text);
+            }
+          }}
+        />
+        <Typography variant="caption" sx={{ mt: 1, color: 'text.secondary' }}>
+          Word count: {calculateWordCount(fieldValue)} / {MAX_WORD_COUNT}
+        </Typography>
+      </div>
+    );
+  }}
+/>  
+<Button
+              type="submit"
+              variant="contained"
+              style={{ backgroundColor: '#fbb31d', color: 'black', marginTop: '16px', width: '400px'}}
+            >
+              Submit
+            </Button>
         </Box>
       </Box>
     </Box>
-  )
-}
+    </Box>
+  );
+};
 
-export default ContactForm
+export default ContactForm;

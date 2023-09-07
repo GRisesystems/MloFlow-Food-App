@@ -42,7 +42,7 @@ const router = createBrowserRouter(
       <Route index element={<HomeScreen />} />
       <Route path='/login' element={<SignInScreen />} />
       <Route path='/activate/:uuid/:token' element={<ActivateAccountScreen />} />
-      <Route path="/chef-dashboard" element={<ProtectedRoute element={ChefDashBoardScreen} />} />
+      <Route path="/chef-dashboard" element={<ChefDashBoardScreen />} />
       <Route path='/chefs' element={<ChefsScreen/>} />
       <Route path='/chefs/:id' element={<ChefDetailScreen/>} />
       <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
