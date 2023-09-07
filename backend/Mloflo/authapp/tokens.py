@@ -1,6 +1,12 @@
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import RefreshToken
 
-class AccountActivateTokenGenerator(PasswordResetTokenGenerator):
-    def _make_hash_value(self, user, timestamp):
-        return str(user.pk) + str(timestamp) + str(user.is_active)
-account_activation_token = AccountActivateTokenGenerator()
+User = get_user_model()
+
+
+def create_jwt_pair_for_user(user: User):
+    refresh = RefreshToken.for_user(user)
+
+    tokens = {"access": str(refresh.access_token), "refresh": str(refresh)}
+
+    return tokens

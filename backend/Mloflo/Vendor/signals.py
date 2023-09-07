@@ -1,0 +1,11 @@
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from .models import Vendor
+from authapp.models import User
+
+@receiver(post_save, sender=Vendor)
+def update_profile_complete_flag(sender, instance, **kwargs):
+    # Assuming 'instance.user' is the related user of the Vendor instance
+    if instance.vendor:
+        instance.vendor.is_profile_complete = True
+        instance.vendor.save()

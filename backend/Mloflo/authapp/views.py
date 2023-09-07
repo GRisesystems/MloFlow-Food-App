@@ -1,95 +1,88 @@
-from django.shortcuts import render,redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout ,get_user_model
-from django.contrib import messages
-from .forms import SignUpForm
-from django.urls import reverse
+#from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+#from rest_framework_simplejwt.views import TokenObtainPairView
+#from .models import User
+#import uuid
+from rest_framework.response import Response
+#import jwt
 
-from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
-from django.core.mail import EmailMessage
 
-from .tokens import account_activation_token 
+from .tokens import create_jwt_pair_for_user
+from rest_framework.views import APIView
+from rest_framework.request import Request
+from django.contrib.auth import authenticate
+from rest_framework import generics, status
 
-# Create your views here.
-def activate(request, uidb64, token):
-    User = get_user_model()
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except:
-        user = None
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        messages.success(request, "Thankyou for your email information now you can login your account.")
-        return redirect('/authapp/login')
-    else:
-        messages.error(request, "Activation link is invalid, signup again")
-    return redirect('authapp/signup')
 
-def activateEmail(request, user, email):
-    mail_subject = "Activate your user account"
-    message= render_to_string("authapp/activeaccount.html",{
-        'user': user.username,
-        'domain': get_current_site(request).domain,
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': account_activation_token.make_token(user),
-        'protocol': 'https' if request.is_secure() else 'http'
-    }
 
-    )
-    email = EmailMessage(mail_subject, message, to=[email])
-    if email.send():
-        messages.success(request, f'Dear {user.username}, please go to your email {user.email} inbox and clicked on received activation link to confirm and complete the registration. Also check on spam folder.')
-    else:
-        messages.error(request, f'Problem sending email to {user.email}, check if you typed it correctly.')
 
-def signup(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        username=request.POST['username']
-        email=request.POST['email']
-        password=request.POST['password1']
-        confirm_password=request.POST['password2']
+#class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+   # @classmethod
+    #def get_token(cls, user):
+       # token = super().get_token(user)
 
-        try:
-            if password != confirm_password:
-                  messages.warning(request, "Password is not matching")
-                  return render(request, 'authapp/signup.html',{ 'form': form })
-        except:
-            pass
-        try:
-            if User.objects.get(username=username):
-                messages.warning(request,"Username is taken")
-                return render(request, 'authapp/signup.html',{ 'form': form })
-        except:
-            pass   
-        try:
-             if User.objects.get(email = email):
-                messages.warning(request, "Email is taken")
-                return render(request, 'authapp/signup.html',{ 'form': form })
-        except:
-           pass   
-    
-           
-        if form.is_valid():
-                user = form.save(commit=False)
-                user.is_active = False # sets the user inactive
+         # Add custom claims       
+        #token['user_id'] = str(user.id)
+
+        #return token
+
+#class MyTokenObtainPairView(TokenObtainPairView):
+   # serializer_class = MyTokenObtainPairSerializer
+
+   # def post(self, request, *args, **kwargs):
+       # response = super().post(request, *args, **kwargs)
+        
+        #if response.status_code == 200:
+           # access_token = response.data['access']
+            #payload = jwt.decode(access_token, options={"verify_signature": False})
+            
+            #user_id_str = payload.get('user_id')
+            #user_id = uuid.UUID(user_id_str) # Convert the string back to a UUID
+            
+            # Query your user management system to get additional user data based on user_id
+            #user = User.objects.get(id=user_id)
+            
+            #data = response.data
+           # data['first_name'] = user.first_name
+            #data['surname'] = user.surname
+            #data['first_time_login'] = user.if_first_time_login
+            #data['category'] = user.category
+            
+        #return response
+
+
+class LoginView(APIView):
+    permission_classes = []
+
+    def post(self, request: Request):
+        email = request.data.get("email")
+        password = request.data.get("password")
+
+        user = authenticate(email=email, password=password)
+        
+        
+               
+
+        if user is not None:            
+            if user.last_login is not None:
+                user.if_first_time_login = False
                 user.save()
-                activateEmail(request, user, form.cleaned_data.get('email'))
-                messages.info(request, "Signup successful!Activate your account then  login.")
-                return redirect('/authapp/login/')
-                #user = User(email=email, username=username)
-                #user.set_password('password')
-                #user.save()
-    else:
-        form = SignUpForm()        
+            
 
-    return render(request, 'authapp/signup.html',{
-                      'form': form
-                  })
+            tokens = create_jwt_pair_for_user(user)
+            email = user.email
+            first_name = user.first_name
+            surname = user.surname            
+            if_first_time_login = user.if_first_time_login
+            is_profile_complete = user.is_profile_complete
+            category = user.category
 
+            response = {"tokens": tokens, "email":email, "first_name":first_name, "surname":surname, "category":category, "first_time_login":if_first_time_login,'is_profile_complete':is_profile_complete}
+            return Response(data=response, status=status.HTTP_200_OK)
 
+        else:
+            return Response(data={"message": "Invalid email or password"})
+        
+    def get(self, request: Request):
+        content = {"user": str(request.user), "auth": str(request.auth)}
+
+        return Response(data=content, status=status.HTTP_200_OK)

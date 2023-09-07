@@ -3,16 +3,23 @@ import { Outlet } from 'react-router-dom'
 import TopNav from './includes/TopNav'
 import NavBar from './includes/NavBar'
 import { FooterContainer } from './includes/Footer'
-
+import {AuthProvider} from './utils/AuthContext'
+// import Cart from './components/homeScreen/Cart/Cart'
+// import { CartContext } from './cartContext'
 const Root = () => {
   return (
-    <>
-        <TopNav/>
+    // <CartContext.Provider value={Cart}>
+    <AuthProvider>
+     
+        <TopNav/>        
         <NavBar/>
             <Outlet/>
-            <FooterContainer />
-      
-    </>
+        <FooterContainer />       
+        {/* <Cart onClose={function (): void {
+        throw new Error('Function not implemented.')
+      } } /> */}
+    </AuthProvider>
+    // </CartContext.Provider>
   )
 }
 
