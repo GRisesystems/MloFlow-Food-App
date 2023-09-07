@@ -1,5 +1,5 @@
 import  {useState, useEffect} from 'react';
-
+import { useParams } from 'react-router';
 import { Box, Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material';
 import axios from 'axios';
 // import { useCart } from '../homeScreen/Cart/CartUtils';
@@ -89,7 +89,7 @@ const handleDecrement = (productId: string) => {
     useEffect(() =>{
       getProducts();
     }, [])
-
+ const { id } = useParams();
   return (
       <Box sx={{ py: 8, m: 6 }} >
         <Typography variant="h3" sx={{backgroundColor:'#FBB31D',  mt:4, mb:2, textAlign:'center'}}>All Products</Typography>
@@ -100,11 +100,11 @@ const handleDecrement = (productId: string) => {
               <Card className='custom-card'
                 sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
               >
-                <Link  href={'/products/${url}'} >
+                <Link   href={`/products/${product.id}`}  >
                   <CardActionArea>
                      <CardMedia
                             component="img"
-                            image={product.image}
+                            image={product.imageOne}
                             alt={product.name}
                           />
                           

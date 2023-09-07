@@ -15,7 +15,7 @@ const UpdateProductForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
+    const [imageOne, setImageOne] = useState(null)
     const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
@@ -23,16 +23,16 @@ const UpdateProductForm: any = () => {
     const {  register,  formState: { errors }, watch } = useForm()
     
     // const hist = useNavigate()
-    const {url} = useParams()
-    const [products, setProducts] = useState([])
+    const {id} = useParams();
+
       const loadedProducts = async () => {    
 
-      const {data} = await axios.get( 'http://localhost:8000/products/{url}');
+      const {data} = await axios.get(`http://localhost:8000/products/${id}/`);
         console.log(data)
         setCategory(data.category)
         setName(data.name)
         setDescription(data.description)
-        setImage(data.image)
+        setImageOne(data.imageOne)
         setWeight(data.weight)
         setPrice(data.price)
         setStock(data.stock)
@@ -52,14 +52,14 @@ const UpdateProductForm: any = () => {
       formField.append('weight', weight)
       formField.append('price', price)
       formField.append('stock', stock)
-      if (image !== null) {
-        formField.append('image', image)
+      if (imageOne) {
+        formField.append('imageOne', imageOne)
       }
     
 
     await axios({
-      method: 'put',
-      url: 'http://localhost:8000/products/${url}',
+      method: 'PUT',
+      url: `http://localhost:8000/products/${id}`,
       data: formField
 
     }).then((response) => {
@@ -112,9 +112,9 @@ const UpdateProductForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="image"
-      src={image}
-      onChange={(e) => setImage(e.target.files[0])}
+      name="imageOne"
+      src={imageOne}
+      onChange={(e) => setImageOne(e.target.files[0])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>

@@ -15,7 +15,7 @@ const AddProductsForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
+    const [imageOne, setImageOne] = useState(null)
     const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
@@ -34,8 +34,8 @@ const AddProductsForm: any = () => {
         formField.append('weight', weight)
         formField.append('price', price)
         formField.append('stock', stock)
-        if (image !== null) {
-          formField.append('image', image)
+        if (imageOne) {
+          formField.append('imageOne', imageOne)
         }
       
 
@@ -94,9 +94,9 @@ const AddProductsForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="image"
-      src={image}
-      onChange={(e) => setImage(e.target.files[0])}
+      name="imageOne"
+      src={imageOne}
+      onChange={(e) => setImageOne(e.target.files[0])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>

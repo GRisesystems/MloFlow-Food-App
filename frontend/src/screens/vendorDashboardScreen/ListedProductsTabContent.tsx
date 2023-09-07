@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import React, { useEffect,  useState } from 'react';
 import { useParams } from 'react-router';
 // import { MaterialReactTable } from 'material-react-table';
+import { useNavigate } from 'react-router-dom';
 
 // import Paper from '@mui/material/Paper';
 
@@ -52,22 +53,22 @@ const Image = styled.img`
 
 const ListedProductsTabContent: React.FC = () => {
   const [selectProduct, setSelectedProduct] = useState(false);
-  const {id} = useParams()
   const [products, setProducts] = useState([])
-    const loadProducts = async () => {    
+  const loadProducts = async () => {    
 
-    const data = await axios.get( 'http://localhost:8000/products/');
+    const data = await axios.get( `http://localhost:8000/products/`)
       console.log(data.data)
       setProducts(data.data)
-  }
+    }
   useEffect(() =>{
     loadProducts()
   },[])
-
-     const deleteProduct = async () => {
-      await axios.delete('http://localhost:8000/products/${product.id}')
-
+  const navigate = useNavigate();
+     const deleteProduct = async (id) => {
+      await axios.delete(`http://localhost:8000/products/${id}/`)
+      navigate('/products');
       }
+
   return (
    <Container>
       
@@ -91,13 +92,10 @@ const ListedProductsTabContent: React.FC = () => {
                 <StyledTableCell>  
                   <Checkbox onChange={(e) => setSelectedProduct(e.target.checked)}  />
                 </StyledTableCell>
-                 <StyledImageCell><Image src={product.image} alt={product.name} /></StyledImageCell>
+                 <StyledImageCell><Image src={product.imageOne} alt={product.name} /></StyledImageCell>
                 <StyledTableCell>{product.id}</StyledTableCell>
                 <StyledTableCell>{product.name}</StyledTableCell>
                 <StyledTableCell >{product.price}</StyledTableCell>
-                {/* <StyledTableCell sx={{maxWidth:'30px'}}>
-               <UpdateProductForm sx={{m:0}} />
-                  </StyledTableCell> */}
                 <StyledTableCell>
 
                   <Button sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>
@@ -107,7 +105,7 @@ const ListedProductsTabContent: React.FC = () => {
                 <StyledTableCell>
 
                   <Button variant="contained" color="error"     sx={{  padding:'6px',  visibility: selectProduct ? 'visible': 'hidden'   }}
-                     onClick={deleteProduct}>
+                     onClick = {() => deleteProduct(product.id)}>
                         DELETE
                   </Button>
                   </StyledTableCell>

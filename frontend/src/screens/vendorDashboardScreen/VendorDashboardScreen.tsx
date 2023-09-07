@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ListedProductsTab from './ListedProductsTabContent';
+// import ListedProductsTab from './ListedProductsTabContent';
+import ListedProductsTabContent from './SelectedProducts';
 import AllSuppliesTab from './SuppliesTabContent';
 import RequestedProductsTab from './RequestedProductsTabContent';
 import GraphTab from './GraphTabContent';
 import AddProductsForm from '../../components/newproductupload/AddProducts';
+import SimpleReactTable from './SelectedProducts';
 import { useAuth } from '../../utils/AuthContext';
 // import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 import axios from 'axios';
@@ -107,7 +109,7 @@ const VendorDashboard = () => {
   <TabContentContainer>
    
     {selectedTab === 0 && <AllSuppliesTab />}
-    {selectedTab === 1 && <ListedProductsTab />}
+    {selectedTab === 1 && <ListedProductsTabContent />}
     {selectedTab === 2 && <RequestedProductsTab />}
     {selectedTab === 3 && <GraphTab />}
 

@@ -130,9 +130,9 @@ SPECTACULAR_SETTINGS = {
 
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -143,10 +143,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_WHITELIST = True
 
 # Add the specific origins you want to allow in the whitelist
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:5173",
-    #"https://yourfrontenddomain.com",   Example: Your frontend's production domain
-]
+CORS_ORIGIN_WHITELIST = ["http://localhost:5173"]
 
 ROOT_URLCONF = "Mloflo.urls"
 
