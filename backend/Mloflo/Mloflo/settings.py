@@ -48,26 +48,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     'main',
     'authapp',
     'payments',
     'vendors',
-
 #added the separate client apps
     'Vendor',
     'Chef',
     'Customer',
-
     'Category',
-    'products',
+    'products.apps.ProductsConfig',
     'rest_framework',
     'corsheaders',
-
     "phonenumber_field",
     'rest_framework_simplejwt.token_blacklist',
-
-
     'drf_spectacular',
     'djoser',
 ]
@@ -136,9 +130,9 @@ SPECTACULAR_SETTINGS = {
 
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -149,17 +143,14 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_WHITELIST = True
 
 # Add the specific origins you want to allow in the whitelist
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:5173",
-    #"https://yourfrontenddomain.com",   Example: Your frontend's production domain
-]
+CORS_ORIGIN_WHITELIST = ["http://localhost:5173"]
 
 ROOT_URLCONF = "Mloflo.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR, 'frontend/dist'],
+        "DIRS": [BASE_DIR, 'frontend/'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -238,6 +229,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/dist/assets'),
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_ROOT  =     os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL  =' /uploads/'
 
 
 MESSAGE_TAGS = {

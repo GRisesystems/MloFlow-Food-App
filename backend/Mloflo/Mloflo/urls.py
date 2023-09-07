@@ -45,5 +45,5 @@ urlpatterns = [
     # payments app routes
     path('api/v1/payments/', include("payments.urls")),
     path('api/v1/vendors/', include("vendors.urls")),
-    #path('api/v1/categories/', include("Category.urls")),
-]
+    # path('api/v1/categories/', include("Category.urls")),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

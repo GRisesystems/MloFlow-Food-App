@@ -56,7 +56,6 @@ const router = createBrowserRouter(
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
       <Route path='/products' element={<AllProductScreen />} />
       <Route path='/products/:id' element={<ProductDetailScreen />} />
-      <Route path='/products' element={<AllProductScreen />} />t
       {/* <Route exact path="/" component={Form} /> */}
       <Route path="/book-now" element={<BookNowForm />} />
 

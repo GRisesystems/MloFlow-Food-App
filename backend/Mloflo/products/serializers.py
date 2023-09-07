@@ -20,9 +20,9 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 
      class Meta:
         model = Product
-        fields = ( "name", "category", "description", "price", "stock", "weight", "imageOne", "imageTwo", "imageThree", "imageFour")
+        fields = ( "id", "name", "category", "description", "price", "stock", "weight", "imageOne", "imageTwo", "imageThree", "imageFour")
         # read_only_fields = ['created_by']
-        fields ='__all__'
+        # fields ='__all__'
 
 
 
