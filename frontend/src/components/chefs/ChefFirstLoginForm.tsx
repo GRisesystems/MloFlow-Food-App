@@ -224,7 +224,6 @@ const ChefFirstLoginForm = () => {
                         <Button
                             variant="contained"
                             color="primary"
-                            disa
                             onClick={toggleFileUpload}
                             sx={{ mt: 2 }}
                         >
