@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'rest_framework',
     'corsheaders',
-    'Conversation'
+    'Conversation',
     "phonenumber_field",
     'rest_framework_simplejwt.token_blacklist',
     'drf_spectacular',
