@@ -29,7 +29,6 @@ class ChefBooking(models.Model):
     end_date = models.DateField()
 
     def __str__(self):
-        return f'Booking for {self.chef_first_name} {self.chef_surname}'
-
+        return f'{self.customer.first_name}{self.customer.surname}'
     class Meta:
         verbose_name_plural = 'Chef Bookings'

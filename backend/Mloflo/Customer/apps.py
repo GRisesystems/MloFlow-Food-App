@@ -7,3 +7,10 @@ class CustomerConfig(AppConfig):
     
     def ready(self):
             import Customer.signals
+
+class YourAppConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'your_app_name'
+
+    def ready(self):
+         import Customer.signals  # Import the signals module here

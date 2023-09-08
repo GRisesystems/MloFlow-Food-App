@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from .models import Chef
 from authapp.models import User
 
+
 @receiver(post_save, sender=Chef)
 def update_profile_complete_flag(sender, instance, **kwargs):
     # Assuming 'instance.user' is the related user of the chef instance

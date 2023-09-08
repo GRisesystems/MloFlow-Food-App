@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'products',
     'rest_framework',
     'corsheaders',
+    'Conversation',
 
     "phonenumber_field",
     'rest_framework_simplejwt.token_blacklist',
@@ -79,6 +80,11 @@ REST_FRAMEWORK = {
         #'rest_framework.permissions.IsAuthenticated',
         #'rest_framework.permissions.IsAdminUser'
     #],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',  # Ensure this is included
+        # Other parsers as needed
+    ],
 
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
@@ -182,6 +188,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'faithsang001@gmail.com'
 EMAIL_HOST_PASSWORD = 'mzoxvivicpxnngvn'
 EMAIL_PORT = 587
+
+DEFAULT_FROM_EMAIL = 'faithsang001@gmail.com'
 
 PASSWORD_RESET_TIMEOUT = 1400
 
@@ -302,3 +310,9 @@ AUTH_USER_MODEL = 'authapp.User'
 MPESA_CONSUMER_KEY = os.environ.get('MPESA_CONSUMER_KEY') or None
 MPESA_CONSUMER_SECRET = os.environ.get('MPESA_CONSUMER_SECRET') or None
 MPESA_PASS_KEY = os.environ.get('MPESA_PASS_KEY') or None
+
+# Define the base directory for media file storage.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Define the URL prefix for serving media files.
+MEDIA_URL = '/media/'
