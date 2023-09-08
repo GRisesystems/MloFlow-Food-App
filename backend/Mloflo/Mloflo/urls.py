@@ -20,13 +20,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+# activate account view
+from authapp.views import activate_account
 
 
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    #re_path(r'^.*$', TemplateView.as_view(template_name="index.html")),
+    path('', TemplateView.as_view(template_name="index.html"),name="redirect_home_view"),
+    path('activate/<str:uidb64>/<str:token>/', activate_account, name='activate_account'),
     path('main/', include('main.urls')),
     path('authapp/', include('authapp.urls')),    
     path('category/', include('Category.urls')),
@@ -43,5 +46,5 @@ urlpatterns = [
     # payments app routes
     path('api/v1/payments/', include("payments.urls")),
     path('api/v1/vendors/', include("vendors.urls")),
-    #path('api/v1/categories/', include("Category.urls")),
-]
+    # path('api/v1/categories/', include("Category.urls")),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

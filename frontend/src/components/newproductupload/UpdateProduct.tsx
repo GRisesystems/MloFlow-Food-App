@@ -15,7 +15,7 @@ const UpdateProductForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [images, setImages] = useState(null)
+    const [imageOne, setImageOne] = useState(null)
     const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
@@ -23,23 +23,23 @@ const UpdateProductForm: any = () => {
     const {  register,  formState: { errors }, watch } = useForm()
     
     // const hist = useNavigate()
-    const {id} = useParams()
-    const [products, setProducts] = useState([])
-      const loadProducts = async () => {    
+    const {id} = useParams();
 
-      const {data} = await axios.get( 'http://localhost:8000/products/${id}');
+      const loadedProducts = async () => {    
+
+      const {data} = await axios.get(`http://localhost:8000/products/${id}/`);
         console.log(data)
         setCategory(data.category)
         setName(data.name)
         setDescription(data.description)
-        setImages(data.images)
+        setImageOne(data.imageOne)
         setWeight(data.weight)
         setPrice(data.price)
         setStock(data.stock)
   
     }
     useEffect(() =>{
-      loadProducts()
+      loadedProducts()
     },[])
 
 
@@ -52,14 +52,14 @@ const UpdateProductForm: any = () => {
       formField.append('weight', weight)
       formField.append('price', price)
       formField.append('stock', stock)
-      if (images !== null) {
-        formField.append('images', images)
+      if (imageOne) {
+        formField.append('imageOne', imageOne)
       }
     
 
     await axios({
-      method: 'put',
-      url: 'http://localhost:8000/products/${id}',
+      method: 'PUT',
+      url: `http://localhost:8000/products/${id}`,
       data: formField
 
     }).then((response) => {
@@ -70,7 +70,7 @@ const UpdateProductForm: any = () => {
 
   return (
     <Paper>
-      <Typography  sx={{backgroundColor:'#0C0B0B',  color:'#FBB31D', padding:'6px', borderRadius:'6px'}} onClick={handleOpen}>Update </Typography>
+      <Typography  sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', padding:'6px', borderRadius:'6px'}} onClick={handleOpen}>Update </Typography>
       <Dialog
         keepMounted
         open={open}
@@ -90,9 +90,9 @@ const UpdateProductForm: any = () => {
           <WeightRangeDropdown name="category"
       value={category}
       onChange={(e) => setCategory(e.target.value)}>
-        <option value="farm">Farm</option>
-        <option value="fish">Fish</option>
-        <option value="poulty">Poultry</option>
+        <option value="Fresh Produce">Fresh Produce</option>
+        <option value="Fish">Fish</option>
+        <option value="Poulty">Poultry</option>
       </WeightRangeDropdown>
       </Field>
   <Field htmlFor={Label} label="Product Name" error={errors.name}>
@@ -112,9 +112,9 @@ const UpdateProductForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="images"
-      src={image}
-      onChange={(e) => setImages(e.target.files[0])}
+      name="imageOne"
+      src={imageOne}
+      onChange={(e) => setImageOne(e.target.files[0])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>
@@ -163,7 +163,7 @@ const UpdateProductForm: any = () => {
           />
         </Field>
   <DialogActions sx={{fontWeight:600}}>
-  <Button  onClick={handleClose} sx={{color:'#FBB31D', marginRight:42, backgroundColor:'#0C0B0B'}}>Cancel</Button>
+  <Button variant="outlined" onClick={handleClose} sx={{marginRight:42}}>Cancel</Button>
   <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}} onClick={handleClose} >Update</Button>
 </DialogActions>
 </Box>
