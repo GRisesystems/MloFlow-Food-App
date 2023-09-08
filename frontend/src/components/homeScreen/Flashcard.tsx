@@ -11,8 +11,8 @@ const FlashCardH3 = styled.h3`
   margin: 5px;
   display: flex;
   text-align: center;
-  margin-top: 0px;  
-  left: 5px;
+  align-items:center;
+  justify-content:center;
   width: 90px;
   background-color: #fbb31d;
   color: #0C0B0B;
@@ -279,11 +279,11 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
           <FlashCardItem key={product.id}>
             <FlashCardImg src={product.cover} alt={product.name} />
             <div className="counter-wrapper">
-            <WeightRangeDropdown>
-  <option value="0.5-1">0.5 - 1 kg</option>
-  <option value="1-3">1 - 3 kg</option>
-  <option value="3-5">3 - 5 kg</option>
-</WeightRangeDropdown>
+      <WeightRangeDropdown>
+            <option value="1">1 kg</option>
+            <option value="5">5kg</option>
+            <option value="10">10 kg</option>
+      </WeightRangeDropdown>
               <CounterWrapper>
                 <CounterButton onClick={() => handleDecrement(product.id.toString())}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -312,7 +312,7 @@ const FlashCard: React.FC<FlashCardProps> = ({ productItems }) => {
             />
              
 
-            <ProductPrice>{`$${product.price}`}</ProductPrice>
+            <ProductPrice>{`Ksh ${product.price}`}</ProductPrice>
             <AddToCartButton>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>
