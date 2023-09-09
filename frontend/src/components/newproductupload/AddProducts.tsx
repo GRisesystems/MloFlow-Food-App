@@ -1,10 +1,11 @@
 import {  useState } from "react";
 import { useForm } from 'react-hook-form'
-import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle } from '@mui/material';
+import { Box, Button, Dialog,  DialogActions,  DialogContent,  DialogContentText,    DialogTitle, Typography } from '@mui/material';
 import { Field } from './Field';
 import { Label } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const AddProductsForm: any = () => {
     const [open, setOpen] = useState(false);
@@ -14,15 +15,15 @@ const AddProductsForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
-    const [choose_weight, setChooseWeight] = useState('')
+    const [imageOne, setImageOne] = useState(null)
+    const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
 
 
     const {  register,  formState: { errors }, watch } = useForm()
     
-    // const history = useHistory()
+    // const navigate = useNavigate();
 
       const AddProductInfo = async () => {
         const formField = new FormData()
@@ -30,11 +31,11 @@ const AddProductsForm: any = () => {
         formField.append('category', category)
         formField.append('name', name)
         formField.append('description', description)
-        formField.append('choose_weight', choose_weight)
+        formField.append('weight', weight)
         formField.append('price', price)
         formField.append('stock', stock)
-        if (image !== null) {
-          formField.append('image', image)
+        if (imageOne) {
+          formField.append('imageOne', imageOne)
         }
       
 
@@ -48,9 +49,10 @@ const AddProductsForm: any = () => {
       })
     }
 
+
   return (
     <Box>
-      <Button variant="contained" sx={{backgroundColor:'#FBB31D',  m:3, color:'#0C0B0B'}} onClick={handleOpen}>Add Products</Button>
+      <Button variant="contained" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', padding:'6px', borderRadius:'6px',  mt:2}} onClick={handleOpen}  >Add Products</Button>
       <Dialog
         keepMounted
         open={open}
@@ -70,9 +72,9 @@ const AddProductsForm: any = () => {
           <WeightRangeDropdown name="category"
       value={category}
       onChange={(e) => setCategory(e.target.value)}>
-        <option value="farm">Farm</option>
-        <option value="fish">Fish</option>
-        <option value="poulty">Poultry</option>
+        <option value="Fresh Produce">Fresh Produce</option>
+        <option value="Fish">Fish</option>
+        <option value="Poultry">Poultry</option>
       </WeightRangeDropdown>
       </Field>
   <Field htmlFor={Label} label="Product Name" error={errors.name}>
@@ -92,9 +94,9 @@ const AddProductsForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="image"
-      src={image}
-      onChange={(e) => setImage(e.target.files[0])}
+      name="imageOne"
+      src={imageOne}
+      onChange={(e) => setImageOne(e.target.files[0])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>
@@ -117,17 +119,18 @@ const AddProductsForm: any = () => {
     <Row >
         <Field label="Select Weight" >
           <WeightRangeDropdown  name="weight"
-      value={choose_weight}
-      onChange={(e) => setChooseWeight(e.target.value)}>
+      value={weight}
+      onChange={(e) => setWeight(e.target.value)}>
         <option value="1">1 kg</option>
         <option value="5">5 kg</option>
         <option value="10">10 kg</option>
       </WeightRangeDropdown>
       </Field>
-      <Field label="Product Price">
+      <Field label="Product Price" >
           <Input
             type="number"
             name="price"
+            placeholder="Kenya Shillings"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
@@ -142,8 +145,8 @@ const AddProductsForm: any = () => {
           />
         </Field>
   <DialogActions>
-  <Button variant="outlined" sx={{outlineColor:'#FBB31D'}} onClick={handleClose}>Cancel</Button>
-  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D'}} onClick={handleClose} >Add </Button>
+   <Button variant="outlined" onClick={handleClose} sx={{marginRight:42}}>Cancel</Button>
+  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}} onClick={handleClose} >Upload</Button>
 </DialogActions>
 </Box>
         </DialogContent>
@@ -170,10 +173,11 @@ const Row = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 10px;
+  padding: 11px;
   width: 100%;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
+  margin: 4px;
 `;
 
 const TextArea = styled.textarea`
@@ -183,7 +187,7 @@ const TextArea = styled.textarea`
 `;
 
 const WeightRangeDropdown = styled.select`
-  margin-top: 6px;
+  margin-top: 5px;
   padding: 8px;
   color: #0C0B0B;
   max-width: 100%;

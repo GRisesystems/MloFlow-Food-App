@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 // import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
@@ -7,10 +6,18 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import React, { useEffect,  useState } from 'react';
+import { useParams } from 'react-router';
+// import { MaterialReactTable } from 'material-react-table';
+import { useNavigate } from 'react-router-dom';
+
 // import Paper from '@mui/material/Paper';
 
+import UpdateProductForm from '../../components/newproductupload/UpdateProduct';
+import axios from 'axios';
+import { Button, Checkbox} from '@mui/material';
 const Container = styled.div`
-  padding: 10px;
+  padding: 5px;
 `;
 
 const StyledTableContainer = styled(TableContainer)`
@@ -28,29 +35,40 @@ const StyledTable = styled(Table)`
 `;
 
 const StyledTableCell = styled(TableCell)`
-  padding: 16px; /* Adjust padding as needed */
+  padding: 8px; /* Adjust padding as needed */
   font-weight: bold;
- 
+  width: 60px;
 `;
 const StyledImageCell = styled(TableCell)`
   padding: 10px;
-  width: 100px;
+  width: 60px;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: auto;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
 `;
 
-const listedProductsData = [
-  { serialNumber: 1, productName: 'Berries', quantity: 50, price: 1.0 , imageSrc: '/public/Images/Fresh Produce/Berries.jpg'},
-  { serialNumber: 2, productName: 'Pears', quantity: 50, price: 0.5, imageSrc: '/public/Images/Fresh Produce/Pears.jpg' },
-  { serialNumber: 3, productName: 'Chicken',quantity: 50, price: 2.0 , imageSrc: '/public/Images/Poultry/Chicken.jpg'},
-  // Add more data...
-];
 
 const ListedProductsTabContent: React.FC = () => {
+  const [selectProduct, setSelectedProduct] = useState(false);
+  const [products, setProducts] = useState([])
+  const loadProducts = async () => {    
+
+    const data = await axios.get( `http://localhost:8000/products/`)
+      console.log(data.data)
+      setProducts(data.data)
+    }
+  useEffect(() =>{
+    loadProducts()
+  },[])
+  const navigate = useNavigate();
+     const deleteProduct = async (id) => {
+      await axios.delete(`http://localhost:8000/products/${id}/`)
+      navigate('/products');
+      }
+
   return (
    <Container>
       
@@ -58,19 +76,39 @@ const ListedProductsTabContent: React.FC = () => {
         <StyledTable>
           <TableHead>
             <TableRow>
-            <StyledImageCell></StyledImageCell> {/* Empty cell for images */}
+            <StyledTableCell>Select</StyledTableCell> {/* Empty cell for images */}
+            <StyledTableCell> Image</StyledTableCell> {/* Empty cell for images */}
               <StyledTableCell>Serial Number</StyledTableCell>
-              <StyledTableCell>Product Name</StyledTableCell>
-              <StyledTableCell>Price ($)</StyledTableCell>
+              <StyledTableCell>Name</StyledTableCell>
+              <StyledTableCell >Price (Ksh)</StyledTableCell>
+     
+              <StyledTableCell sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>Modify</StyledTableCell>
+              <StyledTableCell sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {listedProductsData.map((product) => (
-              <TableRow key={product.serialNumber}>
-                 <StyledImageCell><Image src={product.imageSrc} alt={product.productName} /></StyledImageCell>
-                <StyledTableCell>{product.serialNumber}</StyledTableCell>
-                <StyledTableCell>{product.productName}</StyledTableCell>
-                <StyledTableCell>{product.price.toFixed(2)}</StyledTableCell>
+          {products.map((product) => (
+            <TableRow key={product.id}>
+                <StyledTableCell>  
+                  <Checkbox onChange={(e) => setSelectedProduct(e.target.checked)}  />
+                </StyledTableCell>
+                 <StyledImageCell><Image src={product.imageOne} alt={product.name} /></StyledImageCell>
+                <StyledTableCell>{product.id}</StyledTableCell>
+                <StyledTableCell>{product.name}</StyledTableCell>
+                <StyledTableCell >{product.price}</StyledTableCell>
+                <StyledTableCell>
+
+                  <Button sx={{   visibility: selectProduct ? 'visible' : 'hidden'  }}>
+                      <UpdateProductForm  />
+                  </Button>
+                  </StyledTableCell>
+                <StyledTableCell>
+
+                  <Button variant="contained" color="error"     sx={{  padding:'6px',  visibility: selectProduct ? 'visible': 'hidden'   }}
+                     onClick = {() => deleteProduct(product.id)}>
+                        DELETE
+                  </Button>
+                  </StyledTableCell>
               </TableRow>
             ))}
           </TableBody>

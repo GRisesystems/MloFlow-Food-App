@@ -32,12 +32,14 @@ const Container = styled.div`
 
   input,
   textarea {
-    border-color: ${({ errorState }) => (errorState ? "red" : "#d9d9d9")};
+    border-color: ${({ errorState }) => (errorState ? "red" : "#0C0B0B")};
   }
 `;
 
 const Label = styled.label`
   margin-bottom: 2px;
+  color:#000;
+  font-size:1.2rem;
 `;
 
 const ErrorMessage = styled.div`

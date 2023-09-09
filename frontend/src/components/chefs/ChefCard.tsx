@@ -18,7 +18,7 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
     const handleCloseDialog = () => {
         // Dialog OnClose Function
         setDialogOpen(false);
-      };
+    };
 
     const handleDetailsPageNavigation = (id: any) => {
         navigate(`/chefs/${id}`);
@@ -40,14 +40,21 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
                 </Typography>
                 <Typography>
                     Speciality: Sea Food
-                </Typography>
-                <Stack sx={{ mt: 3 }} direction="row" spacing={0.2}>
+                </Typography>                
+                <Stack sx={{ mt: 2 }} direction="row" spacing={0.2}>
                     <StarIcon sx={{ color: orange[500] }} />
                     <StarIcon sx={{ color: orange[500] }} />
                     <StarIcon sx={{ color: orange[500] }} />
                     <StarIcon sx={{ color: orange[500] }} />
                     <StarIcon sx={{ color: orange[500] }} />
                 </Stack>
+                <Stack sx={{ mt: 2 }} direction="row" spacing={2}>
+                    <Typography sx={{ fontWeight: 'bold' }}>
+                        status:
+                    </Typography>
+                    <Typography sx={{ color: 'green' }}>Available</Typography>
+                </Stack>
+
                 <CardActions
                     sx={{
                         display: 'flex',
@@ -61,7 +68,7 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
                 </CardActions>
             </CardContent>
             {/* pass dialog open props & handleclose functions */}
-            <BookNowForm open={dialogOpen} onClose={handleCloseDialog}/>
+            <BookNowForm open={dialogOpen} onClose={handleCloseDialog} />
         </Card>
     );
 };

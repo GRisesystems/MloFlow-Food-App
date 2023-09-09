@@ -1,0 +1,43 @@
+.MuiBox-root .detail-container{
+  border: 1px solid #FBB31D;
+  max-width:60vw;
+  margin:auto;
+  margin-top: 1rem;
+}
+.MuiCardMedia-root img{
+   width: 100%;
+  margin: .5rem 1.5rem;
+}
+.MuiCardMedia-root img:hover{
+   transform: scale(.9);
+}
+.MuiCardContent {
+  margin-top: 10px !important;
+}
+.MuiCardContent-root .name, .price, .description{
+  font-weight: 600;
+  color: #0C0B0B; 
+}
+.MuiCardContent-root .name span, .description  span, .price span, .category span, .stock span, .quantity span{
+
+  font-weight: 600;
+  font-size: 1.05rem;
+  color:#FBB31D;
+  font-style: normal;
+}
+.MuiCardContent-root .name{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0C0B0B; 
+}
+.MuiCardContent-root  .price  {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0C0B0B; 
+}
+.MuiCardContent-root .description {
+  font-style: italic;
+}
+.MuiCardContent-root .quantity {
+  display: flex;
+}

@@ -142,7 +142,7 @@ const FishProducts = () => {
                    {product.price}
                     </Typography>
                     <Typography sx={{fontWeight:700, color:'000'}}>
-                   <Link to={'/'} >Select Options <DoubleArrowIcon sx={{color:'#FFA000'}}/></Link>
+                   <Link to={'/products/id'} >Select Options <DoubleArrowIcon sx={{color:'#FFA000'}}/></Link>
                     </Typography>
                   </CardContent>
                 </Card>

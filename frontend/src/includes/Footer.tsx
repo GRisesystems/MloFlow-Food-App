@@ -17,7 +17,7 @@ const Footer: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
     <Container
       component="footer"
       sx={{
-        py: 4,
+        py: 3,
         background: "#FBB31D",
         position: "relative",
         bottom: 0,
@@ -46,7 +46,7 @@ const FooterWrapper: React.FC<{ children: React.ReactNode }> = ({
   return(
     <Box
   sx={{
-    maxWidth:"1200px",
+    maxWidth:"100vw",
     margin: "0",
    
     
@@ -99,7 +99,7 @@ const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({
 const FooterTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <h5 style={{
-     color: "#0C0B0B", fontWeight: "bold", fontSize: 18, marginBottom: 4 }}
+     color: "#0C0B0B", fontWeight: 700, fontSize: 18, marginBottom: 4 }}
     >
       {children}
     </h5>
@@ -255,8 +255,8 @@ export function FooterContainer() {
         
         
       </FooterWrapper>
-      <FooterRow>
-     <p style={{display: "center", color: "#0C0B0B",fontSize: 12, marginBottom: 2, marginTop: 2}}>Copyright GRISE Systems 2023.</p>
+      <FooterRow >
+     <p style={{ color: "#0C0B0B",fontSize: 14, marginBottom: 2, marginTop: 2}}>&copy;Copyright 	2023 <a href="#"> GRise Systems </a></p>
         </FooterRow>
     </Footer>
   );

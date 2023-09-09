@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ListedProductsTab from './ListedProductsTabContent';
+// import ListedProductsTab from './ListedProductsTabContent';
+import ListedProductsTabContent from './SelectedProducts';
 import AllSuppliesTab from './SuppliesTabContent';
 import RequestedProductsTab from './RequestedProductsTabContent';
 import GraphTab from './GraphTabContent';
-import UploadProductTab from './UploadProductsTab';
+import AddProductsForm from '../../components/newproductupload/AddProducts';
+import SimpleReactTable from './SelectedProducts';
 import { useAuth } from '../../utils/AuthContext';
 // import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 import axios from 'axios';
 import { BASE_URL } from '../../components/signin/constants';
+import { Box } from '@mui/material';
+import "./styles.css";
 
 const VendorDashboardContainer = styled.div`
   display: flex;
@@ -35,7 +39,7 @@ const TabMenu = styled.div`
 const TabButton = styled.button<{ isActive: boolean }>` // <-- Add backtick here
   flex: 1;
   padding: 20px;
-  background-color: ${props => (props.isActive ? '#FFA000' : '#f0f0f0')};
+  background-color: ${props => (props.isActive ? '#FBB31D' : '#f0f0f0')};
   color: ${props => (props.isActive ? 'black' : 'black')};
   border: none;
   border-radius: 0;
@@ -83,7 +87,10 @@ const VendorDashboard = () => {
    return(
      
   <VendorDashboardContainer>
+    <Box className="vendor"  >
      <WelcomeMessage>Welcome Isaac!</WelcomeMessage>
+     <AddProductsForm />
+    </Box>
   <TabMenu>
     <TabButton isActive={selectedTab === 0} onClick={() => handleTabChange(0)}>
      All Supplies
@@ -97,18 +104,15 @@ const VendorDashboard = () => {
     <TabButton isActive={selectedTab === 3} onClick={() => handleTabChange(3)}>
       Graph
     </TabButton>
-    <TabButton isActive={selectedTab === 4} onClick={() => handleTabChange(4)}>
-      Upload Product
-    </TabButton>
   </TabMenu>
 
   <TabContentContainer>
    
     {selectedTab === 0 && <AllSuppliesTab />}
-    {selectedTab === 1 && <ListedProductsTab />}
+    {selectedTab === 1 && <ListedProductsTabContent />}
     {selectedTab === 2 && <RequestedProductsTab />}
     {selectedTab === 3 && <GraphTab />}
-    {selectedTab === 4 && <UploadProductTab />}
+
   </TabContentContainer>
 </VendorDashboardContainer>
 );

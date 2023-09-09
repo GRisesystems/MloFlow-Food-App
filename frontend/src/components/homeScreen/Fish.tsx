@@ -197,8 +197,8 @@ const FishH3 = styled.h3`
 margin: 5px;
 display: flex;
 text-align: center;
-margin-top: 0px;  
-left: 5px;
+align-items:center;
+justify-content:center;
 width: 90px;
 background-color: #fbb31d;
 color: #0C0B0B;
@@ -308,11 +308,11 @@ const Fish: React.FC<FishProps> = ({ productItems }) => {
           return (
             <FishItem key={product.id}>  
               <FishImg src={product.cover} alt={product.name} />
-              <WeightRangeDropdown>
-  <option value="0.5-1">0.5 - 1 kg</option>
-  <option value="1-3">1 - 3 kg</option>
-  <option value="3-5">3 - 5 kg</option>
-</WeightRangeDropdown>
+          <WeightRangeDropdown>
+            <option value="1">1 kg</option>
+            <option value="5">5kg</option>
+            <option value="10">10 kg</option>
+          </WeightRangeDropdown>
               <div className="counter-wrapper">
               <CounterWrapper>
               
@@ -342,7 +342,7 @@ const Fish: React.FC<FishProps> = ({ productItems }) => {
               amount={product.price}
             />
             
-            <ProductPrice>{`$${product.price}`}</ProductPrice>
+            <ProductPrice>{`Ksh ${product.price}`}</ProductPrice>
             <AddToCartButton>
               <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
             </AddToCartButton>

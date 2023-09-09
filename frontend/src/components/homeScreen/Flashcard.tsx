@@ -12,8 +12,8 @@ const FlashCardH3 = styled.h3`
   margin: 5px;
   display: flex;
   text-align: center;
-  margin-top: 0px;  
-  left: 5px;
+  align-items:center;
+  justify-content:center;
   width: 90px;
   background-color: #fbb31d;
   color: #0C0B0B;
@@ -277,12 +277,85 @@ const FlashCard: React.FC<{ productItems: ProductItem[] }> = ({ productItems }) 
 //   getProducts();
 // }, []);
 
+<<<<<<< HEAD
 const handleIncrement = (productId: string) => {
   setCounts((prevCounts) => {
     const currentCount = prevCounts[productId] || 0;
     const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
     return newCounts;
   });
+=======
+  const handleDecrement = (productId: string) => {
+    setCounts((prevCounts) => {
+      const currentCount = prevCounts[productId] || 0;
+      const newCounts = { ...prevCounts, [productId]: currentCount > 0 ? currentCount - 1 : 0 };
+      return newCounts;
+    });
+  };
+
+  const settings: Settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    nextArrow: <SampleNextArrow onClick={() => {}} />,
+    prevArrow: <SamplePrevArrow onClick={() => {}} />,
+  };
+
+  return (
+    <FlashCardContainer>
+      <Slider {...settings}>
+        {productItems.map((product) => (
+          <FlashCardItem key={product.id}>
+            <FlashCardImg src={product.cover} alt={product.name} />
+            <div className="counter-wrapper">
+      <WeightRangeDropdown>
+            <option value="1">1 kg</option>
+            <option value="5">5kg</option>
+            <option value="10">10 kg</option>
+      </WeightRangeDropdown>
+              <CounterWrapper>
+                <CounterButton onClick={() => handleDecrement(product.id.toString())}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M19 13H5v-2h14v2z"/>
+                  </svg>
+                </CounterButton>
+                <CounterNum>
+                  {/* Display "00" as default */}
+                  {counts[product.id] === undefined ? '00' : counts[product.id] < 10 ? `0${counts[product.id]}` : counts[product.id]}
+                </CounterNum>
+                <CounterButton onClick={() => handleIncrement(product.id.toString())}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/>
+                  </svg>
+                </CounterButton>
+              </CounterWrapper>
+            </div>
+            <FlashCardH3>{product.name}</FlashCardH3>
+            
+            <WishlistBtn
+              initialLiked={false}
+              onToggleLike={() => {
+                // Handle like toggle logic here
+              }}
+              amount={product.price}
+            />
+             
+
+            <ProductPrice>{`Ksh ${product.price}`}</ProductPrice>
+            <AddToCartButton>
+              <AddToCartButtonText>ADD TO CART</AddToCartButtonText>
+            </AddToCartButton>
+           
+          </FlashCardItem>
+        ))}
+      </Slider>
+    </FlashCardContainer>
+  );
+>>>>>>> 6f51eaf09cc185cfcd64675c7dea85029fad4899
 };
 
 const handleDecrement = (productId: string) => {

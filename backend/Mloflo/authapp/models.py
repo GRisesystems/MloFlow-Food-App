@@ -52,6 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     CATEGORY_CHOICES = [
         ('admin','admin'),       
         ('customer','customer'),
+        #('admin', 'admin'),
         ('chef','chef'),
         ('vendor','vendor'),
     ]
@@ -82,7 +83,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
     # {
-    #     'category':'chef',
+    #     'category':'',
     #     'is_first_time_login':'True/False',
     #     'access_token':""
     #     'refresh_token':""
