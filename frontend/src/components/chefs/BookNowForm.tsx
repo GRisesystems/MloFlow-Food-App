@@ -19,7 +19,11 @@ const BookNowForm = ({ open, onClose }) => {
   const { control, handleSubmit, formState } = useForm();
   // const [requestSubmitted, setRequestSubmitted] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false); // State for the dialog
-
+ const config = {
+  headers: {
+    Authorization: `Bearer $(accessToken)`,
+  },
+ };
   const onSubmit = async (data) => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/customer/chef-bookings/', data);
@@ -41,7 +45,7 @@ const BookNowForm = ({ open, onClose }) => {
   };
   const showAlertDialog = () => {
     // Using the browser's alert function to display the message
-    alert('Request received. A notification will be sent to your email.');
+    alert('Request received. We will contact you regarding your booking.');
     handleDialogClose(); // Close the dialog after alert is shown
   };
   

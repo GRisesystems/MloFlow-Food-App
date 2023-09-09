@@ -1,6 +1,10 @@
 import { Box, Button, Grid, InputLabel, TextField, Typography,  useTheme } from '@mui/material';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form';
+import { BASE_URL } from "../signin/constants";
+
+import axios from 'axios';
+
 
 // import CountryList from 'react-select-country-list';
 
@@ -20,9 +24,25 @@ const ContactForm = () => {
   const { control, register, handleSubmit, formState: { errors }, watch } = useForm({
 
   });
+  
 
-  const onSubmit = async (data: any) => {
-    console.log(data)
+  const onSubmit = async (data: FormData, { reset }) => {
+     
+    try {
+      // Make an HTTP POST request to the backend endpoint
+      const response = await axios.post('http://127.0.0.1:8000/customer/chef-bookings/', data);
+  
+      // Check if the request was successful (you can add more error handling)
+      if (response.status === 201) {
+        console.log('Form submitted successfully');
+        // Clear the form by resetting it
+        reset();
+      } else {
+        console.error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('An error occurred while submitting the form', error);
+    }
   };
 
   const MAX_WORD_COUNT = 200; // Define the maximum word count
@@ -144,7 +164,7 @@ const ContactForm = () => {
 <Button
               type="submit"
               variant="contained"
-              style={{ backgroundColor: '#fbb31d', color: 'black', marginTop: '16px', width: '400px'}}
+              style={{ backgroundColor: '#fbb31d', color: 'black', marginTop: '16px', width: '570px'}}
             >
               Submit
             </Button>
