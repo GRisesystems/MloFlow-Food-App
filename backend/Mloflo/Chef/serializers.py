@@ -16,7 +16,7 @@ class ChefSerializer(serializers.ModelSerializer):
     certifications = CertificationSerializer(many=True)
     class Meta:
         model = Chef
-        fields = ('country', 'county', 'state', 'profile_picture', 'speciality','certifications')
+        fields = ('country', 'state','city', 'profile_picture', 'speciality','certifications')
         #fields = "__all__"
     
     def create(self, validated_data):

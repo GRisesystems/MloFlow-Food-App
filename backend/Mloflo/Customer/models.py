@@ -22,6 +22,7 @@ class ChefBooking(models.Model):
     chef = models.ForeignKey(User, on_delete=models.CASCADE, related_name='booked_by_chef')
     first_name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
+    email = models.EmailField()
     chefSpeciality = models.CharField(max_length=200)
     occasion = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
