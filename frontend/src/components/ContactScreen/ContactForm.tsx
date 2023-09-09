@@ -30,7 +30,7 @@ const ContactForm = () => {
      
     try {
       // Make an HTTP POST request to the backend endpoint
-      const response = await axios.post('http://127.0.0.1:8000/customer/chef-bookings/', data);
+      const response = await axios.post('http://127.0.0.1:8000/conversation/contact-us/', data);
   
       // Check if the request was successful (you can add more error handling)
       if (response.status === 201) {

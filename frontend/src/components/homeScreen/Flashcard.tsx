@@ -277,14 +277,12 @@ const FlashCard: React.FC<{ productItems: ProductItem[] }> = ({ productItems }) 
 //   getProducts();
 // }, []);
 
-<<<<<<< HEAD
 const handleIncrement = (productId: string) => {
   setCounts((prevCounts) => {
     const currentCount = prevCounts[productId] || 0;
     const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
     return newCounts;
   });
-=======
   const handleDecrement = (productId: string) => {
     setCounts((prevCounts) => {
       const currentCount = prevCounts[productId] || 0;
@@ -355,7 +353,6 @@ const handleIncrement = (productId: string) => {
       </Slider>
     </FlashCardContainer>
   );
->>>>>>> 6f51eaf09cc185cfcd64675c7dea85029fad4899
 };
 
 const handleDecrement = (productId: string) => {

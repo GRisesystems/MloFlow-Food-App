@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import {
   Box,
@@ -14,24 +13,36 @@ import { Controller, useForm } from 'react-hook-form';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 import axios from 'axios';
 
-
-const BookNowForm = ({ open, onClose }) => {
-  const { control, handleSubmit, formState } = useForm();
-  // const [requestSubmitted, setRequestSubmitted] = useState(false);
+const BookNowForm = ({ open, onClose, accessToken }) => {
+  const { control, handleSubmit, formState, reset } = useForm();
   const [dialogOpen, setDialogOpen] = useState(false); // State for the dialog
- const config = {
-  headers: {
-    Authorization: `Bearer $(accessToken)`,
-  },
- };
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/customer/chef-bookings/', data);
-      console.log('Form submitted:', data);
+      const emailData = {
+        ...data,
+        email: data.email,
+      };
+      const response = await axios.post(
+        'http://127.0.0.1:8000/customer/chef-bookings/',
+        emailData
+      );
+      console.log('Form submitted:', emailData);
       console.log('Server response:', response.data);
+
+      // Reset the form after successful submission
+      reset();
+
       setDialogOpen(true); // Open the dialog after request is submitted
     } catch (error) {
       console.error('Form submission error:', error);
+      // Display error message to the user
     }
   };
 
@@ -43,12 +54,13 @@ const BookNowForm = ({ open, onClose }) => {
     setDialogOpen(false); // Close the dialog
     onClose(); // Close the main dialog as well if needed
   };
+
   const showAlertDialog = () => {
     // Using the browser's alert function to display the message
     alert('Request received. We will contact you regarding your booking.');
     handleDialogClose(); // Close the dialog after alert is shown
   };
-  
+
   const handleRequestClick = async () => {
     try {
       await handleSubmit(onSubmit)();
@@ -106,6 +118,29 @@ const BookNowForm = ({ open, onClose }) => {
             />
           )}
         />
+        <Controller
+  name="email" // Field name
+  control={control}
+  defaultValue=""
+  rules={{
+    required: true, // Add any validation rules you need
+    pattern: {
+      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, // Example email validation pattern
+      message: 'Invalid email address',
+    },
+  }}
+  render={({ field, fieldState }) => (
+    <TextField
+      label="Email"
+      variant="outlined"
+      fullWidth
+      {...field}
+      error={Boolean(fieldState.error)}
+      helperText={fieldState.error ? fieldState.error.message : ''}
+    />
+  )}
+/>
+        
 
         <Controller
           name="specialty"
@@ -226,21 +261,20 @@ const BookNowForm = ({ open, onClose }) => {
         
 
           <DialogActions>
-          <Button
-            type="submit"
-            onClick={handleRequestClick} 
-            disabled={formState.isSubmitting}
-            sx={{
-              backgroundColor: '#FFB31D',
-              color: 'black',
-              width: '100%',
-              alignSelf: 'center',
-             
-            }}
-          >
-            Request
-          </Button>
-        </DialogActions>
+            <Button
+              type="submit"
+              onClick={handleRequestClick}
+              disabled={formState.isSubmitting}
+              sx={{
+                backgroundColor: '#FFB31D',
+                color: 'black',
+                width: '100%',
+                alignSelf: 'center',
+              }}
+            >
+              Request
+            </Button>
+          </DialogActions>
         </Box>
       </Dialog>
 
@@ -251,15 +285,10 @@ const BookNowForm = ({ open, onClose }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button >Close</Button>
-          onClick={showAlertDialog}
+          <Button onClick={showAlertDialog}>Close</Button>
         </DialogActions>
-        
       </Dialog>
-      
     </>
-    
-    
   );
 };
 
