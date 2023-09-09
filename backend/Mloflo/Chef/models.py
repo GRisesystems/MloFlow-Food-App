@@ -5,15 +5,15 @@ from django.conf import settings
 
 
 class Certification(models.Model):
-    file = models.FileField(upload_to='certificates/')
-    description = models.CharField(max_length=255)
+    file = models.FileField(upload_to='certificates/', blank=True, null=True)
+    description = models.CharField(max_length=255, null=True, blank=True)
 
 class Chef(models.Model):
     id = models.UUIDField(primary_key=True,unique=True,editable=False, default=uuid.uuid4)
     chef = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     country = models.CharField(max_length=100,null = True, blank = False)
-    county = models.CharField(max_length=100,null = True, blank = False)
     state = models.CharField(max_length=100,null = True, blank = False)
+    city = models.CharField(max_length=100,null = True, blank = False)
     profile_picture = models.ImageField(upload_to='profile_images/',null = True, blank = False)
     speciality = models.CharField(max_length = 200,null = True, blank = False)
     certifications = models.ManyToManyField(Certification)
