@@ -4,8 +4,8 @@ import HireRequestsTab from './HireRequestsTab';
 import PendingRequestsTab from './PendingRequestsTab';
 import HistoryTab from './History';
 import Switch from '@mui/material/Switch';
-// import { useAuth } from '../../utils/AuthContext';
-// import ChefFirstLoginForm from '../../components/chefs/ChefFirstLoginForm';
+import { useAuth } from '../../utils/AuthContext';
+import ChefFirstLoginForm from '../../components/chefs/ChefFirstLoginForm';
 
 
 // Define your styled components here
@@ -54,7 +54,7 @@ const ChefDashboard = () => {
   const [deniedRequests, setDeniedRequests] = useState<number[]>([]); // Maintain state here
   const [selectedRequest, setSelectedRequest] = useState<number | null>(null); // Specify the type as 'number | null'
 
-  // const { accessToken, updateProfileData,isProfileComplete } = useAuth();
+  const { accessToken, updateProfileData,isProfileComplete } = useAuth();
   // console.log('is profile complete:',isProfileComplete)
 
   const handleAvailabilityChange = () => {
@@ -90,6 +90,7 @@ const ChefDashboard = () => {
     <ChefDashboardContainer>
       {/* <WelcomeMessage>Welcome Chef!</WelcomeMessage>
       {isProfileComplete ? <></>: <ChefFirstLoginForm/>} */}
+      {isProfileComplete ? <></>: <ChefFirstLoginForm/>} 
       <AvailabilityContainer>
         <p>Welcome Chef! Your Availability:</p>
         <Switch checked={isAvailable} onChange={handleAvailabilityChange} />

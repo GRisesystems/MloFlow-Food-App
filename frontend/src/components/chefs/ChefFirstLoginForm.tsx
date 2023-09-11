@@ -23,6 +23,7 @@ import { useAuth } from "../../utils/AuthContext";
 import { BASE_URL } from "../signin/constants";
 import FileUpload from './FileUpload'; // Adjust the path as needed
 import axios from 'axios';
+import CertificationInput from './CertificationInput'
 
 
 const ChefFirstLoginForm = () => {
@@ -91,30 +92,48 @@ const ChefFirstLoginForm = () => {
         setShowFileUpload(!showFileUpload);
     };
 
-    const onSubmit = async (data) => {
-        const formData = { ...data, 'profile_picture': selectedImage,'county':data.state ,'certifications': additionalFileData };
 
+
+    const onSubmit = async (data) => {
+        const formData = new FormData();
+
+        formData.append('country', data.country);
+        formData.append('state', data.state);
+        formData.append('speciality', data.speciality);
+        formData.append('profile_picture', selectedImage);
+
+        // Iterate through additionalFileData and append each certification as a separate field
+        additionalFileData.forEach((certification, index) => {
+            // Append the file to formData with a unique field name
+            formData.append(`certifications[${index}][file]`, certification.file);
+
+            // Append the description as a separate field
+            formData.append(`certifications[${index}][description]`, certification.description);
+        });
 
         const config = {
             headers: {
-                Authorization: `Bearer ${accessToken}`, // Include the accessToken
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'multipart/form-data',
             },
         };
-        console.log(formData)
+
         try {
-            const response = await axios.post(`${BASE_URL}/chef/chefs/`, formData, config);
-            console.log(response)
-            if (response.status == 201 || response.status == 200) {
-                const updatedData = await updateProfileData()
-                console.log(updatedData)
-
+            const response = await axios.post(`${BASE_URL}/chef/chefs/test`, formData, config);
+            console.log(response);
+            if (response.status === 201 || response.status === 200) {
+                const updatedData = await updateProfileData();
+                console.log(updatedData);
             }
-
         } catch (error) {
             console.error('API Error:', error);
-
         }
     };
+    
+
+
+
+
 
     return (
         <Dialog open={true} fullWidth={true}>
@@ -213,7 +232,7 @@ const ChefFirstLoginForm = () => {
                         />
                     </Box>
 
-                    <Box sx={{mt:2, border:1,p:2,borderColor: 'grey.500'}}>
+                    <Box sx={{ mt: 2, border: 1, p: 2, borderColor: 'grey.500' }}>
                         <InputLabel sx={{ color: 'black' }}>Upload certificates</InputLabel>
                         {showFileUpload && (
                             <Box sx={{ mt: 2 }}>
