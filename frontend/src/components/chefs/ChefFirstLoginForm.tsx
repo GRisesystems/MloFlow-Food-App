@@ -92,7 +92,7 @@ const ChefFirstLoginForm = () => {
     };
 
     const onSubmit = async (data) => {
-        const formData = { ...data, 'profile_picture': selectedImage, 'cerifications': additionalFileData };
+        const formData = { ...data, 'profile_picture': selectedImage,'county':data.state ,'certifications': additionalFileData };
 
 
         const config = {
@@ -101,18 +101,19 @@ const ChefFirstLoginForm = () => {
             },
         };
         console.log(formData)
-        // try {
-        //     const response = await axios.post(`${BASE_URL}/chef/chefs/`, formData, config);
-        //     if (response.status == 201 || response.status == 200) {
-        //         const updatedData = await updateProfileData()
-        //         console.log(updatedData)
+        try {
+            const response = await axios.post(`${BASE_URL}/chef/chefs/`, formData, config);
+            console.log(response)
+            if (response.status == 201 || response.status == 200) {
+                const updatedData = await updateProfileData()
+                console.log(updatedData)
 
-        //     }
+            }
 
-        // } catch (error) {
-        //     console.error('API Error:', error);
+        } catch (error) {
+            console.error('API Error:', error);
 
-        // }
+        }
     };
 
     return (
