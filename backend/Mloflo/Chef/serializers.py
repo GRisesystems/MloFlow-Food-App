@@ -8,7 +8,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class CertificationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Certification
+        model = Chef_certification
         fields = '__all__'
 
 class ChefSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class ChefSerializer(serializers.ModelSerializer):
     certifications = CertificationSerializer(many=True)
     class Meta:
         model = Chef
-        fields = ('country', 'state','city', 'profile_picture', 'speciality','certifications')
+        fields = ('country', 'state','city', 'profile_picture', 'speciality')
         #fields = "__all__"
     
     def create(self, validated_data):
