@@ -19,39 +19,149 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 
-# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-# @classmethod
-# def get_token(cls, user):
-# token = super().get_token(user)
+from django.shortcuts import render
+from rest_framework import generics, status, views, permissions
+from .serializers import RegisterSerializer 
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import User
+from .utils import Util
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+import jwt
+from django.conf import settings
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+#from .renderers import UserRenderer
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from .utils import Util
+from django.shortcuts import redirect
+from django.http import HttpResponsePermanentRedirect
+import os
 
-# Add custom claims
-# token['user_id'] = str(user.id)
 
-# return token
+import datetime
+import random
 
-# class MyTokenObtainPairView(TokenObtainPairView):
-# serializer_class = MyTokenObtainPairSerializer
+from django.conf import settings
+from django.utils import timezone
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
-# def post(self, request, *args, **kwargs):
-# response = super().post(request, *args, **kwargs)
+from rest_framework.decorators import api_view
 
-# if response.status_code == 200:
-# access_token = response.data['access']
-# payload = jwt.decode(access_token, options={"verify_signature": False})
 
-# user_id_str = payload.get('user_id')
-# user_id = uuid.UUID(user_id_str) # Convert the string back to a UUID
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import User  
+from .serializers import OTPVerificationSerializer
 
-# Query your user management system to get additional user data based on user_id
-# user = User.objects.get(id=user_id)
+from datetime import datetime, timedelta
+from django.core.exceptions import ObjectDoesNotExist
 
-# data = response.data
-# data['first_name'] = user.first_name
-# data['surname'] = user.surname
-# data['first_time_login'] = user.if_first_time_login
-# data['category'] = user.category
+from django.views.decorators.csrf import csrf_exempt
 
-# return response
+
+
+class RegisterView(generics.GenericAPIView):
+
+    serializer_class = RegisterSerializer
+    
+
+    def post(self, request):
+        user = request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        user_data = serializer.data
+        user = User.objects.get(email=user_data['email'])        
+        otp = user.otp        
+        email_body = 'Hi '+user.first_name + \
+            ' your OTP is \n' + otp
+        data = {'email_body': email_body, 'to_email': user.email,
+                'email_subject': 'Verify your email'}
+
+        Util.send_email(data)
+        return Response(user_data, status=status.HTTP_201_CREATED)
+    
+    
+
+
+
+
+class OTPVerificationView(APIView):
+    def post(self, request):
+        serializer = OTPVerificationSerializer(data=request.data)
+        if serializer.is_valid():
+            otp = serializer.validated_data['otp']
+            email = serializer.validated_data['email']  # Assuming you include the email in the request
+
+            try:
+                user = User.objects.get(email=email)  # Replace 'email' with the actual field name in your User model
+            except user.DoesNotExist:
+                return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+            stored_otp = user.otp  # Replace 'otp' with the actual field name in your User model
+            
+            
+            if (not user.is_active and otp == request.data.get("otp") and user.otp_expiry and timezone.now() < user.otp_expiry):
+                user.is_active = True
+                user.otp_expiry = None
+                user.max_otp_try = settings.MAX_OTP_TRY
+                user.otp_max_out = None
+                user.save()
+                return Response(
+                "Successfully verified the user.", status=status.HTTP_200_OK
+                )
+            return Response("User active or Please enter the correct OTP.", status=status.HTTP_400_BAD_REQUEST,)
+
+    
+
+#@csrf_exempt
+def generate_and_send_otp(email):
+    try:
+        # Fetch the user by email address
+        user = User.objects.get(email=email)  # Replace with the actual field name in your User model
+
+        if int(user.max_otp_try) == 0 and timezone.now() < user.otp_max_out:
+            return Response(
+                "Max OTP try reached, try after an hour",
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        otp = random.randint(1000, 9999)
+        otp_expiry = timezone.now() + datetime.timedelta(minutes=10)
+        max_otp_try = int(user.max_otp_try) - 1
+
+        user.otp = otp
+        user.otp_expiry = otp_expiry
+        user.max_otp_try = max_otp_try
+        #print(otp)
+        if max_otp_try == 0:
+                 #Set cool down time
+            otp_max_out = timezone.now() + datetime.timedelta(hours=1)
+            user.otp_max_out = otp_max_out
+        elif max_otp_try == -1:
+            user.max_otp_try = settings.MAX_OTP_TRY
+        else:
+            user.otp_max_out = None
+            user.max_otp_try = max_otp_try
+            user.save()    
+
+
+        # Send the new OTP to the user via email
+        email_body = f"Your new OTP is {otp}"
+        Util.send_email(email, "OTP Regenerated", email_body)  # Replace with your email sending logic
+
+        return Response("New OTP generated and sent successfully.",status=status.HTTP_200_OK)
+    except ObjectDoesNotExist:
+        return "User not found."
 
 
 class LoginView(APIView):
@@ -89,31 +199,31 @@ class LoginView(APIView):
         return Response(data=content, status=status.HTTP_200_OK)
 
 
-def activate_account(request, uidb64, token):
+#def activate_account(request, uidb64, token):
     # Account Activation link
-    User = get_user_model()
-    try:
+   # User = get_user_model()
+   # try:
         # Decode the user ID from the URL
-        uid = force_str(urlsafe_base64_decode(uidb64))
+       # uid = force_str(urlsafe_base64_decode(uidb64))
 
         # Get the user associated with the ID
-        user = User.objects.get(pk=uid)
+        #user = User.objects.get(pk=uid)
 
         # Verify the token
-        if default_token_generator.check_token(user, token):
+       # if default_token_generator.check_token(user, token):
             # Activate the user's account
-            user.is_active = True
-            user.save()
+          #  user.is_active = True
+           # user.save()
 
             # Redirect to success or login page
-            messages.success(
-                request, 'Account Activated successfully. You can now login', extra_tags='success')
-            return redirect('redirect_home_view')
-        else:
+           # messages.success(
+              #  request, 'Account Activated successfully. You can now login', extra_tags='success')
+            ##return redirect('redirect_home_view')
+       # else:
             # Invalid token, show an error page or redirect to an error page
-            messages.error(request, 'Invalid token', extra_tags='danger')
-            return redirect('redirect_home_view')
-    except (User.DoesNotExist, ValueError, TypeError):
+         #   messages.error(request, 'Invalid token', extra_tags='danger')
+        #    return redirect('redirect_home_view')
+   # except (User.DoesNotExist, ValueError, TypeError):
         # User not found or invalid URL, show an error page or redirect to an error page
-        messages.error(request, 'Account does not exist', extra_tags='danger')
-        return redirect('redirect_home_view')
+       # messages.error(request, 'Account does not exist', extra_tags='danger')
+       # return redirect('redirect_home_view')
