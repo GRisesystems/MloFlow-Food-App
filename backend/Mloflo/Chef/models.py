@@ -8,6 +8,9 @@ class Certification(models.Model):
     file = models.FileField(upload_to='certificates/', blank=True, null=True)
     description = models.CharField(max_length=255, null=True, blank=True)
 
+    def __str__(self):
+        return self.description
+
 class Chef(models.Model):
     id = models.UUIDField(primary_key=True,unique=True,editable=False, default=uuid.uuid4)
     chef = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -16,7 +19,7 @@ class Chef(models.Model):
     city = models.CharField(max_length=100,null = True, blank = False)
     profile_picture = models.ImageField(upload_to='profile_images/',null = True, blank = False)
     speciality = models.CharField(max_length = 200,null = True, blank = False)
-    certifications = models.ManyToManyField(Certification)
+    certifications = models.ManyToManyField(Certification, blank=True)
     #qualifications = models.CharField(max_length = 200,null = True, blank = False)
     #certification = models.ImageField(upload_to='certification_images/',null = True, blank = False)
     avg_star_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
