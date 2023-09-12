@@ -7,8 +7,6 @@ class VendorSerializer(serializers.ModelSerializer):
         model = Customer
         fields = ('customer', 'id','country', 'county', 'city', 'office_address')
 
-from rest_framework import serializers
-
 class ChefBookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChefBooking

@@ -172,7 +172,7 @@ export default function ClippedDrawer() {
                       <Badge >
                         <AccountCircle />
                       </Badge>
-                      <Typography variant="body1">{first_name} {surname}</Typography>
+                      <Typography variant="body1">{first_name} </Typography>
                     </IconButton>
                   ) : (
 

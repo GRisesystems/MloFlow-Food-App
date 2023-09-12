@@ -46,7 +46,16 @@ const historyData = [
   // Add more data...
 ];
 
-const HistoryTab: React.FC = () => {
+const HistoryTab: React.FC<{
+  acceptedRequests: number[];
+  deniedRequests: number[];
+}> = ({ acceptedRequests, deniedRequests }) => {
+  // Filter the pending requests based on accepted and denied requests
+  // const HistoryDataFiltered = HistoryData.filter(
+  //   (request) =>
+  //     !acceptedRequests.includes(request.requestId) &&
+  //     !deniedRequests.includes(request.requestId)
+  // );
   return (
     <Container>
       <StyledTableContainer>

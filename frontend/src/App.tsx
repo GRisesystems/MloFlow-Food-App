@@ -5,7 +5,6 @@ import ActivateAccountScreen from './screens/activateAccountScreen/ActivateAccou
 import ChefDashBoardScreen from './screens/chefDashboardScreen/ChefDashBoardScreen'
 import Root from './Root'
 import FarmProduceScreen from './screens/farmProduceScreen/FarmProduceScreen'
-// import Cart from './components/homeScreen/Cart/Cart'
 import AboutScreen from './screens/aboutScreen/AboutScreen'
 import VendorDashboardScreen from './screens/vendorDashboardScreen/VendorDashboardScreen'
 import CustomerDashboardScreen from './screens/customerDashBoardScreen/CustomerDashboardScreen'
@@ -19,10 +18,9 @@ import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
 import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScreen';
 
-// import Form from './Form'; // Import your Form component
 import BookNowForm from './components/chefs/BookNowForm';
-
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
+import ContactScreen from './screens/ContactScreen/ContactScreen';
 
 
 const ProtectedRoute = ({ element: Element, ...rest }: { element: React.ElementType }) => {
@@ -44,21 +42,20 @@ const router = createBrowserRouter(
       <Route index element={<HomeScreen />} />
       <Route path='/login' element={<SignInScreen />} />
       <Route path='/activate/:uuid/:token' element={<ActivateAccountScreen />} />
-      <Route path="/chef-dashboard" element={<ProtectedRoute element={ChefDashBoardScreen} />} />
+      <Route path="/chef-dashboard" element={<ChefDashBoardScreen />} />
       <Route path='/chefs' element={<ChefsScreen/>} />
       <Route path='/chefs/:id' element={<ChefDetailScreen/>} />
-      {/* <Route path="/vendor-dashboard" element={<ProtectedRoute element={VendorDashboardScreen} />} /> */}
       <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
       <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />
       <Route path='/farm-produce' element={<FarmProduceScreen />} />
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
+
       <Route path='/products' element={<AllProductScreen />} />
       <Route path='/products/:id' element={<ProductDetailScreen />} />
-      <Route path='/products' element={<AllProductScreen />} />t
-      {/* <Route exact path="/" component={Form} /> */}
-      <Route path="/book-now" element={<BookNowForm />} />
+      <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} />} />
+
 
 
       {/* <Route path='/Cart' element={<Cart onClose={function (): void {
@@ -66,6 +63,7 @@ const router = createBrowserRouter(
       }} />} /> */}
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />
+      <Route path='/contact' element={<ContactScreen />} />
 
     </Route>
   )

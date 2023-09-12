@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+
 // import Switch from '@mui/material/Switch';
 
 const Container = styled.div`
@@ -41,7 +42,7 @@ const ButtonContainer = styled.div`
 
 
 
-const hireRequestsData = [
+export const hireRequestsData = [
   {
     requestId: 1,
     firstName: 'Isaac',
@@ -88,14 +89,26 @@ const hireRequestsData = [
   },
   
 ];
+// interface HireRequestsTabProps {
+//   acceptedRequests: number[];
+//   deniedRequests: number[];
+//   setAcceptedRequests: React.Dispatch<React.SetStateAction<number[]>>;
+//   setDeniedRequests: React.Dispatch<React.SetStateAction<number[]>>;
+//   onSelectRequest: (requestId: number) => void;
+//   selectedRequest: number | null;
+// }
 
 const HireRequestsTab: React.FC = () => {
-  // const [isAvailable, setIsAvailable] = useState(false);
+  const [acceptedRequests, setAcceptedRequests] = useState<number[]>([]);
+  const [deniedRequests, setDeniedRequests] = useState<number[]>([]);
+  const [selectedRequest, setSelectedRequest] = useState<number | null>(null);
 
-  // const handleAvailabilityChange = () => {
-  //   setIsAvailable(!isAvailable);
-  // };
+  const onSelectRequest = (requestId: number) => {
+    setSelectedRequest(requestId);
+  };
 
+
+  
   return (
     <Container>
      
@@ -116,7 +129,7 @@ const HireRequestsTab: React.FC = () => {
           </TableHead>
           <TableBody>
             {hireRequestsData.map((request) => (
-              <TableRow key={request.requestId}>
+              <TableRow key={request.requestId} onClick={() => onSelectRequest(request.requestId)}>
                 <StyledTableCell>{request.requestId}</StyledTableCell>
                 <StyledTableCell>{request.firstName}</StyledTableCell>
                 <StyledTableCell>{request.surname}</StyledTableCell>
@@ -128,19 +141,33 @@ const HireRequestsTab: React.FC = () => {
                 </StyledTableCell>
                
                 <StyledTableCell>
-                <ButtonContainer>
-                    <Button
-                      variant="outlined"
-                      style={{ backgroundColor: '#fbb31d', color: 'black' }}
-                    >
-                      Accept
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      style={{ backgroundColor: '#fbb31d', color: 'black' }}
-                    >
-                      Deny
-                    </Button>
+                  <ButtonContainer>
+                    {acceptedRequests.includes(request.requestId) || deniedRequests.includes(request.requestId) ? (
+                      <span>Done</span> // Show "Done" if the request has been accepted or denied
+                    ) : (
+                      <>
+                        <Button
+                          variant="outlined"
+                          style={{ backgroundColor: '#fbb31d', color: 'black' }}
+                          onClick={() => {
+                            setAcceptedRequests([...acceptedRequests, request.requestId]);
+                            setSelectedRequest(null); // Clear selected request
+                          }}
+                        >
+                          Accept
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          style={{ backgroundColor: 'black', color: '#fbb31d' }}
+                          onClick={() => {
+                            setDeniedRequests([...deniedRequests, request.requestId]);
+                            setSelectedRequest(null); // Clear selected request
+                          }}
+                        >
+                          Deny
+                        </Button>
+                      </>
+                    )}
                   </ButtonContainer>
                 </StyledTableCell>
               </TableRow>

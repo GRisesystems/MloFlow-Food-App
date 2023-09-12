@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import {
   Box,
@@ -12,16 +11,39 @@ import {
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
+import axios from 'axios';
 
-const BookNowForm = ({ open, onClose }) => {
-  const { control, handleSubmit, formState } = useForm();
-  // const [requestSubmitted, setRequestSubmitted] = useState(false);
+const BookNowForm = ({ open, onClose, accessToken }) => {
+  const { control, handleSubmit, formState, reset } = useForm();
   const [dialogOpen, setDialogOpen] = useState(false); // State for the dialog
 
-  const onSubmit = (data) => {
-    console.log('Form submitted:', data);
-    // setRequestSubmitted(true);
-    setDialogOpen(true); // Open the dialog after request is submitted
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      const emailData = {
+        ...data,
+        email: data.email,
+      };
+      const response = await axios.post(
+        'http://127.0.0.1:8000/customer/chef-bookings/',
+        emailData
+      );
+      console.log('Form submitted:', emailData);
+      console.log('Server response:', response.data);
+
+      // Reset the form after successful submission
+      reset();
+
+      setDialogOpen(true); // Open the dialog after request is submitted
+    } catch (error) {
+      console.error('Form submission error:', error);
+      // Display error message to the user
+    }
   };
 
   const handleClose = () => {
@@ -32,20 +54,21 @@ const BookNowForm = ({ open, onClose }) => {
     setDialogOpen(false); // Close the dialog
     onClose(); // Close the main dialog as well if needed
   };
-  // const showAlertDialog = () => {
-  //   // Using the browser's alert function to display the message
-  //   alert('Request received. A notification will be sent to your email.');
-  //   handleDialogClose(); // Close the dialog after alert is shown
-  // };
-  // Trigger the showAlertDialog function when the "Request" button is clicked
-  // const handleRequestClick = async () => {
-  //   try {
-  //     const formData = await handleSubmit(onSubmit)();
-  //     showAlertDialog(); // This will show the alert
-  //   } catch (error) {
-  //     console.error("Form submission error:", error);
-  //   }
-  // };
+
+  const showAlertDialog = () => {
+    // Using the browser's alert function to display the message
+    alert('Request received. We will contact you regarding your booking.');
+    handleDialogClose(); // Close the dialog after alert is shown
+  };
+
+  const handleRequestClick = async () => {
+    try {
+      await handleSubmit(onSubmit)();
+      showAlertDialog(); // This will show the alert
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
+  };
 
   return (
     <>
@@ -95,6 +118,29 @@ const BookNowForm = ({ open, onClose }) => {
             />
           )}
         />
+        <Controller
+  name="email" // Field name
+  control={control}
+  defaultValue=""
+  rules={{
+    required: true, // Add any validation rules you need
+    pattern: {
+      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, // Example email validation pattern
+      message: 'Invalid email address',
+    },
+  }}
+  render={({ field, fieldState }) => (
+    <TextField
+      label="Email"
+      variant="outlined"
+      fullWidth
+      {...field}
+      error={Boolean(fieldState.error)}
+      helperText={fieldState.error ? fieldState.error.message : ''}
+    />
+  )}
+/>
+        
 
         <Controller
           name="specialty"
@@ -147,28 +193,52 @@ const BookNowForm = ({ open, onClose }) => {
           )}
         />
 
-        <Controller
-          name="date"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field, fieldState }) => (
-            <TextField
-              label="Date"
-              variant="outlined"
-              fullWidth
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              {...field}
-              error={Boolean(fieldState.error)}
-              helperText={fieldState.error ? 'This field is required' : ''}
-            />
-          )}
-        />
+         {/* Date Range Input */}
+         <div>
+            <InputLabel sx={{ mt: 2 }}>Date Range</InputLabel>
+            <div style={{ display: 'flex', gap: '30px', width:'2000px' }}>
+              <Controller
+                name="fromDate"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    label="From"
+                    variant="outlined"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    {...field}
+                    error={Boolean(fieldState.error)}
+                    helperText={fieldState.error ? 'This field is required' : ''}
+                  />
+                )}
+              />
+              <Controller
+                name="toDate"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    label="To"
+                    variant="outlined"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    {...field}
+                    error={Boolean(fieldState.error)}
+                    helperText={fieldState.error ? 'This field is required' : ''}
+                  />
+                )}
+              />
+            </div>
+          </div>
 
-<InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
+          <InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
                 <Controller
                     control={control}
                     rules={{
@@ -191,21 +261,20 @@ const BookNowForm = ({ open, onClose }) => {
         
 
           <DialogActions>
-          <Button
-            type="submit"
-            onClick={onClose} 
-            disabled={formState.isSubmitting}
-            sx={{
-              backgroundColor: '#FFB31D',
-              color: 'black',
-              width: '100%',
-              alignSelf: 'center',
-             
-            }}
-          >
-            Request
-          </Button>
-        </DialogActions>
+            <Button
+              type="submit"
+              onClick={handleRequestClick}
+              disabled={formState.isSubmitting}
+              sx={{
+                backgroundColor: '#FFB31D',
+                color: 'black',
+                width: '100%',
+                alignSelf: 'center',
+              }}
+            >
+              Request
+            </Button>
+          </DialogActions>
         </Box>
       </Dialog>
 
@@ -216,15 +285,10 @@ const BookNowForm = ({ open, onClose }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button >Close</Button>
-          {/* onClick={showAlertDialog} */}
+          <Button onClick={showAlertDialog}>Close</Button>
         </DialogActions>
-        
       </Dialog>
-      
     </>
-    
-    
   );
 };
 
