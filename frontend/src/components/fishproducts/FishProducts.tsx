@@ -1,155 +1,170 @@
-// import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { FavoriteBorder } from '@mui/icons-material';
-import { ShuffleOutlined } from '@mui/icons-material';
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Link } from 'react-router-dom';
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import  {useState, useEffect} from 'react';
 
-import omena from "../../assets/Fish/Omena.jpg";
-import tilapia from "../../assets/Fish/Tilapia.jpg";
-import nileperch from "../../assets/Fish/Nileperch.jpg";
-import sardine from "../../assets/Fish/Sardines.jpg";
-import tuna from "../../assets/Fish/Tuna.jpg";
-
-const products = [
-  {
-    id:1,
-    photo: omena,
-    producename: "Omena",
-    price: "$ 3.20 per Kg",
-  },
-  {
-    id:2,
-    photo: nileperch,
-    producename: "Nile Perch",
-    price: "$ 4.20 per Kg",
-  },
-  {
-    id:3,
-    photo: tilapia,
-    producename: "Tilapia",
-    price: "$ 7.49 per Kg",
-  },
-  {
-    id:4,
-    photo: tuna,
-    producename: "Tuna",
-    price: "$ 19.99, per Kg",
-  },
-  {
-    id:5,
-    photo: sardine,
-    producename: "Sardines",
-    price: "$ 10.00 per Kg",
-  },
-  // {
-  //   id:6,
-  //   photo: frenchbean,
-  //   producename: "French Beans",
-  //   price: "$ 4.00 per Kg",
-  // },
-  // {
-  //   id:7,
-  //   photo: maize,
-  //   producename: "Maize",
-  //   price: "$ 3.00 per Kg",
-  // },
-  // {
-  //   id:8,
-  //   photo: bean,
-  //   producename: "Beans",
-  //   price: "$ 10.00 per Kg",
-  // },
-  // {
-  //   id:9,
-  //   photo: avocado,
-  //   producename: "Avocado",
-  //   price: "$ 8.00 per Kg",
-  // },
-  // {
-  //   id:10,
-  //   photo: banana,
-  //   producename: "Banana",
-  //   price: "$ 6.80 per Kg",
-  // },
-  // {
-  //   id:11,
-  //   photo: apple,
-  //   producename: "Apples",
-  //   price: "$ 6.80 per Kg",
-  // },
-  // {
-  //   id:12,
-  //   photo: pears,
-  //   producename: "Pears",
-  //   price: "$ 6.80 per Kg",
-  // },
-  // {
-  //   id:13,
-  //   photo: orange,
-  //   producename: "Oranges",
-  //   price: "$ 6.80 per Kg",
-  // },
-  // {
-  //   id:14,
-  //   photo: berries,
-  //   producename: "Berries",
-  //   price: "$ 6.80 per Kg",
-  // },
-  // {
-  //   id:15,
-  //   photo: watermelon,
-  //   producename: "Watermelon",
-  //   price: "$ 6.80 per Kg",
-  // },
- 
-];
+import { Box, Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material';
+import axios from 'axios';
+// import { useCart } from '../homeScreen/Cart/CartUtils';
+import WishlistButton from '../homeScreen/WishlistBtn';
+import styled from "styled-components";
+import "./styles.css";
 
 const FishProducts = () => {
+  const ProductPrice = styled.span`
+font-size: .8rem;
+font-weight: 700;
+color: #0C0B0B;
+  
+`;
+const AddToCartButton = styled.button`
+background-color: #FBB31D;
+margin-left:7px;
+padding:4px 6px;
+border:none;
+font-size:.9rem;
+font-weight:500;
+border-radius:8px;
+`;
+const CounterWrapper = styled.div`
+  margin-left: 50px;
+  display:flex;
+`;
+
+const CounterButton = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fbb31d;
+  color: #0C0B0B;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+
+  &:hover {
+    background-color: #d5b542;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: #0C0B0B;
+  }
+`;
+
+const CounterNum = styled.span`
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 10px;
+  color: #0C0B0B;
+`;
+
+const [counts, setCounts] = useState<{ [productId: string]: number }>({});
+
+ 
+const handleIncrement = (productId: string) => {
+  setCounts((prevCounts) => {
+    const currentCount = prevCounts[productId] || 0;
+    const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
+    return newCounts;
+  });
+};
+
+const handleDecrement = (productId: string) => {
+  setCounts((prevCounts) => {
+    const currentCount = prevCounts[productId] || 0;
+    const newCounts = { ...prevCounts, [productId]: currentCount > 0 ? currentCount - 1 : 0 };
+    return newCounts;
+  });
+};
+    // const { addToCart } = useCart();
+    const [products, setProducts] = useState([])
+
+    const getProducts = async () => {
+    const response = await axios.get('http://localhost:8000/products/')
+      setProducts(response.data)
+      console.log(response.data)
+    }
+
+    useEffect(() =>{
+      getProducts();
+    }, [])
+    
   return (
-        <Box sx={{ py: 8, m: 6 }} >
-             <Typography variant='h3' sx={{mb:3, textAlign:'center', color:'#FFA000'}}>
-           Fish Products 
-          </Typography>
+      <Box sx={{ py: 8, m: 6 }} >
+        <Typography variant="h3" sx={{backgroundColor:'#FBB31D',  mt:4, mb:2, textAlign:'center'}}>Fish Products</Typography>
+        {/* #FBB31D, #0C0B0B */}
           <Grid container spacing={1} >
-            {products.map((product) => (
-              <Grid key={product.id} sx={{ display: 'flex', flexWrap: 'wrap', maxWidth:'16vw', m:2}}>
-                <Card 
-                  sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
-                >
-                       <CardMedia
-                              component="img"
-                              image={product.photo}
-                              alt={product.producename}
-                            />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                  <CardActions sx={{opacity:0, color:'#FFA000', "&:hover": {opacity: 1 },}}>
-                  <FavoriteBorder />
-                  <ShuffleOutlined />
-                  <VisibilityIcon />
+          {products.map((product) => {
+            if (product.category === "Fish") {
+              return  (
+            <Grid sx={{ display: 'flex', flexWrap: 'wrap', maxWidth:'16vw', m:2}}>
+              <Card className='custom-card'
+                sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
+              >
+                  
+                <Link  href={`/products/${product.id}`} >
+                  <CardActionArea>
+                     <CardMedia
+                            component="img"
+                            image={product.imageOne}
+                            alt={product.name}
+                          />
+                          
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h3" sx={{textAlign:'center'}}>
+                    {product.name}
+                  </Typography>
+               </CardContent>
+                  <Typography gutterBottom variant="h5" component="h4" >
+                    View 
+                  </Typography>
+                  </CardActionArea>
+                  </Link>
+                  <CardActions>
+                  <ProductPrice> KES {product.price}</ProductPrice>
+             <AddToCartButton onClick={() => addToCart(product)}>
+                ADD TO CART
+            </AddToCartButton> 
+            </CardActions>
+            <CardActions>
+              <WishlistButton 
+              initialLiked={false}
+              onToggleLike={() => {
+                // Handle like toggle logic here
+              }}
+              amount={product.price} 
+            />
+                        <CounterWrapper>
+                <CounterButton onClick={() => handleDecrement(product.id.toString())}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M19 13H5v-2h14v2z"/>
+                  </svg>
+                </CounterButton>
+                <CounterNum>
+                  {/* Display "00" as default */}
+                  {counts[product.id] === undefined ? '00' : counts[product.id] < 10 ? `0${counts[product.id]}` : counts[product.id]}
+                </CounterNum>
+                <CounterButton onClick={() => handleIncrement(product.id.toString())}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/>
+                  </svg>
+                </CounterButton>
+              </CounterWrapper>
                   </CardActions>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {product.producename}
-                    </Typography>
-                    <Typography sx={{fontWeight:700, color:'#FFA000'}}>
-                   {product.price}
-                    </Typography>
-                    <Typography sx={{fontWeight:700, color:'000'}}>
-                   <Link to={'/products/id'} >Select Options <DoubleArrowIcon sx={{color:'#FFA000'}}/></Link>
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+              
+              </Card>
+            </Grid>)
+          }}
+          )
+          } 
+        </Grid>
+      </Box>
   );
 }
 export default FishProducts;
+
+function useCart(): { addToCart: any; } {
+  throw new Error('Function not implemented.');
+}
+

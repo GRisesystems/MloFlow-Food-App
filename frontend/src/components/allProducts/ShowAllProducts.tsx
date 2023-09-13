@@ -9,7 +9,7 @@ import "./styles.css";
 
 const ShowAllProducts = () => {
   const ProductPrice = styled.span`
-font-size: .9rem;
+font-size: .8rem;
 font-weight: 700;
 color: #0C0B0B;
   
@@ -119,7 +119,7 @@ const handleDecrement = (productId: string) => {
                   </CardActionArea>
                   </Link>
                   <CardActions>
-                  <ProductPrice> Ksh {product.price}</ProductPrice>
+                  <ProductPrice> KES {product.price}</ProductPrice>
              <AddToCartButton onClick={() => addToCart(product)}>
                 ADD TO CART
             </AddToCartButton> 

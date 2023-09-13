@@ -9,7 +9,7 @@ import "./styles.css";
 
 const PoultryProducts = () => {
   const ProductPrice = styled.span`
-font-size: .9rem;
+font-size: .8rem;
 font-weight: 700;
 color: #0C0B0B;
   
@@ -95,8 +95,10 @@ const handleDecrement = (productId: string) => {
         <Typography variant="h3" sx={{backgroundColor:'#FBB31D',  mt:4, mb:2, textAlign:'center'}}>Poultry Products</Typography>
         {/* #FBB31D, #0C0B0B */}
           <Grid container spacing={1} >
-          {products.map((product) => (
-            <Grid sx={{ display: 'flex', flexWrap: 'wrap', maxWidth:'16vw', m:2}}>
+          {products.map((product) => {
+            if (product.category === "Poultry") {
+              return  (
+            <Grid sx={{ display: 'flex', flexWrap: 'wrap', width:'16vw', m:2}} xs={12} sm={6} md={4}>
               <Card className='custom-card'
                 sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
               >
@@ -120,7 +122,7 @@ const handleDecrement = (productId: string) => {
                   </CardActionArea>
                   </Link>
                   <CardActions>
-                  <ProductPrice> Ksh {product.price}</ProductPrice>
+                  <ProductPrice> KES {product.price}</ProductPrice>
              <AddToCartButton onClick={() => addToCart(product)}>
                 ADD TO CART
             </AddToCartButton> 
@@ -152,8 +154,10 @@ const handleDecrement = (productId: string) => {
                   </CardActions>
               
               </Card>
-            </Grid>
-          ))} 
+            </Grid>)
+          }}
+          )
+          } 
         </Grid>
       </Box>
   );

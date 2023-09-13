@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Typography, Box, Button } from '@mui/material';
+import { Typography, Box, Button, Link } from '@mui/material';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/farmproducts.jpg';
 import food1 from '../../assets/carousel/food1.jpg';
@@ -54,7 +54,7 @@ const HomeCarousel: React.FC = () => {
   };
 
   return (
-    <Box width="100%" height="300px" overflow="hidden">
+    <Box width="100%" height="400px" overflow="hidden">
       <Slider {...settings}>
         {images.map((image, index) => (
           <CarouselSlide key={index} image={image} />
@@ -67,25 +67,26 @@ const HomeCarousel: React.FC = () => {
 const CarouselSlide: React.FC<CarouselSlideProps> = ({ image }) => {
   return (
     <Box position="relative" width="100%" height="400px"> {/* Set a fixed height for the carousel */}
-      <img src={image} alt={`Image ${image}`} style={{ width: '100%', height: '100%', objectFit: 'cover',filter: 'blur(3px)',  }} />
-      <Box
+      <img src={image} alt={`Image ${image}`} style={{ width: '100%', height: '100%', objectFit: 'cover',  }} />
+      <Box 
         position="absolute"
-        top={80}
-        left={0}
-        width="100%"
+        width="50%"
         display="flex"
         flexDirection="column"
-        justifyContent="flex-end"
+        // justifyContent="flex-end"
         p={2}
-        // bgcolor="rgba(0, 0, 0, 0.5)"
-        color="white"
+        bgcolor="rgba(34,34,34, 0.5)"
+        color="#fbb31d"
         textAlign="center"
+        sx={{top:100, left:'25%' }}
       >
-        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>Kenya's Exclusive One-Stop Shop for all things food!</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 700, }}>Welcome to Mloflo, Kenya's Exclusive One-Stop Shop for freshly supplied  food stuff.</Typography>
         <Box mt={2}>
-          <Button variant="contained" color="success" >
+          <Link href="/products">
+          <Button variant="contained" color="primary" >
             Shop Now
           </Button>
+          </Link>
         </Box>
       </Box>
     </Box>

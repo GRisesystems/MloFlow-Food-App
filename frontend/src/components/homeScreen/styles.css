@@ -1,0 +1,57 @@
+/* 
+.MuiPaper-root .slider-item {
+flex-direction: column;
+  width: 20%;
+  margin: 10px;
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+background-color: blue;
+  transition: transform 0.3s ease;
+    
+  }
+  .MuiPaper-root .slider-item:hover  {
+  
+    transform: scale(0.95);
+}
+  .MuiPaper-root .slider-item img  {
+    border-radius: 10px;
+    margin-bottom: 1.4rem;
+    height: 150px;
+}
+/* @media (max-width: 768px) {
+flex: 0; 
+flex-direction:column;/* Full width on smaller screens 
+margin-bottom: 20px; /* Add some space between items
+height: auto;
+} */ */
+
+.MuiContainer-root .group-one {
+  display: flex;
+}
+.MuiContainer-root .group-one  h3{
+  font-weight: 600;
+  color: #0275d8;
+  width: fit-content;
+  font-size: 1.5rem;
+}
+.MuiContainer-root .group-one  p{
+  font-weight: 600;
+  float: right;
+}
+.MuiContainer-root .group-two{
+ display: flex;
+ margin-top: 2rem;
+}
+.MuiContainer-root .group-two .counter-wrapper{
+  float: right;
+}
+.MuiContainer-root .group-three{
+ display: flex;
+ margin-top: 12px;
+}
+.MuiContainer-root .group-three .add{
+  margin-left: 3.2rem;
+  color: white;
+  font-weight: 600;
+}
