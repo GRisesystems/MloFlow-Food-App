@@ -65,3 +65,6 @@ td img {
   .selected .delete, .selected:hover .delete{
     visibility: visible;
   }
+  .selected .update, .selected:hover .update{
+    visibility: visible;
+  }

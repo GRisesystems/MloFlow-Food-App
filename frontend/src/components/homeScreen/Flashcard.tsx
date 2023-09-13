@@ -383,9 +383,9 @@ return (
           <FlashCardImg src={product.cover} alt={product.name} />
           <div className="counter-wrapper">
             <WeightRangeDropdown>
-              <option value="0.5-1">0.5 - 1 kg</option>
-              <option value="1-3">1 - 3 kg</option>
-              <option value="3-5">3 - 5 kg</option>
+              <option value="1">1 kg</option>
+              <option value="5">5 kg</option>
+              <option value="10">10kg</option>
             </WeightRangeDropdown>
 
             <CounterWrapper>
@@ -411,7 +411,8 @@ return (
             amount={product.price}
           />
 
-          <ProductPrice>{`$${product.price}`}</ProductPrice>
+          <ProductPrice>{`
+          Ksh ${product.price}`}</ProductPrice>
           <AddToCartButton
             className='px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700'
             onClick={() => {
