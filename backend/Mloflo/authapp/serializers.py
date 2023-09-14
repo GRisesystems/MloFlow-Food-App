@@ -89,3 +89,11 @@ class OTPVerificationSerializer(serializers.Serializer):
     class Meta:
         model = User
         fields = ['email','otp']
+
+
+class RegenerateOTPSerializer(serializers.Serializer):    
+    email =serializers.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ['email']
