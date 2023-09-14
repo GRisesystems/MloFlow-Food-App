@@ -255,8 +255,8 @@ export function FooterContainer() {
         
         
       </FooterWrapper>
-      <FooterRow>
-     <p style={{display: "center", color: "#0C0B0B",fontSize: 12, marginBottom: 2, marginTop: 2}}>Copyright GRISE Systems 2023.</p>
+      <FooterRow >
+     <p style={{ color: "#0C0B0B",fontSize: 14, marginBottom: 2, marginTop: 2}}>Copyright 	2023. All rights reserved by<a href="#"> GRise Systems </a></p>
         </FooterRow>
     </Footer>
   );

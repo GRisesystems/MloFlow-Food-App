@@ -5,6 +5,7 @@ import { Field } from './Field';
 import { Label } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const AddProductsForm: any = () => {
     const [open, setOpen] = useState(false);
@@ -14,7 +15,7 @@ const AddProductsForm: any = () => {
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [images, setImages] = useState(null)
+    const [imageOne, setImageOne] = useState(null)
     const [weight, setWeight] = useState('')
     const [price, setPrice] = useState('')
     const [stock, setStock] = useState('')
@@ -22,44 +23,36 @@ const AddProductsForm: any = () => {
 
     const {  register,  formState: { errors }, watch } = useForm()
     
-    // const history = useHistory()
+    // const navigate = useNavigate();
 
-  const AddProductInfo = (event) => {
-    // get the selected file from the input
-    const file = event.target.files[0];
-    // create a new FormData object and append the file to it
-    const formField = new FormData();
-    formField.append('category', category)
-    formField.append('name', name)
-    formField.append('description', description)
-    formField.append('weight', weight)
-    formField.append('price', price)
-    formField.append('stock', stock)
-    if (images !== null) {
-      formField.append('images', images)
+      const AddProductInfo = async () => {
+        const formField = new FormData()
+
+        formField.append('category', category)
+        formField.append('name', name)
+        formField.append('description', description)
+        formField.append('weight', weight)
+        formField.append('price', price)
+        formField.append('stock', stock)
+        if (imageOne) {
+          formField.append('imageOne', imageOne)
+        }
+      
+
+      await axios({
+        method: 'post',
+        url: 'http://localhost:8000/products/',
+        data: formField
+
+      }).then((response) => {
+        console.log(response.data);
+      })
     }
-    // make a POST request to the File Upload API with the FormData object and Rapid API headers
-    axios
-      .post("http://localhost:8000/products/'", formField, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
-      })
-      .then((response) => {
-		// handle the response
-        console.log(response);
-      })
-      .catch((error) => {
-        // handle errors
-        console.log(error);
-      });
-  };
-  // render a simple input element with an onChange event listener that calls the handleFileUpload function
 
 
   return (
     <Box>
-      <Typography  onClick={handleOpen} sx={{fontSize:'13px'}} >Add Products</Typography>
+      <Button variant="contained" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', padding:'6px', borderRadius:'6px',  mt:2}} onClick={handleOpen}  >Add Products</Button>
       <Dialog
         keepMounted
         open={open}
@@ -79,9 +72,9 @@ const AddProductsForm: any = () => {
           <WeightRangeDropdown name="category"
       value={category}
       onChange={(e) => setCategory(e.target.value)}>
-        <option value="farm">Farm</option>
-        <option value="fish">Fish</option>
-        <option value="poulty">Poultry</option>
+        <option value="Fresh Produce">Fresh Produce</option>
+        <option value="Fish">Fish</option>
+        <option value="Poultry">Poultry</option>
       </WeightRangeDropdown>
       </Field>
   <Field htmlFor={Label} label="Product Name" error={errors.name}>
@@ -101,10 +94,9 @@ const AddProductsForm: any = () => {
       })} 
       type="file"
       id="image"
-      name="images"
-      multiple
-      src={images}
-      onChange={(e) => setImages(e.target.files[0, 1])}
+      name="imageOne"
+      src={imageOne}
+      onChange={(e) => setImageOne(e.target.files[0])}
     />
   </Field>
   <Field htmlFor={Label} label="Product Description" error={errors.description}>
@@ -153,8 +145,8 @@ const AddProductsForm: any = () => {
           />
         </Field>
   <DialogActions>
-  <Button  onClick={handleClose} sx={{color:'#FBB31D', marginRight:44, backgroundColor:'#0C0B0B'}}>Cancel</Button>
-  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}} onClick={handleClose} >Add</Button>
+   <Button variant="outlined" onClick={handleClose} sx={{marginRight:42}}>Cancel</Button>
+  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}} onClick={handleClose} >Upload</Button>
 </DialogActions>
 </Box>
         </DialogContent>

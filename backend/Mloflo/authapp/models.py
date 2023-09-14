@@ -4,6 +4,8 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
+
+from django.conf import settings
 # Create your models here.
 
 class UserAccountManager(BaseUserManager):
@@ -34,7 +36,7 @@ class UserAccountManager(BaseUserManager):
         
     def create_user(self, email, first_name, surname, phone, home_address,category,password, **extra_fields):
         extra_fields.setdefault('is_staff',False)
-        extra_fields.setdefault('is_active',True)
+        extra_fields.setdefault('is_active',False)
         extra_fields.setdefault('is_superuser',False)
         return self._create_user(email, first_name, surname, phone, home_address,category, password, **extra_fields)
     
@@ -63,7 +65,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = PhoneNumberField(null=False, blank=False, unique=True)
     home_address = models.CharField(max_length=100)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)    
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
@@ -79,6 +81,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_profile_complete = models.BooleanField(default=False)
     #Terms_and_condition = models.BooleanField(default=True)
     is_profile_complete = models.BooleanField(default=False)
+    
+    otp = models.CharField(max_length=6)
+    otp_expiry = models.DateTimeField(blank=True, null=True)
+    max_otp_try = models.CharField(max_length=2, default=settings.MAX_OTP_TRY)
+    otp_max_out = models.DateTimeField(blank=True, null=True)  
 
 
 

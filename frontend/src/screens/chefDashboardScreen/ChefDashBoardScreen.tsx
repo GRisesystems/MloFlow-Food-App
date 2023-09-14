@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-// Import your ChefDashboard tab components here
 import HireRequestsTab from './HireRequestsTab';
 import PendingRequestsTab from './PendingRequestsTab';
 import HistoryTab from './History';
@@ -51,17 +50,36 @@ const AvailabilityContainer = styled.div`
 const ChefDashboard = () => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
+  const [acceptedRequests, setAcceptedRequests] = useState<number[]>([]); // Maintain state here
+  const [deniedRequests, setDeniedRequests] = useState<number[]>([]); // Maintain state here
+  const [selectedRequest, setSelectedRequest] = useState<number | null>(null); // Specify the type as 'number | null'
+
   const { accessToken, updateProfileData,isProfileComplete } = useAuth();
-  console.log('is profile complete:',isProfileComplete)
+  // console.log('is profile complete:',isProfileComplete)
 
   const handleAvailabilityChange = () => {
     setIsAvailable(!isAvailable);
   };
+  const handleRequestSelect = (requestId: number) => {
+    setSelectedRequest(requestId);
+  };
   // Define your tab-specific components here
   const tabComponents = [
-    <HireRequestsTab />,
-    <PendingRequestsTab />,
-    <HistoryTab />
+    <HireRequestsTab
+      acceptedRequests={acceptedRequests}
+      deniedRequests={deniedRequests}
+      setAcceptedRequests={setAcceptedRequests}
+      setDeniedRequests={setDeniedRequests}
+      onSelectRequest={handleRequestSelect}
+  selectedRequest={selectedRequest}
+    />,
+    <PendingRequestsTab
+      acceptedRequests={acceptedRequests}
+      deniedRequests={deniedRequests} selectedRequest={null}/>,
+    <HistoryTab
+      acceptedRequests={acceptedRequests}
+      deniedRequests={deniedRequests}
+    />,
   ];
 
   const handleTabChange = (tab: number) => {
@@ -70,22 +88,23 @@ const ChefDashboard = () => {
 
   return (
     <ChefDashboardContainer>
-      {/* <WelcomeMessage>Welcome Chef!</WelcomeMessage> */}
-      {isProfileComplete ? <></>: <ChefFirstLoginForm/>}
+      {/* <WelcomeMessage>Welcome Chef!</WelcomeMessage>
+      {isProfileComplete ? <></>: <ChefFirstLoginForm/>} */}
+      {isProfileComplete ? <></>: <ChefFirstLoginForm/>} 
       <AvailabilityContainer>
         <p>Welcome Chef! Your Availability:</p>
         <Switch checked={isAvailable} onChange={handleAvailabilityChange} />
       </AvailabilityContainer>
       <TabMenu>
-        <TabButton isActive={selectedTab === 0} onClick={() => handleTabChange(0)}>
-          Hire Requests
-        </TabButton>
-        <TabButton isActive={selectedTab === 1} onClick={() => handleTabChange(1)}>
-          Pending Requests
-        </TabButton>
-        <TabButton isActive={selectedTab === 2} onClick={() => handleTabChange(2)}>
-          History
-        </TabButton>
+        {tabComponents.map((tab, index) => (
+          <TabButton
+            key={index}
+            isActive={selectedTab === index}
+            onClick={() => handleTabChange(index)}
+          >
+            {index === 0 ? 'Hire Requests' : index === 1 ? 'Pending Requests' : 'History'}
+          </TabButton>
+        ))}
       </TabMenu>
       <TabContentContainer>
         {tabComponents[selectedTab]}
