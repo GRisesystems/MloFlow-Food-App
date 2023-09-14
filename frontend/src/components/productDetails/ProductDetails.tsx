@@ -1,99 +1,15 @@
-import  {useState, useEffect} from 'react';
+import  {useContext, useState, useEffect} from 'react';
 import { useParams } from 'react-router';
-import { Box, Card,  CardActions,  CardContent, CardMedia,  Grid,  Typography } from '@mui/material';
+import { Box, Button, Card,  CardActions,  CardContent, CardMedia,  Grid,  Typography } from '@mui/material';
 import axios from 'axios';
-// import { useCart } from '../homeScreen/Cart/CartUtils';
+import { CartContext, CartContextType } from '../../Context/CartContext'; 
 import WishlistButton from '../homeScreen/WishlistBtn';
 import styled from "styled-components";
 import "./styles.css";
 
 const ProductDetailed = () => {
-  const WeightRangeDropdown = styled.select`
-  margin-top:4px;
-  padding: 5px;
-  color: #0C0B0B;
-  margin-bottom: 0px;
-  font-weight: 700;
-  border: narrow ##0C0B0B;
-`;
-
-const AddToCartButton = styled.div`
-position: relative; /* or position: relative; based on parent container */
-margin-top:10px;
-float: right;
-width: auto;
-display: flex;
-cursor: pointer;
-padding: 4px 8px;
-align-items: center;
-border-radius: 10px;
-background-color: #FBB31D;
-
-
-/* Media query for responsive design */
-@media (max-width: 768px) {
-  margin-top: 40px;
-  position: static; /* Resetting position for smaller screens */
-}
-`;
-
-const CounterWrapper = styled.div`
-  display:flex;
-  float:right;
-  margin-top:4px;
-`;
-
-const CounterButton = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align:center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #fbb31d;
-  color: #0C0B0B;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  
-
-  &:hover {
-    background-color: #d5b542;
-  }
-
-  svg {
-    width: 20px;
-    height: 20px;
-    fill: #0C0B0B;
-  }
-`;
-
-const CounterNum = styled.span`
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0 10px;
-  color: #0C0B0B;
-`;
-
-const [counts, setCounts] = useState<{ [productId: string]: number }>({});
-
- 
-const handleIncrement = (productId: string) => {
-  setCounts((prevCounts) => {
-    const currentCount = prevCounts[productId] || 0;
-    const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
-    return newCounts;
-  });
-};
-
-const handleDecrement = (productId: string) => {
-  setCounts((prevCounts) => {
-    const currentCount = prevCounts[productId] || 0;
-    const newCounts = { ...prevCounts, [productId]: currentCount > 0 ? currentCount - 1 : 0 };
-    return newCounts;
-  });
-};
-    // const { addToCart } = useCart();
+const {  addToCart } = useContext<CartContextType>(CartContext);
+  ;
     const { id } = useParams();
     const [product, setProduct] = useState("")
 
@@ -134,43 +50,16 @@ const handleDecrement = (productId: string) => {
               <span>  Price:  </span>
                   Ksh {product.price}
               </Typography>
-              <Box sx={{marginTop:1, marginBottom:1}}>
-              {/* <Typography className='quantity' >
-              <span> Quantity:  </span>   
-              </Typography>   */}
-               <WeightRangeDropdown>
-            <option value="1">1 kg</option>
-            <option value="5">5 kg</option>
-            <option value="10">10 kg</option>
-          </WeightRangeDropdown>
-              <CounterWrapper>
-                <CounterButton onClick={() => handleDecrement(product.id.toString())}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M19 13H5v-2h14v2z"/>
-                  </svg>
-                </CounterButton>
-                <CounterNum>
-                  {/* Display "00" as default */}
-                  {counts[product.id] === undefined ? '00' : counts[product.id] < 10 ? `0${counts[product.id]}` : counts[product.id]}
-                </CounterNum>
-                <CounterButton onClick={() => handleIncrement(product.id.toString())}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/>
-                  </svg>
-                </CounterButton>
-              </CounterWrapper>
-              </Box>
-              <AddToCartButton onClick={() => addToCart(product)}>
+            <CardActions sx={{marginTop:1, marginBottom:1}}>
+              <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', marginRight:'1.5rem'}}
+               onClick={() => addToCart(product)}>
                 ADD TO CART
-            </AddToCartButton> 
-            <CardActions>
+            </Button> 
               <WishlistButton 
-              initialLiked={false}
-              onToggleLike={() => {
-                // Handle like toggle logic here
-              }}
-              amount={product.price} 
-            />
+                  initialLiked={false}
+                  onToggleLike={() => {
+                    // Handle like toggle logic here
+                  } } amount={product.price}  />
                   </CardActions>                       
           </CardContent>
         </Grid>

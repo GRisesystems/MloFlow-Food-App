@@ -22,8 +22,8 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({
   return (
     <IconButton
       style={{
-        color: liked ? "#fbb31d" : "#0C0B0B",
-        border: `0.08px solid ${liked ? "#fbb31d" : "#0C0B0B"}`,
+        color: liked ? "#0C0B0B" : "#fbb31d",
+        border: `0.08px solid ${liked ? "#0C0B0B" : "#fbb31d"}`,
         borderRadius: "10px",
         padding: "5px",
         marginTop: "0px",

@@ -1,0 +1,57 @@
+/* 
+.MuiPaper-root .slider-item {
+flex-direction: column;
+  width: 20%;
+  margin: 10px;
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+background-color: blue;
+  transition: transform 0.3s ease;
+    
+  }
+  .MuiPaper-root .slider-item:hover  {
+  
+    transform: scale(0.95);
+}
+  .MuiPaper-root .slider-item img  {
+    border-radius: 10px;
+    margin-bottom: 1.4rem;
+    height: 150px;
+}
+/* @media (max-width: 768px) {
+flex: 0; 
+flex-direction:column;/* Full width on smaller screens 
+margin-bottom: 20px; /* Add some space between items
+height: auto;
+} */ */
+
+
+.MuiContainer-root{
+  margin: 0;
+  padding: 0;
+}
+.MuiContainer-root h3{
+  font-weight: 600;
+  color: #0275d8;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.MuiContainer-root .price-wish {
+  display: flex;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.MuiContainer-root .price-wish  p{
+  font-weight: 600;
+  margin-right: 5.2rem;
+  left: 0 !important;
+  font-size: 1.02rem;
+}
+
+.MuiContainer-root  .add{
+  background-color: #FFB31D;
+  color: #0C0B0B;;
+  font-weight: 600;
+  width: 100%;
+}

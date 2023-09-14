@@ -23,7 +23,7 @@ const AddProductsForm: any = () => {
 
     const {  register,  formState: { errors }, watch } = useForm()
     
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
       const AddProductInfo = async () => {
         const formField = new FormData()
@@ -37,16 +37,25 @@ const AddProductsForm: any = () => {
         if (imageOne) {
           formField.append('imageOne', imageOne)
         }
-      
-
-      await axios({
-        method: 'post',
-        url: 'http://localhost:8000/products/',
-        data: formField
-
+   
+      await axios.post(
+        'http://localhost:8000/products/',
+        {
+        data:{
+          'formField': formField
+        },
+         headers: {
+          'Content-Type': 'multipart/form-data;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+        }
       }).then((response) => {
         console.log(response.data);
+        navigate('/products');
       })
+      .catch( (error) => {
+        // handle error
+        console.log(error);
+      });
     }
 
 
@@ -66,7 +75,7 @@ const AddProductsForm: any = () => {
             Please enter your products details accurately in the form provided below.
           </DialogContentText>
         <DialogContent sx={{ mt: 2 }} >
-            <Box component="form" noValidate autoComplete="off" onSubmit={AddProductInfo}
+            <Box component="form" name="add" noValidate autoComplete="off" onSubmit={AddProductInfo}
             >
                       <Field label="Select Category"  >
           <WeightRangeDropdown name="category"

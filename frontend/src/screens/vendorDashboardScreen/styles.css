@@ -56,12 +56,16 @@ td img {
   }
   
   .clickable-row:hover {
-    background-color: #FBB31D;
+    /* background-color: #FBB31D; */
+    background-color: rgb(188, 190, 189);
   }
 
   .selected, .selected:hover {
     background-color: rgb(188, 190, 189);
   }
   .selected .delete, .selected:hover .delete{
+    visibility: visible;
+  }
+  .selected .update, .selected:hover .update{
     visibility: visible;
   }

@@ -32,7 +32,7 @@ const FoodCategory = () => {
     position:'relative',
   }}
   >
-            <Typography variant="h3" sx={{m:3,}}>
+            <Typography variant="h3" sx={{m:3, color:'#0275d8'}}>
          Categories
         </Typography>
         <Divider sx={{width:'90%', marginLeft:5, marginRight:5,  }} />
