@@ -1,4 +1,5 @@
 import { Paper, Grid, CardContent, CardActions, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 interface HomeServiceCategoryCardProps {
@@ -27,12 +28,12 @@ const HomeServiceCategoryCard : React.FC<HomeServiceCategoryCardProps> = ({ back
         }}
       >
         <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column',ml:3}}>
-          <Typography variant="h5" component="div" sx={{ mt: 3,color:"#fbb31d ", backgroundColor: "black", opacity: 0.6, maxWidth: 'fit-content', padding:'4px 6px'  }}>
+          <Typography variant="h5" component="div" sx={{ mt: 3, marginLeft:'25%', color:"#fbb31d ", backgroundColor: "black", opacity: 0.6, maxWidth: 'fit-content', padding:'4px 6px'  }}>
             {category_name}
           </Typography>
         </CardContent>
         <CardActions sx={{ml:3}}>
-          <Button size="small" sx={{textTransform:'none',}} variant="contained">{button_title}</Button>
+          <Button size="small" sx={{textTransform:'none', backgroundColor:'#fbb31d', color:'#0C0B0B'}} variant="contained">{button_title}</Button>
         </CardActions>
       </Paper>
     </Grid>

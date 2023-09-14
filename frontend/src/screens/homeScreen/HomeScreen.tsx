@@ -9,7 +9,7 @@ import './home.css';
 import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/variety.jpg';
 import food1 from '../../assets/carousel/delivery.png';
-import FoodCategory from "../../components/homeScreen/Categories";
+// import FoodCategory from "../../components/homeScreen/Categories";
 import Newsletter from "../../components/homeScreen/Newsletter";
 import FishSlider from "../../components/homeScreen/FishSlider";
 import PoultrySlider from "../../components/homeScreen/PoultrySlider";
@@ -42,10 +42,10 @@ const HomeScreen = () => {
 
 
      <Container>
-  <h1 style={{ color: '#0275d8', fontSize: '2.2rem', display: 'flex', justifyContent: 'space-between', padding: '35', marginLeft: 30, marginTop: 40}}>
+  <h1 style={{ color: '#0275d8', fontSize: '1.8rem', display: 'flex', justifyContent: 'space-between', padding: '35', marginLeft: 30, marginTop: 40}}>
     Farm Produce
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
-      <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '1.05', alignItems: 'center' }}>
+      <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '1.05rem', alignItems: 'center' }}>
         <li>Vegetables</li>
         <li>Fruits</li>
         <li>Grains</li>
@@ -69,7 +69,7 @@ const HomeScreen = () => {
 
       </Box>  
       <Container>
-  <h1 style={{ color: '#0275d8', fontSize: '2.2rem', display: 'flex', justifyContent: 'space-between', padding: '5', marginLeft: 30, marginTop: 40}}>
+  <h1 style={{ color: '#0275d8', fontSize: '1.8rem', display: 'flex', justifyContent: 'space-between', padding: '5', marginLeft: 30, marginTop: 40}}>
     Fish
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '1.05rem', alignItems: 'center' }}>
@@ -95,7 +95,7 @@ const HomeScreen = () => {
 </Box>
 <Box>
 <Container>
-  <h1 style={{ color: '#0275d8', fontSize: '2.2rem', display: 'flex', justifyContent: 'space-between', padding: '5', marginLeft: 30, marginTop: 40}}>
+  <h1 style={{ color: '#0275d8', fontSize: '1.8rem', display: 'flex', justifyContent: 'space-between', padding: '5', marginLeft: 30, marginTop: 40}}>
     Poultry
     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px', marginLeft: '20px' }}>
       <ul style={{ listStyleType: 'circle', margin: 0, padding: 5, display: 'flex', gap: '40px', fontSize: '1.05rem', alignItems: 'center' }}>
@@ -121,7 +121,7 @@ const HomeScreen = () => {
        </Container>
       </Box>
      
-      <FoodCategory />      
+      {/* <FoodCategory />       */}
       <PageContainer>
        
        

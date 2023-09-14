@@ -26,32 +26,32 @@ margin-bottom: 20px; /* Add some space between items
 height: auto;
 } */ */
 
-.MuiContainer-root .group-one {
-  display: flex;
+
+.MuiContainer-root{
+  margin: 0;
+  padding: 0;
 }
-.MuiContainer-root .group-one  h3{
+.MuiContainer-root h3{
   font-weight: 600;
   color: #0275d8;
-  width: fit-content;
   font-size: 1.5rem;
+  text-align: center;
 }
-.MuiContainer-root .group-one  p{
+.MuiContainer-root .price-wish {
+  display: flex;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.MuiContainer-root .price-wish  p{
   font-weight: 600;
-  float: right;
+  margin-right: 5.2rem;
+  left: 0 !important;
+  font-size: 1.02rem;
 }
-.MuiContainer-root .group-two{
- display: flex;
- margin-top: 2rem;
-}
-.MuiContainer-root .group-two .counter-wrapper{
-  float: right;
-}
-.MuiContainer-root .group-three{
- display: flex;
- margin-top: 12px;
-}
-.MuiContainer-root .group-three .add{
-  margin-left: 3.2rem;
-  color: white;
+
+.MuiContainer-root  .add{
+  background-color: #FFB31D;
+  color: #0C0B0B;;
   font-weight: 600;
+  width: 100%;
 }

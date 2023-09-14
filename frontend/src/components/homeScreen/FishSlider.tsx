@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import Slider, { Settings } from "react-slick";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
-// import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-// import { useCart } from '../homeScreen/Cart/CartUtils';
 import {Typography, Button, Container} from '@mui/material';
+import { CartContext, CartContextType } from '../../Context/CartContext'; 
 import styled from "styled-components";
 import WishlistBtn from "./WishlistBtn";
 import axios from "axios";
 import './styles.css';
-
-  const WeightRangeDropdown = styled.select`
-  padding: 5px;
-  color: #0C0B0B;
-  margin-bottom: 0px;
-  font-weight: bold;
-  border: narrow ##0C0B0B;
-`;
 
 
 const NextArrowButton = styled.button`
@@ -73,41 +63,7 @@ const PrevArrowIcon = styled(ChevronLeftIcon)`
   height: 20px;
   fill: #0C0B0B;
 `;
-const CounterWrapper = styled.div`
-  display: flex;
-  margin-left: 2rem;
-`;
 
-const CounterButton = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #ffb31d;
-  color: #0C0B0B;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  
-
-  &:hover {
-    background-color: #d5b542;
-  }
-
-  svg {
-    width: 20px;
-    height: 20px;
-    fill: #0C0B0B;
-  }
-`;
-
-const CounterNum = styled.span`
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0 10px;
-  color: #0C0B0B;
-`;
 interface SampleNextArrowProps {
   onClick: () => void;
 }
@@ -171,49 +127,16 @@ flex-direction: column;
 const SliderImage = styled.img`
 flex: 1;
 width: 97%;
-height: 100%;
+height: 150px;
 object-fit: cover;
 margin-bottom:1.5rem;
 border-radius: 10px 10px 10px 10px;
 `;
 
 
-
-
-// const AddToCartButtonSvg = styled(AddShoppingCartIcon)`
-//   width: 20px;
-//   height: 20px;
-//   fill: black;
-// `;
-
-
 const FishSlider = () => {
-  // const { addToCart } = useCart();
-  const [counts, setCounts] = useState<{ [productId: string]: number }>({});
-  // const [selectedWeightRange, setSelectedWeightRange] = useState<string>('0.5-1');
+  const {  addToCart } = useContext<CartContextType>(CartContext);
 
-
-//  // ... (inside FlashCardItem)
-// const handleWeightRangeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//   setSelectedWeightRange(event.target.value);
-// };
-
- 
-  const handleIncrement = (productId: string) => {
-    setCounts((prevCounts) => {
-      const currentCount = prevCounts[productId] || 0;
-      const newCounts = { ...prevCounts, [productId]: currentCount + 1 };
-      return newCounts;
-    });
-  };
-
-  const handleDecrement = (productId: string) => {
-    setCounts((prevCounts) => {
-      const currentCount = prevCounts[productId] || 0;
-      const newCounts = { ...prevCounts, [productId]: currentCount > 0 ? currentCount - 1 : 0 };
-      return newCounts;
-    });
-  };
 
   const settings: Settings = {
     dots: false,
@@ -222,7 +145,7 @@ const FishSlider = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true, // Add this line
-  autoplaySpeed: 3000,
+    autoplaySpeed: 3000,
     nextArrow: <SampleNextArrow onClick={() => {}} />,
     prevArrow: <SamplePrevArrow onClick={() => {}} />,
   };
@@ -246,37 +169,9 @@ const FishSlider = () => {
           return (
             <SliderItem key={product.id}>  
               <SliderImage src={product.imageOne} alt={product.name} />
-              <Container className="group-one">
-              <Typography component="h3">{product.name}</Typography>
+              <Typography sx={{ fontWeight: 600, color: '#0275d8', fontSize: '1.5rem', textAlign: 'center'}} >{product.name}</Typography>
+              <Container className="price-wish">
               <Typography component="p">{`KES ${product.price}`}</Typography>
-              </Container>
-              <Container className="group-two">
-          <WeightRangeDropdown>
-            <option value="1">1 kg</option>
-            <option value="5">5kg</option>
-            <option value="10">10 kg</option>
-          </WeightRangeDropdown>
-              <Container className="counter-wrapper">
-              <CounterWrapper>
-              
-                <CounterButton onClick={() => handleDecrement(product.id.toString())}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M19 13H5v-2h14v2z"/>
-                  </svg>
-                </CounterButton>
-                <CounterNum>
-                  {/* Display "00" as default */}
-                  {counts[product.id] === undefined ? '00' : counts[product.id] < 10 ? `0${counts[product.id]}` : counts[product.id]}
-                </CounterNum>
-                <CounterButton onClick={() => handleIncrement(product.id.toString())}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/>
-                  </svg>
-                </CounterButton>
-              </CounterWrapper>
-            </Container>
-            </Container>
-              <Container className="group-three">
               <WishlistBtn
               initialLiked={false}
               onToggleLike={() => {
@@ -284,8 +179,10 @@ const FishSlider = () => {
               }}
               amount={product.price}
             />
-              <Button variant="contained" className="add">ADD TO CART</Button>
               </Container>
+              <Button variant="contained" className="add" onClick={() => {
+                addToCart(product);
+              }}>ADD TO CART</Button>
             </SliderItem>
           )}
         })}

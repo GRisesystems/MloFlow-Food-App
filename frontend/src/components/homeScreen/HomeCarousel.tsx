@@ -80,10 +80,10 @@ const CarouselSlide: React.FC<CarouselSlideProps> = ({ image }) => {
         textAlign="center"
         sx={{top:100, left:'25%' }}
       >
-        <Typography variant="h4" sx={{ fontWeight: 700, }}>Welcome to Mloflo, Kenya's Exclusive One-Stop Shop for freshly supplied  food stuff.</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 700, }}>Welcome to Mloflo, Kenya's Exclusive  Shop for freshly supplied  food stuff.</Typography>
         <Box mt={2}>
           <Link href="/products">
-          <Button variant="contained" color="primary" >
+          <Button variant="contained" sx={{backgroundColor:'#fbb31d', color:'#0C0B0B'}}>
             Shop Now
           </Button>
           </Link>
