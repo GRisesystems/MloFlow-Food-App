@@ -127,40 +127,48 @@ class RegenerateOTPView(APIView):
         if serializer.is_valid():
             email = serializer.validated_data['email']
             try:
-                user = User.objects.get(email=email)  
+                user = User.objects.get(email=email)
 
-                print(user.max_otp_try)
-                if user.max_otp_try == 0 and timezone.now() < user.otp_max_out :
+                # Convert user.max_otp_try to an integer before comparison
+                max_otp_try = int(user.max_otp_try)
+
+                if max_otp_try == 0 and timezone.now() < user.otp_max_out:
                     return Response(
                         "Max OTP try reached, try after an hour",
                         status=status.HTTP_400_BAD_REQUEST,
                     )
 
-                otp = random.randint(1000, 9999)
-                otp_expiry = timezone.now() + timedelta(minutes=10)
-                max_otp_try = int(user.max_otp_try) - 1
+                # Check if the user has exceeded the maximum OTP regeneration limit (3 times)
+                if max_otp_try <= 3:
+                    otp = random.randint(1000, 9999)
+                    otp_expiry = timezone.now() + timedelta(minutes=10)
+                    max_otp_try -= 1  # Decrement the count
 
-                user.otp = otp
-                user.otp_expiry = otp_expiry
-                user.max_otp_try = max_otp_try
-                
+                    user.otp = otp
+                    user.otp_expiry = otp_expiry
+                    user.max_otp_try = str(max_otp_try)  # Convert back to string for storage
 
-                if max_otp_try == 0:
-                    otp_max_out = timezone.now() + timedelta(hours=1)
-                    user.otp_max_out = otp_max_out                    
-                elif max_otp_try == -1:
-                    user.max_otp_try = settings.MAX_OTP_TRY
-                else:
-                    user.otp_max_out = None
+                    if max_otp_try == 0:
+                        otp_max_out = timezone.now() + timedelta(hours=1)
+                        user.otp_max_out = otp_max_out
+                    elif max_otp_try == -1:
+                        user.max_otp_try = settings.MAX_OTP_TRY
+                    else:
+                        user.otp_max_out = None
                     user.save()
 
-                # Send the new OTP to the user via email                
-                email_body = f"Your new OTP is {otp}"
-                data = {'email_body': email_body, 'to_email': user.email,
-                'email_subject': 'Verify your email'}
-                Util.send_email(data)  
+                    # Send the new OTP to the user via email
+                    email_body = f"Your new OTP is {otp}"
+                    data = {'email_body': email_body, 'to_email': user.email,
+                            'email_subject': 'Verify your email'}
+                    Util.send_email(data)
 
-                return Response("New OTP generated and sent successfully.", status=status.HTTP_200_OK)
+                    return Response("New OTP generated and sent successfully.", status=status.HTTP_200_OK)
+                else:
+                    return Response(
+                        "OTP regeneration limit exceeded, please contact support.",
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
 
             except ObjectDoesNotExist:
                 return Response("User not found.", status=status.HTTP_404_NOT_FOUND)
