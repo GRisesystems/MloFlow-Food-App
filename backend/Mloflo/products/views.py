@@ -5,7 +5,7 @@ from rest_framework import permissions
 
 class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
-    queryset = Product.objects.all().order_by('name')
+    queryset = Product.objects.all().order_by('created_at')
     serializer_class = ProductSerializer
 
     # def perform_create(self, serializer):

@@ -1,15 +1,16 @@
-import  {useState, useEffect} from 'react';
+import  {useContext, useState, useEffect} from 'react';
 import { useParams } from 'react-router';
 import { Box, Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material';
 import axios from 'axios';
 // import { useCart } from '../homeScreen/Cart/CartUtils';
+import { CartContext, CartContextType } from '../../Context/CartContext'; // Added ItemType for better type checking
 import WishlistButton from '../homeScreen/WishlistBtn';
 import styled from "styled-components";
 import "./styles.css";
 
 const ShowAllProducts = () => {
   const ProductPrice = styled.span`
-font-size: .9rem;
+font-size: .8rem;
 font-weight: 700;
 color: #0C0B0B;
   
@@ -60,6 +61,7 @@ const CounterNum = styled.span`
 `;
 
 const [counts, setCounts] = useState<{ [productId: string]: number }>({});
+const {  addToCart } = useContext<CartContextType>(CartContext);
 
  
 const handleIncrement = (productId: string) => {
@@ -119,7 +121,7 @@ const handleDecrement = (productId: string) => {
                   </CardActionArea>
                   </Link>
                   <CardActions>
-                  <ProductPrice> Ksh {product.price}</ProductPrice>
+                  <ProductPrice> KES {product.price}</ProductPrice>
              <AddToCartButton onClick={() => addToCart(product)}>
                 ADD TO CART
             </AddToCartButton> 

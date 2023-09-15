@@ -1,9 +1,6 @@
-# from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-# from rest_framework_simplejwt.views import TokenObtainPairView
-# from .models import User
-# import uuid
+
 from rest_framework.response import Response
-# import jwt
+
 
 
 from .tokens import create_jwt_pair_for_user
@@ -12,11 +9,11 @@ from rest_framework.request import Request
 from django.contrib.auth import authenticate,get_user_model
 from rest_framework import generics, status
 from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
-from django.utils.encoding import force_bytes
+#from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+#from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib import messages
-from django.shortcuts import redirect
+#from django.contrib import messages
+#from django.shortcuts import redirect
 
 
 from django.shortcuts import render
@@ -30,14 +27,14 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 import jwt
 from django.conf import settings
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
+#from drf_yasg.utils import swagger_auto_schema
+#from drf_yasg import openapi
 #from .renderers import UserRenderer
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.contrib.sites.shortcuts import get_current_site
-from django.urls import reverse
+#from django.contrib.auth.tokens import PasswordResetTokenGenerator
+#from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
+#from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+#from django.contrib.sites.shortcuts import get_current_site
+#from django.urls import reverse
 from .utils import Util
 from django.shortcuts import redirect
 from django.http import HttpResponsePermanentRedirect
@@ -60,12 +57,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User  
-from .serializers import OTPVerificationSerializer
+from .serializers import OTPVerificationSerializer, RegenerateOTPSerializer
 
 from datetime import datetime, timedelta
 from django.core.exceptions import ObjectDoesNotExist
 
-from django.views.decorators.csrf import csrf_exempt
+#from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -100,14 +97,14 @@ class OTPVerificationView(APIView):
         serializer = OTPVerificationSerializer(data=request.data)
         if serializer.is_valid():
             otp = serializer.validated_data['otp']
-            email = serializer.validated_data['email']  # Assuming you include the email in the request
+            email = serializer.validated_data['email']  
 
             try:
-                user = User.objects.get(email=email)  # Replace 'email' with the actual field name in your User model
+                user = User.objects.get(email=email)  
             except user.DoesNotExist:
                 return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
-            stored_otp = user.otp  # Replace 'otp' with the actual field name in your User model
+            stored_otp = user.otp  
             
             
             if (not user.is_active and otp == request.data.get("otp") and user.otp_expiry and timezone.now() < user.otp_expiry):
@@ -120,48 +117,64 @@ class OTPVerificationView(APIView):
                 "Successfully verified the user.", status=status.HTTP_200_OK
                 )
             return Response("User active or Please enter the correct OTP.", status=status.HTTP_400_BAD_REQUEST,)
-
+            
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
     
 
-#@csrf_exempt
-def generate_and_send_otp(email):
-    try:
-        # Fetch the user by email address
-        user = User.objects.get(email=email)  # Replace with the actual field name in your User model
+class RegenerateOTPView(APIView):
+    def post(self, request):
+        serializer = RegenerateOTPSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            try:
+                user = User.objects.get(email=email)
 
-        if int(user.max_otp_try) == 0 and timezone.now() < user.otp_max_out:
-            return Response(
-                "Max OTP try reached, try after an hour",
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+                # Convert user.max_otp_try to an integer before comparison
+                max_otp_try = int(user.max_otp_try)
 
-        otp = random.randint(1000, 9999)
-        otp_expiry = timezone.now() + datetime.timedelta(minutes=10)
-        max_otp_try = int(user.max_otp_try) - 1
+                if max_otp_try == 0 and timezone.now() < user.otp_max_out:
+                    return Response(
+                        "Max OTP try reached, try after an hour",
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
 
-        user.otp = otp
-        user.otp_expiry = otp_expiry
-        user.max_otp_try = max_otp_try
-        #print(otp)
-        if max_otp_try == 0:
-                 #Set cool down time
-            otp_max_out = timezone.now() + datetime.timedelta(hours=1)
-            user.otp_max_out = otp_max_out
-        elif max_otp_try == -1:
-            user.max_otp_try = settings.MAX_OTP_TRY
-        else:
-            user.otp_max_out = None
-            user.max_otp_try = max_otp_try
-            user.save()    
+                # Check if the user has exceeded the maximum OTP regeneration limit (3 times)
+                if max_otp_try <= 3:
+                    otp = random.randint(1000, 9999)
+                    otp_expiry = timezone.now() + timedelta(minutes=10)
+                    max_otp_try -= 1  # Decrement the count
 
+                    user.otp = otp
+                    user.otp_expiry = otp_expiry
+                    user.max_otp_try = str(max_otp_try)  # Convert back to string for storage
 
-        # Send the new OTP to the user via email
-        email_body = f"Your new OTP is {otp}"
-        Util.send_email(email, "OTP Regenerated", email_body)  # Replace with your email sending logic
+                    if max_otp_try == 0:
+                        otp_max_out = timezone.now() + timedelta(hours=1)
+                        user.otp_max_out = otp_max_out
+                    elif max_otp_try == -1:
+                        user.max_otp_try = settings.MAX_OTP_TRY
+                    else:
+                        user.otp_max_out = None
+                    user.save()
 
-        return Response("New OTP generated and sent successfully.",status=status.HTTP_200_OK)
-    except ObjectDoesNotExist:
-        return "User not found."
+                    # Send the new OTP to the user via email
+                    email_body = f"Your new OTP is {otp}"
+                    data = {'email_body': email_body, 'to_email': user.email,
+                            'email_subject': 'Verify your email'}
+                    Util.send_email(data)
+
+                    return Response("New OTP generated and sent successfully.", status=status.HTTP_200_OK)
+                else:
+                    return Response(
+                        "OTP regeneration limit exceeded, please contact support.",
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+
+            except ObjectDoesNotExist:
+                return Response("User not found.", status=status.HTTP_404_NOT_FOUND)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class LoginView(APIView):

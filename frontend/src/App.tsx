@@ -21,7 +21,7 @@ import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScre
 import BookNowForm from './components/chefs/BookNowForm';
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen';
-
+import Cart from './components/homeScreen/Cart';
 
 const ProtectedRoute = ({ element: Element, ...rest }: { element: React.ElementType }) => {
   const { isAuthenticated } = useAuth();
@@ -58,9 +58,9 @@ const router = createBrowserRouter(
 
 
 
-      {/* <Route path='/Cart' element={<Cart onClose={function (): void {
+      <Route path='/Cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')
-      }} />} /> */}
+      }} />} />
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/contact' element={<ContactScreen />} />

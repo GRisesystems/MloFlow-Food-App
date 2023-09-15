@@ -2,6 +2,10 @@
     transform: scale(1.08);
     box-shadow: 0px 0px 5px 3px #FBB31D;
 }
+.MuiCard-root.custom-card img {
+   height: 150px;
+   width: 100%;
+}
 .MuiCard-root.custom-card a {
     text-decoration: none;
 }
@@ -23,4 +27,5 @@
 .MuiCard-root.custom-card:hover a h4 {
     opacity: 1;
 }
+
 

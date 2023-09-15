@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 // import ListedProductsTab from './ListedProductsTabContent';
-import ListedProductsTabContent from './SelectedProducts';
+import ListedProductsTabContent from './ListedProductsTab';
 import AllSuppliesTab from './SuppliesTabContent';
 import RequestedProductsTab from './RequestedProductsTabContent';
 import GraphTab from './GraphTabContent';
 import AddProductsForm from '../../components/newproductupload/AddProducts';
-import SimpleReactTable from './SelectedProducts';
 import { useAuth } from '../../utils/AuthContext';
 // import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 import axios from 'axios';
@@ -52,24 +51,24 @@ const TabContentContainer = styled.div`
 
 const VendorDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const { isProfileComplete } = useAuth();
-  const [categories, setCategories] = useState([])
+  // const { isProfileComplete } = useAuth();
+  // const [categories, setCategories] = useState([])
 
   
   
  
 
-  useEffect(() => {
-    // Fetch categories when the component mounts
-    axios.get(`${BASE_URL}/api/v1/categories`) // Replace with your API endpoint
-      .then(response => {
-        setCategories(response.data.categories);
+  // useEffect(() => {
+  //   // Fetch categories when the component mounts
+  //   axios.get(`${BASE_URL}/api/v1/categories`) // Replace with your API endpoint
+  //     .then(response => {
+  //       setCategories(response.data.categories);
 
-      })
-      .catch(error => {
-        console.error('Error fetching categories:', error);
-      });
-  }, []);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching categories:', error);
+  //     });
+  // }, []);
 
   
   const handleTabChange = (tab: number) => {

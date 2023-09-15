@@ -13,7 +13,7 @@ class CertificationSerializer(serializers.ModelSerializer):
 
 class ChefSerializer(serializers.ModelSerializer):
    # reviews = ReviewSerializer(many=True, read_only=True)  # Nested serializer for reviews
-    certifications = CertificationSerializer(many=True)
+    #certifications = CertificationSerializer(many=True)
     class Meta:
         model = Chef
         fields = ('country', 'state','city', 'profile_picture', 'speciality')
