@@ -8,15 +8,15 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.conf import settings
 
-from .serializers import VendorSerializer, ChefBookingSerializer
+from .serializers import CustomerSerializer, ChefBookingSerializer
 
 class CustomerListCreateView(generics.ListCreateAPIView):
     queryset = Customer.objects.all()
-    serializer_class = VendorSerializer
+    serializer_class = CustomerSerializer
 
 class CustomerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Customer.objects.all()
-    serializer_class = VendorSerializer
+    serializer_class = CustomerSerializer
 
 class ChefBookingViewSet(viewsets.ModelViewSet):
     queryset = ChefBooking.objects.all()
