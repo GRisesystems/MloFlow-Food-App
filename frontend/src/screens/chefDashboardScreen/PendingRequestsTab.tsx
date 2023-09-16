@@ -6,8 +6,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import {hireRequestsData} from './HireRequestsTab';
-
 
 const Container = styled.div`
   padding: 10px;
@@ -32,8 +30,6 @@ const StyledTableCell = styled(TableCell)`
   font-weight: bold;
 `;
 
-
-
 const pendingRequestsData = [
   {
     requestId: 1,
@@ -44,34 +40,18 @@ const pendingRequestsData = [
     location: 'Conference Center',
     startDate: '10/11/23',
     endDate: '10/11/23',
-    
   },
   // Add more data...
 ];
-// const pendingRequestsDataFiltered = pendingRequestsData.concat(
-//   hireRequestsData.filter(
-//     (request) =>
-//       !acceptedRequests.includes(request.requestId) &&
-//       !deniedRequests.includes(request.requestId)
-//   )
-// // );
-// interface HireRequestsTabProps {
-//   acceptedRequests: number[];
-//   deniedRequests: number[];
-//   setAcceptedRequests: React.Dispatch<React.SetStateAction<number[]>>;
-//   setDeniedRequests: React.Dispatch<React.SetStateAction<number[]>>;
-// }
 
 const PendingRequestsTab: React.FC<{
   acceptedRequests: number[];
   deniedRequests: number[];
-  selectedRequest: number | null; // Define selectedRequest prop
+  selectedRequest: number | null;
 }> = ({ acceptedRequests, deniedRequests, selectedRequest }) => {
-  // Filter the pending requests based on accepted and denied requests
   const selectedPendingRequest = hireRequestsData.find(
     (request) => request.requestId === selectedRequest
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   const pendingRequestsDataFiltered = pendingRequestsData.filter(
     (request) =>
@@ -79,8 +59,7 @@ const PendingRequestsTab: React.FC<{
       !deniedRequests.includes(request.requestId)
   );
 
-  
-    return (
+  return (
     <Container>
       <StyledTableContainer>
         <StyledTable>
@@ -88,26 +67,19 @@ const PendingRequestsTab: React.FC<{
             <TableRow>
               <StyledTableCell>Request ID</StyledTableCell>
               <StyledTableCell>First Name</StyledTableCell>
-              <StyledTableCell>Surname</StyledTableCell>
-              <StyledTableCell>Specialty</StyledTableCell>
-              <StyledTableCell>Occasion</StyledTableCell>
-              <StyledTableCell>Location</StyledTableCell>
-              <StyledTableCell>Start to End Date</StyledTableCell>
-             
-              
+              {/* ... (other table headers) */}
             </TableRow>
           </TableHead>
           <TableBody>
-          {selectedPendingRequest ? (
-            <TableRow key={selectedPendingRequest.requestId}>
-              <StyledTableCell>{selectedPendingRequest.requestId}</StyledTableCell>
-              {/* Display other details of the selected request */}
-            </TableRow>
+            {selectedPendingRequest ? (
+              <TableRow key={selectedPendingRequest.requestId}>
+                {/* Display other details of the selected request */}
+              </TableRow>
             ) : (
               <TableRow>
-              <StyledTableCell colSpan={7}>No pending requests</StyledTableCell>
-            </TableRow>
-          )}
+                <StyledTableCell colSpan={7}>No pending requests</StyledTableCell>
+              </TableRow>
+            )}
           </TableBody>
         </StyledTable>
       </StyledTableContainer>

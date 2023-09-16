@@ -51,13 +51,9 @@ const router = createBrowserRouter(
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
-
       <Route path='/products' element={<AllProductScreen />} />
       <Route path='/products/:id' element={<ProductDetailScreen />} />
-      <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} />} />
-
-
-
+      <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} accessToken={undefined} />} />
       <Route path='/Cart' element={<Cart onClose={function (): void {
         throw new Error('Function not implemented.')
       }} />} />
