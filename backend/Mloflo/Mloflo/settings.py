@@ -66,11 +66,9 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
 
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
         # 'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.permissions.IsAdminUser'
-         'rest_framework.permissions.AllowAny'
-    ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.MultiPartParser',  # Ensure this is included
@@ -146,7 +144,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_WHITELIST = True
 
 # Add the specific origins you want to allow in the whitelist
-CORS_ORIGIN_WHITELIST = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 
 ROOT_URLCONF = "Mloflo.urls"
 
@@ -228,9 +226,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/dist/assets'),
     os.path.join(BASE_DIR, 'static'),
 ]
-
-MEDIA_ROOT  =     os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL  =' /uploads/'
 
 
 MESSAGE_TAGS = {
