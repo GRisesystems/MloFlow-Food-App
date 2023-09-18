@@ -1,12 +1,29 @@
 import { useState } from 'react';
 import OtpInput from 'react-otp-input';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Alert, AlertTitle } from '@mui/material';
+import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { BASE_URL } from '../../components/signin/constants';
+import { useData } from '../../Context/DataContext';
 
 const ActivateAccountScreen = () => {
   const [otp, setOtp] = useState('');
+  const [showAlert, setShowAlert] = useState(false)
+  const navigate = useNavigate()
+  const { data } = useData();
+  console.log(data)
 
-  const verifyAccount = () => {
-    console.log(otp)
+  const verifyAccount = async () => {
+    const otp_data = { otp }
+    try {
+      const response = await axios.post(`${BASE_URL}/authapp/verify-otp/`, otp_data)
+      if (response.status === 200) {
+        navigate('/sign-in')
+      }
+    } catch (error) {
+      setShowAlert(!showAlert)
+    }
+
   };
 
   const clearOtp = () => {
@@ -29,6 +46,12 @@ const ActivateAccountScreen = () => {
     >
       <Box sx={{ p: 2 }}>
         <Typography variant='h6' sx={{ textAlign: 'center', mb: 3, fontWeight: 'bold' }}>Enter Account activation number</Typography>
+        {showAlert &&
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            Check yout otp or contact support for help
+          </Alert>
+        }
         <OtpInput
           value={otp}
           onChange={setOtp}
