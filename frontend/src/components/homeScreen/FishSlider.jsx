@@ -1,9 +1,10 @@
-import React, {useContext, useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import  {useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import {Typography, Button, Container} from '@mui/material';
-import { CartContext } from '../../Context/CartContext'; 
+import { CartContext } from "../../context/Cart"; 
 import styled from "styled-components";
 import WishlistBtn from "./WishlistBtn";
 import axios from "axios";
@@ -128,7 +129,7 @@ border-radius: 10px 10px 10px 10px;
 
 
 const FishSlider = () => {
-  const   addToCart  = useContext(CartContext);
+  const   {addToCart}  = useContext(CartContext);
 
   const settings = {
     dots: false,

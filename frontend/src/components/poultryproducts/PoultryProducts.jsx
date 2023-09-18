@@ -1,14 +1,16 @@
 import  {useContext, useState, useEffect} from 'react';
 import { Box, Button, Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { CartContext } from '../../Context/CartContext'; 
+import { CartContext } from '../../context/Cart'; 
+import { FavoriteContext } from '../../context/WishList';
 import WishlistButton from '../homeScreen/WishlistBtn';
 import "./styles.css";
 import { Link } from 'react-router-dom';
 
 const PoultryProducts = () => {
 
-const  addToCart  = useContext(CartContext);
+const  {addToCart}  = useContext(CartContext);
+const  {addToWishList}  = useContext(FavoriteContext);
  
     const [products, setProducts] = useState([])
 
@@ -30,7 +32,7 @@ const  addToCart  = useContext(CartContext);
           {products.map((product) => {
             if (product.category === "Poultry") {
               return  (
-            <Grid sx={{ display: 'flex', flexWrap: 'wrap', width:'16vw', m:2}} >
+            <Grid sx={{ display: 'flex', flexWrap: 'wrap', width:'16vw', m:2}} key={product.id} >
               <Card className='custom-card'
                 sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
               >
@@ -59,9 +61,10 @@ const  addToCart  = useContext(CartContext);
               initialLiked={false}
               onToggleLike={() => {
                 // Handle like toggle logic here
+                {addToWishList}
               }}
               amount={product.price} 
-            />
+            />   
                   </CardActions>
                   <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}}
                onClick={() => addToCart(product)}>

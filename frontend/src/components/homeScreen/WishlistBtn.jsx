@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 
-const WishlistButton = ({
+const WishlistButton = (
   initialLiked,
   onToggleLike,
-}) => {
+) => {
   const [liked, setLiked] = useState(initialLiked);
 
   const handleLikeToggle = () => {

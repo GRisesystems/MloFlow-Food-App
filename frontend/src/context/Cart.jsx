@@ -1,15 +1,9 @@
-import  {  useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react'
 
+export const CartContext = createContext()
 
-// Create the CartContext and provide the initial value (undefined)
-// export const CartContext = createContext();
-
-export const CartContext = () => {  
-  const [cartItems, setCartItems] = useState(
-    localStorage.getItem('cartItems')
-      ? JSON.parse(localStorage.getItem('cartItems'))
-      : []
-  );
+export const CartProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
 
   const addToCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
@@ -30,7 +24,7 @@ export const CartContext = () => {
   const removeFromCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
 
-    if (isItemInCart && isItemInCart.quantity === 1) {
+    if (isItemInCart.quantity === 1) {
       setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
     } else {
       setCartItems(
@@ -52,18 +46,18 @@ export const CartContext = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    const storedCartItems = localStorage.getItem('cartItems');
-    if (storedCartItems) {
-      setCartItems(JSON.parse(storedCartItems));
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      setCartItems(JSON.parse(cartItems));
     }
   }, []);
 
   return (
-    <CartContext
+    <CartContext.Provider
       value={{
         cartItems,
         addToCart,
@@ -72,6 +66,7 @@ export const CartContext = () => {
         getCartTotal,
       }}
     >
-    </CartContext>
+      {children}
+    </CartContext.Provider>
   );
 };

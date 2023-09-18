@@ -1,13 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
-// Create the CartContext and provide the initial value (undefined)
-export const WishListContext = createContext(undefined);
+export const FavoriteContext = createContext()
 
-export const WishListProvider = ({ children }) => {  const [wishListItems, setWishListItems] = useState(
+export const FavoriteProvider = ({ children }) => {  const [wishListItems, setWishListItems] = useState(
     localStorage.getItem('wishListItems')
       ? JSON.parse(localStorage.getItem('wishListItems'))
-      : []
-  );
+      : [])
 
   const addToWishList = (item) => {
     const isItemInWishlist = wishListItems.find((wishListItem) => wishListItem.id === item.id);
@@ -28,7 +26,7 @@ export const WishListProvider = ({ children }) => {  const [wishListItems, setWi
   const removeFromWishList = (item) => {
     const isItemInWishlist = wishListItems.find((wishListItem) => wishListItem.id === item.id);
 
-    if (isItemInWishlist && isItemInWishlist.quantity === 1) {
+    if (isItemInWishlist.quantity === 1) {
       setWishListItems(wishListItems.filter((wishListItem) => wishListItem.id !== item.id));
     } else {
       setWishListItems(
@@ -61,16 +59,16 @@ export const WishListProvider = ({ children }) => {  const [wishListItems, setWi
   }, []);
 
   return (
-    <WishListContext.Provider
+    <FavoriteContext.Provider
       value={{
         wishListItems,
         addToWishList,
         removeFromWishList,
         clearWishList,
-        getWishListTotal
+        getWishListTotal,
       }}
     >
       {children}
-    </WishListContext.Provider>
+    </FavoriteContext.Provider>
   );
 };

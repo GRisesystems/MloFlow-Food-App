@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { BASE_URL } from '../components/signin/constants';
 
 const AuthContext = createContext(undefined);

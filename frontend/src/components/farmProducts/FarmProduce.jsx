@@ -1,14 +1,14 @@
 import  {useContext, useState, useEffect} from 'react';
 import { Box, Button, Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { CartContext } from '../../Context/CartContext'; 
+import { CartContext } from '../../context/Cart'; 
 import WishlistButton from '../homeScreen/WishlistBtn';
 import "./styles.css";
 import { Link } from 'react-router-dom';
 
 const FarmProduce = () => {
 
-const  addToCart  = useContext(CartContext);
+const  {addToCart}  = useContext(CartContext);
  
     const [products, setProducts] = useState([])
 
@@ -30,7 +30,7 @@ const  addToCart  = useContext(CartContext);
           {products.map((product) => {
             if (product.category === "Farm Produce") {
               return  (
-            <Grid sx={{ display: 'flex', flexWrap: 'wrap', width:'16vw', m:2}} >
+            <Grid sx={{ display: 'flex', flexWrap: 'wrap', width:'16vw', m:2}} key={product.id}>
               <Card className='custom-card'
                 sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
               >

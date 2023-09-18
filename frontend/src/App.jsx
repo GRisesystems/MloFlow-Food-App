@@ -21,7 +21,7 @@ import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScre
 import BookNowForm from './components/chefs/BookNowForm';
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen';
-import Cart from './components/homeScreen/Cart';
+import Cart from './components/homeScreen/ShoppingCart';
 import WishList from './screens/vendorDashboardScreen/WishList';
 
 
@@ -46,7 +46,7 @@ const router = createBrowserRouter(
       <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} />} />
 
     <Route path='/wishlist' element={<WishList />}></Route>
-    <Route path='/cart' element={<Cart />}></Route>
+    <Route path='/shopping-cart' element={<Cart />}></Route>
 
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />

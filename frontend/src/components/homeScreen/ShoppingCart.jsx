@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CartContext } from '../../Context/CartContext';
+import { CartContext } from '../../context/Cart';
 import { Button, Container, Divider } from '@mui/material';
 import { AddCircleOutlineRounded } from '@mui/icons-material';
 import { RemoveCircleOutlineOutlined } from '@mui/icons-material';
@@ -8,11 +8,8 @@ import './styles.css';
 import { Link } from 'react-router-dom';
 
 export default function Cart() {
-  const  getCartTotal = useContext(CartContext);
-  const  cartItems   = useContext(CartContext);
-  const addToCart = useContext(CartContext);
-  const removeFromCart = useContext(CartContext);
-  const clearCart = useContext(CartContext);
+  const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } = useContext(CartContext);
+
    return (
     <Container maxWidth="md" className='cart'>
       <div className='shopping'>
@@ -33,7 +30,7 @@ export default function Cart() {
             <th>Price (KES)</th>
           </tr>
         </thead>
-    {cartItems?.map((item) => (
+    {cartItems.map((item) => (
         <tbody key={item.id}>
           <tr>
             <td>   
@@ -62,7 +59,7 @@ export default function Cart() {
         ))}
         </table>
         <div className="cart-footer">
-        {cartItems?.length > 0 ? (
+        {cartItems.length > 0 ? (
             <h4 className="cart-total">TOTAL <span> KES {getCartTotal()}</span></h4>
             ) : (
               <h1 className="cart-empty">Your cart is empty</h1>

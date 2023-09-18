@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
 
@@ -10,7 +9,7 @@ const StyledTab = styled.div`
   border-bottom: ${({ active }) => (active ? '6px solid #FBB31D' : 'none')};
 `;
 
-const Tab = ({ label, activeTab, tabName, onTabChange }) => {
+const Tab = (label, activeTab, tabName, onTabChange ) => {
   const handleClick = () => {
     onTabChange(tabName);
   };

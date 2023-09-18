@@ -2,7 +2,7 @@ import  {useContext, useState, useEffect} from 'react';
 import { useParams } from 'react-router';
 import { Box, Button,   CardActions,  CardContent, CardMedia,  Grid,  Typography } from '@mui/material';
 import axios from 'axios';
-import { CartContext } from '../../Context/CartContext'; 
+import { CartContext } from '../../context/Cart';  
 import WishlistButton from '../homeScreen/WishlistBtn';
 import { ArrowLeftSharp } from '@mui/icons-material';
 import './styles.css';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import "./styles.css";
 
 const ProductDetailed = () => {
-const   addToCart  = useContext(CartContext);
+const   {addToCart}  = useContext(CartContext);
     const { id } = useParams();
     const [product, setProduct] = useState("")
 
@@ -70,7 +70,7 @@ const   addToCart  = useContext(CartContext);
                 <Link to={'/products'}>
                 <Button><ArrowLeftSharp />  Continue Shopping</Button>
                 </Link>
-                <Link to={'/cart'}>
+                <Link to={'/shopping-cart'}>
                 <Button variant='contained' sx={{ float:'right'}}>View Cart</Button>
                 </Link>
               </div>

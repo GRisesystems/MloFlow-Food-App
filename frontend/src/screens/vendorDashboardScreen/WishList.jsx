@@ -1,7 +1,6 @@
 import { useContext } from 'react';
-import {WishListContext } from '../../Context/WishListContext';
+import { FavoriteContext } from '../../context/WishList';
 import { Button, Container, Divider } from '@mui/material';
-import { AddCircleOutlineRounded } from '@mui/icons-material';
 import { RemoveCircleOutlineOutlined } from '@mui/icons-material';
 import { ArrowLeftSharp } from '@mui/icons-material';
 import './styles.css';
@@ -12,7 +11,8 @@ export default function WishList() {
     wishListItems, 
     addToWishList,
     removeFromWishList,
-    clearWishList} = useContext(WishListContext);
+    clearWishList, 
+    getWishListTotal} = useContext(FavoriteContext);
   return (
     <Container maxWidth="md" className='cart'>
       <div className='shopping'>
@@ -29,33 +29,33 @@ export default function WishList() {
           <tr>
             <th>Name</th>
             <th>Image</th>
-            <th>Quantity</th>
+            <th>Descriptiion</th>
             <th>Price (KES)</th>
+            <th>Add to Cart</th>
+            <th>Remove </th>
           </tr>
         </thead>
     {wishListItems.map((item) => (
         <tbody key={item.id}>
           <tr>
             <td>   
-                    <h4 className="text-lg font-bold">{item.name}</h4>
+                  <h4 className="text-lg font-bold">{item.name}</h4>
                     </td>
                     <td>
-                      <img src={item.imageOne} alt={item.title} width={60} className="cart-item-image" />
+                      <img src={item.imageOne} alt={item.name} width={60} className="cart-item-image" />
                       </td>
             <td>               
                <div className="quantity-control">
-                   <AddCircleOutlineRounded   onClick={() =>addToWishList(item)}/>
-
-                  <p className='item-quantity'>{item.quantity}</p>
-                    <RemoveCircleOutlineOutlined  onClick={() => removeFromWishList(item)}/>
+                <p>{item.description}</p>
                 </div>
                 </td>
             <td>
             <p className="price">{item.price}</p>
             </td>
-            <td>
-
-            </td>
+                <td>
+                    <RemoveCircleOutlineOutlined  onClick={() => removeFromWishList(item)}/>
+                </td>
+                <td></td>
           </tr>
         </tbody>
         
@@ -72,8 +72,8 @@ export default function WishList() {
                 <Link to={'/products'}>
                 <Button><ArrowLeftSharp />  Continue Shopping</Button>
                 </Link>
-                <Link to={'/checkout'}>
-                <Button variant='contained' sx={{ float:'right'}}>Proceed to Checkout</Button>
+                <Link to={'/cart'}>
+                <Button variant='contained' sx={{ float:'right'}}>Proceed to Shopping Cart</Button>
                 </Link>
               </div>
     </Container>

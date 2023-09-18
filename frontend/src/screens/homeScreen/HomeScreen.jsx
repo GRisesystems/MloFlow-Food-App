@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { Container, Grid, Box,CssBaseline } from "@mui/material";
@@ -10,6 +9,7 @@ import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/variety.jpg';
 import food1 from '../../assets/carousel/delivery.png';
 // import FoodCategory from "../../components/homeScreen/Categories";
+// import Faqs from '../../components/homeScreen/Faqs';
 import Newsletter from "../../components/homeScreen/Newsletter";
 import FishSlider from "../../components/homeScreen/FishSlider";
 import PoultrySlider from "../../components/homeScreen/PoultrySlider";
@@ -122,6 +122,7 @@ const HomeScreen = () => {
       </Box>
      
       {/* <FoodCategory />       */}
+      {/* <Faqs /> */}
       <PageContainer>
        
        
