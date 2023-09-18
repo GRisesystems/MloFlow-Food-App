@@ -15,6 +15,7 @@ import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProduc
 import ChefsScreen from './screens/chefsScreen/ChefsScreen'
 import EnterEmailScreen from './screens/forgotPasswordScreen/EnterEmailScreen'
 import ForgotPasswordScreen from './screens/forgotPasswordScreen/ForgotPasswordScreen'
+import AdminScreen from './screens/adminScreens'
 
 import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
@@ -43,6 +44,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<Root />}>
       <Route index element={<HomeScreen />} />
       <Route path='/login' element={<SignInScreen />} />
+      <Route path='/admin' element={<AdminScreen />} />
       <Route path='/activate' element={<ActivateAccountScreen />} />
       <Route path="/email-otp" element={<EnterEmailScreen/>} />
       <Route path="/forgot-password" element={<ForgotPasswordScreen/>} />
