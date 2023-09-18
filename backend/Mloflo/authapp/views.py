@@ -93,11 +93,11 @@ class RegisterView(generics.GenericAPIView):
 
 
 class OTPVerificationView(APIView):
-    def post(self, request):
+    def post(self, request):        
         serializer = OTPVerificationSerializer(data=request.data)
-        if serializer.is_valid():
-            otp = serializer.validated_data['otp']
-            email = serializer.validated_data['email']  
+        if serializer.is_valid():            
+            otp = serializer.validated_data['otp']            
+            email = serializer.validated_data['email'] 
 
             try:
                 user = User.objects.get(email=email)  
