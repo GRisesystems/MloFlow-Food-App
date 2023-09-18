@@ -1,6 +1,6 @@
 import  {useContext, useState, useEffect} from 'react';
 import { useParams } from 'react-router';
-import { Box, Button,   CardActions,  CardContent, CardMedia,  Grid,  Typography } from '@mui/material';
+import { Container, Button,   CardActions,  CardContent, CardMedia,  Grid,  Typography } from '@mui/material';
 import axios from 'axios';
 import { CartContext } from '../../context/Cart';  
 import WishlistButton from '../homeScreen/WishlistBtn';
@@ -25,15 +25,15 @@ const   {addToCart}  = useContext(CartContext);
     }, [])
 
   return (
-      <Box className='detail-container'>
-        <Typography variant="h3" sx={{backgroundColor:'#FBB31D',  mb:2, textAlign:'center'}}>Product Details</Typography>
+      <Container className='detail-container'>
+        <Typography className="product-detail" >Product Details</Typography>
         {/* #FBB31D, #0C0B0B */}
        < Grid container spacing={4} >
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={6}>
           <CardMedia >
          <img  src={product.imageOne} alt={product.name}></img></CardMedia>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={6}>
           <CardContent>
               <Typography  className='name' >
                   <span>  Name: </span>  {product.name}
@@ -52,7 +52,7 @@ const   {addToCart}  = useContext(CartContext);
                   Ksh {product.price}
               </Typography>
             <CardActions sx={{marginTop:1, marginBottom:1}}>
-              <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', marginRight:'1.5rem'}}
+              <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', marginRight:'30%'}}
                onClick={() => addToCart(product)}>
                 ADD TO CART
             </Button> 
@@ -74,7 +74,7 @@ const   {addToCart}  = useContext(CartContext);
                 <Button variant='contained' sx={{ float:'right'}}>View Cart</Button>
                 </Link>
               </div>
-      </Box>
+      </Container>
   );
 }
 export default ProductDetailed;

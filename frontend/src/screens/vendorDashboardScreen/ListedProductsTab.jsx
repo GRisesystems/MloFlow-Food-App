@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import UpdateProductForm from '../../components/newproductupload/UpdateProduct';
@@ -31,7 +31,7 @@ const navigate = useNavigate();
           <tr>
             <th>Select:</th>
             <th>Product Image</th>
-            <th>Serial No:</th>
+            {/* <th>Serial No:</th> */}
             <th>Name</th>
             <th>Price (KES)</th>
             <th>Modify</th>
@@ -41,11 +41,12 @@ const navigate = useNavigate();
         <tbody>
           {products.map((product) => {
             return (
-              <tr className={"clickable-row ".concat(selectedRow === product.id ? "selected" : "")}>
-                
-                <td></td>
+              <tr className={"clickable-row ".concat(selectedRow === product.id ? "selected" : "")} key={product.id}>
+                <td>
+  
+                </td>
                 <td><img src={product.imageOne} alt={product.name}  ></img></td>
-                <td onClick={() => console.log(`Cell ${product.id}A was clicked!`)}>{product.id}</td>
+                {/* <td onClick={() => console.log(`Cell ${product.id}A was clicked!`)}>{product.id}</td> */}
                 <td>{product.name}</td>
                 <td>{product.price}</td>
                 <td> <Button className="update" sx={{   visibility: selectedRow ? 'visible' : ''  }}>

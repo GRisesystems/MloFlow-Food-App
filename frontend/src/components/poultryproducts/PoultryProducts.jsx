@@ -2,7 +2,7 @@ import  {useContext, useState, useEffect} from 'react';
 import { Box, Button, Card, CardActions, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { CartContext } from '../../context/Cart'; 
-import { FavoriteContext } from '../../context/WishList';
+// import { FavoriteContext } from '../../context/WishList';
 import WishlistButton from '../homeScreen/WishlistBtn';
 import "./styles.css";
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const PoultryProducts = () => {
 
 const  {addToCart}  = useContext(CartContext);
-const  {addToWishList}  = useContext(FavoriteContext);
+// const  {addToWishList}  = useContext(FavoriteContext);
  
     const [products, setProducts] = useState([])
 
@@ -26,7 +26,7 @@ const  {addToWishList}  = useContext(FavoriteContext);
     
   return (
       <Box sx={{ m: 4 }} >
-        <Typography variant="h3" sx={{backgroundColor:'#FBB31D',  mt:4, mb:2, textAlign:'center'}}>Poultry</Typography>
+        <Typography variant="h3" sx={{mt:4, mb:2, textAlign:'center'}}>Poultry</Typography>
         {/* #FBB31D, #0C0B0B */}
           <Grid container spacing={1} >
           {products.map((product) => {
@@ -61,7 +61,7 @@ const  {addToWishList}  = useContext(FavoriteContext);
               initialLiked={false}
               onToggleLike={() => {
                 // Handle like toggle logic here
-                {addToWishList}
+                // {addToWishList}
               }}
               amount={product.price} 
             />   

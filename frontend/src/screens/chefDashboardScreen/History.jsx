@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

@@ -35,7 +35,9 @@ useEffect(() =>{
         <tbody>
           {vendors.map((vendor) => {
             return (
-              <tr key={vendor.id}>
+              <tr  key={vendor.id} >
+                <ol>
+                <li>
                 <td> </td>
                 <td> </td>
                 <td> </td>
@@ -47,7 +49,10 @@ useEffect(() =>{
                 <td> </td>
                 <td> </td>
                 <td> </td>
+                </li>
+              </ol>
               </tr>
+
             );
           })}
         </tbody>

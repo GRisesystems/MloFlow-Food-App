@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/Cart';
-import { Button, Container, Divider } from '@mui/material';
+import { Button, Container, Divider, Typography } from '@mui/material';
 import { AddCircleOutlineRounded } from '@mui/icons-material';
 import { RemoveCircleOutlineOutlined } from '@mui/icons-material';
 import { ArrowLeftSharp } from '@mui/icons-material';
+import WishlistButton from './WishlistBtn';
 import './styles.css';
 import { Link } from 'react-router-dom';
 
@@ -11,15 +12,15 @@ export default function Cart() {
   const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } = useContext(CartContext);
 
    return (
-    <Container maxWidth="md" className='cart'>
-      <div className='shopping'>
-    <h1 className="cart-tittle">Your Shopping Cart </h1>
-    <button className="empty-cart"
+    <Container  className='cart' >
+      <Container className='shopping'>
+    <Typography className='cart-title'>Your Shopping Cart </Typography>
+    <Button variant='contained'  className="empty-cart"
                 onClick={clearCart}
               >
                 Empty Cart
-              </button>
-        </div>
+              </Button>
+        </Container>
     <Divider />
       <table className="cart-container">
         <thead>
@@ -27,6 +28,7 @@ export default function Cart() {
             <th>Name</th>
             <th>Image</th>
             <th>Quantity</th>
+            <th>Add to Favourites</th>
             <th>Price (KES)</th>
           </tr>
         </thead>
@@ -48,10 +50,10 @@ export default function Cart() {
                 </div>
                 </td>
             <td>
-            <p className="price">{item.price}</p>
+                <WishlistButton></WishlistButton>
             </td>
             <td>
-
+            <p className="price">{item.price}</p>
             </td>
           </tr>
         </tbody>
