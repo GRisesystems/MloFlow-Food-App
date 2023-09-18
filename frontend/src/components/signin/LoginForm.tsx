@@ -9,17 +9,18 @@ import {
     useMediaQuery,
     useTheme
 } from '@mui/material';
+import { Link } from "react-router-dom";
 
 
 import { useAuth } from '../../utils/AuthContext'
-import { navigateToDashboard,UserRole  } from "../../utils/navigateToDashboard";
+import { navigateToDashboard, UserRole } from "../../utils/navigateToDashboard";
 import { useNavigate } from "react-router";
 import logo from '../../assets/mloflow.png'
 
 const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: { email: "", password: "" } });
-    const [recievedErrorMessage, setRecievedErrorMessage] = useState(false);    
-    const { login, errorMessage} = useAuth();
+    const [recievedErrorMessage, setRecievedErrorMessage] = useState(false);
+    const { login, errorMessage } = useAuth();
     const theme = useTheme()
     const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const LoginForm = () => {
 
     const onSubmit = async (data: any) => {
         try {
-            const { access, refresh,category } = await login(data.email, data.password);
+            const { access, refresh, category } = await login(data.email, data.password);
             const userRole: UserRole = category as UserRole;
             localStorage.setItem('access_token', access);
             localStorage.setItem('refresh_token', refresh);
@@ -41,7 +42,7 @@ const LoginForm = () => {
     };
 
     return (
-        <Box display="flex" justifyContent="center" alignItems="center" maxWidth="sm" sx={{ mt: isMobileView ? 1: 3,mb:3 }}>
+        <Box display="flex" justifyContent="center" alignItems="center" maxWidth="sm" sx={{ mt: isMobileView ? 1 : 3, mb: 3 }}>
             <Box component="form" noValidate autoComplete="off"
                 onSubmit={
                     handleSubmit(onSubmit)
@@ -53,7 +54,7 @@ const LoginForm = () => {
                 width="100%"
                 maxWidth="400px"
                 sx={
-                    { boxShadow: 3, mt: isMobileView ? 1: 4 }
+                    { boxShadow: 3, mt: isMobileView ? 1 : 4 }
                 }>
                 <Avatar alt="MloFlow Logo" src={logo} sx={{ height: 54 }} />
                 {/* <Typography variant="h5" component="div" gutterBottom>
@@ -95,11 +96,16 @@ const LoginForm = () => {
                     } />
                 <Button variant="contained"
                     sx={
-                        { mt: 3,backgroundColor: "#FFA000" }
+                        { mt: 3, backgroundColor: "#FFA000" }
                     }
                     color="success"
                     type="submit">Login
                 </Button>
+                <Box sx={{ mt: 2 }}>
+                    <Link to="/email-otp" >
+                        forgot password ?
+                    </Link>
+                </Box>
             </Box>
         </Box>
     )

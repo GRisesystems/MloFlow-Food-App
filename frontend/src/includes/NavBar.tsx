@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,9 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Badge, Link, Stack, useMediaQuery, useTheme } from '@mui/material';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { Badge, Link, Paper, Stack, useMediaQuery, useTheme } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const pages = ['Home', 'Chefs', 'Vendors', 'Farm Produce', 'Contact', 'Blog'];
 
@@ -19,6 +21,13 @@ function NavBar() {
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+
+  const [produceMenuOpen, setProduceMenuOpen] = useState(false);
+
+  // Step 2: Add an onClick event handler to toggle the produce dropdown menu
+  const toggleProduceMenu = () => {
+    setProduceMenuOpen(!produceMenuOpen);
+  };
 
 
   // useEffect(() => {
@@ -84,7 +93,7 @@ function NavBar() {
               Home
             </Button>
 
-            <Link href='/chefs' sx={{textDecoration:'none'}}>
+            <Link href='/chefs' sx={{ textDecoration: 'none' }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
@@ -100,23 +109,63 @@ function NavBar() {
               Vendors
             </Button>
 
-            <Link href="/farm-produce" style={{ textDecoration: 'none' }}>
+            <PopupState variant="popover" popupId="demo-popup-menu">
+              {(popupState) => (
+                <Box >
+                  <Button {...bindTrigger(popupState)}
+                    sx={{
+                      my: 2,
+                      color: '#0C0B0B',
+                      // display: 'block',
+                      fontWeight: 'bolder',
+                      display: 'flex', // Use flex display
+                      alignItems: 'center', // Align items vertically
+                      "&:hover": { color: "white", transition: "200ms ease-in" },
+                    }}
+                  >
+                    Produce <KeyboardArrowDownIcon />
+                  </Button>
+
+                  <Menu
+                    {...bindMenu(popupState)}>
+
+                    <MenuItem onClick={popupState.close}>
+                      <Link href="#" sx={{ textDecoration: 'none', color: 'inherit' }}>
+                        Fish
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={popupState.close}>
+                      <Link href="#" sx={{ textDecoration: 'none', color: 'inherit' }}>
+                        Poultry
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={popupState.close}>
+                      <Link href="#" sx={{ textDecoration: 'none', color: 'inherit' }}>
+                        Macadamia
+                      </Link>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              )}
+            </PopupState>
+
+            {/* <Link href="/farm-produce" style={{ textDecoration: 'none' }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
               >
-                Farm Produce
+               Produce
               </Button>
-            </Link>
+            </Link> */}
 
             <Link href="/contact" style={{ textDecoration: 'none' }}>
 
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
-            >
-              Contact
-            </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+              >
+                Contact
+              </Button>
             </Link>
 
             <Button
