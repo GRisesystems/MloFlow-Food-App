@@ -11,10 +11,10 @@ const ActivateAccountScreen = () => {
   const [showAlert, setShowAlert] = useState(false)
   const navigate = useNavigate()
   const { data } = useData();
-  console.log(data)
+  
 
   const verifyAccount = async () => {
-    const otp_data = { otp }
+    const otp_data = { otp,email:data }    
     try {
       const response = await axios.post(`${BASE_URL}/authapp/verify-otp/`, otp_data)
       if (response.status === 200) {

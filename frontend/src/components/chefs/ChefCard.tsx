@@ -7,7 +7,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Stack, Typography, D
 import chef from './chef.jpeg';
 import BookNowForm from './BookNowForm';
 
-const ChefCard = ({ chef_name }: { chef_name: string }) => {
+const ChefCard = ({ chef_name,status }: { chef_name: string,status:string }) => {
     const navigate = useNavigate();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
@@ -43,7 +43,7 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
     const handleDetailsPageNavigation = (id: any) => {
         navigate(`/chefs/${id}`);
     };
-
+    
     return (
         <Card>
             <CardMedia
@@ -73,7 +73,7 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
                     <Typography sx={{ fontWeight: 'bold' }}>
                         Status:
                     </Typography>
-                    <Typography sx={{ color: 'green' }}>Available</Typography>
+                    <Typography sx={{ color: 'green' }}>{status}</Typography>
                 </Stack>
 
                 <CardActions
@@ -83,7 +83,12 @@ const ChefCard = ({ chef_name }: { chef_name: string }) => {
                         alignItems: 'center',
                     }}
                 >
-                    <Button onClick={handleOpenDialog} style={{ order: 1 }} variant='contained' sx={{ backgroundColor: 'orange', textTransform: 'none', '&:hover': { backgroundColor: 'orange' }, color: 'black' }}>Book Now</Button>
+                    {
+                        status === 'available' ?
+                        <Button onClick={handleOpenDialog} style={{ order: 1 }} variant='contained' sx={{ backgroundColor: 'orange', textTransform: 'none', '&:hover': { backgroundColor: 'orange' }, color: 'black' }}>Book Now</Button>
+                        :
+                        <Button onClick={handleOpenDialog} style={{ order: 1 }} variant='contained' sx={{ backgroundColor: 'orange', textTransform: 'none', '&:hover': { backgroundColor: 'orange' }, color: 'black' }}>Schedule date</Button>
+                    }                    
                     <Button style={{ order: 3 }} variant='outlined' sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'none' } }} onClick={() => handleDetailsPageNavigation(1)}>Details {'>>'}</Button>
                 </CardActions>
             </CardContent>
