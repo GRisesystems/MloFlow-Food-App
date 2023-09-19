@@ -26,10 +26,18 @@ class ChefBooking(models.Model):
     chefSpeciality = models.CharField(max_length=200)
     occasion = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
+    noOfGuests = models.IntegerField(default=10)
     start_date = models.DateField()
     end_date = models.DateField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedt = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return f'{self.customer.first_name}{self.customer.surname}'
     class Meta:
         verbose_name_plural = 'Chef Bookings'
+        ordering = ['-createdAt']
+        indexes = [
+            models.Index(fields=['-createdAt']),
+        ]
