@@ -167,7 +167,7 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    #'django.core.mail.backends.smtp.EmailBackend',
+    'django.core.mail.backends.smtp.EmailBackend',
     
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
