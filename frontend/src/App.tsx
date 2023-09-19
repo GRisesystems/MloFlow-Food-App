@@ -16,15 +16,15 @@ import ChefsScreen from './screens/chefsScreen/ChefsScreen'
 import EnterEmailScreen from './screens/forgotPasswordScreen/EnterEmailScreen'
 import ForgotPasswordScreen from './screens/forgotPasswordScreen/ForgotPasswordScreen'
 import AdminScreen from './screens/adminScreens'
-
+import ChefAdminScreen from './screens/adminScreens/ChefAdminScreen'
 import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
 import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScreen';
-
 import BookNowForm from './components/chefs/BookNowForm';
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen';
 import Cart from './components/homeScreen/Cart';
+
 
 const ProtectedRoute = ({ element: Element, ...rest }: { element: React.ElementType }) => {
   const { isAuthenticated } = useAuth();
@@ -46,8 +46,10 @@ const router = createBrowserRouter(
       <Route path='/login' element={<SignInScreen />} />
       <Route path='/admin' element={<AdminScreen />} />
       <Route path='/activate' element={<ActivateAccountScreen />} />
+
       <Route path="/email-otp" element={<EnterEmailScreen/>} />
       <Route path="/forgot-password" element={<ForgotPasswordScreen/>} />
+      <Route path='/chef-admin' element={<ChefAdminScreen />} />
       <Route path="/chef-dashboard" element={<ChefDashBoardScreen />} />
       <Route path='/chefs' element={<ChefsScreen/>} />
       <Route path='/chefs/:id' element={<ChefDetailScreen/>} />

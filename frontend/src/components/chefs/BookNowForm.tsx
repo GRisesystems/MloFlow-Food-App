@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -7,7 +7,9 @@ import {
   DialogContent,
   DialogContentText,
   InputLabel,
-  TextField,
+  Select,
+  MenuItem,
+  TextField
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
@@ -16,6 +18,16 @@ import axios from 'axios';
 const BookNowForm = ({ open, onClose, accessToken }) => {
   const { control, handleSubmit, formState, reset } = useForm();
   const [dialogOpen, setDialogOpen] = useState(false); // State for the dialog
+  const [selectedOccasion, setSelectedOccasion] = useState('');
+  const [occasionPrice, setOccasionPrice] = useState(0);
+
+  const occasionOptions = [
+    { value: 'Wedding', price: 500 }, // Assign prices to occasions
+    { value: 'Birthday', price: 300 },
+    { value: 'Dinner', price: 200 },
+    { value: 'Anniversary', price: 400 },
+    { value: 'Baby Shower', price: 250 },
+  ];
 
   const config = {
     headers: {
@@ -28,6 +40,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
       const emailData = {
         ...data,
         email: data.email,
+        occasion: selectedOccasion, // Include the selected occasion in the data
       };
       const response = await axios.post(
         'http://127.0.0.1:8000/customer/chef-bookings/',
@@ -67,6 +80,19 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
       showAlertDialog(); // This will show the alert
     } catch (error) {
       console.error('Form submission error:', error);
+    }
+  };
+
+  const handleOccasionChange = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOccasion(selectedValue);
+
+    // Find the price of the selected occasion
+    const selectedOption = occasionOptions.find((option) => option.value === selectedValue);
+    if (selectedOption) {
+      setOccasionPrice(selectedOption.price);
+    } else {
+      setOccasionPrice(0);
     }
   };
 
@@ -159,24 +185,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
           )}
         />
 
-        <Controller
-          name="occasion"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field, fieldState }) => (
-            <TextField
-              label="Occasion"
-              variant="outlined"
-              fullWidth
-              {...field}
-              error={Boolean(fieldState.error)}
-              helperText={fieldState.error ? 'This field is required' : ''}
-            />
-          )}
-        />
-
-        <Controller
+           <Controller
           name="location"
           control={control}
           defaultValue=""
@@ -192,6 +201,23 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
             />
           )}
         />
+
+        {/* Occasion Dropdown */}
+        <InputLabel sx={{ mt: 2 }}>Occasion</InputLabel>
+          <Select
+            label="Occasion"
+            variant="outlined"
+            fullWidth
+            value={selectedOccasion}
+            onChange={handleOccasionChange}
+          >
+            {occasionOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.value}
+              </MenuItem>
+            ))}
+          </Select>
+          
 
          {/* Date Range Input */}
          <div>
@@ -257,7 +283,13 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
                     )}
                     name="phone"
                 />
-          
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: 'green', marginLeft: '20px', marginBottom: '0px' }}>
+                          Total Price: ${occasionPrice}
+                     </p>
+
+
         
 
           <DialogActions>
@@ -268,13 +300,15 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
               sx={{
                 backgroundColor: '#FFB31D',
                 color: 'black',
-                width: '100%',
+                width: '330px',
+                height: '40px',
                 alignSelf: 'center',
               }}
             >
               Request
-            </Button>
-          </DialogActions>
+            </Button>        
+            </DialogActions>
+          </div>         
         </Box>
       </Dialog>
 
@@ -288,6 +322,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
           <Button onClick={showAlertDialog}>Close</Button>
         </DialogActions>
       </Dialog>
+      
     </>
   );
 };

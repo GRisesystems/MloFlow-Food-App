@@ -11,8 +11,8 @@ const Root = () => {
     // <CartContext.Provider value={Cart}>
     <AuthProvider>
      
-        <TopNav/>        
-        <NavBar/>
+        <TopNav/>         
+       <NavBar/>
             <Outlet/>
         <FooterContainer />       
         {/* <Cart onClose={function (): void {
