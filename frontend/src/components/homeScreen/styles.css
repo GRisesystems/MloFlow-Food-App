@@ -63,6 +63,10 @@ height: auto;
 .MuiTypography-root.cart-title {
   font-size: 2.4rem;
 }
+/* .MuiTypography-root.cart-title  span{
+  text-decoration: underline;
+  text-decoration-color: #FFB31D;
+} */
 .MuiButton-root.empty-cart{
  background-color: #FFB31D;
  color: #0C0B0B;

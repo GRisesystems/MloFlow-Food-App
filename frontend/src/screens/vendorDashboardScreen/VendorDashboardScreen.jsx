@@ -8,11 +8,11 @@ import GraphTab from './GraphTabContent';
 import AddProductsForm from '../../components/newproductupload/AddProducts';
 import VendorsList from './VendorsList';
 import WishList from './WishList';
-// import { useAuth } from '../../utils/AuthContext';
+import { useAuth } from '../../utils/AuthContext';
 // import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
 // import axios from 'axios';
 // import { BASE_URL } from '../../components/signin/constants';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import "./styles.css";
 
 const VendorDashboardContainer = styled.div`
@@ -22,12 +22,6 @@ const VendorDashboardContainer = styled.div`
   margin-top: 20px;
   margin-left: 20px;
   
-`;
-const WelcomeMessage = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-  
-
 `;
 
 const TabMenu = styled.div`
@@ -53,6 +47,7 @@ const TabContentContainer = styled.div`
 
 const VendorDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const { first_name } = useAuth();
   // const { isProfileComplete } = useAuth();
   // const [categories, setCategories] = useState([])
 
@@ -89,7 +84,7 @@ const VendorDashboard = () => {
      
   <VendorDashboardContainer>
     <Box className="vendor"  >
-     <WelcomeMessage>Welcome Isaac!</WelcomeMessage>
+     <Typography variant='h3'>Welcome <span>{first_name }</span> </Typography>
      <AddProductsForm />
     </Box>
   <TabMenu>

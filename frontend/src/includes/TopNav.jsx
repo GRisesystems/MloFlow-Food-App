@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -15,11 +15,12 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Badge, Button, IconButton, InputBase,  Stack } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 import { useMediaQuery, useTheme } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -27,6 +28,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import logo from '../assets/mloflow.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
+import { CartContext } from '../context/Cart';
 // import { Link as RouterLink } from 'react-router-dom';
 
 
@@ -73,9 +75,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
-
-
 export default function ClippedDrawer() {
 
   // const { cart } = useCart(); // Access the cart data
@@ -83,18 +82,11 @@ export default function ClippedDrawer() {
   console.log('first name')
   console.log(first_name)
   const theme = useTheme()
+  const   {cartItems}  = useContext(CartContext);
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
-  
-
-
-
   const navigate = useNavigate()
-
-  
-
-
 
   const handleLogin = () => {
     // nagigate to login screen
@@ -108,12 +100,9 @@ export default function ClippedDrawer() {
     navigate('/')
   }
 
-
-
   const handleProfileMenuOpen = () => {
     setIsDrawerVisible(!isDrawerVisible)
   }
-
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -121,7 +110,6 @@ export default function ClippedDrawer() {
       <AppBar elevation={0} position="static" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'white', color: 'black' }}>
         <Toolbar>
        
-     
         <Link to={'/'}>
             <Box
               component="img"
@@ -175,6 +163,7 @@ export default function ClippedDrawer() {
                         <AccountCircle />
                       </Badge>
                       <Typography variant="body1">{first_name} </Typography>
+                    <KeyboardArrowDownIcon />
                     </IconButton>
                   ) : (
 
@@ -200,9 +189,9 @@ export default function ClippedDrawer() {
                     aria-label="Cart"
                     color="inherit"
                   >
-                    <Link to={"/cart"} >
+                    <Link to={"/shopping-cart"} >
                       <IconButton size="large" aria-label="Cart" color="inherit">
-                        <Badge>
+                        <Badge badgeContent={cartItems.length} color="error">
                           <ShoppingCartCheckoutRoundedIcon />
                         </Badge>
                       </IconButton>
@@ -213,11 +202,12 @@ export default function ClippedDrawer() {
                     size="large"
                     aria-label="show favourites"
                     color="inherit"
-                    onClick={() => console.log('Profile clicked')}
                   >
+                    <Link to={'/wishlist'}>
                     <Badge badgeContent={17} color="error">
                       <FavoriteBorderIcon />
                     </Badge>
+                    </Link>
                   </IconButton>
 
                 </>
@@ -252,12 +242,14 @@ export default function ClippedDrawer() {
               </ListItem>
 
               <ListItem disablePadding>
+                <Link to={'/vendor-dashboard'}>
                 <ListItemButton>
                   <ListItemIcon>
                     <DashboardIcon />
                   </ListItemIcon>
                   <ListItemText primary='Dashboard' />
                 </ListItemButton>
+                </Link>
               </ListItem>
 
               <ListItem disablePadding>

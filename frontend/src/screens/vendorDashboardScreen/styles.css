@@ -1,8 +1,12 @@
 .MuiBox-root.vendor {
     display: flex;
+    margin: 1rem;
 }
-.MuiBox-root.vendor h1{
+.MuiBox-root.vendor h3{
     margin-left: 20vw;
+}
+.MuiBox-root.vendor span{
+   font-weight: 800;
 }
 .MuiBox-root.vendor button{
     margin-left: 20vw;

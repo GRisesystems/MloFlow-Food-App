@@ -9,7 +9,7 @@ const   ApplyCouponAccordion = () => {
     // const {formState} = useForm()
     // const onSubmit = (data) => console.log(data)
     return (
-        <Box sx={{width:400}}>
+        <Box maxWidth={500}>
             <Accordion>
                 <AccordionSummary
                     aria-controls="panel1a-content"

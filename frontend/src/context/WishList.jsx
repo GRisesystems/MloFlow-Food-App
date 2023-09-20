@@ -1,71 +1,64 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react'
 
 export const FavoriteContext = createContext()
 
-export const FavoriteProvider = ({ children }) => {  const [wishListItems, setWishListItems] = useState(
-    localStorage.getItem('wishListItems')
-      ? JSON.parse(localStorage.getItem('wishListItems'))
-      : [])
+export const Provider = ({ children }) => {
+  const [favoriteItems, setFavoriteItems] = useState(localStorage.getItem('favoriteItems') ? JSON.parse(localStorage.getItem('favoriteItems')) : [])
 
-  const addToWishList = (item) => {
-    const isItemInWishlist = wishListItems.find((wishListItem) => wishListItem.id === item.id);
+  const addToFavorites = (item) => {
+    const isItemInFavorites = favoriteItems.find((favoriteItem) => favoriteItem.id === item.id);
 
-    if (isItemInWishlist) {
-      setWishListItems(
-        wishListItems.map((wishListItem) =>
-        wishListItem.id === item.id
-            ? { ...wishListItem, quantity: wishListItem.quantity + 1 }
-            : wishListItem
+    if (isItemInFavorites) {
+      setFavoriteItems(
+        favoriteItems.map((favoriteItem) =>
+          favoriteItem.id === item.id
+            ? { ...favoriteItem, quantity: favoriteItem.quantity + 1 }
+            : favoriteItem
         )
       );
     } else {
-      setWishListItems([...wishListItems, { ...item, quantity: 1 }]);
+      setFavoriteItems([...favoriteItems, { ...item, quantity: 1 }]);
     }
   };
 
-  const removeFromWishList = (item) => {
-    const isItemInWishlist = wishListItems.find((wishListItem) => wishListItem.id === item.id);
+  const removeFromFavorites = (item) => {
+    const isItemInFavorites = favoriteItems.find((favoriteItem) => favoriteItem.id === item.id);
 
-    if (isItemInWishlist.quantity === 1) {
-      setWishListItems(wishListItems.filter((wishListItem) => wishListItem.id !== item.id));
+    if (isItemInFavorites.quantity === 1) {
+      setFavoriteItems(favoriteItems.filter((favoriteItem) => favoriteItem.id !== item.id));
     } else {
-      setWishListItems(
-        wishListItems.map((wishListItem) =>
-          wishListItem.id === item.id
-            ? { ...wishListItem, quantity: wishListItem.quantity - 1 }
-            : wishListItem
+      setFavoriteItems(
+        favoriteItems.map((favoriteItem) =>
+          favoriteItem.id === item.id
+            ? { ...favoriteItem, quantity: favoriteItem.quantity - 1 }
+            : favoriteItem
         )
       );
     }
   };
 
-  const clearWishList = () => {
-    setWishListItems([]);
-  };
-
-  const getWishListTotal = () => {
-    return wishListItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const clearFavorites = () => {
+    setFavoriteItems([]);
   };
 
   useEffect(() => {
-    localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
-  }, [wishListItems]);
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
 
   useEffect(() => {
-    const storedWishListItems = localStorage.getItem('wishListItems');
-    if (storedWishListItems) {
-      setWishListItems(JSON.parse(storedWishListItems));
+    const favoriteItems = localStorage.getItem("favoriteItems");
+    if (favoriteItems) {
+      setFavoriteItems(JSON.parse(favoriteItems));
     }
   }, []);
 
   return (
     <FavoriteContext.Provider
       value={{
-        wishListItems,
-        addToWishList,
-        removeFromWishList,
-        clearWishList,
-        getWishListTotal,
+        favoriteItems,
+        addToFavorites,
+        removeFromFavorites,
+        clearFavorites,
       }}
     >
       {children}

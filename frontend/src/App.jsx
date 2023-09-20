@@ -13,7 +13,7 @@ import FishProductsScreen from './screens/fishProductsScreen/FishProductsScreen'
 import CookedProductsScreen from './screens/cookedProductsScreen/CookedProductsScreen'
 import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProductsScreen'
 import ChefsScreen from './screens/chefsScreen/ChefsScreen'
-
+import Faqs from './components/homeScreen/Faqs';
 // import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
 import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScreen';
@@ -23,7 +23,7 @@ import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen';
 import Cart from './components/homeScreen/ShoppingCart';
 import WishList from './screens/vendorDashboardScreen/WishList';
-
+import Checkout from './components/Order/Checkout'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,7 +47,9 @@ const router = createBrowserRouter(
 
     <Route path='/wishlist' element={<WishList />}></Route>
     <Route path='/shopping-cart' element={<Cart />}></Route>
-
+    <Route path='faqs' element={<Faqs />}></Route>
+    <Route path='orders' element={<Checkout />}></Route>
+    
       <Route path='/checkout' element={<CheckoutScreen />} />
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/contact' element={<ContactScreen />} />

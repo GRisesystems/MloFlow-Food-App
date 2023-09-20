@@ -14,11 +14,11 @@ export default function Cart() {
    return (
     <Container  className='cart' >
       <Container className='shopping'>
-    <Typography className='cart-title'>Your Shopping Cart </Typography>
+    <Typography className='cart-title'> Your Shopping Cart </Typography>
     <Button variant='contained'  className="empty-cart"
                 onClick={clearCart}
               >
-                Empty Cart
+                Clear Cart
               </Button>
         </Container>
     <Divider />

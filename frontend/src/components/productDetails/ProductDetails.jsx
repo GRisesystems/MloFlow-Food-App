@@ -52,7 +52,7 @@ const   {addToCart}  = useContext(CartContext);
                   Ksh {product.price}
               </Typography>
             <CardActions sx={{marginTop:1, marginBottom:1}}>
-              <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', marginRight:'30%'}}
+              <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', fontWeight:800, marginRight:'30%'}}
                onClick={() => addToCart(product)}>
                 ADD TO CART
             </Button> 

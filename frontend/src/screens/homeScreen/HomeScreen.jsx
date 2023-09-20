@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import styled from "styled-components";
 import { Container, Grid, Box,CssBaseline } from "@mui/material";
 import HomeCarousel from "../../components/homeScreen/HomeCarousel";
 import HomeServiceCategoryCard from "../../components/homeScreen/HomeServiceCategoryCard";
@@ -9,18 +8,12 @@ import chef1 from '../../assets/carousel/chef1.jpg';
 import farmproducts from '../../assets/carousel/variety.jpg';
 import food1 from '../../assets/carousel/delivery.png';
 // import FoodCategory from "../../components/homeScreen/Categories";
-// import Faqs from '../../components/homeScreen/Faqs';
+import Faqs from '../../components/homeScreen/Faqs';
 import Newsletter from "../../components/homeScreen/Newsletter";
 import FishSlider from "../../components/homeScreen/FishSlider";
 import PoultrySlider from "../../components/homeScreen/PoultrySlider";
 import FramSlider from "../../components/homeScreen/FarmSlider";
 
-
-
-const PageContainer = styled.div`
-background-color: #F5F5F5; // Set your desired background color here
-
-`;
 
 const HomeScreen = () => {
  
@@ -122,13 +115,9 @@ const HomeScreen = () => {
       </Box>
      
       {/* <FoodCategory />       */}
-      {/* <Faqs /> */}
-      <PageContainer>
-       
-       
-      </PageContainer>   
-      <Newsletter />
+      <Faqs />
       <Wrapper />
+      <Newsletter />
     </Box>
   );
 };

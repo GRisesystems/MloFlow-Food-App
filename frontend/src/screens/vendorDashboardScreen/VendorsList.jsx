@@ -26,18 +26,16 @@ useEffect(() =>{
             <th>Country</th>
             <th>County/State</th>
             <th>City</th>
-            <th>National ID</th>
+            <th>Product Category</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>A/C Number</th>
+            <th>Bank</th>
           </tr>
         </thead>
         <tbody>
           {vendors.map((vendor) => {
             return (
               <tr  key={vendor.id} >
-                <ol>
-                <li>
                 <td> </td>
                 <td> </td>
                 <td> </td>
@@ -49,8 +47,6 @@ useEffect(() =>{
                 <td> </td>
                 <td> </td>
                 <td> </td>
-                </li>
-              </ol>
               </tr>
 
             );

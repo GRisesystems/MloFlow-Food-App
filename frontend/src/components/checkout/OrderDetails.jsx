@@ -1,7 +1,10 @@
 import { Box, Button, Divider, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
-import ApplyCouponAccordion from "./ApplyCouponAccordion";
+// import ApplyCouponAccordion from "./ApplyCouponAccordion";
+import { useContext } from 'react';
+import { CartContext } from '../../context/Cart';
 
 const OrderDetails = () => {
+  const { cartItems, getCartTotal } = useContext(CartContext);
   return (
     <Box sx={{ border: '4px solid #a5a8ad', m: 3 }}>
       <Box sx={{ m: 3 }}>
@@ -18,25 +21,27 @@ const OrderDetails = () => {
           <Divider />
           {/* table body */}
           <TableBody>
-            <TableRow>
-              <TableCell>onions</TableCell>
-              <TableCell align="right">Ksh 1200.00</TableCell>
+          {cartItems.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.name}</TableCell>
+              <TableCell align="right">{item.price}</TableCell>
             </TableRow>
+              ))}
             <TableRow>
-          <ApplyCouponAccordion />
+          {/* <ApplyCouponAccordion /> */}
             </TableRow>
             <Divider />
             {/* sub total section */}
             <TableRow>
               <TableCell sx={{ fontWeight: 'bold' }}>Subtotal</TableCell>
-              <TableCell align="right" sx={{ fontWeight: 'bold' }}>Ksh 1200.00</TableCell>
+              <TableCell align="right" sx={{ fontWeight: 'bold' }}>{getCartTotal}</TableCell>
             </TableRow>
             {/* Total Section */}
             <TableRow>
               <TableCell sx={{ fontWeight: 'bold' }}>
                 Total
               </TableCell>
-              <TableCell align="right" sx={{ fontWeight: 'bold', color: 'green' }}>Ksh 1200.00</TableCell>
+              <TableCell align="right" sx={{ fontWeight: 'bold', color: 'green' }}>{getCartTotal}</TableCell>
             </TableRow>
 
           </TableBody>

@@ -1,24 +1,24 @@
 import { useContext } from 'react';
-import { FavoriteContext } from '../../context/WishList';
 import { Button, Container, Divider } from '@mui/material';
 import { RemoveCircleOutlineOutlined } from '@mui/icons-material';
 import { ArrowLeftSharp } from '@mui/icons-material';
 import './styles.css';
 import { Link } from 'react-router-dom';
+import { FavoriteContext } from '../../context/WishList';
 
 export default function WishList() {
-  const {
-    wishListItems, 
-    addToWishList,
-    removeFromWishList,
-    clearWishList, 
-    getWishListTotal} = useContext(FavoriteContext);
+  const { 
+    favoriteItems,
+    addToFavorites,
+    removeFromFavorites,
+    clearFavorites } = useContext(FavoriteContext)
+
   return (
     <Container maxWidth="md" className='cart'>
       <div className='shopping'>
     <h1 className="cart-tittle">Your Wish List </h1>
     <button className="empty-cart"
-                onClick={clearWishList}
+                onClick={clearFavorites}
               >
                 Empty List
               </button>
@@ -35,7 +35,7 @@ export default function WishList() {
             <th>Remove </th>
           </tr>
         </thead>
-    {wishListItems.map((item) => (
+    {favoriteItems?.map((item) => (
         <tbody key={item.id}>
           <tr>
             <td>   
@@ -53,7 +53,7 @@ export default function WishList() {
             <p className="price">{item.price}</p>
             </td>
                 <td>
-                    <RemoveCircleOutlineOutlined  onClick={() => removeFromWishList(item)}/>
+                    <RemoveCircleOutlineOutlined  onClick={() => removeFromFavorites(item)}/>
                 </td>
                 <td></td>
           </tr>
@@ -62,8 +62,8 @@ export default function WishList() {
         ))}
         </table>
         <div className="cart-footer">
-        {wishListItems.length > 0 ? (
-            <h4 className="cart-total">{(wishListItems.length)}</h4>
+        {favoriteItems.length > 0 ? (
+            <h4 className="cart-total">{(favoriteItems?.length)}</h4>
             ) : (
               <h1 className="cart-empty">Your Wish List is empty</h1>
               )}

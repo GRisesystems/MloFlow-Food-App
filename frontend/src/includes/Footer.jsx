@@ -2,13 +2,12 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-//import h1, { h1Props }from "@mui/material/h1";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { Link } from "react-router-dom";
-
+import { Typography } from "@mui/material";
 
 // Footer component
 const Footer = ({ children }) => {
@@ -37,6 +36,18 @@ const Footer = ({ children }) => {
     </Container>
   );
 };
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        MloFlow
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 // FooterWrapper component
 const FooterWrapper = ({
@@ -250,9 +261,8 @@ export function FooterContainer() {
         
         
       </FooterWrapper>
-      <FooterRow >
-     <p style={{ color: "#0C0B0B",fontSize: 14, marginBottom: 2, marginTop: 2}}>Copyright 	2023. All rights reserved by<a href="#"> GRise Systems </a></p>
-        </FooterRow>
+
+        <Copyright />
     </Footer>
   );
 }
