@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Customer,ChefBooking
+from .models import Customer, ChefBooking
 from authapp.models import User
 from Chef.models import Chef
 from django.core.mail import send_mail
@@ -9,8 +9,9 @@ from django.contrib.auth import get_user_model
 
 @receiver(post_save, sender=Customer)
 def update_profile_complete_flag(sender, instance, **kwargs):
-    #Assuming 'instance.user' is the related user of the Vendor instance
+    #Assuming 'instance.user' is the related user of the Customer instance
     if instance.customer:
+        print(instance.customer)
         instance.customer.is_profile_complete = True
         instance.customer.save()
 

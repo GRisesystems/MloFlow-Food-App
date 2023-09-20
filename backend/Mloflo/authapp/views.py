@@ -57,7 +57,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User  
-from .serializers import OTPVerificationSerializer, RegenerateOTPSerializer
+from .serializers import OTPVerificationSerializer, RegenerateOTPSerializer, LoginSerializer
 
 from datetime import datetime, timedelta
 from django.core.exceptions import ObjectDoesNotExist
@@ -177,66 +177,45 @@ class RegenerateOTPView(APIView):
 
 
 
-class LoginView(APIView):
-    permission_classes = []
+#class LoginView(APIView):
+    #permission_classes = []
 
-    def post(self, request: Request):
-        email = request.data.get("email")
-        password = request.data.get("password")
+    #def post(self, request: Request):
+        #email = request.data.get("email")
+       # password = request.data.get("password")
 
-        user = authenticate(email=email, password=password)
+        #user = authenticate(email=email, password=password)
 
-        if user is not None:
-            if user.last_login is not None:
-                user.if_first_time_login = False
-                user.save()
+        #if user is not None:
+           # if user.last_login is not None:
+              #  user.if_first_time_login = False
+               # user.save()
 
-            tokens = create_jwt_pair_for_user(user)
-            email = user.email
-            first_name = user.first_name
-            surname = user.surname
-            if_first_time_login = user.if_first_time_login
-            is_profile_complete = user.is_profile_complete
-            category = user.category
+            #tokens = create_jwt_pair_for_user(user)
+            #email = user.email
+            #first_name = user.first_name
+            #surname = user.surname
+            #if_first_time_login = user.if_first_time_login
+            #is_profile_complete = user.is_profile_complete
+           # category = user.category
 
-            response = {"tokens": tokens, "email": email, "first_name": first_name, "surname": surname,
-                        "category": category, "first_time_login": if_first_time_login, 'is_profile_complete': is_profile_complete}
-            return Response(data=response, status=status.HTTP_200_OK)
+           # response = {"tokens": tokens, "email": email, "first_name": first_name, "surname": surname,
+             #           "category": category, "first_time_login": if_first_time_login, 'is_profile_complete': is_profile_complete}
+           # return Response(data=response, status=status.HTTP_200_OK)
 
-        else:
-            return Response(data={"message": "Invalid email or password"})
-
-    def get(self, request: Request):
-        content = {"user": str(request.user), "auth": str(request.auth)}
-
-        return Response(data=content, status=status.HTTP_200_OK)
-
-
-#def activate_account(request, uidb64, token):
-    # Account Activation link
-   # User = get_user_model()
-   # try:
-        # Decode the user ID from the URL
-       # uid = force_str(urlsafe_base64_decode(uidb64))
-
-        # Get the user associated with the ID
-        #user = User.objects.get(pk=uid)
-
-        # Verify the token
-       # if default_token_generator.check_token(user, token):
-            # Activate the user's account
-          #  user.is_active = True
-           # user.save()
-
-            # Redirect to success or login page
-           # messages.success(
-              #  request, 'Account Activated successfully. You can now login', extra_tags='success')
-            ##return redirect('redirect_home_view')
        # else:
-            # Invalid token, show an error page or redirect to an error page
-         #   messages.error(request, 'Invalid token', extra_tags='danger')
-        #    return redirect('redirect_home_view')
-   # except (User.DoesNotExist, ValueError, TypeError):
-        # User not found or invalid URL, show an error page or redirect to an error page
-       # messages.error(request, 'Account does not exist', extra_tags='danger')
-       # return redirect('redirect_home_view')
+         #   return Response(data={"message": "Invalid email or password"})
+
+    #def get(self, request: Request):
+       # content = {"user": str(request.user), "auth": str(request.auth)}
+
+       # return Response(data=content, status=status.HTTP_200_OK)
+
+
+class LoginAPIView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
