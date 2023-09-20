@@ -22,11 +22,11 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
   const [occasionPrice, setOccasionPrice] = useState(0);
 
   const occasionOptions = [
-    { value: 'Wedding', price: 500 }, // Assign prices to occasions
-    { value: 'Birthday', price: 300 },
-    { value: 'Dinner', price: 200 },
-    { value: 'Anniversary', price: 400 },
-    { value: 'Baby Shower', price: 250 },
+    { value: 'Wedding', price: 5000 }, // Assign prices to occasions
+    { value: 'Birthday', price: 3000 },
+    { value: 'Dinner', price: 2000 },
+    { value: 'Anniversary', price: 4000 },
+    { value: 'Baby Shower', price: 2500 },
   ];
 
   const config = {
@@ -95,6 +95,10 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
       setOccasionPrice(0);
     }
   };
+  const [numberOfGuests, setNumberOfGuests] = useState(0); // State for the number of guests
+  const handleNumberOfGuestsChange = (event) => {
+    setNumberOfGuests(event.target.value);
+  };
 
   return (
     <>
@@ -106,7 +110,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
             flexDirection: 'column',
             padding: '20px',
             gap: '20px',
-            width: '600px', // Set the desired width here
+            width: '450px', // Set the desired width here
           }}
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -217,7 +221,20 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
               </MenuItem>
             ))}
           </Select>
-          
+          <Controller
+            name="numberOfGuests"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                label="Number of Guests"
+                variant="outlined"
+                fullWidth
+                type="number"
+                {...field}
+              />
+            )}
+          />
 
          {/* Date Range Input */}
          <div>
@@ -283,14 +300,15 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
                     )}
                     name="phone"
                 />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-
-                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: 'green', marginLeft: '20px', marginBottom: '0px' }}>
-                          Total Price: ${occasionPrice}
+                <section>
+                 <p style={{ fontSize: '24px', fontWeight: 'bolder', color: 'black', textAlign: 'center', marginBottom: '0px',marginTop: '0px' }}>
+                          Total Price: 
                      </p>
-
-
-        
+                     <p style={{ fontSize: '24px', fontWeight: 'bolder', color: 'black', textAlign: 'center', marginBottom: '0px' }}>
+                           Ksh. {occasionPrice}
+                     </p>
+                     </section>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>                       
 
           <DialogActions>
             <Button
@@ -300,9 +318,10 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
               sx={{
                 backgroundColor: '#FFB31D',
                 color: 'black',
-                width: '330px',
+                width: '450px',
                 height: '40px',
                 alignSelf: 'center',
+                marginTop: '0px'
               }}
             >
               Request

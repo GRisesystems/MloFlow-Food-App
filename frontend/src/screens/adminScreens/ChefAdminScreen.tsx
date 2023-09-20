@@ -17,10 +17,15 @@ import {
   InputLabel,
 } from '@mui/material';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import ChefCard from '../../components/chefs/ChefCard';
+
+
 
 const RootContainer = styled.div`
   padding: 20px;
-  background-color: #f2f2f2; /* Light gray background color */
+  background-color: #f5f5f5; /* Light gray background color */
   min-height: 100vh; /* Ensure the content takes up the full viewport height */
   display: flex;
   flex-direction: column;
@@ -51,27 +56,31 @@ const StatCardWrapper = styled.div`
 
 const StatCard = styled(Card)`
   width: 200px;
-  height: 150px;
+  height: 180px;
   margin: 10px;
   background-color: #fff;
-  border: 1px solid #e0e0e0; /* Light gray border */
+  // background-image: url('C:/MloFlow-Food-App/frontend/public/Images/chefAdmin.jpg'); /* Replace with the path to your image */
+  // background-size: cover; /* Adjust the background image size */
+  // background-position: center center; /* Center the background image */
+  // border: 1px solid #f2f2f2; /* Light gray border */
   border-radius: 18px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
 
-  &:hover {
-    transform: scale(1.05);
-  }
+  // &:hover {
+  //   transform: scale(1.05);
+  // }
 `;
 
 const StatCardTitle = styled.h2`
   text-align: center;
   margin-top: 0px;
   margin-bottom: 0px;
+  
 `;
 
 const StatCardValue = styled.p`
-margin-top: 4px;
+margin-top: 10px;
   text-align: center;
   font-size: 24px;
 `;
@@ -82,11 +91,13 @@ const StatCardContent = styled(CardContent)`
 
 const TableContainerStyled = styled(TableContainer)`
   background-color: white; /* White background color for the table container */
-  // border-radius: 10px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px rgba(0.3, 0, 0, 0.3);
+  margin-top: 5px;
   width: 100%; /* Adjust the width to your preference */
-  // max-width: 800px; /* Set a maximum width for better readability */
+`;
+const BoldTableCell = styled(TableCell)`
+  font-weight: bold;
 `;
 
 const ActionButton = styled(Button)`
@@ -99,7 +110,7 @@ const SearchFilterContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  width: 80%; /* Adjust the width to your preference */
+  width: 80%; /* Adjust the width to your preference *
   max-width: 800px; /* Set a maximum width for better alignment */
 `;
 
@@ -118,17 +129,17 @@ const GlobalStyles = styled.div`
 const ChefAdminScreen = () => {
   // Dummy data for demonstration
   const chefStatistics = {
-    totalChefs: 50,
-    AvailableChefs: 30,
-    UnavailableChefs: 20,
-   AcceptedRequests: 'Chef A',
-    DeniedRequests: 'Chef B',
+    totalChefs: 25,
+    AvailableChefs: 17,
+    UnavailableChefs: 8,
+   AcceptedRequests: 'Faith Sang',
+    DeniedRequests: 'Isaac Kamula',
   };
 
   const chefData = [
     {
       id: 1,
-      chefName: 'Chef 1',
+      chefName: 'Isaac Kamula',
       specialty: 'Kenyan Dishes',
       phoneNumber: '123-456-7890',
       email: 'chef1@example.com',
@@ -136,7 +147,7 @@ const ChefAdminScreen = () => {
     },
     {
       id: 2,
-      chefName: 'Chef 2',
+      chefName: 'Faith Sang',
       specialty: 'International Dishes',
       phoneNumber: '987-654-3210',
       email: 'chef2@example.com',
@@ -144,7 +155,7 @@ const ChefAdminScreen = () => {
     },
     {
       id: 3,
-      chefName: 'Chef 3',
+      chefName: 'Deus-Darius Chimoyi',
       specialty: 'Swahili Cuisine',
       phoneNumber: '555-555-5555',
       email: 'chef3@example.com',
@@ -152,7 +163,7 @@ const ChefAdminScreen = () => {
     },
     {
       id: 4,
-      chefName: 'Chef 4',
+      chefName: 'Beatrice Murage',
       specialty: 'Pasteries',
       phoneNumber: '777-777-7777',
       email: 'chef4@example.com',
@@ -184,6 +195,37 @@ const ChefAdminScreen = () => {
     },
     // Add more chef data as needed
   ];
+  const [dialogOpen, setDialogOpen] = useState(false);
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [isBookingFormOpen, setBookingFormOpen] = useState(false); // Add state for the form
+
+    const handleOpenDialog = () => {
+        // Dialog onOpen function
+        setDialogOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        // Dialog onClose function
+        setDialogOpen(false);
+    };
+
+    const handleTermsAcceptance = () => {
+        setTermsAccepted(!termsAccepted);
+        // Close the dialog when terms are accepted
+        if (termsAccepted) {
+            setDialogOpen(false);
+        }
+    };
+
+    const handleContinueBooking = () => {
+        if (termsAccepted) {
+            // If terms are accepted, proceed with booking
+            // You can add your booking logic here
+            // For example, open the booking form
+            setBookingFormOpen(true); // Open the booking form
+        }
+    };
+  const navigate = useNavigate();
 
   // State for search and filter
   const [searchText, setSearchText] = React.useState('');
@@ -216,16 +258,18 @@ const ChefAdminScreen = () => {
       chef.location.toLowerCase().includes(searchText.toLowerCase())
     );
   });
-
+  const handleDetailsPageNavigation = (id: any) => {
+    navigate(`/chefs/${id}`);
+};
   return (
     <GlobalStyles>
       <RootContainer>
-        <h1>Chef Statistics</h1>
+      <h1 style={{ color: '#0275d8' }}>Chef Statistics</h1>
         <StatCardRow>
         <StatCardWrapper>
           <StatCard>
             <StatCardContent>
-              <StatCardTitle>Total Chefs</StatCardTitle>
+<RestaurantIcon fontSize="large" />              <StatCardTitle>Total Chefs</StatCardTitle>
               <StatCardValue>{chefStatistics.totalChefs}</StatCardValue>
             </StatCardContent>
           </StatCard>
@@ -234,7 +278,7 @@ const ChefAdminScreen = () => {
         <StatCardWrapper>
           <StatCard>
             <StatCardContent>
-              <StatCardTitle> Available Chefs</StatCardTitle>
+<RestaurantIcon fontSize="large" />              <StatCardTitle>  Available Chefs</StatCardTitle>
               <StatCardValue>{chefStatistics.AvailableChefs}</StatCardValue>
             </StatCardContent>
           </StatCard>
@@ -243,6 +287,7 @@ const ChefAdminScreen = () => {
         <StatCardWrapper>
           <StatCard>
             <StatCardContent>
+           <RestaurantIcon fontSize="large" />
               <StatCardTitle>Unavailable Chefs</StatCardTitle>
               <StatCardValue>{chefStatistics.UnavailableChefs}</StatCardValue>
             </StatCardContent>
@@ -252,7 +297,8 @@ const ChefAdminScreen = () => {
         <StatCardWrapper>
           <StatCard>
             <StatCardContent>
-              <StatCardTitle>Accepted Requests</StatCardTitle>
+            <RestaurantIcon fontSize="large" />
+              <StatCardTitle>Most Accepted Requests</StatCardTitle>
               <StatCardValue>{chefStatistics.AcceptedRequests}</StatCardValue>
             </StatCardContent>
           </StatCard>
@@ -261,7 +307,8 @@ const ChefAdminScreen = () => {
         <StatCardWrapper>
           <StatCard>
             <StatCardContent>
-              <StatCardTitle>Denied Requests</StatCardTitle>
+            <RestaurantIcon fontSize="large" />
+              <StatCardTitle> Most Denied Requests</StatCardTitle>
               <StatCardValue>{chefStatistics.DeniedRequests}</StatCardValue>
             </StatCardContent>
           </StatCard>
@@ -296,17 +343,17 @@ const ChefAdminScreen = () => {
           </FormControl>
         </SearchFilterContainer>
 
-        <h2>Chef Information</h2>
+        <h2 style={{ color: '#0275d8' }}>Chef Information</h2>
         <TableContainerStyled>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Chef Name</TableCell>
-                <TableCell>Specialty</TableCell>
-                <TableCell>Phone Number</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Action</TableCell>
+              <BoldTableCell>Chef Name</BoldTableCell>
+        <BoldTableCell>Specialty</BoldTableCell>
+        <BoldTableCell>Phone Number</BoldTableCell>
+        <BoldTableCell>Email</BoldTableCell>
+        <BoldTableCell>Location</BoldTableCell>
+        <BoldTableCell>Action</BoldTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -318,13 +365,22 @@ const ChefAdminScreen = () => {
                   <TableCell>{chef.email}</TableCell>
                   <TableCell>{chef.location}</TableCell>
                   <TableCell>
-                    <ActionButton>View Details</ActionButton>
+                    <ActionButton onClick={() => handleDetailsPageNavigation(1)}>View Details</ActionButton>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainerStyled>
+        <ChefCard
+                      chef_name={chef.chefName}
+                      status={/* Add status property here */}
+                      handleOpenDialog={handleOpenDialog}
+                      handleCloseDialog={handleCloseDialog}
+                      handleTermsAcceptance={handleTermsAcceptance}
+                      handleContinueBooking={handleContinueBooking}
+                      isBookingFormOpen={isBookingFormOpen}
+                    />
       </RootContainer>
     </GlobalStyles>
   );
