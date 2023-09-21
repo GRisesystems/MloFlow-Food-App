@@ -173,22 +173,15 @@ class PasswordResetSerializer(serializers.Serializer):
 class LogoutSerializer(serializers.Serializer):
     refresh = serializers.CharField()
 
-    default_error_messages = {
-        'bad_token': 'Token is expired or invalid',
-        'token_blacklist_failed': 'Logout failed. Please try again later',
-    }
-
     def validate(self, attrs):
         self.token = attrs['refresh']
         return attrs
 
     def save(self, **kwargs):
-        try:            
+        try:
             RefreshToken(self.token).blacklist()
-        except TokenError:            
-            raise ValidationError(self.default_error_messages['bad_token'])
-        except Exception as e:            
-            raise ValidationError(self.default_error_messages['token_blacklist_failed'])
+        except TokenError:
+            raise ValidationError({'bad_token': 'Token is expired or invalid'})
 
 
 
