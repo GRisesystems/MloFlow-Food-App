@@ -55,7 +55,7 @@ const ActivateAccountScreen = () => {
         <OtpInput
           value={otp}
           onChange={setOtp}
-          numInputs={6}
+          numInputs={4}
           renderSeparator={<span>-</span>}
           renderInput={(props) => <input {...props} />}
           inputStyle={{
@@ -81,7 +81,7 @@ const ActivateAccountScreen = () => {
           variant="contained"
           color="primary"
           onClick={verifyAccount}
-          disabled={otp.length !== 6}
+          disabled={otp.length !== 4}
           sx={{ marginTop: '16px', ml: 2 }}
         >
           Activate
