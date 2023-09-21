@@ -3,14 +3,17 @@ import { Outlet } from 'react-router-dom'
 import TopNav from './includes/TopNav'
 import NavBar from './includes/NavBar'
 import { FooterContainer } from './includes/Footer'
-import {AuthProvider} from './utils/AuthContext'
+import { AuthProvider } from './utils/AuthContext'
+import { ActivationProvider } from './utils/ActivationContext'
 const Root = () => {
   return (
     <AuthProvider>
-        <TopNav/>        
-        <NavBar/>
-            <Outlet/>
-        <FooterContainer />       
+      <ActivationProvider>
+        <TopNav />
+        <NavBar />
+        <Outlet />
+        <FooterContainer />
+      </ActivationProvider>
     </AuthProvider>
   )
 }
