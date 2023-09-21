@@ -7,8 +7,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import RegisterAlert from './RegisterAlert';
 import { BASE_URL } from './constants'
-import { useData } from '../../Context/DataContext'
+import { ActivationContext } from '../../utils/ActivationContext'
 import { useNavigate } from 'react-router';
+import { useContext } from 'react';
 
 
 
@@ -22,8 +23,8 @@ const SignUpForm = () => {
 
     const [showRegisterSuccessModal, setShowRegisterSuccessModal] = useState(false)
     const { control, register, handleSubmit, formState: { errors }, watch } = useForm({});
-    const { setData } = useData();
     const navigate = useNavigate()
+    const { setActivationEmail } = useContext(ActivationContext);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -41,18 +42,18 @@ const SignUpForm = () => {
         try {
             const response = await axios.post(`${BASE_URL}/auth/users/`, data);
 
-            console.log(response.status);
+
             if (response.status === 201) {
                 setSuccessMessage('Successfully Created an Account. Check your email for Account Activation details');
                 setShowRegisterSuccessModal(!showRegisterSuccessModal)
-                setData(data.email)
+                setActivationEmail(data.email);
                 navigate('/activate')
 
             } else {
                 setErrorMessage('Registration Failed');
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             setErrorMessage('Registration Failed');
         }
     };
