@@ -58,28 +58,33 @@ class RegisterView(generics.GenericAPIView):
 
 
 class OTPVerificationView(APIView):
-    def post(self, request):        
+    def post(self, request):
         serializer = OTPVerificationSerializer(data=request.data)
-        if serializer.is_valid():                       
-            email = serializer.validated_data['email'] 
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            otp = request.data.get("otp")
 
             try:
-                user = User.objects.get(email=email)  
-            except user.DoesNotExist:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
                 return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
-            if (not user.is_active and user.otp == request.data.get("otp") and user.otp_expiry and timezone.now() < user.otp_expiry):
-                user.is_active = True
-                user.otp_expiry = None
-                user.max_otp_try = settings.MAX_OTP_TRY
-                user.otp_max_out = None
-                user.save()
-                return Response(
-                "Successfully verified the user.", status=status.HTTP_200_OK
-                )
-            return Response("User active or Please enter the correct OTP.", status=status.HTTP_400_BAD_REQUEST,)
-            
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+            if not user.is_active:
+                if user.otp == otp and user.otp_expiry and timezone.now() < user.otp_expiry:
+                    user.is_active = True
+                    user.otp_expiry = None
+                    user.max_otp_try = settings.MAX_OTP_TRY
+                    user.otp_max_out = None
+                    user.save()
+                    return Response("Successfully verified the user.", status=status.HTTP_200_OK)
+                elif user.otp_expiry and timezone.now() >= user.otp_expiry:
+                    return Response("OTP has expired. Please generate a new one.", status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    return Response("Please enter the correct OTP.", status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response("User is already active.", status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
     
 
 class RegenerateOTPView(APIView):
@@ -217,7 +222,7 @@ class PasswordResetView(APIView):
 class LogoutAPIView(generics.GenericAPIView):
     serializer_class = LogoutSerializer
 
-    #permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
 
