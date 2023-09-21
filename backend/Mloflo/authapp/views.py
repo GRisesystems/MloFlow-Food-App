@@ -60,8 +60,7 @@ class RegisterView(generics.GenericAPIView):
 class OTPVerificationView(APIView):
     def post(self, request):        
         serializer = OTPVerificationSerializer(data=request.data)
-        if serializer.is_valid():            
-            #otp = serializer.validated_data['otp']            
+        if serializer.is_valid():                       
             email = serializer.validated_data['email'] 
 
             try:
@@ -69,9 +68,6 @@ class OTPVerificationView(APIView):
             except user.DoesNotExist:
                 return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
-            #stored_otp = user.otp  
-            
-            
             if (not user.is_active and user.otp == request.data.get("otp") and user.otp_expiry and timezone.now() < user.otp_expiry):
                 user.is_active = True
                 user.otp_expiry = None
@@ -195,22 +191,20 @@ class PasswordResetView(APIView):
                 new_password = serializer.validated_data['new_password']
                 confirm_password = serializer.validated_data['confirm_password']
                 user = User.objects.get(email = email)
-
-                # Validate the OTP (you should compare it with the stored OTP)                
+                              
                 if otp != user.reset_password_otp:
                     return Response({'error': 'otp do not match'}, status=status.HTTP_400_BAD_REQUEST)
 
-                # Check if the new password and confirm password match
+                
                 if new_password != confirm_password:
                     return Response({'error': 'New passwords do not match'}, status=status.HTTP_400_BAD_REQUEST)
 
-                # If OTP is valid and passwords match, reset the user's password
-                # Update the user's password in your database here
+               
                 password = new_password
                 user.set_password(password)
                 user.save()
 
-                # For demonstration purposes, we'll just print a success message            
+                          
                 return Response({'message': 'Password reset successful'}, status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
@@ -223,7 +217,7 @@ class PasswordResetView(APIView):
 class LogoutAPIView(generics.GenericAPIView):
     serializer_class = LogoutSerializer
 
-    #permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
 
