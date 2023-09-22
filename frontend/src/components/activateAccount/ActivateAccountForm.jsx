@@ -1,20 +1,36 @@
+import { useState } from 'react';
 import { Box, Button, TextField, InputLabel } from '@mui/material'
 import { useNavigate } from 'react-router';
 import { useForm } from "react-hook-form";
 import { useContext } from 'react';
 import { ActivationContext } from '../../utils/ActivationContext'
+import { BASE_URL } from '../signin/constants';
+import axios from 'axios';
+import Alert from '@mui/material/Alert';
 
 const ActivateAccountForm = ({ onClose }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
+    const [showErrorMessage, setShowErrorMessage] = useState(false)
     const { setActivationEmail } = useContext(ActivationContext);
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
-        if (data) {
-            setActivationEmail(data.email);
-            navigate('/activate')
-            onClose()
+        try {
+            const response = await axios.post(`${BASE_URL}/authapp/regenerate-otp/`, data);
+            if (response.status === 200) {
+                setActivationEmail(data.email);
+                navigate('/activate')
+                onClose()
+            } else {
+                setShowErrorMessage(!showErrorMessage)
+            }
+
+        } catch (error) {
+            setShowErrorMessage(!showErrorMessage)
+
         }
+
+
     }
     return (
         <Box sx={{ p: 2 }}>
@@ -24,6 +40,9 @@ const ActivateAccountForm = ({ onClose }) => {
                     handleSubmit(onSubmit)
                 }
             >
+                {showErrorMessage &&
+                    <Alert severity="error">An Error occured, try again</Alert>
+                }
                 <InputLabel required sx={{ fontWeight: 'bold', color: 'black' }}>Email</InputLabel>
                 <TextField
                     placeholder="Enter registered email"

@@ -100,7 +100,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.status === 200) {
         const data = response.data;
-        console.log(data)
+        // console.log(data)
         setIsAuthenticated(true);
         setIsFirstTimeLogin(true);
         setIsProfileComplete(data.is_profile_complete);

@@ -5,6 +5,7 @@ import HireRequestsTab from './HireRequestsTab';
 import PendingRequestsTab from './PendingRequestsTab';
 import HistoryTab from './History';
 import { useAuth } from '../../utils/AuthContext';
+import ChefFirstLoginForm from '../../components/chefs/ChefFirstLoginForm';
 
 const ChefDashboardContainer = styled.div`
   display: flex;
@@ -37,7 +38,8 @@ const CustomTab = styled(Tab)`
 const ChefDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isAvailable, setIsAvailable] = useState(false);
-  useAuth();
+  const { accessToken, updateProfileData,isProfileComplete } = useAuth();
+  // console.log('is profile complete', isProfileComplete)
 
   const handleAvailabilityChange = () => {
     setIsAvailable(!isAvailable);
@@ -58,6 +60,9 @@ const ChefDashboard = () => {
 
   return (
     <ChefDashboardContainer>
+      {/* {
+        isProfileComplete ? <></> : <ChefFirstLoginForm/>
+      } */}
       <AvailabilityContainer>
         <p>Welcome Chef! Your Availability:</p>
         <Switch checked={isAvailable} onChange={handleAvailabilityChange} />
