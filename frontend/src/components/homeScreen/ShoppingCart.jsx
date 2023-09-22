@@ -71,7 +71,7 @@ export default function Cart() {
                 <Link to={'/products'}>
                 <Button><ArrowLeftSharp />  Continue Shopping</Button>
                 </Link>
-                <Link to={'/checkout'}>
+                <Link to={'/checkout-page'}>
                 <Button variant='contained' sx={{ float:'right'}}>Proceed to Checkout</Button>
                 </Link>
               </div>

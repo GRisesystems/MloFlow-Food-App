@@ -78,10 +78,10 @@ const CarouselSlide = ({ image }) => {
         textAlign="center"
         sx={{top:100, left:'25%' }}
       >
-        <Typography variant="h4" sx={{ fontWeight: 700, }}>Welcome to Mloflo, Kenya's Exclusive  Shop for freshly supplied  food stuff.</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 700, }}>Welcome to Mloflow, Kenya's Exclusive  Shop for freshly supplied  food stuff.</Typography>
         <Box mt={2}>
           <Link to={"/products"}>
-          <Button variant="contained" sx={{backgroundColor:'#fbb31d', color:'#0C0B0B'}}>
+          <Button variant="contained" sx={{backgroundColor:'#fbb31d', color:'#0C0B0B', fontWeight:800}}>
             Shop Now
           </Button>
           </Link>

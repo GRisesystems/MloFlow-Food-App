@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 
 const   Faqs = () => {
     return (
-        <Container maxWidth='md'>
+        <Container maxWidth='md' sx={{mt:4}}>
           <Typography variant='h2' sx={{textAlign:'center', mb:3}}> Frequently Asked Questions</Typography>
             <Accordion>
                 <AccordionSummary

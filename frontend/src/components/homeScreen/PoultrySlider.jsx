@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import {useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import {Typography, Button, Container} from '@mui/material';
+import {Typography, Button, Box} from '@mui/material';
 import { CartContext } from "../../context/Cart";  
 import styled from "styled-components";
 import WishlistBtn from "./WishlistBtn";
@@ -95,9 +96,6 @@ padding: 0px;
 `;
 
 const SliderItem = styled.div`
-flex-direction: column;
-  width: 20%;
-  margin: 20px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -110,10 +108,7 @@ flex-direction: column;
   }
 
   @media (max-width: 768px) {
-    flex: 0;
-    flex-direction: column;
-    margin-bottom: 20px;
-    height: auto;
+    width: 80vh;
   }
 
 `;
@@ -161,9 +156,11 @@ const PoultrySlider = () => {
             if (product.category === "Poultry") {
           return (
             <SliderItem key={product.id}>  
+                <Link  to={`/products/${product.id}`} >
               <SliderImage src={product.imageOne} alt={product.name} />
-              <Typography sx={{ fontWeight: 600, color: '#0275d8', fontSize: '1.5rem', textAlign: 'center'}} >{product.name}</Typography>
-              <Container className="price-wish">
+              </Link>
+              <Typography sx={{ fontWeight: 600, color: '#0275d8', fontSize: '1.5rem',}} >{product.name}</Typography>
+              <Box className="price-wish">
               <Typography component="p">{`KES ${product.price}`}</Typography>
               <WishlistBtn
               initialLiked={false}
@@ -172,7 +169,7 @@ const PoultrySlider = () => {
               }}
               amount={product.price}
             />
-              </Container>
+              </Box>
               <Button variant="contained" className="add" onClick={() => {
                 addToCart(product);
               }}>ADD TO CART</Button>

@@ -14,9 +14,11 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
+    "@date-io/date-fns":"^2.0.1",
     "@types/recharts": "^1.8.24",
     "axios": "^1.5.0",
     "country-state-city": "^3.2.0",
+    "formik": "^2.4.5",
     "material-react-table": "^1.14.0",
     "material-ui-popup-state": "^5.0.9",
     "mui-tel-input": "^4.0.0",
@@ -34,7 +36,12 @@
     "react-world-flags": "^1.5.1",
     "recharts": "^2.7.3",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.0.7"
+    "styled-components": "^6.0.7",
+   "date-fns":"^2.9.0",
+   "lodash":"^4.17.15",
+   "moment":"^2.24.0",
+   "prop-types":"^15.7.2",
+   "yup":"^0.28.1"
   },
   "devDependencies": {
     "@types/node": "^20.5.7",
