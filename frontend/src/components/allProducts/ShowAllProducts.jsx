@@ -25,13 +25,13 @@ const  {addToCart}  = useContext(CartContext);
     
   return (
       <Box sx={{ m: 4 }} >
-        <Typography variant="h3" sx={{backgroundColor:'#FBB31D',  mt:4, mb:2, textAlign:'center'}}>All Products </Typography>
+        <Typography variant="h3" sx={{  mt:4, mb:2, textAlign:'center'}}>All Products </Typography>
         {/* #FBB31D, #0C0B0B */}
           <Grid container spacing={1} >
           {products?.map((product) => (
-            <Grid sx={{ display: 'flex', flexWrap: 'wrap', swidth:'16vw', m:2}} key={product.id} >
+            <Grid sx={{ display: 'flex', width:'sm', mr:'auto', ml:'auto', mt:3}} key={product.id} >
               <Card className='custom-card'
-                sx={{ height: 'auto', display: 'flex', flexDirection: 'column' }}
+                sx={{ height: 'auto',  }}
               >
                   
                 <Link  to={`/products/${product.id}`} >
@@ -40,10 +40,9 @@ const  {addToCart}  = useContext(CartContext);
                             component="img"
                             image={product.imageOne}
                             alt={product.name}
-                          />
-                          
+                          />                     
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h3" sx={{textAlign:'center'}}>
+                  <Typography gutterBottom variant="h5" component="h3" >
                     {product.name}
                   </Typography>
                </CardContent>
@@ -62,7 +61,7 @@ const  {addToCart}  = useContext(CartContext);
               amount={product.price} 
             />
                   </CardActions>
-                  <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B'}}
+                  <Button variant='contained' sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', fontWeight:800, width:'100%'}}
                onClick={() => addToCart(product)}>
                 ADD TO CART
             </Button> 

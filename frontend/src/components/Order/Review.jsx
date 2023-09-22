@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
-
+import ApplyCouponAccordion from '../checkout/ApplyCouponAccordion';
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
   { name: 'Card type', detail: 'Visa' },
@@ -25,11 +25,29 @@ export default function Review() {
       <List disablePadding>
         {cartItems.map((product) => (
           <ListItem key={product.id} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.description} />
+            <ListItemText primary={product.quantity} secondary={product.name}  />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
 
         ))}
+        <ListItem sx={{ py: 1, px: 0 }}>
+          <ListItemText primary="Shipping Cost" />
+          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+            {getCartTotal}
+          </Typography>
+        </ListItem>
+        <ListItem sx={{ py: 1, px: 0 }}>
+          <ListItemText primary="VAT(18%)" />
+          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+            {getCartTotal}
+          </Typography>
+        </ListItem>
+        <ListItem sx={{ py: 1, px: 0 }}>
+          <ListItemText primary="Apply Coupon" />
+          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+          <ApplyCouponAccordion />
+          </Typography>
+        </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>

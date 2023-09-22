@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,6 +15,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../context/Cart';
 
 const pages = ['Home', 'Chefs', 'Vendors', 'Farm Produce', 'Contact', 'Blog'];
 
@@ -24,7 +25,7 @@ function NavBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const [produceMenuOpen, setProduceMenuOpen] = useState(false);
-
+  const   {cartItems}  = useContext(CartContext);
   // Step 2: Add an onClick event handler to toggle the produce dropdown menu
   const toggleProduceMenu = () => {
     setProduceMenuOpen(!produceMenuOpen);
@@ -87,7 +88,7 @@ function NavBar() {
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Link to={'/'} sx={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to={'/'} style={{ textDecoration: 'none' }}>
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
@@ -95,7 +96,7 @@ function NavBar() {
               Home
             </Button>
             </Link>
-            <Link to={'/chefs'} sx={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to={'/chefs'} style={{ textDecoration: 'none' }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
@@ -177,9 +178,11 @@ function NavBar() {
                 color="inherit"
 
               >
-                <Badge badgeContent={6} color="error">
+                <Link to={'/shopping-cart'}>
+                <Badge badgeContent={cartItems.length} color="error">
                   <ShoppingCartCheckoutRoundedIcon />
                 </Badge>
+                </Link>
               </IconButton>
               <IconButton
                 size="large"

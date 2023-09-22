@@ -29,9 +29,6 @@ import logo from '../assets/mloflow.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
 import { CartContext } from '../context/Cart';
-// import { Link as RouterLink } from 'react-router-dom';
-
-
 
 
 const drawerWidth = 240;

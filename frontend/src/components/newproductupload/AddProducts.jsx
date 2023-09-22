@@ -12,6 +12,9 @@ const AddProductsForm = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [msg, setMsg] = useState(null)
+    const [progress, setProgress] = useState({started:false, pc:0})
+
     const [category, setCategory] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -33,26 +36,30 @@ const AddProductsForm = () => {
         formField.append('weight', weight)
         formField.append('price', price)
         formField.append('stock', stock)
-        if (imageOne) {
-          formField.append('imageOne', imageOne)
+        if (!imageOne) {
+          setMsg('No file selected!')
+          return;
+        } else {
+        formField.append('imageOne', imageOne)
+      }
+      setMsg('Uploading...')
+      setProgress(prevState => {
+        return {...prevState, started:true}
+      })
+      await axios.post( 'http://localhost:8000/products/', formField, {
+        onUploadProgress: (progressEvent) => {
+          setProgress(prevState => {
+            return { ...prevState, pc: progressEvent.progress*100 }
+          })
         }
-   
-      await axios.post(
-        'http://localhost:8000/products/',
-        {
-        data:{
-          'formField': formField
-        },
-         headers: {
-          'Content-Type': 'multipart/form-data;charset=UTF-8',
-          "Access-Control-Allow-Origin": "*",
-        }
-      }).then((response) => {
+      }
+      ).then((response) => {
         console.log(response.data);
+        setMsg('Upload Successful')
         navigate('/products');
       })
       .catch( (error) => {
-        // handle error
+        setMsg('Upload failed!')
         console.log(error);
       });
     }

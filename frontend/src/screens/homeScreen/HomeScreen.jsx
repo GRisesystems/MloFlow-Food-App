@@ -17,7 +17,7 @@ import FramSlider from "../../components/homeScreen/FarmSlider";
 
 const HomeScreen = () => {
  
-  const categories = [{"image":chef1,name:"Chefs",btn_title:'Hire now'},{"image":farmproducts, name:"Fresh Produce",btn_title:'Shop now'},{"image":food1,name:"Food Delivery",btn_title:'Shop now'}];
+  const categories = [{"image":chef1,name:"Chefs",btn_title:'HIRE NOW'},{"image":farmproducts, name:"Fresh Produce",btn_title:'SHOP NOW'},{"image":food1,name:"Food Delivery",btn_title:'SHOP NOW'}];
 
   return (
     // <Box sx={{display:"flex"}}> flexible container
@@ -46,8 +46,8 @@ const HomeScreen = () => {
       </ul>
 
       <Link to='/farm-produce' style={{ textDecoration: 'none' }}>
-  <button style={{ backgroundColor: 'transparent', color:  '#fbb31d', border: 'none', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 700, display: 'flex', alignItems: 'center' }}>
-    Shop All
+  <button style={{ backgroundColor: 'transparent', color:  '#fbb31d', border: 'none', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 900, display: 'flex', alignItems: 'center' }}>
+    View More
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
       <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
     </svg>
@@ -71,8 +71,8 @@ const HomeScreen = () => {
       </ul>
 
       <Link to='/fish-products' style={{ textDecoration: 'none' }}>
-  <button style={{ backgroundColor: 'transparent', color:  '#fbb31d', border: 'none', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
-    Shop All
+  <button style={{ backgroundColor: 'transparent', color:  '#fbb31d', border: 'none', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 900, display: 'flex', alignItems: 'center' }}>
+    View More
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
       <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
     </svg>
@@ -99,8 +99,8 @@ const HomeScreen = () => {
       </ul>
 
       <Link to='/poultry-products' style={{ textDecoration: 'none' }}>
-  <button style={{ backgroundColor: 'transparent', color:  '#fbb31d', border: 'none', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
-    Shop All
+  <button style={{ backgroundColor: 'transparent', color:  '#fbb31d', border: 'none', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 900, display: 'flex', alignItems: 'center' }}>
+    View More
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
       <path d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
     </svg>

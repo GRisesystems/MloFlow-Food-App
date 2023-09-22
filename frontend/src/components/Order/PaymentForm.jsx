@@ -1,8 +1,5 @@
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import { Accordion, AccordionSummary, AccordionDetails,  Box, Button, Checkbox, FormControlLabel, Grid, Typography,  Stack, TextField} from '@mui/material';
+
 
 export default function PaymentForm() {
   return (
@@ -10,7 +7,13 @@ export default function PaymentForm() {
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
-      <Grid container spacing={3}>
+      <Box maxWidth={500}>
+            <Accordion>
+                <AccordionSummary >
+                    <Typography sx={{ backgroundColor: '#0275d8',  color:'white', width:'fit-content', paddingX:3}} >VISA</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
             required
@@ -54,11 +57,104 @@ export default function PaymentForm() {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
+            control={<Checkbox color="primary" name="saveCard" value="yes" />}
             label="Remember credit card details for next time"
           />
         </Grid>
       </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion>
+                <AccordionSummary >
+                    <Typography sx={{ backgroundColor: 'green', color:'white', width:'fit-content', paddingX:3 }} >MPESA</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography variant='body1' sx={{ mt: 2, mb: 2 }}>
+                        Please enter accurately  your MPESA number in the form  below.
+                    </Typography>
+                    <form action="">
+                        <Stack direction="row" spacing={2}>
+                            <TextField
+                                margin="normal"                                
+                                id="coupon_code"
+                                label="MPESA number"
+                                name="coupon_code"
+                                autoFocus
+                                sx={{ width:'50%',
+                                    "& label.Mui-focused": {
+                                        color: '#000',
+                                    }, "& .MuiOutlinedInput-root": {
+                                        "&.Mui-focused fieldset": {
+                                            borderColor: '#000',
+                                        }
+                                    }
+                                }}
+                            />
+                            <Button
+                                
+                                type="submit"                                
+                                variant="contained"                                
+                                sx={{ "&:hover": { backgroundColor: '#FFA000',} }}
+                            >
+                               Submit
+                            </Button>
+                        </Stack>
+                    </form>
+                    <Grid item xs={12}>
+          <FormControlLabel
+            control={<Checkbox color="primary" name="phone" value="yes" />}
+            label="Remember my phone number for next time"
+          />
+        </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion>
+                <AccordionSummary >
+                    <Typography sx={{ backgroundColor: '#0275d8', color:'white', width:'fit-content', paddingX:3 }} >PayPal</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography variant='body1' sx={{ mt: 2, mb: 2 }}>
+                        Please enter accurately  your  PayPal Email in the form  below.
+                    </Typography>
+                    <form action="">
+                        <Stack direction="row" spacing={2}>
+                            <TextField
+                                margin="normal"                                
+                                id="coupon_code"
+                                label="PayPal Account"
+                                name="coupon_code"
+                                autoFocus
+                                sx={{ width:'50%',
+                                    "& label.Mui-focused": {
+                                        color: '#000',
+                                    }, "& .MuiOutlinedInput-root": {
+                                        "&.Mui-focused fieldset": {
+                                            borderColor: '#000',
+                                        }
+                                    }
+                                }}
+                            />
+                            <Button
+                                disableElevation
+                                type="submit"                                
+                                variant="contained"                                
+                                sx={{ "&:hover": { backgroundColor: '#FFA000',} }}
+                            >
+                               Submit
+                            </Button>
+                        </Stack>
+                    </form>
+                    <Grid item xs={12}>
+          <FormControlLabel
+            control={<Checkbox color="primary" name="paypal" value="yes" />}
+            label="Remember my PayPal account for next time"
+          />
+        </Grid>
+                </AccordionDetails>
+            </Accordion>
+
+        </Box>
+
     </>
   );
 }

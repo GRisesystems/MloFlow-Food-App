@@ -24,6 +24,7 @@ import ContactScreen from './screens/ContactScreen/ContactScreen';
 import Cart from './components/homeScreen/ShoppingCart';
 import WishList from './screens/vendorDashboardScreen/WishList';
 import Checkout from './components/Order/Checkout'
+// import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,9 +49,9 @@ const router = createBrowserRouter(
     <Route path='/wishlist' element={<WishList />}></Route>
     <Route path='/shopping-cart' element={<Cart />}></Route>
     <Route path='faqs' element={<Faqs />}></Route>
-    <Route path='orders' element={<Checkout />}></Route>
+    <Route path='checkout-page' element={<Checkout />}></Route>
     
-      <Route path='/checkout' element={<CheckoutScreen />} />
+      {/* <Route path='/checkout' element={<CheckoutScreen />} /> */}
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/contact' element={<ContactScreen />} />
 
