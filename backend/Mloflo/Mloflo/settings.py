@@ -66,11 +66,9 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
 
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
         # 'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.permissions.IsAdminUser'
-         'rest_framework.permissions.AllowAny'
-    ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.MultiPartParser',  # Ensure this is included
@@ -146,7 +144,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_WHITELIST = True
 
 # Add the specific origins you want to allow in the whitelist
-CORS_ORIGIN_WHITELIST = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 
 ROOT_URLCONF = "Mloflo.urls"
 
@@ -168,7 +166,8 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'django.core.mail.backends.smtp.EmailBackend',
+    #'django.core.mail.backends.smtp.EmailBackend',
+    
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True  
@@ -211,13 +210,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -228,9 +230,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/dist/assets'),
     os.path.join(BASE_DIR, 'static'),
 ]
-
-MEDIA_ROOT  =     os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL  =' /uploads/'
 
 
 MESSAGE_TAGS = {

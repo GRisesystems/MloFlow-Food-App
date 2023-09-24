@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements,  Route, RouterProvider } from 'react-router-dom'
 import HomeScreen from "./screens/homeScreen/HomeScreen"
 import SignInScreen from './screens/SignInScreen/SignInScreen'
 import ActivateAccountScreen from './screens/activateAccountScreen/ActivateAccountScreen'
@@ -13,43 +13,25 @@ import FishProductsScreen from './screens/fishProductsScreen/FishProductsScreen'
 import CookedProductsScreen from './screens/cookedProductsScreen/CookedProductsScreen'
 import PoultryProductsScreen from './screens/poultryProductsScreen/PoultryProductsScreen'
 import ChefsScreen from './screens/chefsScreen/ChefsScreen'
-import EnterEmailScreen from './screens/forgotPasswordScreen/EnterEmailScreen'
-import ForgotPasswordScreen from './screens/forgotPasswordScreen/ForgotPasswordScreen'
-import AdminScreen from './screens/adminScreens'
-import ChefAdminScreen from './screens/adminScreens/ChefAdminScreen'
-import { useAuth } from './utils/AuthContext';
+import Faqs from './components/homeScreen/Faqs';
+// import { useAuth } from './utils/AuthContext';
 import AllProductScreen from './screens/showAllProducts/ShowAllProductsScreen'
 import ProductDetailScreen from './screens/productDetailScreen/ProductDetailScreen';
+
 import BookNowForm from './components/chefs/BookNowForm';
 import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen';
-import Cart from './components/homeScreen/Cart';
-
-
-const ProtectedRoute = ({ element: Element, ...rest }: { element: React.ElementType }) => {
-  const { isAuthenticated } = useAuth();
-
-  if (!isAuthenticated) {
-    localStorage.setItem('redirectAfterLogin', window.location.pathname);
-    return <Navigate to="/login" />;
-  }
-
-  return <Element {...rest} />;
-};
-
-
+import Cart from './components/homeScreen/ShoppingCart';
+import WishList from './screens/vendorDashboardScreen/WishList';
+import Checkout from './components/Order/Checkout'
+// import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Root />}>
       <Route index element={<HomeScreen />} />
       <Route path='/login' element={<SignInScreen />} />
-      <Route path='/admin' element={<AdminScreen />} />
       <Route path='/activate' element={<ActivateAccountScreen />} />
-
-      <Route path="/email-otp" element={<EnterEmailScreen/>} />
-      <Route path="/forgot-password" element={<ForgotPasswordScreen/>} />
-      <Route path='/chef-admin' element={<ChefAdminScreen />} />
       <Route path="/chef-dashboard" element={<ChefDashBoardScreen />} />
       <Route path='/chefs' element={<ChefsScreen/>} />
       <Route path='/chefs/:id' element={<ChefDetailScreen/>} />
@@ -59,13 +41,17 @@ const router = createBrowserRouter(
       <Route path='/fish-products' element={<FishProductsScreen />} />
       <Route path='/poultry-products' element={<PoultryProductsScreen />} />
       <Route path='/cooked-food' element={<CookedProductsScreen />} />
+
       <Route path='/products' element={<AllProductScreen />} />
       <Route path='/products/:id' element={<ProductDetailScreen />} />
-      <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} accessToken={undefined} />} />
-      <Route path='/Cart' element={<Cart onClose={function (): void {
-        throw new Error('Function not implemented.')
-      }} />} />
-      <Route path='/checkout' element={<CheckoutScreen />} />
+      <Route path="/book-now" element={<BookNowForm open={undefined} onClose={undefined} />} />
+
+    <Route path='/wishlist' element={<WishList />}></Route>
+    <Route path='/shopping-cart' element={<Cart />}></Route>
+    <Route path='faqs' element={<Faqs />}></Route>
+    <Route path='checkout-page' element={<Checkout />}></Route>
+    
+      {/* <Route path='/checkout' element={<CheckoutScreen />} /> */}
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/contact' element={<ContactScreen />} />
 

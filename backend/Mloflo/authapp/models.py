@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 
 from django.conf import settings
+
+from rest_framework_simplejwt.tokens import RefreshToken
 # Create your models here.
 
 class UserAccountManager(BaseUserManager):
@@ -73,10 +75,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
-    is_admin = models.BooleanField(default=False)
-    #is_active = models.BooleanField(default=True)
-    #is_staff = models.BooleanField(default=False)
-    #is_superuser = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)    
     if_first_time_login = models.BooleanField(default=True)
     is_profile_complete = models.BooleanField(default=False)
     #Terms_and_condition = models.BooleanField(default=True)
@@ -85,16 +84,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     otp = models.CharField(max_length=6)
     otp_expiry = models.DateTimeField(blank=True, null=True)
     max_otp_try = models.CharField(max_length=2, default=settings.MAX_OTP_TRY)
-    otp_max_out = models.DateTimeField(blank=True, null=True)  
-
-
-
-    # {
-    #     'category':'',
-    #     'is_first_time_login':'True/False',
-    #     'access_token':""
-    #     'refresh_token':""
-    # }
+    otp_max_out = models.DateTimeField(blank=True, null=True)
+    
+    reset_password_otp = models.CharField(max_length=6)   
     
    
     
@@ -108,3 +100,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    def tokens(self):
+        refresh = RefreshToken.for_user(self)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token)
+        }

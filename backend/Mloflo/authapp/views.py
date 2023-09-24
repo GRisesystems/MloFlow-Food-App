@@ -1,124 +1,90 @@
-
 from rest_framework.response import Response
-
-
-
-from .tokens import create_jwt_pair_for_user
 from rest_framework.views import APIView
 from rest_framework.request import Request
-from django.contrib.auth import authenticate,get_user_model
 from rest_framework import generics, status
-from django.utils.encoding import force_str
-#from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
-#from django.utils.encoding import force_bytes
-from django.contrib.auth.tokens import default_token_generator
-#from django.contrib import messages
-#from django.shortcuts import redirect
-
-
-from django.shortcuts import render
 from rest_framework import generics, status, views, permissions
 from .serializers import RegisterSerializer 
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 from .utils import Util
-from django.contrib.sites.shortcuts import get_current_site
-from django.urls import reverse
-import jwt
 from django.conf import settings
-#from drf_yasg.utils import swagger_auto_schema
-#from drf_yasg import openapi
-#from .renderers import UserRenderer
-#from django.contrib.auth.tokens import PasswordResetTokenGenerator
-#from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
-#from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-#from django.contrib.sites.shortcuts import get_current_site
-#from django.urls import reverse
 from .utils import Util
-from django.shortcuts import redirect
-from django.http import HttpResponsePermanentRedirect
-import os
-
-
 import datetime
 import random
-
 from django.conf import settings
 from django.utils import timezone
 from rest_framework import status, viewsets
-from rest_framework.decorators import action
 from rest_framework.response import Response
-
-from rest_framework.decorators import api_view
-
-
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User  
-from .serializers import OTPVerificationSerializer, RegenerateOTPSerializer
-
+from .serializers import OTPVerificationSerializer, RegenerateOTPSerializer, LoginSerializer, PasswordResetRequestSerializer, PasswordResetSerializer , LogoutSerializer
 from datetime import datetime, timedelta
 from django.core.exceptions import ObjectDoesNotExist
 
-#from django.views.decorators.csrf import csrf_exempt
+
 
 
 
 class RegisterView(generics.GenericAPIView):
-
     serializer_class = RegisterSerializer
-    
 
     def post(self, request):
-        user = request.data
-        serializer = self.serializer_class(data=user)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        user_data = serializer.data
-        user = User.objects.get(email=user_data['email'])        
-        otp = user.otp        
-        email_body = 'Hi '+user.first_name + \
-            ' your OTP is \n' + otp
-        data = {'email_body': email_body, 'to_email': user.email,
-                'email_subject': 'Verify your email'}
+        try:
+            user_data = request.data
+            serializer = self.serializer_class(data=user_data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            user_data = serializer.data
 
-        Util.send_email(data)
-        return Response(user_data, status=status.HTTP_201_CREATED)
-    
+            user = User.objects.get(email=user_data['email'])
+            otp = user.otp
+            email_body = 'Hi ' + user.first_name + \
+                ' your OTP is \n' + otp
+            data = {'email_body': email_body, 'to_email': user.email,
+                    'email_subject': 'Verify your email'}
+
+            Util.send_email(data)
+
+            return Response(user_data, status=status.HTTP_201_CREATED)
+
+        except Exception as e:            
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
 
 
 
 class OTPVerificationView(APIView):
-    def post(self, request):        
+    def post(self, request):
         serializer = OTPVerificationSerializer(data=request.data)
-        if serializer.is_valid():            
-            otp = serializer.validated_data['otp']            
-            email = serializer.validated_data['email'] 
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            otp = request.data.get("otp")
 
             try:
-                user = User.objects.get(email=email)  
-            except user.DoesNotExist:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
                 return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
-            stored_otp = user.otp  
-            
-            
-            if (not user.is_active and otp == request.data.get("otp") and user.otp_expiry and timezone.now() < user.otp_expiry):
-                user.is_active = True
-                user.otp_expiry = None
-                user.max_otp_try = settings.MAX_OTP_TRY
-                user.otp_max_out = None
-                user.save()
-                return Response(
-                "Successfully verified the user.", status=status.HTTP_200_OK
-                )
-            return Response("User active or Please enter the correct OTP.", status=status.HTTP_400_BAD_REQUEST,)
-            
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+            if not user.is_active:
+                if user.otp == otp and user.otp_expiry and timezone.now() < user.otp_expiry:
+                    user.is_active = True
+                    user.otp_expiry = None
+                    user.max_otp_try = settings.MAX_OTP_TRY
+                    user.otp_max_out = None
+                    user.save()
+                    return Response("Successfully verified the user.", status=status.HTTP_200_OK)
+                elif user.otp_expiry and timezone.now() >= user.otp_expiry:
+                    return Response("OTP has expired. Please generate a new one.", status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    return Response("Please enter the correct OTP.", status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response("User is already active.", status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
     
 
 class RegenerateOTPView(APIView):
@@ -177,66 +143,92 @@ class RegenerateOTPView(APIView):
 
 
 
-class LoginView(APIView):
-    permission_classes = []
+class LoginAPIView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
 
-    def post(self, request: Request):
-        email = request.data.get("email")
-        password = request.data.get("password")
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    
 
-        user = authenticate(email=email, password=password)
 
-        if user is not None:
-            if user.last_login is not None:
-                user.if_first_time_login = False
+class PasswordResetRequestView(APIView):
+    def post(self, request):
+        try:
+            serializer = PasswordResetRequestSerializer(data=request.data)
+            if serializer.is_valid():
+                email = serializer.validated_data['email']
+                otp = random.randint(100000, 999999)
+                            
+                user = User.objects.get(email=email)
+                user.reset_password_otp = otp
+                user.save()
+                
+                subject = 'Your OTP for password reset'
+                email_body = f'Your OTP is: {otp}'
+                data = {'email_body': email_body, 'to_email': user.email,
+                                'email_subject': subject}
+
+                # Send the OTP to the user via email
+                Util.send_email(data)
+
+                return Response({'message': 'OTP sent successfully'}, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+        
+
+class PasswordResetView(APIView):
+    def post(self, request):
+        try:
+            serializer = PasswordResetSerializer(data=request.data)
+            if serializer.is_valid():
+                email = serializer.validated_data['email']
+                otp = serializer.validated_data['otp']
+                new_password = serializer.validated_data['new_password']
+                confirm_password = serializer.validated_data['confirm_password']
+                user = User.objects.get(email = email)
+                              
+                if otp != user.reset_password_otp:
+                    return Response({'error': 'otp do not match'}, status=status.HTTP_400_BAD_REQUEST)
+
+                
+                if new_password != confirm_password:
+                    return Response({'error': 'New passwords do not match'}, status=status.HTTP_400_BAD_REQUEST)
+
+               
+                password = new_password
+                user.set_password(password)
                 user.save()
 
-            tokens = create_jwt_pair_for_user(user)
-            email = user.email
-            first_name = user.first_name
-            surname = user.surname
-            if_first_time_login = user.if_first_time_login
-            is_profile_complete = user.is_profile_complete
-            category = user.category
+                          
+                return Response({'message': 'Password reset successful'}, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+        
+class LogoutAPIView(generics.GenericAPIView):
+    serializer_class = LogoutSerializer
 
-            response = {"tokens": tokens, "email": email, "first_name": first_name, "surname": surname,
-                        "category": category, "first_time_login": if_first_time_login, 'is_profile_complete': is_profile_complete}
-            return Response(data=response, status=status.HTTP_200_OK)
+    permission_classes = (permissions.IsAuthenticated,)
 
-        else:
-            return Response(data={"message": "Invalid email or password"})
+    def post(self, request):
 
-    def get(self, request: Request):
-        content = {"user": str(request.user), "auth": str(request.auth)}
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
 
-        return Response(data=content, status=status.HTTP_200_OK)
-
-
-#def activate_account(request, uidb64, token):
-    # Account Activation link
-   # User = get_user_model()
-   # try:
-        # Decode the user ID from the URL
-       # uid = force_str(urlsafe_base64_decode(uidb64))
-
-        # Get the user associated with the ID
-        #user = User.objects.get(pk=uid)
-
-        # Verify the token
-       # if default_token_generator.check_token(user, token):
-            # Activate the user's account
-          #  user.is_active = True
-           # user.save()
-
-            # Redirect to success or login page
-           # messages.success(
-              #  request, 'Account Activated successfully. You can now login', extra_tags='success')
-            ##return redirect('redirect_home_view')
-       # else:
-            # Invalid token, show an error page or redirect to an error page
-         #   messages.error(request, 'Invalid token', extra_tags='danger')
-        #    return redirect('redirect_home_view')
-   # except (User.DoesNotExist, ValueError, TypeError):
-        # User not found or invalid URL, show an error page or redirect to an error page
-       # messages.error(request, 'Account does not exist', extra_tags='danger')
-       # return redirect('redirect_home_view')
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    

@@ -24,18 +24,16 @@ flex: 0;
 flex-direction:column;/* Full width on smaller screens 
 margin-bottom: 20px; /* Add some space between items
 height: auto;
-} */ */
+} */ 
 
 
-.MuiContainer-root{
-  margin: 0;
-  padding: 0;
-}
 .MuiContainer-root h3{
   font-weight: 600;
   color: #0275d8;
   font-size: 1.5rem;
-  text-align: center;
+}
+.MuiButton-root  a {
+  text-decoration: none !important;
 }
 .MuiContainer-root .price-wish {
   display: flex;
@@ -44,7 +42,7 @@ height: auto;
 }
 .MuiContainer-root .price-wish  p{
   font-weight: 600;
-  margin-right: 5.2rem;
+  margin-right: 48%;
   left: 0 !important;
   font-size: 1.02rem;
 }
@@ -52,6 +50,77 @@ height: auto;
 .MuiContainer-root  .add{
   background-color: #FFB31D;
   color: #0C0B0B;;
-  font-weight: 600;
+  font-weight: 800;
   width: 100%;
+}
+.MuiContainer-root.cart {
+  padding: 12spx;
+  margin-top: 1rem;
+  }
+.MuiContainer-root.shopping  {
+  display: flex;
+}
+.MuiTypography-root.cart-title {
+  font-size: 2.4rem;
+}
+/* .MuiTypography-root.cart-title  span{
+  text-decoration: underline;
+  text-decoration-color: #FFB31D;
+} */
+.MuiButton-root.a {
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.MuiButton-root.empty-cart{
+ background-color: #FFB31D;
+ color: #0C0B0B;
+  margin-left: 57%;
+  margin-bottom: 10px;
+}
+.MuiContainer-root .quantity-control, .MuiContainer-root .shopping  {
+  display: flex;
+}
+.MuiContainer-root .quantity-control  {
+align-items: center;
+justify-content: center;
+text-align: center;
+
+}
+.MuiContainer-root .quantity-control .item-quantity  {
+  font-size: 1.4rem;
+  color: #FFB31D;
+  font-weight: 700;
+  margin: 0 12px;
+}
+.MuiContainer-root .cart-footer{
+ background-color: #FFB31D;
+ font-weight: 900;
+ font-size: 2.2rem;
+}
+.MuiContainer-root .cart-footer span{
+float: right !important;
+margin-right: 4rem;
+}
+.MuiContainer-root .cart-footer .cart-empty {
+text-align: center;
+}
+
+.MuiCard-root.custom-card a h4{
+  left:0;
+  opacity:0;
+  top: 0;
+  display:flex;
+  width: 100%;
+  height: 100%;
+  color:#fbb31d;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3 ease-in;
+  background-color: rgba(44, 43, 43, 0.79);
+}
+
+.MuiCard-root.custom-card:hover a h4 {
+  opacity: 1;
 }
