@@ -105,48 +105,63 @@ const HireRequestsTab = ( onMoveRequest, onSelectRequest ) => {
             <TableRow>
               <StyledTableCell>Request ID</StyledTableCell>
               <StyledTableCell>First Name</StyledTableCell>
-              {/* ... (other table headers) */}
+              <StyledTableCell>Surname</StyledTableCell>
+              <StyledTableCell>Specialty</StyledTableCell>
+              <StyledTableCell>Occasion</StyledTableCell>
+              <StyledTableCell>Location</StyledTableCell>
+              <StyledTableCell>Start Date</StyledTableCell>
+              <StyledTableCell>End Date</StyledTableCell>
+              <StyledTableCell>Actions</StyledTableCell>
+              
             </TableRow>
           </TableHead>
+          
           <TableBody>
-            {hireRequestsData.map((request) => (
-              <TableRow key={request.requestId} onClick={() => onSelectRequest(request.requestId)}>
-                {/* ... (other table cells) */}
-                <StyledTableCell>
-                  <ButtonContainer>
-                    {acceptedRequests.includes(request.requestId) || deniedRequests.includes(request.requestId) ? (
-                      <span>Done</span>
-                    ) : (
-                      <>
-                        <Button
-                          variant="outlined"
-                          style={{ backgroundColor: '#fbb31d', color: 'black' }}
-                          onClick={() => {
-                            setAcceptedRequests([...acceptedRequests, request.requestId]);
-                            // Clear selected request
-                            onSelectRequest(null);
-                          }}
-                        >
-                          Accept
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          style={{ backgroundColor: 'black', color: '#fbb31d' }}
-                          onClick={() => {
-                            setDeniedRequests([...deniedRequests, request.requestId]);
-                            // Clear selected request
-                            onSelectRequest(null);
-                          }}
-                        >
-                          Deny
-                        </Button>
-                      </>
-                    )}
-                  </ButtonContainer>
-                </StyledTableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+  {hireRequestsData.map((request) => (
+    <TableRow key={request.requestId} onClick={() => onSelectRequest(request.requestId)}>
+      <StyledTableCell>{request.requestId}</StyledTableCell>
+      <StyledTableCell>{request.firstName}</StyledTableCell>
+      <StyledTableCell>{request.surname}</StyledTableCell>
+      <StyledTableCell>{request.specialty}</StyledTableCell>
+      <StyledTableCell>{request.occasion}</StyledTableCell>
+      <StyledTableCell>{request.location}</StyledTableCell>
+      <StyledTableCell>{request.startDate}</StyledTableCell>
+      <StyledTableCell>{request.endDate}</StyledTableCell>
+      <StyledTableCell>
+        <ButtonContainer>
+          {acceptedRequests.includes(request.requestId) || deniedRequests.includes(request.requestId) ? (
+            <span>Done</span>
+          ) : (
+            <>
+              <Button
+                variant="outlined"
+                style={{ backgroundColor: '#fbb31d', color: 'black' }}
+                onClick={() => {
+                  setAcceptedRequests([...acceptedRequests, request.requestId]);
+                  // Clear selected request
+                  onSelectRequest(null);
+                }}
+              >
+                Accept
+              </Button>
+              <Button
+                variant="outlined"
+                style={{ backgroundColor: 'black', color: '#fbb31d' }}
+                onClick={() => {
+                  setDeniedRequests([...deniedRequests, request.requestId]);
+                  // Clear selected request
+                  onSelectRequest(null);
+                }}
+              >
+                Deny
+              </Button>
+            </>
+          )}
+        </ButtonContainer>
+      </StyledTableCell>
+    </TableRow>
+  ))}
+</TableBody>
         </StyledTable>
       </StyledTableContainer>
     </Container>

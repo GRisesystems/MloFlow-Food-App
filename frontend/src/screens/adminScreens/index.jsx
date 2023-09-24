@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
+import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -17,6 +18,7 @@ import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import { LuChefHat } from 'react-icons/lu';
 import { GiFruitBowl } from 'react-icons/gi';
 import { ImUsers } from 'react-icons/im';
+
 
 
 const drawerWidth = 240;
@@ -52,13 +54,14 @@ export default function ResponsiveDrawer() {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <LuChefHat />
-            </ListItemIcon>
-            <ListItemText primary="Chefs" />
-          </ListItemButton>
-        </ListItem>
+  <ListItemButton component={Link} to="/chef-admin">
+    <ListItemIcon>
+      <LuChefHat />
+    </ListItemIcon>
+    <ListItemText primary="Chefs" />
+  </ListItemButton>
+</ListItem>
+
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
