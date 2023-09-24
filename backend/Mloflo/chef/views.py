@@ -19,13 +19,6 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
-class ChefChargeViewSet(viewsets.ModelViewSet):
-    queryset = ChefCharge.objects.all()
-    serializer_class = ChefChargeSerializer
-
-class OccasionViewSet(viewsets.ModelViewSet):
-    queryset = Occasion.objects.all()
-    serializer_class = OccasionSerializer
 
 # chef update info test view
 
