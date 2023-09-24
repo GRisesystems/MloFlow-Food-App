@@ -19,7 +19,7 @@ import {
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import ChefCard from '../../components/chefs/ChefCard';
+
 
 
 
