@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Card,
   CardContent,
-  Grid,
+
   Table,
   TableBody,
   TableCell,
@@ -232,7 +232,7 @@ const ChefAdminScreen = () => {
   const [filter, setFilter] = React.useState('All');
 
   // Function to handle filter change
-  const handleFilterChange = (event) => {
+  const handleFilterChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setFilter(event.target.value);
   };
 
@@ -246,7 +246,7 @@ const ChefAdminScreen = () => {
   });
 
   // Function to handle search text change
-  const handleSearchTextChange = (event) => {
+  const handleSearchTextChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setSearchText(event.target.value);
   };
 
@@ -261,6 +261,8 @@ const ChefAdminScreen = () => {
   const handleDetailsPageNavigation = (id: any) => {
     navigate(`/chefs/${id}`);
 };
+
+
   return (
     <GlobalStyles>
       <RootContainer>
@@ -333,11 +335,6 @@ const ChefAdminScreen = () => {
               label="Filter"
             >
               <MenuItem value="All">All</MenuItem>
-              <MenuItem value="Available">Available</MenuItem>
-              <MenuItem value="Unavailable">Unavailable</MenuItem>
-              <MenuItem value="Kenyan Dishes">Kenyan Dishes</MenuItem>
-              <MenuItem value="International Dishes">International Dishes</MenuItem>
-              <MenuItem value="Pasteries">Pasteries</MenuItem>
               {/* Add more filter options as needed */}
             </Select>
           </FormControl>
@@ -348,12 +345,12 @@ const ChefAdminScreen = () => {
           <Table>
             <TableHead>
               <TableRow>
-              <BoldTableCell>Chef Name</BoldTableCell>
-        <BoldTableCell>Specialty</BoldTableCell>
-        <BoldTableCell>Phone Number</BoldTableCell>
-        <BoldTableCell>Email</BoldTableCell>
-        <BoldTableCell>Location</BoldTableCell>
-        <BoldTableCell>Action</BoldTableCell>
+                <BoldTableCell>Chef Name</BoldTableCell>
+                <BoldTableCell>Specialty</BoldTableCell>
+                <BoldTableCell>Phone Number</BoldTableCell>
+                <BoldTableCell>Email</BoldTableCell>
+                <BoldTableCell>Location</BoldTableCell>
+                <BoldTableCell>Action</BoldTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -365,22 +362,13 @@ const ChefAdminScreen = () => {
                   <TableCell>{chef.email}</TableCell>
                   <TableCell>{chef.location}</TableCell>
                   <TableCell>
-                    <ActionButton onClick={() => handleDetailsPageNavigation(1)}>View Details</ActionButton>
+                    <ActionButton onClick={() => handleDetailsPageNavigation(chef.id)}>View Details</ActionButton>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainerStyled>
-        <ChefCard
-                      chef_name={chef.chefName}
-                      status={/* Add status property here */}
-                      handleOpenDialog={handleOpenDialog}
-                      handleCloseDialog={handleCloseDialog}
-                      handleTermsAcceptance={handleTermsAcceptance}
-                      handleContinueBooking={handleContinueBooking}
-                      isBookingFormOpen={isBookingFormOpen}
-                    />
       </RootContainer>
     </GlobalStyles>
   );

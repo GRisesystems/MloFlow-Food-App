@@ -13,8 +13,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.3",
-    "@mui/material": "^5.14.4",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.10",
     "@syncfusion/ej2-react-dropdowns": "^23.1.36",
     "@types/recharts": "^1.8.24",
     "axios": "^1.5.0",

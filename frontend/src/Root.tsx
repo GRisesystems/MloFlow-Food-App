@@ -1,7 +1,7 @@
 // TopNav, NavBar and Footer sections
 import { Outlet } from 'react-router-dom'
-// import TopNav from './includes/TopNav'
-// import NavBar from './includes/NavBar'
+import TopNav from './includes/TopNav'
+import NavBar from './includes/NavBar'
 // import { FooterContainer } from './includes/Footer'
 import {AuthProvider} from './utils/AuthContext'
 // import Cart from './components/homeScreen/Cart/Cart'
@@ -11,8 +11,8 @@ const Root = () => {
     // <CartContext.Provider value={Cart}>
     <AuthProvider>
      
-        {/* <TopNav/>         
-       <NavBar/> */}
+        <TopNav/>         
+       <NavBar/>
             <Outlet/>
         {/* <FooterContainer />        */}
         {/* <Cart onClose={function (): void {
