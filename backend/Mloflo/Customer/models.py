@@ -17,6 +17,12 @@ class Customer(models.Model):
         return f'{self.customer.first_name} {self.customer.surname}'
     
 class ChefBooking(models.Model):
+    STATUS_CHOICES = (
+        ('new', 'New'),
+        ('pending', 'Pending'),
+        ('denied', 'Denied'),
+        ('history', 'History'),
+    )
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     chef = models.ForeignKey(User, on_delete=models.CASCADE, related_name='booked_by_chef')
@@ -29,6 +35,7 @@ class ChefBooking(models.Model):
     noOfGuests = models.IntegerField(default=10)
     start_date = models.DateField()
     end_date = models.DateField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedt = models.DateTimeField(auto_now=True)
 

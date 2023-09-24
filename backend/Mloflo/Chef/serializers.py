@@ -25,3 +25,13 @@ class ChefSerializer(serializers.ModelSerializer):
         for certification_data in certifications_data:
             Certification.objects.create(Chef=Chef, **certification_data)
         return Chef
+
+class ChefChargeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChefCharge
+        fields = '__all__'
+
+class OccasionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Occasion
+        fields = '__all__'

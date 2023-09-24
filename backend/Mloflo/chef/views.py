@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from authapp.models import User
-from .models import Chef, Chef_certification, Review
-from .serializers import ChefSerializer, ReviewSerializer
+from .models import Chef, Chef_certification, Review, ChefCharge, Occasion
+from .serializers import ChefSerializer, ReviewSerializer, ChefChargeSerializer, OccasionSerializer
 
 # test view imports
 from rest_framework import status
@@ -19,6 +19,13 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
+class ChefChargeViewSet(viewsets.ModelViewSet):
+    queryset = ChefCharge.objects.all()
+    serializer_class = ChefChargeSerializer
+
+class OccasionViewSet(viewsets.ModelViewSet):
+    queryset = Occasion.objects.all()
+    serializer_class = OccasionSerializer
 
 # chef update info test view
 
@@ -65,32 +72,3 @@ def update_chef_info_test(request):
     return Response(context, status=status.HTTP_201_CREATED)
 
 
-# from django.shortcuts import render
-# from . models import *
-# from rest_framework.decorators import api_view
-# from rest_framework.response import Response
-# from . serializers import *
-
-# from drf_spectacular.utils import extend_schema
-
-# # Create your views here.
-# @extend_schema(responses=ChefSerializer)
-# @api_view(["POST"])
-# def chefInfo(request):
-
-#     if request.method =="POST":
-#         serializer = ChefSerializer(data =request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-
-#     return Response(serializer.data)
-
-# @extend_schema(responses=ChefSerializer)
-# @api_view(["GET"])
-# def getChef(request):
-
-#     #permission_classes = [IsAuthenticated]
-#     chef = Chef.objects.all()
-#     serializer = ChefSerializer(chef, many = True)
-
-#     return Response(serializer.data)
