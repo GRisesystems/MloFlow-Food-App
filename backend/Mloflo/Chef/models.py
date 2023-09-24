@@ -66,3 +66,22 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.chef} by {self.reviewer}"
+    
+class Occasion(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    occasion_name = models.CharField(max_length=255, unique=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    #date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.occasion_name
+
+class ChefCharge(models.Model):
+    chef = models.ForeignKey(User, on_delete=models.CASCADE)
+    occasion = models.ForeignKey(Occasion, on_delete=models.CASCADE, to_field='occasion_name')
+    amount_charged = models.DecimalField(max_digits=10, decimal_places=2)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.chef.first_name} - {self.occasion}"
