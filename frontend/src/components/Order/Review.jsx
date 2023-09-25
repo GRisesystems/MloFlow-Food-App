@@ -7,6 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 import ApplyCouponAccordion from '../checkout/ApplyCouponAccordion';
+
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
   { name: 'Card type', detail: 'Visa' },
@@ -31,15 +32,15 @@ export default function Review() {
 
         ))}
         <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Shipping Cost" />
+          <ListItemText primary="Delivery Cost" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {getCartTotal}
+            0.00
           </Typography>
         </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="VAT(18%)" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {getCartTotal}
+           0.00
           </Typography>
         </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
@@ -51,7 +52,7 @@ export default function Review() {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {getCartTotal}
+                KES  {getCartTotal()}
           </Typography>
         </ListItem>
       </List>

@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 
 export const FavoriteContext = createContext()
 
-export const Provider = ({ children }) => {
+export const FavoriteProvider = ({ children }) => {
   const [favoriteItems, setFavoriteItems] = useState(localStorage.getItem('favoriteItems') ? JSON.parse(localStorage.getItem('favoriteItems')) : [])
 
   const addToFavorites = (item) => {
@@ -58,10 +58,10 @@ export const Provider = ({ children }) => {
         favoriteItems,
         addToFavorites,
         removeFromFavorites,
-        clearFavorites,
+        clearFavorites
       }}
     >
-      {children}
+       {children}
     </FavoriteContext.Provider>
   );
 };

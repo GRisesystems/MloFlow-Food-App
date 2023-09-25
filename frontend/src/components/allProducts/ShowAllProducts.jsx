@@ -1,7 +1,7 @@
 import  {useContext, useState, useEffect} from 'react';
 import { Box, Button, Card, CardActions, CardActionArea, CardContent, CardMedia, Grid,  Typography } from '@mui/material';
 import axios from 'axios';
-// import { CartContext } from '../../Context/CartContext'; 
+// import { FavoriteContext } from '../../wishContext/FavoritesList';
 import { CartContext } from '../../context/Cart';
 import WishlistButton from '../homeScreen/WishlistBtn';
 import "./styles.css";
@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 
 const ShowAllProducts = () => {
 
-const  {addToCart}  = useContext(CartContext);
+// const  {addToFavorites}  = useContext(FavoriteContext)
+const  {addToCart}  = useContext(CartContext)
  
     const [products, setProducts] = useState([])
 
@@ -57,6 +58,7 @@ const  {addToCart}  = useContext(CartContext);
               initialLiked={false}
               onToggleLike={() => {
                 // Handle like toggle logic here
+                // {addToFavorites(product)}
               }}
               amount={product.price} 
             />

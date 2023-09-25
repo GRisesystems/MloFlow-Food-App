@@ -29,7 +29,8 @@ export default function Cart() {
             <th>Image</th>
             <th>Quantity</th>
             <th>Add to Favourites</th>
-            <th>Price (KES)</th>
+            <th>Unit Price (KES)</th>
+            <th>Sub Total (KES)</th>
           </tr>
         </thead>
     {cartItems.map((item) => (
@@ -53,7 +54,10 @@ export default function Cart() {
                 <WishlistButton></WishlistButton>
             </td>
             <td>
-            <p className="price">{item.price}</p>
+            <p >{item.price}</p>
+            </td>
+            <td>
+            <p className="price">{item.price * item.quantity}</p>
             </td>
           </tr>
         </tbody>

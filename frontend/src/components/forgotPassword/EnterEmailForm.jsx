@@ -55,7 +55,7 @@ const EnterEmailForm = () => {
                             }
                         }
                         color="success"
-                        type="submit">Get otp
+                        type="submit">Get OTP
                     </Button>
 
                 </Box>

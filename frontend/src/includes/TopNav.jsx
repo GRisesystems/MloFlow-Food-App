@@ -29,6 +29,7 @@ import logo from '../assets/mloflow.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
 import { CartContext } from '../context/Cart';
+// import { FavoriteContext } from '../wishContext/FavoritesList';
 
 
 const drawerWidth = 240;
@@ -74,12 +75,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 export default function ClippedDrawer() {
 
-  // const { cart } = useCart(); // Access the cart data
   const { isAuthenticated, logout,first_name } = useAuth();
   console.log('first name')
   console.log(first_name)
   const theme = useTheme()
   const   {cartItems}  = useContext(CartContext);
+  // const   {favoriteItems}  = useContext(FavoriteContext);
   const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 

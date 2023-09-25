@@ -12,8 +12,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { Link } from 'react-router-dom';
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Delivery address', 'Payment details', 'Review your order'];
 
 function getStepContent(step) {
   switch (step) {
@@ -61,11 +62,14 @@ export default function Checkout() {
               <Typography variant="h5" gutterBottom>
                 Thank you for your order.
               </Typography>
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" sx={{mb:3}}>
                 Your order number is #2001539. We have emailed your order
                 confirmation, and will send you an update when your order has been
-                shipped.
+                delivered.
               </Typography>
+              <Button variant='contained'  >
+                <Link to={'/'} color='white'> Home</Link>
+              </Button>
             </React.Fragment>
           ) : (
             <React.Fragment>
