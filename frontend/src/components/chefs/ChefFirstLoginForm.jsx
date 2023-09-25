@@ -41,7 +41,7 @@ const ChefFirstLoginForm = () => {
     const [previewImage, setPreviewImage] = useState(undefined);
     const inputRef = useRef(null);
     const [showFileUpload, setShowFileUpload] = useState(false);
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const [additionalFileData, setAdditionalFileData] = useState([]);
 
@@ -95,6 +95,7 @@ const ChefFirstLoginForm = () => {
         formData.append('state', data.state);
         formData.append('speciality', data.speciality);
         formData.append('profile_picture', selectedImage);
+        
 
         // Iterate through additionalFileData and append each certification as a separate field
         additionalFileData.forEach((certification, index) => {

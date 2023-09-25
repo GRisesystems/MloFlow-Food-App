@@ -1,29 +1,26 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-import { LuChefHat } from 'react-icons/lu';
-import { GiFruitBowl } from 'react-icons/gi';
-import { ImUsers } from 'react-icons/im';
-
 
 const drawerWidth = 240;
 
-
-
-export default function ResponsiveDrawer() {
+function ResponsiveDrawer(props) {
+  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -35,40 +32,30 @@ export default function ResponsiveDrawer() {
       <Toolbar />
       <Divider />
       <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <DashboardCustomizeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <ImUsers />
-            </ListItemIcon>
-            <ListItemText primary="Registered users" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <LuChefHat />
-            </ListItemIcon>
-            <ListItemText primary="Chefs" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <GiFruitBowl />
-            </ListItemIcon>
-            <ListItemText primary="Produce" />
-          </ListItemButton>
-        </ListItem>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
       </List>
       <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 
@@ -95,7 +82,7 @@ export default function ResponsiveDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Admin Dashboard
+            Responsive drawer
           </Typography>
         </Toolbar>
       </AppBar>
@@ -167,3 +154,13 @@ export default function ResponsiveDrawer() {
     </Box>
   );
 }
+
+ResponsiveDrawer.propTypes = {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
+export default ResponsiveDrawer;

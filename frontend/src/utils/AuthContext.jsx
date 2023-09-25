@@ -45,6 +45,11 @@ export const AuthProvider = ({ children }) => {
     return storedAccessToken || '';
   });
 
+  const [category, setCategory] = useState(() => {
+    const storedCategory = localStorage.getItem('category');
+    return storedCategory || '';
+  });
+
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -106,16 +111,18 @@ export const AuthProvider = ({ children }) => {
         setIsProfileComplete(data.is_profile_complete);
         setFirstName(data.first_name)
         setSurname(data.surname)
+        setCategory(data.category)
         setLoading(false);
 
         setAccessToken(data.tokens.access);
 
         localStorage.setItem('first_name', data.first_name);
         localStorage.setItem('surname', data.surname);
+        localStorage.setItem('category', data.category);
 
         localStorage.setItem('is_profile_complete', data.is_profile_complete);
 
-        return { ...data, first_name, surname };
+        return { ...data, first_name, surname,category };
       } else {
         setErrorMessage('Invalid email or password');
       }
@@ -129,6 +136,9 @@ export const AuthProvider = ({ children }) => {
     setIsFirstTimeLogin(false);
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('first_name');
+    localStorage.removeItem('surname');
+    localStorage.removeItem('category');
   };
 
   return (
@@ -145,6 +155,7 @@ export const AuthProvider = ({ children }) => {
         accessToken,
         isProfileComplete,
         updateProfileData,
+        category
       }}
     >
       {children}

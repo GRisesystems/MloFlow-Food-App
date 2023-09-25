@@ -35,7 +35,7 @@ const ActivateAccountScreen = () => {
     try {
       const response = await axios.post(`${BASE_URL}/authapp/verify-otp/`, otp_data)
       if (response.status === 200) {
-        navigate('/sign-in')
+        navigate('/login')
       }
     } catch (error) {
       setShowAlert(!showAlert)
@@ -100,6 +100,7 @@ const ActivateAccountScreen = () => {
         >
           Clear
         </Button>
+        
         {showRegenerateOtpBtn ?
           <Button
             variant="contained"

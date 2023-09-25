@@ -60,9 +60,9 @@ const ChefDashboard = () => {
 
   return (
     <ChefDashboardContainer>
-      {/* {
+      {
         isProfileComplete ? <></> : <ChefFirstLoginForm/>
-      } */}
+      }
       <AvailabilityContainer>
         <p>Welcome Chef! Your Availability:</p>
         <Switch checked={isAvailable} onChange={handleAvailabilityChange} />
