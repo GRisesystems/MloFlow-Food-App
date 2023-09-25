@@ -21,7 +21,7 @@ class ChefBooking(models.Model):
         ('new', 'New'),
         ('pending', 'Pending'),
         ('denied', 'Denied'),
-        ('history', 'History'),
+        ('completed', 'Completed'),
     )
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
