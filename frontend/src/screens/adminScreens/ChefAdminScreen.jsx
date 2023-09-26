@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
-
   Table,
   TableBody,
   TableCell,
@@ -20,9 +19,6 @@ import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 
-
-
-
 const RootContainer = styled.div`
   padding: 20px;
   background-color: #f5f5f5; /* Light gray background color */
@@ -32,13 +28,6 @@ const RootContainer = styled.div`
   align-items: left;
 `;
 
-// const StatCardWrapper = styled.div`
-
-//   background-color: #f2f2f2; /* Light gray background color */
-//   margin: 10px;
-//   border-radius: 18px;
-// `;
-
 const StatCardRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -47,11 +36,9 @@ const StatCardRow = styled.div`
 `;
 
 const StatCardWrapper = styled.div`
-  // flex: 0 0 calc(33.33% - 20px); /* Three cards in a row with 20px spacing */
   margin-right: 20px;
   padding: 5px;
   margin-bottom: 30px;
-
 `;
 
 const StatCard = styled(Card)`
@@ -59,43 +46,35 @@ const StatCard = styled(Card)`
   height: 180px;
   margin: 10px;
   background-color: #fff;
-  // background-image: url('C:/MloFlow-Food-App/frontend/public/Images/chefAdmin.jpg'); /* Replace with the path to your image */
-  // background-size: cover; /* Adjust the background image size */
-  // background-position: center center; /* Center the background image */
-  // border: 1px solid #f2f2f2; /* Light gray border */
   border-radius: 18px;
   box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
-
-  // &:hover {
-  //   transform: scale(1.05);
-  // }
 `;
 
 const StatCardTitle = styled.h2`
   text-align: center;
   margin-top: 0px;
   margin-bottom: 0px;
-  
 `;
 
 const StatCardValue = styled.p`
-margin-top: 10px;
+  margin-top: 10px;
   text-align: center;
   font-size: 24px;
 `;
+
 const StatCardContent = styled(CardContent)`
   text-align: center;
 `;
 
-
 const TableContainerStyled = styled(TableContainer)`
-  background-color: white; /* White background color for the table container */
+  background-color: white;
   border-radius: 10px;
   box-shadow: 4px 4px 4px rgba(0.3, 0, 0, 0.3);
   margin-top: 5px;
-  width: 100%; /* Adjust the width to your preference */
+  width: 100%;
 `;
+
 const BoldTableCell = styled(TableCell)`
   font-weight: bold;
 `;
@@ -110,29 +89,27 @@ const SearchFilterContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  width: 80%; /* Adjust the width to your preference *
-  max-width: 800px; /* Set a maximum width for better alignment */
+  width: 80%;
+  max-width: 800px;
 `;
 
 const SearchButton = styled(Button)`
   background-color: #fbb31d;
   color: black;
   margin-right: 120px;
-  
 `;
 
 const GlobalStyles = styled.div`
-  background-color: gray; /* Light gray background color */
+  background-color: gray;
   min-height: 100vh;
 `;
 
 const ChefAdminScreen = () => {
-  // Dummy data for demonstration
   const chefStatistics = {
     totalChefs: 25,
     AvailableChefs: 17,
     UnavailableChefs: 8,
-   AcceptedRequests: 'Faith Sang',
+    AcceptedRequests: 'Faith Sang',
     DeniedRequests: 'Isaac Kamula',
   };
 
@@ -195,126 +172,117 @@ const ChefAdminScreen = () => {
     },
     // Add more chef data as needed
   ];
-  const [dialogOpen, setDialogOpen] = useState(false);
-    const [termsAccepted, setTermsAccepted] = useState(false);
-    const [isBookingFormOpen, setBookingFormOpen] = useState(false); // Add state for the form
 
-    const handleOpenDialog = () => {
-        // Dialog onOpen function
-        setDialogOpen(true);
-    };
+   const [dialogOpen, setDialogOpen] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [isBookingFormOpen, setBookingFormOpen] = useState(false);
 
-    const handleCloseDialog = () => {
-        // Dialog onClose function
-        setDialogOpen(false);
-    };
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
 
-    const handleTermsAcceptance = () => {
-        setTermsAccepted(!termsAccepted);
-        // Close the dialog when terms are accepted
-        if (termsAccepted) {
-            setDialogOpen(false);
-        }
-    };
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
 
-    const handleContinueBooking = () => {
-        if (termsAccepted) {
-            // If terms are accepted, proceed with booking
-            // You can add your booking logic here
-            // For example, open the booking form
-            setBookingFormOpen(true); // Open the booking form
-        }
-    };
+  const handleTermsAcceptance = () => {
+    setTermsAccepted(!termsAccepted);
+    if (termsAccepted) {
+      setDialogOpen(false);
+    }
+  };
+
+  const handleContinueBooking = () => {
+    if (termsAccepted) {
+      setBookingFormOpen(true);
+    }
+  };
+
   const navigate = useNavigate();
 
-  // State for search and filter
   const [searchText, setSearchText] = React.useState('');
   const [filter, setFilter] = React.useState('All');
 
-  // Function to handle filter change
-  const handleFilterChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
 
-  // Filter chef data based on the selected filter
   const filteredChefData = chefData.filter((chef) => {
     if (filter === 'All') {
       return true;
     }
-    // Add your filter conditions here
     return chef.specialty === filter;
   });
 
-  // Function to handle search text change
-  const handleSearchTextChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
 
-  // Filter chef data based on the search text
   const searchedChefData = filteredChefData.filter((chef) => {
-    // Add your search conditions here (e.g., by chef name, location, etc.)
     return (
       chef.chefName.toLowerCase().includes(searchText.toLowerCase()) ||
       chef.location.toLowerCase().includes(searchText.toLowerCase())
     );
   });
-  const handleDetailsPageNavigation = (id: any) => {
-    navigate(`/chefs/${id}`);
-};
 
+  const handleDetailsPageNavigation = (id) => {
+    navigate(`/chefs/${id}`);
+  };
 
   return (
     <GlobalStyles>
       <RootContainer>
-      <h1 style={{ color: '#0275d8' }}>Chef Statistics</h1>
+        <h1 style={{ color: '#0275d8' }}>Chef Statistics</h1>
         <StatCardRow>
-        <StatCardWrapper>
-          <StatCard>
-            <StatCardContent>
-<RestaurantIcon fontSize="large" />              <StatCardTitle>Total Chefs</StatCardTitle>
-              <StatCardValue>{chefStatistics.totalChefs}</StatCardValue>
-            </StatCardContent>
-          </StatCard>
-        </StatCardWrapper>
+          <StatCardWrapper>
+            <StatCard>
+              <StatCardContent>
+                <RestaurantIcon fontSize="large" />
+                <StatCardTitle>Total Chefs</StatCardTitle>
+                <StatCardValue>{chefStatistics.totalChefs}</StatCardValue>
+              </StatCardContent>
+            </StatCard>
+          </StatCardWrapper>
 
-        <StatCardWrapper>
-          <StatCard>
-            <StatCardContent>
-<RestaurantIcon fontSize="large" />              <StatCardTitle>  Available Chefs</StatCardTitle>
-              <StatCardValue>{chefStatistics.AvailableChefs}</StatCardValue>
-            </StatCardContent>
-          </StatCard>
-        </StatCardWrapper>
+          <StatCardWrapper>
+            <StatCard>
+              <StatCardContent>
+                <RestaurantIcon fontSize="large" />
+                <StatCardTitle>Available Chefs</StatCardTitle>
+                <StatCardValue>{chefStatistics.AvailableChefs}</StatCardValue>
+              </StatCardContent>
+            </StatCard>
+          </StatCardWrapper>
 
-        <StatCardWrapper>
-          <StatCard>
-            <StatCardContent>
-           <RestaurantIcon fontSize="large" />
-              <StatCardTitle>Unavailable Chefs</StatCardTitle>
-              <StatCardValue>{chefStatistics.UnavailableChefs}</StatCardValue>
-            </StatCardContent>
-          </StatCard>
-        </StatCardWrapper>
+          <StatCardWrapper>
+            <StatCard>
+              <StatCardContent>
+                <RestaurantIcon fontSize="large" />
+                <StatCardTitle>Unavailable Chefs</StatCardTitle>
+                <StatCardValue>{chefStatistics.UnavailableChefs}</StatCardValue>
+              </StatCardContent>
+            </StatCard>
+          </StatCardWrapper>
 
-        <StatCardWrapper>
-          <StatCard>
-            <StatCardContent>
-            <RestaurantIcon fontSize="large" />
-              <StatCardTitle>Most Accepted Requests</StatCardTitle>
-              <StatCardValue>{chefStatistics.AcceptedRequests}</StatCardValue>
-            </StatCardContent>
-          </StatCard>
-        </StatCardWrapper>
+          <StatCardWrapper>
+            <StatCard>
+              <StatCardContent>
+                <RestaurantIcon fontSize="large" />
+                <StatCardTitle>Most Accepted Requests</StatCardTitle>
+                <StatCardValue>{chefStatistics.AcceptedRequests}</StatCardValue>
+              </StatCardContent>
+            </StatCard>
+          </StatCardWrapper>
 
-        <StatCardWrapper>
-          <StatCard>
-            <StatCardContent>
-            <RestaurantIcon fontSize="large" />
-              <StatCardTitle> Most Denied Requests</StatCardTitle>
-              <StatCardValue>{chefStatistics.DeniedRequests}</StatCardValue>
-            </StatCardContent>
-          </StatCard>
-        </StatCardWrapper>
+          <StatCardWrapper>
+            <StatCard>
+              <StatCardContent>
+                <RestaurantIcon fontSize="large" />
+                <StatCardTitle>Most Denied Requests</StatCardTitle>
+                <StatCardValue>{chefStatistics.DeniedRequests}</StatCardValue>
+              </StatCardContent>
+            </StatCard>
+          </StatCardWrapper>
         </StatCardRow>
 
         <SearchFilterContainer>
@@ -335,7 +303,6 @@ const ChefAdminScreen = () => {
               label="Filter"
             >
               <MenuItem value="All">All</MenuItem>
-              {/* Add more filter options as needed */}
             </Select>
           </FormControl>
         </SearchFilterContainer>
