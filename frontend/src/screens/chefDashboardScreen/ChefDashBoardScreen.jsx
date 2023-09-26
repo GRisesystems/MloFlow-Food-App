@@ -1,11 +1,10 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Tab, Tabs, Paper, Switch } from '@mui/material';
 import HireRequestsTab from './HireRequestsTab';
 import PendingRequestsTab from './PendingRequestsTab';
 import HistoryTab from './History';
 import { useAuth } from '../../utils/AuthContext';
-import ChefFirstLoginForm from '../../components/chefs/ChefFirstLoginForm';
 
 const ChefDashboardContainer = styled.div`
   display: flex;
@@ -38,8 +37,7 @@ const CustomTab = styled(Tab)`
 const ChefDashboard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isAvailable, setIsAvailable] = useState(false);
-  const { accessToken, updateProfileData,isProfileComplete } = useAuth();
-  // console.log('is profile complete', isProfileComplete)
+  const { accessToken, updateProfileData, isProfileComplete } = useAuth();
 
   const handleAvailabilityChange = () => {
     setIsAvailable(!isAvailable);
@@ -54,15 +52,12 @@ const ChefDashboard = () => {
     // For example, you can set the selectedRequest state here.
   };
 
-  function moveRequestToPending(requestId){
-    throw new Error('Function not implemented.');
+  function moveRequestToPending(requestId) {
+    // Implement the function to move a request to pending status
   }
 
   return (
     <ChefDashboardContainer>
-      {/* {
-        isProfileComplete ? <></> : <ChefFirstLoginForm/>
-      } */}
       <AvailabilityContainer>
         <p>Welcome Chef! Your Availability:</p>
         <Switch checked={isAvailable} onChange={handleAvailabilityChange} />
@@ -81,20 +76,15 @@ const ChefDashboard = () => {
       </Paper>
       {selectedTab === 0 && (
         <HireRequestsTab
-          onMoveRequest={moveRequestToPending}
           onSelectRequest={onSelectRequest}
         />
       )}
       {selectedTab === 1 && (
-        <PendingRequestsTab
-          acceptedRequests={[]}
-          deniedRequests={[]}
-          selectedRequest={null}
-        />
+        <PendingRequestsTab />
       )}
-      {selectedTab === 2 && <HistoryTab acceptedRequests={[]} deniedRequests={[]} />}
+      {selectedTab === 2 && <HistoryTab />}
     </ChefDashboardContainer>
   );
 };
 
-export default ChefDashboard
+export default ChefDashboard;
