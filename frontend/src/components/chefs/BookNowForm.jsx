@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -7,7 +7,9 @@ import {
   DialogContent,
   DialogContentText,
   InputLabel,
-  TextField,
+  Select,
+  MenuItem,
+  TextField
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
@@ -16,6 +18,16 @@ import axios from 'axios';
 const BookNowForm = ({ open, onClose, accessToken }) => {
   const { control, handleSubmit, formState, reset } = useForm();
   const [dialogOpen, setDialogOpen] = useState(false); // State for the dialog
+  const [selectedOccasion, setSelectedOccasion] = useState('');
+  const [occasionPrice, setOccasionPrice] = useState(0);
+
+  const occasionOptions = [
+    { value: 'Wedding', price: 5000 }, // Assign prices to occasions
+    { value: 'Birthday', price: 3000 },
+    { value: 'Dinner', price: 2000 },
+    { value: 'Anniversary', price: 4000 },
+    { value: 'Baby Shower', price: 2500 },
+  ];
 
   const config = {
     headers: {
@@ -28,6 +40,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
       const emailData = {
         ...data,
         email: data.email,
+        occasion: selectedOccasion, // Include the selected occasion in the data
       };
       const response = await axios.post(
         'http://127.0.0.1:8000/customer/chef-bookings/',
@@ -70,6 +83,23 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
     }
   };
 
+  const handleOccasionChange = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOccasion(selectedValue);
+
+    // Find the price of the selected occasion
+    const selectedOption = occasionOptions.find((option) => option.value === selectedValue);
+    if (selectedOption) {
+      setOccasionPrice(selectedOption.price);
+    } else {
+      setOccasionPrice(0);
+    }
+  };
+  const [numberOfGuests, setNumberOfGuests] = useState(0); // State for the number of guests
+  const handleNumberOfGuestsChange = (event) => {
+    setNumberOfGuests(event.target.value);
+  };
+
   return (
     <>
     <Dialog open={open} onClose={handleClose}>
@@ -80,7 +110,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
             flexDirection: 'column',
             padding: '20px',
             gap: '20px',
-            width: '600px', // Set the desired width here
+            width: '450px', // Set the desired width here
           }}
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -159,24 +189,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
           )}
         />
 
-        <Controller
-          name="occasion"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field, fieldState }) => (
-            <TextField
-              label="Occasion"
-              variant="outlined"
-              fullWidth
-              {...field}
-              error={Boolean(fieldState.error)}
-              helperText={fieldState.error ? 'This field is required' : ''}
-            />
-          )}
-        />
-
-        <Controller
+           <Controller
           name="location"
           control={control}
           defaultValue=""
@@ -192,6 +205,36 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
             />
           )}
         />
+
+        {/* Occasion Dropdown */}
+        <InputLabel sx={{ mt: 2 }}>Occasion</InputLabel>
+          <Select
+            label="Occasion"
+            variant="outlined"
+            fullWidth
+            value={selectedOccasion}
+            onChange={handleOccasionChange}
+          >
+            {occasionOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.value}
+              </MenuItem>
+            ))}
+          </Select>
+          <Controller
+            name="numberOfGuests"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                label="Number of Guests"
+                variant="outlined"
+                fullWidth
+                type="number"
+                {...field}
+              />
+            )}
+          />
 
          {/* Date Range Input */}
          <div>
@@ -257,8 +300,15 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
                     )}
                     name="phone"
                 />
-          
-        
+                <section>
+                 <p style={{ fontSize: '24px', fontWeight: 'bolder', color: 'black', textAlign: 'center', marginBottom: '0px',marginTop: '0px' }}>
+                          Total Price: 
+                     </p>
+                     <p style={{ fontSize: '24px', fontWeight: 'bolder', color: 'black', textAlign: 'center', marginBottom: '0px' }}>
+                           Ksh. {occasionPrice}
+                     </p>
+                     </section>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>                       
 
           <DialogActions>
             <Button
@@ -268,13 +318,16 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
               sx={{
                 backgroundColor: '#FFB31D',
                 color: 'black',
-                width: '100%',
+                width: '450px',
+                height: '40px',
                 alignSelf: 'center',
+                marginTop: '0px'
               }}
             >
               Request
-            </Button>
-          </DialogActions>
+            </Button>        
+            </DialogActions>
+          </div>         
         </Box>
       </Dialog>
 
@@ -288,6 +341,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
           <Button onClick={showAlertDialog}>Close</Button>
         </DialogActions>
       </Dialog>
+      
     </>
   );
 };

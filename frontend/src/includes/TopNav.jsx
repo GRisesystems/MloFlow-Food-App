@@ -29,7 +29,7 @@ import logo from '../assets/mloflow.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
 import { CartContext } from '../context/Cart';
-// import { FavoriteContext } from '../wishContext/FavoritesList';
+import { useSignOut } from 'react-auth-kit'
 
 
 const drawerWidth = 240;
@@ -74,6 +74,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 export default function ClippedDrawer() {
+  const signOut = useSignOut()
 
   const { isAuthenticated, logout,first_name } = useAuth();
   console.log('first name')
@@ -94,6 +95,7 @@ export default function ClippedDrawer() {
   const handleLogout = () => {
     // Handle logout fucntionality
     logout()
+    signOut()
     setIsDrawerVisible(!isDrawerVisible)
     navigate('/')
   }

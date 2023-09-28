@@ -16,6 +16,7 @@ import { useAuth } from '../../utils/AuthContext'
 import { navigateToDashboard } from "../../utils/navigateToDashboard";
 import { useNavigate } from "react-router";
 import logo from '../../assets/mloflow.png'
+import { useSignIn } from 'react-auth-kit'
 
 const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: { email: "", password: "" } });
@@ -24,6 +25,7 @@ const LoginForm = () => {
     const theme = useTheme()
     const isMobileView = useMediaQuery(theme.breakpoints.down('sm'));
     const navigate = useNavigate();
+    const signIn = useSignIn()
 
 
 
@@ -31,8 +33,15 @@ const LoginForm = () => {
         try {
             const { access, refresh, category } = await login(data.email, data.password);
             const userRole = category;
-            localStorage.setItem('access_token', access);
-            localStorage.setItem('refresh_token', refresh);
+            signIn({
+                access_token:access,
+                refresh_token:refresh,
+                expiresIn: '3600',
+                tokenType: 'Bearer',
+                authState: { role: userRole }
+            })
+            // localStorage.setItem('access_token', access);
+            // localStorage.setItem('refresh_token', refresh);
             navigateToDashboard(userRole, navigate);
         } catch (error) {
             setRecievedErrorMessage(!recievedErrorMessage)

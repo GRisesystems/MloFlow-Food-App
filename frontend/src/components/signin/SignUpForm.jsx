@@ -40,7 +40,7 @@ const SignUpForm = () => {
         delete data.password_confirm;
 
         try {
-            const response = await axios.post(`${BASE_URL}/auth/users/`, data);
+            const response = await axios.post(`${BASE_URL}/authapp/register/`, data);
 
 
             if (response.status === 201) {
