@@ -27,6 +27,7 @@
     "mui-tel-input": "^4.0.0",
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
+    "react-auth-kit": "^2.12.7",
     "react-country-flag": "^3.1.0",
     "react-country-region-selector": "^3.6.1",
     "react-dom": "^18.2.0",
