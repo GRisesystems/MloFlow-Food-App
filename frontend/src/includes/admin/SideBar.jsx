@@ -1,11 +1,5 @@
 import Toolbar from '@mui/material/Toolbar';
-import AddBusinessIcon from '@mui/icons-material/AddBusiness';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
-import WalletIcon from '@mui/icons-material/Wallet';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -18,6 +12,7 @@ import { LiaUsersSolid } from 'react-icons/lia';
 import { BiSolidUser } from 'react-icons/bi';
 import { AiOutlinePieChart } from 'react-icons/ai';
 import { LuChefHat } from 'react-icons/lu';
+import logo from '../../assets/mloflow.png'
 
 
 
@@ -34,6 +29,7 @@ import {
     Chip,
 } from "@mui/material"
 import { Link } from "react-router-dom";
+import { orange } from '@mui/material/colors';
 
 
 const SideBar = () => {
@@ -58,18 +54,28 @@ const SideBar = () => {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 height: '100%',
-                backgroundColor: orangePrimaryColor
+                backgroundColor: orange[500]
             }}
         >
             <Box>
                 <Toolbar sx={
                     { p: 0 }
                 }>
-                    <IconButton sx={{ color: bluePrimaryColor }}>
-                        <AccountBalanceIcon />
-                    </IconButton>
-                    <Typography sx={{ color: 'black' }} variant="h6" noWrap component="div">
-                        Ceton
+                    <Avatar>
+                        <img
+                            src={logo}
+                            alt="Mlo Flow"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                borderRadius: '50%',
+                            }}
+
+                        />
+                    </Avatar>
+                    <Typography sx={{ color: 'black', ml: 1 }} variant="h6" noWrap component="div">
+                        MloFlow
                     </Typography>
                 </Toolbar>
                 <List dense sx={{ p: 1 }}>
