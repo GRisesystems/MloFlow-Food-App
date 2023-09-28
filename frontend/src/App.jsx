@@ -3,7 +3,6 @@ import HomeScreen from "./screens/homeScreen/HomeScreen"
 import SignInScreen from './screens/SignInScreen/SignInScreen'
 import ActivateAccountScreen from './screens/activateAccountScreen/ActivateAccountScreen'
 import ChefDashBoardScreen from './screens/chefDashboardScreen/ChefDashBoardScreen'
-import Root from './Root'
 import FarmProduceScreen from './screens/farmProduceScreen/FarmProduceScreen'
 import AboutScreen from './screens/aboutScreen/AboutScreen'
 import VendorDashboardScreen from './screens/vendorDashboardScreen/VendorDashboardScreen'
@@ -24,6 +23,8 @@ import ContactScreen from './screens/ContactScreen/ContactScreen';
 import Cart from './components/homeScreen/ShoppingCart';
 import WishList from './screens/vendorDashboardScreen/WishList';
 import Checkout from './components/Order/Checkout'
+import Root from './utils/Root'
+import AdminRoot from './utils/AdminRoot'
 // import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 
 const router = createBrowserRouter(
@@ -54,6 +55,8 @@ const router = createBrowserRouter(
       {/* <Route path='/checkout' element={<CheckoutScreen />} /> */}
       <Route path='/about' element={<AboutScreen />} />
       <Route path='/contact' element={<ContactScreen />} />
+
+      {/* Admin routes */}
 
     </Route>
   )
