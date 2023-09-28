@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react'; // Make sure to import React
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarIcon from '@mui/icons-material/Star';
 import { orange } from '@mui/material/colors';
@@ -7,7 +7,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Stack, Typography, D
 import chef from './chef.jpeg';
 import BookNowForm from './BookNowForm';
 
-const ChefCard = ( chef_name, status ) => {
+const ChefCard = ({ chef_name, status }) => {
     const navigate = useNavigate();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
@@ -99,14 +99,58 @@ const ChefCard = ( chef_name, status ) => {
             <Dialog open={dialogOpen} onClose={handleCloseDialog}>
                 <DialogTitle>Terms and Conditions</DialogTitle>
                 <DialogContent>
-                    {/* Display your terms and conditions here */}
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-                    </Typography>
-                    <FormControlLabel
-                        control={<Checkbox checked={termsAccepted} onChange={handleTermsAcceptance} />}
-                        label="I accept the terms and conditions"
-                    />
+                <Typography>
+            <strong>MloFlow Chef Booking Terms and Conditions</strong>
+          </Typography>
+          <Typography>
+            <strong>Chef Selection Assurance:</strong>
+            <ul>
+              <li>
+                If the selected chef declines your request, MloFlow guarantees to promptly assign another high-quality chef
+                to provide the service you expect, ensuring excellence in every culinary experience.
+              </li>
+            </ul>
+          </Typography>
+          <Typography>
+            <strong>Notification of Chef Assignment:</strong>
+            <ul>
+              <li>
+                Upon reassignment as per Clause 1, MloFlow will send you a confirmation email within 3 hours to inform you of
+                the newly assigned chef.
+              </li>
+            </ul>
+          </Typography>
+          <Typography>
+            <strong>Payment Process:</strong>
+            <ul>
+              <li>
+                Once you receive the confirmation email, you are required to make the payment as specified. Upon successful
+                payment confirmation, the chef will be scheduled to arrive at your location.
+              </li>
+            </ul>
+          </Typography>
+          <Typography>
+            <strong>Cancellation Window:</strong>
+            <ul>
+              <li>
+                In the event that you do not receive any notifications from MloFlow within 3 hours of the initial request,
+                you have the option to cancel the booking.
+              </li>
+            </ul>
+          </Typography>
+          <Typography>
+            <strong>Cancellation Refund Policy:</strong>
+            <ul>
+              <li>
+                If you choose to cancel the booking after making the payment, MloFlow will refund 80% of the total amount
+                charged for the chef service, retaining the remaining 20% as processing fees.
+              </li>
+            </ul>
+          </Typography>
+          <FormControlLabel
+            control={<Checkbox checked={termsAccepted} onChange={handleTermsAcceptance} />}
+            label="I accept the terms and conditions"
+          />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseDialog} color="primary">
@@ -121,4 +165,4 @@ const ChefCard = ( chef_name, status ) => {
     );
 };
 
-export default ChefCard
+export default ChefCard;
