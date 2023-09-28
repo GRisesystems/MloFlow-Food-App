@@ -56,11 +56,23 @@ const AppRouter = () => {
         <Route index element={<HomeScreen />} />
         <Route path='/login' element={<SignInScreen />} />
         <Route path='/activate' element={<ActivateAccountScreen />} />
-        <Route path="/chef-dashboard" element={<ChefDashBoardScreen />} />
+        <Route path="/chef-dashboard" element={
+          <RequireAuth loginPath={'/'}>
+            <ChefDashBoardScreen />
+          </RequireAuth>
+        } />
         <Route path='/chefs' element={<ChefsScreen />} />
         <Route path='/chefs/:id' element={<ChefDetailScreen />} />
-        <Route path='/vendor-dashboard' element={<VendorDashboardScreen />} />
-        <Route path='/customer-dashboard' element={<CustomerDashboardScreen />} />
+        <Route path='/vendor-dashboard' element={
+          <RequireAuth loginPath={'/'}>
+            <VendorDashboardScreen />
+          </RequireAuth>
+        } />
+        <Route path='/customer-dashboard' element={
+          <RequireAuth loginPath={'/'}>
+            <CustomerDashboardScreen />
+          </RequireAuth>
+        } />
         <Route path='/farm-produce' element={<FarmProduceScreen />} />
         <Route path='/fish-products' element={<FishProductsScreen />} />
         <Route path='/poultry-products' element={<PoultryProductsScreen />} />
