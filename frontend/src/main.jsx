@@ -7,7 +7,14 @@ import { CartProvider } from './context/Cart.jsx';
 import { AuthProvider } from 'react-auth-kit'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
+    <AuthProvider
+      authType={'cookie'}
+      authName={'_auth'}
+      cookieDomain={window.location.hostname}
+      // cookieSecure={window.location.protocol === "https:"}
+      cookieSecure
+
+    >
       <CartProvider>
         <AppRouter />
       </CartProvider>
