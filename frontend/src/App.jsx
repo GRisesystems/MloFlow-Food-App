@@ -25,8 +25,6 @@ import ContactScreen from './screens/ContactScreen/ContactScreen';
 import Cart from './components/homeScreen/ShoppingCart';
 import WishList from './screens/vendorDashboardScreen/WishList';
 import Checkout from './components/Order/Checkout'
-import Root from './utils/Root'
-import AdminRoot from './utils/AdminRoot'
 // import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 
 // Admin routes
@@ -36,14 +34,25 @@ import VendorAdminScreen from './screens/adminScreens/VendorAdminScreen'
 import RegisteredUsers from './screens/adminScreens/RegisteredUsers'
 import TransactionsScreen from './screens/adminScreens/TransactionsScreen'
 import AdminProfileScreen from './screens/adminScreens/AdminProfileScreen'
+// End of admin routes
+
+// utills section
+import Root from './utils/Root'
+import AdminRoot from './utils/AdminRoot'
+import { RequireAuth, useIsAuthenticated, useAuthUser } from 'react-auth-kit'
 
 const AppRouter = () => {
   const custom_theme = createMuiTheme()
-  const role = 'admin'
+  const isAuthenticated = useIsAuthenticated();
+  const authUser = useAuthUser();
+  const role = authUser()?.role || '';
+  console.log('role is', role)
+  // const cat = 'admin'
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={role === 'admin' ? <AdminRoot /> : <Root />}>
+      <Route path='/' element={
+        isAuthenticated() && role === 'admin' ? <AdminRoot /> : <Root />}>
         <Route index element={<HomeScreen />} />
         <Route path='/login' element={<SignInScreen />} />
         <Route path='/activate' element={<ActivateAccountScreen />} />
@@ -71,12 +80,36 @@ const AppRouter = () => {
         <Route path='/contact' element={<ContactScreen />} />
 
         {/* Admin routes */}
-        <Route path='/admin' element={<AdminDashboardScreen />} />
-        <Route path='/admin/chefs' element={<ChefAdminScreen/>} />
-        <Route path='/admin/vendors' element={<VendorAdminScreen />} />
-        <Route path='/admin/users' element={<RegisteredUsers />} />
-        <Route path='/admin/transactions' element={<TransactionsScreen />} />
-        <Route path='/admin/profile' element={<AdminProfileScreen />} />
+        <Route path='/admin' element={
+          <RequireAuth loginPath={'/'}>
+            <AdminDashboardScreen />
+          </RequireAuth>
+        } />
+        <Route path='/admin/chefs' element={
+          <RequireAuth loginPath={'/'}>
+            <ChefAdminScreen />
+          </RequireAuth>
+        } />
+        <Route path='/admin/vendors' element={
+          <RequireAuth loginPath={'/'}>
+            <VendorAdminScreen />
+          </RequireAuth>
+        } />
+        <Route path='/admin/users' element={
+          <RequireAuth loginPath={'/'}>
+            <RegisteredUsers />
+          </RequireAuth>
+        } />
+        <Route path='/admin/transactions' element={
+          <RequireAuth loginPath={'/'}>
+            <TransactionsScreen />
+          </RequireAuth>
+        } />
+        <Route path='/admin/profile' element={
+          <RequireAuth loginPath={'/'}>
+            <AdminProfileScreen />
+          </RequireAuth>
+        } />
 
 
       </Route>

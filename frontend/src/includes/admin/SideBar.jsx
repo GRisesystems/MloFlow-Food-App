@@ -4,7 +4,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from "@mui/material/styles";
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { GrTransaction } from 'react-icons/gr';
@@ -30,22 +30,30 @@ import {
 } from "@mui/material"
 import { Link } from "react-router-dom";
 import { orange } from '@mui/material/colors';
+import { useSignOut } from 'react-auth-kit'
 
 
 const SideBar = () => {
     const location = useLocation();
     const isChefActive = location.pathname.includes('chefs');
     const isVendorsActive = location.pathname.includes('vendors');
-    const isPaymentsActive = location.pathname.includes('payments');
+    // const isPaymentsActive = location.pathname.includes('payments');
     const isUsersActive = location.pathname.includes('users');
     const isTransactionsActive = location.pathname.includes('transactions');
     const isProfileActive = location.pathname.includes('profile');
     const theme = useTheme();
-    const bluePrimaryColor = theme.components.MuiPaper.styleOverrides.sidebar.backgroundColor;
-    const orangePrimaryColor = theme.components.MuiPaper.styleOverrides.sidebar.backgroundColor;
+    // const bluePrimaryColor = theme.components.MuiPaper.styleOverrides.sidebar.backgroundColor;
+    // const orangePrimaryColor = theme.components.MuiPaper.styleOverrides.sidebar.backgroundColor;
     const blackColor = "black"
     const whiteColor = "white"
     const minHeight = theme.components.MuiPaper.styleOverrides.sidebar.minHeight;
+    const navigate = useNavigate()
+    const signOut = useSignOut()
+
+    const handleLogout = () => {
+        signOut()
+        navigate('/')
+    }
     return (
         <Box
             sx={{
@@ -255,7 +263,10 @@ const SideBar = () => {
                                 </Typography>
                             </Box>
                         </Stack>
-                        <LogoutIcon sx={{ color: blackColor, fontSize: 'inherit' }} />
+                        <LogoutIcon
+                            sx={{ color: blackColor, fontSize: 'inherit' }}
+                            onClick={handleLogout}
+                        />
                     </Box>
                 </ListItem>
             </List>
