@@ -6,3 +6,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 } 
+
+.noHover {
+  /* Disable hover effect */
+  pointer-events: none;
+  /* Set the cursor to a pointer */
+  cursor: pointer;
+}
