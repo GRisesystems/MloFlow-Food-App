@@ -1,19 +1,33 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from 'react-hook-form'
-import { Box, Button, Checkbox, DialogContent, DialogContentText, DialogTitle, Divider, FormControlLabel, FormGroup,  InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Box, Button,  DialogContent, DialogContentText, DialogTitle, Divider,  InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import { Country, State } from 'country-state-city';
 import { useAuth } from "../../utils/AuthContext";
 import { BASE_URL } from "../signin/constants";
 import axios from "axios";
+import styled from "@emotion/styled";
+import { Field } from "../newproductupload/Field";
 
-const VendorFirstLoginForm = ({ is_profile_complete, product_categories }) => {
+
+const WeightRangeDropdown = styled.select`
+  margin-top: 5px;
+  padding: 8px;
+  color: #0C0B0B;
+  max-width: 100%;
+  margin-bottom: 0px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1.1rem;
+`;
+
+const VendorFirstLoginForm = ({ is_profile_complete }) => {
     const countries = Country.getAllCountries()
     const [selectedCountry, setSelectedCountry] = useState(null); // Initialize with null
     const [selectedStates, setSelectedStates] = useState([]);
+    const [category, setCategory] = useState('');
     const [selectedOptions, setSelectedOptions] = useState([]);
 
-    const [fullWidth, setFullWidth] = useState(true);
     const [open, setOpen] = useState(!is_profile_complete);
     const [maxWidth] = useState('sm');
     const { control,  handleSubmit, formState: { errors } } = useForm()
@@ -23,17 +37,7 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }) => {
     const { accessToken, updateProfileData } = useAuth();
 
 
-    const handleCheckboxChange = (value) => {
-        if (selectedOptions.includes(value)) {
-            setSelectedOptions(selectedOptions.filter((option) => option !== value));
-        } else {
-            setSelectedOptions([...selectedOptions, value]);
-        }
-    };
-
-
-
-    useEffect(() => {
+     useEffect(() => {
         // Fetch and update the list of states whenever the selected country changes
         if (selectedCountry) {
             const selectedCountryData = countries.find(country => country.name === selectedCountry);
@@ -74,7 +78,7 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }) => {
 
     return (
         <Dialog
-            fullWidth={fullWidth}
+            fullWidth
             maxWidth={maxWidth}
             open={open}
         >
@@ -159,28 +163,15 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }) => {
                             />
                             {errors.city && <span>This field is required</span>}
                         </Box>
-
-                        <FormGroup sx={{mt:2}} >
-                            <InputLabel sx={{color:'black'}} id="demo-simple-select-label">Select Product Category</InputLabel>                            
-                            {product_categories.map(category => (
-                                <FormControlLabel
-                                    key={category.id}
-                                    control={
-                                        <Checkbox
-                                            name={category.name}
-                                            value={category.id}
-                                            checked={selectedOptions.includes(category.id)}
-                                            onChange={() => handleCheckboxChange(category.id)}
-                                        />
-                                    }
-                                    label={category.name}
-                                />
-                            ))}
-                        </FormGroup>
-
-
-
-
+                        <Field label="Select Category"  >
+          <WeightRangeDropdown name="category"
+      value={category}
+      onChange={(e) => setCategory(e.target.value)}>
+        <option value="Fresh Produce">Fresh Produce</option>
+        <option value="Fish">Fish</option>
+        <option value="Poultry">Poultry</option>
+      </WeightRangeDropdown>
+      </Field>
 
                         <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
                             <Button variant="contained" color="primary" type="submit">
@@ -196,3 +187,5 @@ const VendorFirstLoginForm = ({ is_profile_complete, product_categories }) => {
 };
 
 export default VendorFirstLoginForm;
+
+

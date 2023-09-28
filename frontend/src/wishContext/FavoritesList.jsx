@@ -5,31 +5,31 @@ export const FavoriteContext = createContext()
 export const FavoriteProvider = ({ children }) => {
   const [favoriteItems, setFavoriteItems] = useState(localStorage.getItem('favoriteItems') ? JSON.parse(localStorage.getItem('favoriteItems')) : [])
 
-  const addToFavorites = (item) => {
-    const isItemInFavorites = favoriteItems.find((favoriteItem) => favoriteItem.id === item.id);
+  const addToFavorites = (favItem) => {
+    const isItemInFavorites = favoriteItems.find((favoriteItem) => favoriteItem.id === favItem.id);
 
     if (isItemInFavorites) {
       setFavoriteItems(
         favoriteItems.map((favoriteItem) =>
-          favoriteItem.id === item.id
+          favoriteItem.id === favItem.id
             ? { ...favoriteItem, quantity: favoriteItem.quantity + 1 }
             : favoriteItem
         )
       );
     } else {
-      setFavoriteItems([...favoriteItems, { ...item, quantity: 1 }]);
+      setFavoriteItems([...favoriteItems, { ...favItem, quantity: 1 }]);
     }
   };
 
-  const removeFromFavorites = (item) => {
-    const isItemInFavorites = favoriteItems.find((favoriteItem) => favoriteItem.id === item.id);
+  const removeFromFavorites = (favItem) => {
+    const isItemInFavorites = favoriteItems.find((favoriteItem) => favoriteItem.id === favItem.id);
 
     if (isItemInFavorites.quantity === 1) {
-      setFavoriteItems(favoriteItems.filter((favoriteItem) => favoriteItem.id !== item.id));
+      setFavoriteItems(favoriteItems.filter((favoriteItem) => favoriteItem.id !== favItem.id));
     } else {
       setFavoriteItems(
         favoriteItems.map((favoriteItem) =>
-          favoriteItem.id === item.id
+          favoriteItem.id === favItem.id
             ? { ...favoriteItem, quantity: favoriteItem.quantity - 1 }
             : favoriteItem
         )
@@ -58,7 +58,7 @@ export const FavoriteProvider = ({ children }) => {
         favoriteItems,
         addToFavorites,
         removeFromFavorites,
-        clearFavorites
+        clearFavorites,
       }}
     >
        {children}

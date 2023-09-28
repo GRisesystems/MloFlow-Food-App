@@ -83,7 +83,7 @@ const AddProductsForm = () => {
         <DialogContent sx={{ mt: 2 }} >
             <Box component="form" name="add" noValidate autoComplete="off" onSubmit={AddProductInfo}
             >
-                      <Field label="Select Category"  >
+            <Field label="Select Category"  >
           <WeightRangeDropdown name="category"
       value={category}
       onChange={(e) => setCategory(e.target.value)}>

@@ -7,10 +7,10 @@ import { ArrowLeftSharp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 export default function WishList() {
-  const {favoriteItems,
+  const { favoriteItems,
     addToFavorites,
     removeFromFavorites,
-    clearFavorites} = useContext(FavoriteContext);
+    clearFavorites, } = useContext(FavoriteContext);
 
    return (
     <Container  className='cart' >

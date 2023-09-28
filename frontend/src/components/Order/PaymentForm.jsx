@@ -1,7 +1,25 @@
 import { Accordion, AccordionSummary, AccordionDetails,  Box, Button, Checkbox, FormControlLabel, Grid, Typography,  Stack, TextField} from '@mui/material';
-
+import { useState } from 'react';
+import axios from "axios";
 
 export default function PaymentForm() {
+  const [phone, setPhone] = useState('')
+
+  const MpesaNumber = async (e) => {
+    e.preventDefault();
+    const formField = new FormData()
+
+    formField.append('phone', phone)
+
+  await axios.post( 'http://localhost:8000/products/', formField
+  ).then((response) => {
+    console.log(response.data);
+  })
+  .catch( (error) => {
+    console.log(error);
+  });
+}
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -72,15 +90,17 @@ export default function PaymentForm() {
                     <Typography variant='body1' sx={{ mt: 2, mb: 2 }}>
                         Please enter accurately  your MPESA number in the form  below.
                     </Typography>
-                    <form action="">
+                    <Box component="form" id='phone' name="add" onSubmit={MpesaNumber}
+            >
                         <Stack direction="row" spacing={2}>
                             <TextField
                                 margin="normal"                                
-                                id="coupon_code"
+                                id="phone"
                                 label="MPESA number"
-                                name="coupon_code"
+                                name={phone}
                                 autoFocus
-                                sx={{ width:'50%',
+                                onChange={(e) => {setPhone(e.target.value)}}
+                                sx={{ 
                                     "& label.Mui-focused": {
                                         color: '#000',
                                     }, "& .MuiOutlinedInput-root": {
@@ -99,7 +119,7 @@ export default function PaymentForm() {
                                Submit
                             </Button>
                         </Stack>
-                    </form>
+                        </Box>
                     <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="primary" name="phone" value="yes" />}
@@ -154,7 +174,9 @@ export default function PaymentForm() {
             </Accordion>
 
         </Box>
-
+          <Box mt={3}>
+            <Typography>Payment Status: Paid/Unpaid</Typography>
+          </Box>
     </>
   );
 }
