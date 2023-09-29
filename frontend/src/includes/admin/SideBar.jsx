@@ -37,7 +37,7 @@ const SideBar = () => {
     const location = useLocation();
     const isChefActive = location.pathname.includes('chefs');
     const isVendorsActive = location.pathname.includes('vendors');
-    // const isPaymentsActive = location.pathname.includes('payments');
+    const isProductsActive = location.pathname.includes('products');
     const isUsersActive = location.pathname.includes('users');
     const isTransactionsActive = location.pathname.includes('transactions');
     const isProfileActive = location.pathname.includes('profile');
@@ -180,7 +180,32 @@ const SideBar = () => {
                                         fontWeight: 'bold',
                                         color: blackColor
                                     }} variant="body1">
-                                        Registered users
+                                        Customers
+                                    </Typography>
+                                </ListItemText>
+                            </ListItemButton>
+                        </Link>
+                    </ListItem>
+
+                    <ListItem disablePadding>
+                        <Link to="/admin/products" style={{ textDecoration: 'none', color: 'white', width: '100%' }}>
+                            <ListItemButton
+                                className='noHover'
+                                sx={{
+                                    borderRadius: 2,
+                                    color: blackColor,
+                                    backgroundColor: isProductsActive ? whiteColor : 'transparent',
+                                }}
+                            >
+                                <ListItemIcon sx={{ color: blackColor }}>
+                                    <LiaUsersSolid style={{ fontSize: 24, fontWeight: 'bold' }} />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    <Typography sx={{
+                                        fontWeight: 'bold',
+                                        color: blackColor
+                                    }} variant="body1">
+                                        Products
                                     </Typography>
                                 </ListItemText>
                             </ListItemButton>

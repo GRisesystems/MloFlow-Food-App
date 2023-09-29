@@ -31,7 +31,7 @@ import Checkout from './components/Order/Checkout'
 import AdminDashboardScreen from './screens/adminScreens/AdminDashboardScreen'
 import ChefAdminScreen from './screens/adminScreens/ChefAdminScreen'
 import VendorAdminScreen from './screens/adminScreens/VendorAdminScreen'
-import RegisteredUsers from './screens/adminScreens/RegisteredUsers'
+import AdminCustomerScreen from './screens/adminScreens/AdminCustomerScreen'
 import TransactionsScreen from './screens/adminScreens/TransactionsScreen'
 import AdminProfileScreen from './screens/adminScreens/AdminProfileScreen'
 // End of admin routes
@@ -40,6 +40,7 @@ import AdminProfileScreen from './screens/adminScreens/AdminProfileScreen'
 import Root from './utils/Root'
 import AdminRoot from './utils/AdminRoot'
 import { RequireAuth, useIsAuthenticated, useAuthUser } from 'react-auth-kit'
+import AdminProducts from './screens/adminScreens/AdminProducts'
 
 const AppRouter = () => {
   const custom_theme = createMuiTheme()
@@ -109,7 +110,12 @@ const AppRouter = () => {
         } />
         <Route path='/admin/users' element={
           <RequireAuth loginPath={'/'}>
-            <RegisteredUsers />
+            <AdminCustomerScreen />
+          </RequireAuth>
+        } />
+        <Route path='/admin/products' element={
+          <RequireAuth loginPath={'/'}>
+            <AdminProducts />
           </RequireAuth>
         } />
         <Route path='/admin/transactions' element={
