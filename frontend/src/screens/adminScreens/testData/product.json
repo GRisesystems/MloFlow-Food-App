@@ -1,0 +1,103 @@
+[
+    {
+      "id": 1,
+      "name": "Salmon Fillet",
+      "category": "Fish",
+      "vendor": "Seafood Delights",
+      "initial_stock": 100,
+      "quantity_sold": 30,
+      "available_stock": 70,
+      "price": 1500
+    },
+    {
+      "id": 2,
+      "name": "Ribeye Steak",
+      "category": "Beef",
+      "vendor": "Butcher's Choice",
+      "initial_stock": 50,
+      "quantity_sold": 10,
+      "available_stock": 40,
+      "price": 2000
+    },
+    {
+      "id": 3,
+      "name": "Organic Spinach",
+      "category": "Organic",
+      "vendor": "Healthy Greens",
+      "initial_stock": 200,
+      "quantity_sold": 60,
+      "available_stock": 140,
+      "price": 500
+    },
+    {
+      "id": 4,
+      "name": "Tuna Steak",
+      "category": "Fish",
+      "vendor": "Ocean Fresh",
+      "initial_stock": 80,
+      "quantity_sold": 25,
+      "available_stock": 55,
+      "price": 1200
+    },
+    {
+      "id": 5,
+      "name": "Sirloin Steak",
+      "category": "Beef",
+      "vendor": "Meat Masters",
+      "initial_stock": 60,
+      "quantity_sold": 15,
+      "available_stock": 45,
+      "price": 1800
+    },
+    {
+      "id": 6,
+      "name": "Organic Apples",
+      "category": "Organic",
+      "vendor": "Eco Farms",
+      "initial_stock": 120,
+      "quantity_sold": 40,
+      "available_stock": 80,
+      "price": 400
+    },
+    {
+      "id": 7,
+      "name": "Cod Fillet",
+      "category": "Fish",
+      "vendor": "Catch of the Day",
+      "initial_stock": 90,
+      "quantity_sold": 20,
+      "available_stock": 70,
+      "price": 1400
+    },
+    {
+      "id": 8,
+      "name": "Ground Beef",
+      "category": "Beef",
+      "vendor": "Fresh Cuts",
+      "initial_stock": 70,
+      "quantity_sold": 25,
+      "available_stock": 45,
+      "price": 1600
+    },
+    {
+      "id": 9,
+      "name": "Organic Quinoa",
+      "category": "Organic",
+      "vendor": "Green Fields",
+      "initial_stock": 150,
+      "quantity_sold": 50,
+      "available_stock": 100,
+      "price": 800
+    },
+    {
+      "id": 10,
+      "name": "Swordfish Steak",
+      "category": "Fish",
+      "vendor": "Ocean Delicacies",
+      "initial_stock": 75,
+      "quantity_sold": 30,
+      "available_stock": 45,
+      "price": 1700
+    }
+  ]
+  
