@@ -79,8 +79,8 @@ function AdminRoot(props) {
       >
         <Toolbar />
         <Box sx={{p:2}}>
-        </Box>
             <Outlet /> 
+        </Box>
       </Box>
     </Box>
   );
