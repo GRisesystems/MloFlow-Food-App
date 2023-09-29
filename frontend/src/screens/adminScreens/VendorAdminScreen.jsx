@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid'
 import TopCard from '../../components/adminComponents/vendors/TopCard'
 import FinancialAreaChart from '../../components/adminComponents/dashboard/FinancialAreaChart'
 import TopVendorsTable from '../../components/adminComponents/vendors/TopVendorsTable'
+import vendor_sales from './testData/vendor_sales.json'
 
 const VendorAdminScreen = () => {
   const data = [
@@ -33,7 +34,7 @@ const VendorAdminScreen = () => {
           <FinancialAreaChart />
         </Grid>
         <Grid item sm={12} xs={12} md={6}>
-          <TopVendorsTable/>
+          <TopVendorsTable vendor_sales={vendor_sales} />
         </Grid>
       </Grid>
     </Box>

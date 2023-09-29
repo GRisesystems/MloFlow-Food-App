@@ -19,7 +19,7 @@ import top_sales from './topsales.json'
 import VendorDetailsModal from './VendorDetailsModal';
 
 
-const TopVendorsTable = () => {
+const TopVendorsTable = ({vendor_sales}) => {
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -80,7 +80,7 @@ const TopVendorsTable = () => {
                         <Dialog
                             open={open}
                             onClose={handleClose}
-                            maxWidth='sm'
+                            maxWidth='md'
                             fullWidth
                             sx={{ borderRadius: 8 }}
                         >
@@ -91,7 +91,7 @@ const TopVendorsTable = () => {
                                 <Typography variant="h6" sx={{ fontWeight: 'bold', ml: 1 }}>Vendor details</Typography>
 
                             </Box>
-                            <VendorDetailsModal  onClose={handleClose}/>
+                            <VendorDetailsModal vendor_sales={vendor_sales} onClose={handleClose} />
                         </Dialog>
                     </TableBody>
                 </Table>

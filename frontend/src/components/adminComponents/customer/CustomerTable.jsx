@@ -16,7 +16,7 @@ import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import { grey } from '@mui/material/colors'
 
 
-const CustomerTable = () => {
+const CustomerTable = ({ customer_data }) => {
     return (
         <Box component={Paper} sx={{ mt: 2, p: 2 }}>
             <Grid container spacing={2}>
@@ -36,23 +36,49 @@ const CustomerTable = () => {
                                 startAdornment: <SearchOutlinedIcon />,
                             }}
                         />
-                        
+
                     </Stack>
                 </Grid>
-                <TableContainer>
-                    <Table aria-label="Approval table">
-                        <TableHead sx={{ backgroundColor: grey[100] }}>
-                            <TableRow>
-                                <TableCell>First Name</TableCell>
-                                <TableCell>Last Name</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>Phone number</TableCell>
-                                <TableCell>Date joined</TableCell>
-                                <TableCell>Last login</TableCell>
-                            </TableRow>
-                        </TableHead>
-                    </Table>
-                </TableContainer>
+                {customer_data &&
+                    <TableContainer>
+                        <Table aria-label="Approval table">
+                            <TableHead sx={{ backgroundColor: grey[100] }}>
+                                <TableRow>
+                                    <TableCell>First Name</TableCell>
+                                    <TableCell>Last Name</TableCell>
+                                    <TableCell>Email</TableCell>
+                                    <TableCell>Phone number</TableCell>
+                                    <TableCell>Date joined</TableCell>
+                                    <TableCell>Last login</TableCell>
+                                    <TableCell></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    customer_data.map((customer) => (
+                                        <TableRow key={customer.id}>
+                                            <TableCell>{customer.first_name}</TableCell>
+                                            <TableCell>{customer.last_name}</TableCell>
+                                            <TableCell>{customer.email}</TableCell>
+                                            <TableCell>{customer.phone_number}</TableCell>
+                                            <TableCell>{customer.date_joined}</TableCell>
+                                            <TableCell>{customer.last_login}</TableCell>
+                                            <TableCell>
+                                                <Button
+                                                    size='small'
+                                                    sx={{ textTransform: 'none' }}
+                                                >
+                                                    View details
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+
+                                    ))
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                }
             </Grid>
 
         </Box>
