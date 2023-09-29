@@ -9,6 +9,7 @@ import TopCard from '../../components/adminComponents/products/TopCard'
 import ProductTable from '../../components/adminComponents/products/ProductTable'
 import AddCategoryForm from '../../components/adminComponents/products/AddCategoryForm';
 import product_data_json from './testData/product.json'
+import AddProductForm from '../../components/adminComponents/products/AddProductForm';
 
 
 const AdminProducts = () => {
@@ -77,13 +78,19 @@ const AdminProducts = () => {
                         fullWidth
                         sx={{ borderRadius: 8 }}
                     >
-                        <DialogTitle>
-                            <Typography variant="h6" sx={{ fontWeight: 'bold', ml: 1 }}>Add category</Typography>
+                        <DialogTitle >
+                            <Typography
+                                variant="h6"
+                                sx={{ textAlign: 'center', fontWeight: 'bold' }}
+                            >
+                                Create Category
+                            </Typography>
                         </DialogTitle>
-                        <AddCategoryForm onClose={handleClose}/>
+                        <AddCategoryForm onClose={handleClose} />
                     </Dialog>
-                    {/* Add product modal */}
 
+
+                    {/* Add product modal */}
                     <Dialog
                         open={openProductDialog}
                         onClose={handleProductClose}
@@ -92,10 +99,15 @@ const AdminProducts = () => {
                         sx={{ borderRadius: 8 }}
                     >
 
-                        <Box sx={{ p: 2, display: 'flex', borderBottom: 1 }}>
-                            <Typography variant="h6" sx={{ fontWeight: 'bold', ml: 1 }}>Add Product</Typography>
-                        </Box>
-                        <h1>Add product</h1>
+                        <DialogTitle >
+                            <Typography
+                                variant="h6"
+                                sx={{ textAlign: 'center', fontWeight: 'bold' }}
+                            >
+                                Add Product
+                            </Typography>
+                        </DialogTitle>
+                        <AddProductForm onClose={handleProductClose}/>
                     </Dialog>
                 </Grid>
             </Grid>
