@@ -84,10 +84,10 @@ const TopVendorsTable = ({ vendor_sales }) => {
                             fullWidth
                             sx={{ borderRadius: 8 }}
                         >
-                            <Box sx={{ display: 'flex', justifyContent: 'end',p:2}}>
+                            <Box sx={{ display: 'flex', justifyContent: 'end', p: 2 }}>
                                 <CloseIcon
-                                onClick={handleClose}
-                                sx={{cursor:'pointer',backgroundColor:'white'}}
+                                    onClick={handleClose}
+                                    sx={{ cursor: 'pointer', backgroundColor: 'white' }}
                                 />
                             </Box>
                             <Box sx={{ p: 2, display: 'flex', borderBottom: 1 }}>

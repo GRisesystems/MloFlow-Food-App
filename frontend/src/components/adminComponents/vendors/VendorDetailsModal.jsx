@@ -16,7 +16,7 @@ const VendorDetailsModal = ({ vendor_sales, onClose }) => {
         <Box
             sx={{ p: 2 }}
         >
-            
+
             <Grid container spacing={2}>
                 <Grid item sm={12} xs={12} md={7}>
                     <Stack spacing={1}>

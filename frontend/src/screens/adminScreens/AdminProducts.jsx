@@ -1,11 +1,27 @@
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button'
 import TopCard from '../../components/adminComponents/products/TopCard'
 import ProductTable from '../../components/adminComponents/products/ProductTable'
+import AddCategoryForm from '../../components/adminComponents/products/AddCategoryForm';
 import product_data_json from './testData/product.json'
 
+
 const AdminProducts = () => {
+    const [open, setOpen] = useState(false)
+    const [openProductDialog, setOpenProductDialog] = useState(false)
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const handleProductOpen = () => setOpenProductDialog(true)
+    const handleProductClose = () => setOpenProductDialog(false)
+
+
     const product_data = [
         {
             id: 1,
@@ -33,6 +49,7 @@ const AdminProducts = () => {
                         <Button
                             variant='contained'
                             color='success'
+                            onClick={handleOpen}
                             sx={{
                                 textTransform: 'none'
                             }}
@@ -46,11 +63,40 @@ const AdminProducts = () => {
                                 textTransform: 'none',
                                 ml: 1
                             }}
+                            onClick={handleProductOpen}
                         >
-                            Add Product
+                            Add product
                         </Button>
 
                     </Box>
+                    {/* Add Category Modal */}
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        maxWidth='xs'
+                        fullWidth
+                        sx={{ borderRadius: 8 }}
+                    >
+                        <DialogTitle>
+                            <Typography variant="h6" sx={{ fontWeight: 'bold', ml: 1 }}>Add category</Typography>
+                        </DialogTitle>
+                        <AddCategoryForm onClose={handleClose}/>
+                    </Dialog>
+                    {/* Add product modal */}
+
+                    <Dialog
+                        open={openProductDialog}
+                        onClose={handleProductClose}
+                        maxWidth='sm'
+                        fullWidth
+                        sx={{ borderRadius: 8 }}
+                    >
+
+                        <Box sx={{ p: 2, display: 'flex', borderBottom: 1 }}>
+                            <Typography variant="h6" sx={{ fontWeight: 'bold', ml: 1 }}>Add Product</Typography>
+                        </Box>
+                        <h1>Add product</h1>
+                    </Dialog>
                 </Grid>
             </Grid>
             <ProductTable product_data={product_data_json} />
