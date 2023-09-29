@@ -1,9 +1,10 @@
-import Box from '@mui/material/Box'
-import React from 'react'
-
+import Box from '@mui/material/Box';
+import VendorsList from '../vendorDashboardScreen/VendorsList';
 const VendorAdminScreen = () => {
   return (
-    <Box>VendorAdminScreen</Box>
+    <Box>
+      <VendorsList />
+    </Box>
   )
 }
 

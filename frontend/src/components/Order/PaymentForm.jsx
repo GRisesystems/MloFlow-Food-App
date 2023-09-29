@@ -174,9 +174,7 @@ export default function PaymentForm() {
             </Accordion>
 
         </Box>
-          <Box mt={3}>
-            <Typography>Payment Status: Paid/Unpaid</Typography>
-          </Box>
+
     </>
   );
 }

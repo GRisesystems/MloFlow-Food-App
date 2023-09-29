@@ -27,6 +27,10 @@ const VendorFirstLoginForm = ({ is_profile_complete }) => {
     const [selectedStates, setSelectedStates] = useState([]);
     const [category, setCategory] = useState('');
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [bank, setBank] = useState('');
 
     const [open, setOpen] = useState(!is_profile_complete);
     const [maxWidth] = useState('sm');
@@ -172,6 +176,67 @@ const VendorFirstLoginForm = ({ is_profile_complete }) => {
         <option value="Poultry">Poultry</option>
       </WeightRangeDropdown>
       </Field>
+
+      <Box sx={{ mt: 2 }}>
+                            <Controller
+                                name={firstname}
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: true }}
+                                render={({ field }) => (
+                                    <TextField {...field} label="Fist Name" variant="outlined" fullWidth error={!!errors.firstname} />
+                                )}
+                            />
+                            {errors.firstname && <span>This field is required</span>}
+        </Box>
+      <Box sx={{ mt: 2 }}>
+                            <Controller
+                                name={lastname}
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: true }}
+                                render={({ field }) => (
+                                    <TextField {...field} label="Last Name" variant="outlined" fullWidth error={!!errors.lastname} />
+                                )}
+                            />
+                            {errors.lastname && <span>This field is required</span>}
+        </Box>
+      <Box sx={{ mt: 2 }}>
+                            <Controller
+                                name={lastname}
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: true }}
+                                render={({ field }) => (
+                                    <TextField {...field} label="Last Name" variant="outlined" fullWidth error={!!errors.lastname} />
+                                )}
+                            />
+                            {errors.lastname && <span>This field is required</span>}
+        </Box>
+      <Box sx={{ mt: 2 }}>
+                            <Controller
+                                name={phone}
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: true }}
+                                render={({ field }) => (
+                                    <TextField {...field} label="Phone Number" variant="outlined" fullWidth error={!!errors.phone} />
+                                )}
+                            />
+                            {errors.phone && <span>This field is required</span>}
+        </Box>
+      <Box sx={{ mt: 2 }}>
+                            <Controller
+                                name={bank}
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: true }}
+                                render={({ field }) => (
+                                    <TextField {...field} label="Bank Number" variant="outlined" fullWidth error={!!errors.bank} />
+                                )}
+                            />
+                            {errors.bank && <span>This field is required</span>}
+        </Box>
 
                         <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
                             <Button variant="contained" color="primary" type="submit">

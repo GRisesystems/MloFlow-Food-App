@@ -108,8 +108,8 @@ const SliderItem = styled.div`
     box-shadow: 0px 0px 5px 3px #FBB31D;
   }
 
-  @media (max-width: 768px) {
- width:80%;
+  @media (max-width: 468px) {
+ width:400px;
   }
 
 `;

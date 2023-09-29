@@ -59,25 +59,25 @@ export default function Review() {
       <List disablePadding>
         {cartItems.map((product) => (
           <ListItem key={product.id} sx={{ py: 1, px: 0 }}>
-            {() => setItemQuantity(product.quantity)}
-            {() => setItemName(product.name)}
-            {() => setItemPrice(product.price)}
-            <ListItemText primary={itemQuantity} secondary={itemName}  />
-            <Typography variant="body2">{itemPrice}</Typography>
+            {() => {setItemQuantity(product.quantity)}}
+            {() => {setItemName(product.name)}}
+            {() => {setItemPrice(product.price)}}
+            <ListItemText primary={product.quantity} secondary={product.name}  />
+            <Typography variant="body2">{product.price}</Typography>
           </ListItem>
         ))}
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Delivery Cost" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-         {() => setDeliveryCost(0.00)}
-         {deliveryCost}
+         {() =>{ setDeliveryCost(0.00)}}
+              0.00
           </Typography>
         </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="VAT(18%)" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-           {setVat(0.00)}
-           {vat}
+           {() => {setVat(0.00)}}
+           0.00
           </Typography>
         </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
@@ -89,8 +89,8 @@ export default function Review() {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                {setTotalCost(getCartTotal())}
-                KES  {totalCost}
+                {() => {setTotalCost(getCartTotal())}}
+                KES  {getCartTotal()}
           </Typography>
         </ListItem>
       </List>
@@ -106,6 +106,12 @@ export default function Review() {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment details
           </Typography>
+          <Box mt={3}>
+            <Typography> Method: MPESA</Typography>
+          </Box>
+          <Box mt={3}>
+            <Typography> Status: Paid/Unpaid</Typography>
+          </Box>
           {/* <Grid container>
             {payments.map((payment) => (
               <React.Fragment key={payment.name}>

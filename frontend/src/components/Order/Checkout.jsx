@@ -14,6 +14,8 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import { Link } from 'react-router-dom';
 
+
+
 const steps = ['Delivery address', 'Payment details', 'Review your order'];
 
 function getStepContent(step) {
@@ -60,16 +62,18 @@ export default function Checkout() {
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
-                Thank you for your order.
+                Thank you for shopping with us.
               </Typography>
               <Typography variant="subtitle1" sx={{mb:3}}>
                 Your order number is #2001539. We have emailed your order
                 confirmation, and will send you an update when your order has been
                 delivered.
               </Typography>
+                <Link to={'/'} > 
               <Button variant='contained'  >
-                <Link to={'/'} color='white'> Home</Link>
+              Home
               </Button>
+                </Link>
             </React.Fragment>
           ) : (
             <React.Fragment>

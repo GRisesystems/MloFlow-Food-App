@@ -6,7 +6,6 @@ import AllSuppliesTab from './SuppliesTabContent';
 import RequestedProductsTab from './RequestedProductsTabContent';
 import GraphTab from './GraphTabContent';
 import AddProductsForm from '../../components/newproductupload/AddProducts';
-import VendorsList from './VendorsList';
 import WishList from './WishList';
 import { useAuth } from '../../utils/AuthContext';
 // import VendorFirstLoginForm from '../../components/vendoScreenComponents/VendorFirstLoginForm';
@@ -89,33 +88,29 @@ const VendorDashboard = () => {
     </Box>
   <TabMenu>
     <TabButton isActive={selectedTab === 0} onClick={() => handleTabChange(0)}>
-     Vendors List
-    </TabButton>
-    <TabButton isActive={selectedTab === 1} onClick={() => handleTabChange(1)}>
      All Supplies
     </TabButton>
-    <TabButton isActive={selectedTab === 2} onClick={() => handleTabChange(2)}>
+    <TabButton isActive={selectedTab === 1} onClick={() => handleTabChange(1)}>
     Listed Products
     </TabButton>
-    <TabButton isActive={selectedTab === 3} onClick={() => handleTabChange(3)}>
+    <TabButton isActive={selectedTab === 2} onClick={() => handleTabChange(2)}>
       Requested Products
     </TabButton>
-    <TabButton isActive={selectedTab === 4} onClick={() => handleTabChange(4)}>
+    <TabButton isActive={selectedTab === 3} onClick={() => handleTabChange(3)}>
       Graph
     </TabButton>
-    <TabButton isActive={selectedTab === 5} onClick={() => handleTabChange(5)}>
+    <TabButton isActive={selectedTab === 4} onClick={() => handleTabChange(4)}>
       Wish List
     </TabButton>
   </TabMenu>
 
   <TabContentContainer>
    
-    {selectedTab === 0 && <VendorsList />}
-    {selectedTab === 1 && <AllSuppliesTab />}
-    {selectedTab === 2 && <ListedProductsTabContent />}
-    {selectedTab === 3 && <RequestedProductsTab />}
-    {selectedTab === 4 && <GraphTab />}
-    {selectedTab === 5 && <WishList />}
+    {selectedTab === 0 && <AllSuppliesTab />}
+    {selectedTab === 1 && <ListedProductsTabContent />}
+    {selectedTab === 2 && <RequestedProductsTab />}
+    {selectedTab === 3 && <GraphTab />}
+    {selectedTab === 4 && <WishList />}
 
   </TabContentContainer>
 </VendorDashboardContainer>

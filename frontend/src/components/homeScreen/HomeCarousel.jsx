@@ -3,9 +3,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Typography, Box, Button} from '@mui/material';
-import chef1 from '../../assets/carousel/chef1.jpg';
-import farmproducts from '../../assets/carousel/farmproducts.jpg';
-import food1 from '../../assets/carousel/food1.jpg';
+import chef1 from '../../assets/carousel/POULTRYITEMS.png';
+import farmproducts from '../../assets/carousel/FRESHFOOD.jpg';
+import food1 from '../../assets/carousel/FISH.jpg';
 import { Link } from 'react-router-dom';
 
 

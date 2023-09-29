@@ -166,7 +166,7 @@ export default function AddressForm() {
             label="Use this address for payment details"
           />
         </Grid>
-  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', m:3}} >Submit</Button>
+  <Button variant="contained" type="submit" sx={{backgroundColor:'#FBB31D', color:'#0C0B0B', m:3}} >Save</Button>
       </Grid>
       </Box>
     </>
