@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import TopCard from '../../components/adminComponents/products/TopCard'
 import ProductTable from '../../components/adminComponents/products/ProductTable'
+import product_data_json from './testData/product.json'
 
 const AdminProducts = () => {
     const product_data = [
@@ -52,7 +53,7 @@ const AdminProducts = () => {
                     </Box>
                 </Grid>
             </Grid>
-            <ProductTable />
+            <ProductTable product_data={product_data_json} />
         </Box>
     )
 }

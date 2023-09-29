@@ -16,7 +16,8 @@ import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import { grey } from '@mui/material/colors'
 
 
-const ProductTable = () => {
+const ProductTable = ({ product_data }) => {
+    console.log(product_data)
     return (
         <Box component={Paper} sx={{ mt: 2, p: 2 }}>
             <Grid container spacing={2}>
@@ -41,26 +42,39 @@ const ProductTable = () => {
                         </Button>
                     </Stack>
                 </Grid>
-                <TableContainer>
-                    <Table aria-label="Approval table">
-                        <TableHead sx={{ backgroundColor: grey[100] }}>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Category</TableCell>
-                                <TableCell>Vendor</TableCell>
-                                <TableCell>Initial Stock</TableCell>
-                                <TableCell>Quantity Sold</TableCell>
-                                <TableCell>Available Sock</TableCell>
-                                <TableCell>Price</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell>Tilapia</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                {product_data &&
+                    <TableContainer>
+                        <Table dense aria-label="Approval table">
+                            <TableHead sx={{ backgroundColor: grey[100] }}>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Category</TableCell>
+                                    <TableCell>Vendor</TableCell>
+                                    <TableCell>Initial Stock</TableCell>
+                                    <TableCell>Quantity Sold</TableCell>
+                                    <TableCell>Available Sock</TableCell>
+                                    <TableCell>Price(KES)</TableCell>
+                                    {/* <TableCell>Price(KES)</TableCell> */}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    product_data.map((product) => (
+                                        <TableRow key={product.id}>
+                                            <TableCell>{product.name}</TableCell>
+                                            <TableCell>{product.category}</TableCell>
+                                            <TableCell>{product.vendor}</TableCell>
+                                            <TableCell>{product.initial_stock}</TableCell>
+                                            <TableCell>{product.quantity_sold}</TableCell>
+                                            <TableCell>{product.available_stock}</TableCell>
+                                            <TableCell>{product.price.toLocaleString()}</TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                }
             </Grid>
 
         </Box>

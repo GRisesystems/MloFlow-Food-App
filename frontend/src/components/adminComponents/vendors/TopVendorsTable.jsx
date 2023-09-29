@@ -10,7 +10,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import { Box, Typography, Avatar } from '@mui/material';
 import { grey, green } from '@mui/material/colors';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -19,7 +19,7 @@ import top_sales from './topsales.json'
 import VendorDetailsModal from './VendorDetailsModal';
 
 
-const TopVendorsTable = ({vendor_sales}) => {
+const TopVendorsTable = ({ vendor_sales }) => {
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -84,7 +84,14 @@ const TopVendorsTable = ({vendor_sales}) => {
                             fullWidth
                             sx={{ borderRadius: 8 }}
                         >
+                            <Box sx={{ display: 'flex', justifyContent: 'end',p:2}}>
+                                <CloseIcon
+                                onClick={handleClose}
+                                sx={{cursor:'pointer',backgroundColor:'white'}}
+                                />
+                            </Box>
                             <Box sx={{ p: 2, display: 'flex', borderBottom: 1 }}>
+
                                 <Avatar>
                                     {/* image */}
                                 </Avatar>
