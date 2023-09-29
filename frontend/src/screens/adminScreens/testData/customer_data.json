@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "phone_number": "123-456-7890",
+      "date_joined": "1st January 2022",
+      "last_login": "15th February 2022"
+    },
+    {
+      "id": 2,
+      "first_name": "Alice",
+      "last_name": "Smith",
+      "email": "alice.smith@example.com",
+      "phone_number": "987-654-3210",
+      "date_joined": "5th March 2021",
+      "last_login": "10th April 2022"
+    },
+    {
+      "id": 3,
+      "first_name": "Bob",
+      "last_name": "Johnson",
+      "email": "bob.johnson@example.com",
+      "phone_number": "555-123-4567",
+      "date_joined": "20th July 2022",
+      "last_login": "2nd August 2022"
+    },
+    {
+      "id": 4,
+      "first_name": "Eva",
+      "last_name": "Williams",
+      "email": "eva.williams@example.com",
+      "phone_number": "777-888-9999",
+      "date_joined": "10th June 2020",
+      "last_login": "30th July 2021"
+    },
+    {
+      "id": 5,
+      "first_name": "Michael",
+      "last_name": "Brown",
+      "email": "michael.brown@example.com",
+      "phone_number": "111-222-3333",
+      "date_joined": "8th November 2021",
+      "last_login": "12th December 2021"
+    },
+    {
+      "id": 6,
+      "first_name": "Sophia",
+      "last_name": "Lee",
+      "email": "sophia.lee@example.com",
+      "phone_number": "444-555-6666",
+      "date_joined": "3rd September 2020",
+      "last_login": "25th October 2021"
+    },
+    {
+      "id": 7,
+      "first_name": "Daniel",
+      "last_name": "Garcia",
+      "email": "daniel.garcia@example.com",
+      "phone_number": "888-777-6666",
+      "date_joined": "12th May 2021",
+      "last_login": "6th July 2022"
+    },
+    {
+      "id": 8,
+      "first_name": "Olivia",
+      "last_name": "Davis",
+      "email": "olivia.davis@example.com",
+      "phone_number": "333-111-5555",
+      "date_joined": "18th February 2022",
+      "last_login": "22nd March 2022"
+    },
+    {
+      "id": 9,
+      "first_name": "Liam",
+      "last_name": "Martinez",
+      "email": "liam.martinez@example.com",
+      "phone_number": "666-999-7777",
+      "date_joined": "9th April 2021",
+      "last_login": "15th June 2021"
+    },
+    {
+      "id": 10,
+      "first_name": "Ava",
+      "last_name": "Wilson",
+      "email": "ava.wilson@example.com",
+      "phone_number": "222-333-4444",
+      "date_joined": "7th July 2022",
+      "last_login": "20th August 2022"
+    }
+  ]
+  
