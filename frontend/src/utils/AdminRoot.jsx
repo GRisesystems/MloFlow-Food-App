@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,12 +10,14 @@ import Toolbar from '@mui/material/Toolbar';
 import TopNav from '../includes/admin/TopNav';
 import SideBar from '../includes/admin/SideBar';
 
-import { Outlet } from 'react-router-dom'
+
+import { Outlet, useLocation } from 'react-router-dom'
 
 const drawerWidth = 240;
 
 function AdminRoot(props) {
   // window. location. reload()
+  const location = useLocation()
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -23,10 +25,39 @@ function AdminRoot(props) {
     setMobileOpen(!mobileOpen);
   };
 
- 
+
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  const title = 'Dashboard'
+  const [title, setTitle] = React.useState('')
+  
+  useEffect(() => {
+    if (location.pathname.includes('chefs')) {
+      setTitle('Chefs')
+    }
+    else if (location.pathname.includes('vendors')) {
+      setTitle('Vendors')
+    }
+    else if (location.pathname.includes('users')) {
+      setTitle('Customers')
+    }
+    else if (location.pathname.includes('products')) {
+      setTitle('Products')
+    }
+    else if (location.pathname.includes('transactions')) {
+      setTitle('Transactions')
+    }
+    else if (location.pathname.includes('profile')) {
+      setTitle('Profile')
+    } else {
+      setTitle('Dashboard')
+    }
+
+  }, [location])
+
+  // if (location.pathname.includes('chefs')) {
+  //   setTitle('Chefs')
+  // }
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -39,7 +70,7 @@ function AdminRoot(props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <TopNav title={title} handleDrawerToggle={handleDrawerToggle}/>
+        <TopNav title={title} handleDrawerToggle={handleDrawerToggle} />
       </AppBar>
       <Box
         component="nav"
@@ -60,7 +91,7 @@ function AdminRoot(props) {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
-          <SideBar/>
+          <SideBar />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -70,16 +101,16 @@ function AdminRoot(props) {
           }}
           open
         >
-          <SideBar/>
+          <SideBar />
         </Drawer>
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` },overflow:'hidden' }}
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, overflow: 'hidden' }}
       >
         <Toolbar />
-        <Box sx={{p:2}}>
-            <Outlet /> 
+        <Box sx={{ p: 2 }}>
+          <Outlet />
         </Box>
       </Box>
     </Box>
