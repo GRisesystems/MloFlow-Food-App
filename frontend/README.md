@@ -34,7 +34,7 @@ Once the dependencies are installed, you can start the frontend section of Mlofl
 npm run dev
 ```
 
-This command will start the development server and launch the application in your default web browser. By default, the application will be served at `http://localhost:3000`.
+This command will start the development server and launch the application in your default web browser. By default, the application will be served at `http://localhost:5173`.
 
 Now, you can interact with Mloflow's frontend, explore its features, and experience its smooth performance.
 

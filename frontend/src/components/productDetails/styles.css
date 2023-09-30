@@ -1,0 +1,52 @@
+.MuiContainer-root.detail-container{
+  border: 1px solid #FBB31D;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.MuiTypography-root.product-detail{
+  text-align: center;
+  background-color: #FBB31D;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+.MuiCardMedia-root img{
+   width:90%;
+  margin: .5rem 0;
+}
+.MuiCardMedia-root img:hover{
+   transform: scale(.9);
+}
+.MuiCardContent {
+  margin-top: 10px !important;
+}
+.MuiCardContent-root .name, .price, .description{
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #0C0B0B; 
+}
+.MuiCardContent-root .name span, .description  span, .price span, .category span, .stock span, .quantity span{
+
+  font-weight: 600;
+  font-size: 1.4rem;
+  color:#0275d8;
+  font-style: normal;
+}
+
+.MuiCardContent-root .name, .MuiCardContent-root  .price  {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0C0B0B; 
+}
+.MuiCardContent-root .stock, .MuiCardContent-root  .category  {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0C0B0B; 
+}
+.MuiCardContent-root .description {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.MuiCardContent-root .quantity {
+  display: flex;
+}
