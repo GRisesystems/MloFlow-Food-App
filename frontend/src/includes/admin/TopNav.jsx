@@ -10,8 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import { useSignOut } from 'react-auth-kit'
 
 
-const TopNav = ({ title, handleDrawerToggle }) => {
-    // const { logout } = useAuth()
+const TopNav = ({ title, handleDrawerToggle }) => {    
     const signOut = useSignOut()
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate()
