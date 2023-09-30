@@ -8,15 +8,15 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class CertificationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Certification
+        model = Chef_certification
         fields = '__all__'
 
 class ChefSerializer(serializers.ModelSerializer):
    # reviews = ReviewSerializer(many=True, read_only=True)  # Nested serializer for reviews
-    certifications = CertificationSerializer(many=True)
+    #certifications = CertificationSerializer(many=True)
     class Meta:
         model = Chef
-        fields = ('country', 'county', 'state', 'profile_picture', 'speciality','certifications')
+        fields = ('country', 'state','city', 'profile_picture', 'speciality')
         #fields = "__all__"
     
     def create(self, validated_data):
@@ -25,3 +25,13 @@ class ChefSerializer(serializers.ModelSerializer):
         for certification_data in certifications_data:
             Certification.objects.create(Chef=Chef, **certification_data)
         return Chef
+
+class ChefChargeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChefCharge
+        fields = '__all__'
+
+class OccasionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Occasion
+        fields = '__all__'

@@ -5,9 +5,90 @@
     <link rel="icon" type="image/svg+xml" href="./src/assets/mloflow.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mlo Flow</title>
-  </head>
-  <body>
+    <style>
+      #wrapper{
+          font-family: serif;
+          background-color: black;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      .center {
+          display: flex;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+      }
+      .ring { 
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          animation: ring 3s linear infinite;
+      }
+      @keyframes ring {
+          0%  {
+              transform: rotate(0deg);
+              box-shadow: 1px 5px 2px #0275d8;
+          }
+          50%  {
+              transform: rotate(180deg);
+              box-shadow: 1px 5px 2px #FFB31D;
+          }
+          100%  {
+              transform: rotate(360deg);
+              box-shadow: 1px 5px 2px #28c804;
+          }
+      }
+
+      .ring::after {
+          position: absolute;
+          content: '';
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 100%;
+          border-radius: 50%;
+          box-shadow: 0 0 5px rgba(255, 255, 255, .3);
+      }
+      .loader-text {
+          color: #FFB31D;   
+          font-size: 20px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          line-height: 200px;   
+          }
+  </style>
+</head>
+<body >
+  <div id="wrapper">
+    <div class="center">
+      <div class="ring"></div>
+      <span class="loader-text">Loading...</span>
+    </div>
+  </div>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script>
+                  document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                  "body").style.visibility = "hidden";
+                document.querySelector(
+                  "#wrapper").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                  "#wrapper").style.display = "none";
+                document.querySelector(
+                  "body").style.visibility = "visible";
+            }
+        };
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

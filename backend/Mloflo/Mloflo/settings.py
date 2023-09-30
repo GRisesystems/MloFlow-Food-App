@@ -14,15 +14,11 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
 from datetime import timedelta
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+MAX_OTP_TRY = 3
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -32,7 +28,7 @@ SECRET_KEY = "django-insecure-uc&_xy5q3skrh9yb^@(+k@6c03rkit6hrwt6=@$omy#*u!=b=$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
@@ -48,27 +44,22 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     'main',
     'authapp',
     'payments',
     'vendors',
-
+    'order',
 #added the separate client apps
     'Vendor',
     'Chef',
     'Customer',
-
     'Category',
-    'products',
+    'products.apps.ProductsConfig',
     'rest_framework',
     'corsheaders',
     'Conversation',
-
     "phonenumber_field",
     'rest_framework_simplejwt.token_blacklist',
-
-
     'drf_spectacular',
     'djoser',
 ]
@@ -76,10 +67,9 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
 
-    #'DEFAULT_PERMISSION_CLASSES': [
-        #'rest_framework.permissions.IsAuthenticated',
-        #'rest_framework.permissions.IsAdminUser'
-    #],
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAdminUser'
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.MultiPartParser',  # Ensure this is included
@@ -142,30 +132,27 @@ SPECTACULAR_SETTINGS = {
 
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_WHITELIST = True
 
 # Add the specific origins you want to allow in the whitelist
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:5173",
-    #"https://yourfrontenddomain.com",   Example: Your frontend's production domain
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 
 ROOT_URLCONF = "Mloflo.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR, 'frontend/dist'],
+        "DIRS": [BASE_DIR, 'frontend/'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -178,16 +165,17 @@ TEMPLATES = [
     },
 ]
 
-# AUTHENTICATION_BACKENDS = [
-#   'django.contrib.auth.backends.ModelBackend',
-#  'django.core.mail.backends.smtp.EmailBackend',
-# ]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    #'django.core.mail.backends.smtp.EmailBackend',
+    
+]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'faithsang001@gmail.com'
-EMAIL_HOST_PASSWORD = 'mzoxvivicpxnngvn'
-EMAIL_PORT = 587
+EMAIL_USE_TLS = True  
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_USER = 'faithsang001@gmail.com'  
+EMAIL_HOST_PASSWORD = 'mzoxvivicpxnngvn'  
+EMAIL_PORT = 587  
 
 DEFAULT_FROM_EMAIL = 'faithsang001@gmail.com'
 
@@ -212,30 +200,27 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

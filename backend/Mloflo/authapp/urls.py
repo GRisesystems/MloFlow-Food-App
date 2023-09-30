@@ -2,17 +2,17 @@ from django.urls import path
 
 
 from .views import *
-#from .views import MyTokenObtainPairView
 
-#from rest_framework_simplejwt.views import (
-  #  TokenRefreshView,
-#)
-
-from . import views
 
 urlpatterns = [  
     
-    #path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    #path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path("login/", views.LoginView.as_view(), name="login"),
+    path('register/', RegisterView.as_view(), name="register"),
+    path('verify-otp/', OTPVerificationView.as_view(), name='verify-otp'),
+    path('regenerate-otp/', RegenerateOTPView.as_view(), name='verify-otp'),
+    path("login/", LoginAPIView.as_view(), name="login"),
+    path('logout/', LogoutAPIView.as_view(), name="logout"),
+    path('request-password-reset/', PasswordResetRequestView.as_view(), name='request-password-reset'),
+    path('reset-password/', PasswordResetView.as_view(), name='reset-password'),
+    
+    
 ]

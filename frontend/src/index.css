@@ -1,8 +1,15 @@
-/* :root {
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-} */
+} 
+
+.noHover {
+  /* Disable hover effect */
+  pointer-events: none;
+  /* Set the cursor to a pointer */
+  cursor: pointer;
+}
