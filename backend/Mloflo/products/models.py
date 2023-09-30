@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 # from Category.models import Category
 from authapp.models import User
+from Category.models import Category
 import uuid
 # from PIL import Image  # This is required to handle image resizing
 # import os
@@ -12,7 +13,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 #Create your models here.
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    # category = models.ForeignKey(Category,on_delete=models.SET_NULL,blank=True,null=True)
+    #category = models.ForeignKey(Category,on_delete=models.SET_NULL,blank=True,null=True)
     category = models.CharField(max_length=250, blank=True, null=True)
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=250)
