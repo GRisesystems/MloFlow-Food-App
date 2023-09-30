@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'authapp',
     'payments',
     'vendors',
+    'order',
 #added the separate client apps
     'Vendor',
     'Chef',
