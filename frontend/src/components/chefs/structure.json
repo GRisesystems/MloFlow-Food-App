@@ -1,0 +1,11 @@
+{country: 'Algeria', state: 'Batna', speciality: 'fried chicken', profile_picture: File, cerifications: Array(2)
+}cerifications: (2) [
+    {…
+    },
+    {…
+    }
+]country: "Algeria"profile_picture: File {name: 'profile.jpg', lastModified: 1693986673996, lastModifiedDate: Wed Sep 06 2023 10: 51: 13 GMT+0300 (East Africa Time), webkitRelativePath: '', size: 64404, …
+}speciality: "fried chicken"state: "Batna"[
+    [Prototype
+    ]
+]: Object

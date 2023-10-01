@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Apples",
+        "vendor": "John Doe",
+        "inflow": 68,
+        "growth": 12.5
+    },
+    {
+        "id": 2,
+        "name": "Bananas",
+        "vendor": "Jane Smith",
+        "inflow": 73,
+        "growth": 8.2
+    },
+    {
+        "id": 3,
+        "name": "Oranges",
+        "vendor": "Michael Johnson",
+        "inflow": 54,
+        "growth": 15.7
+    },
+    {
+        "id": 4,
+        "name": "Grapes",
+        "vendor": "Emily Wilson",
+        "inflow": 89,
+        "growth": 20.1
+    },
+    {
+        "id": 5,
+        "name": "Strawberries",
+        "vendor": "David Brown",
+        "inflow": 62,
+        "growth": 11.8
+    }
+]
