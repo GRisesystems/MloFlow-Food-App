@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
-import { blue } from '@mui/material/colors'
+import { blue, green } from '@mui/material/colors'
 
 
 
@@ -68,7 +68,7 @@ const VendorDetailsModal = ({ vendor_sales, onClose }) => {
             </Box>
             {/* vendor graph */}
             <Box>
-                <Typography variant='h6' sx={{ fontWeight: 'bold', textAlign: 'center', mb: 1, mt: 1 }}>Sales</Typography>
+                <Typography variant='h6' sx={{ fontWeight: 'bold', textAlign: 'center', mb: 1, mt: 1 }}>Vendor sales</Typography>
                 <ResponsiveContainer
                     width="100%"
                     // width={500}
@@ -86,7 +86,7 @@ const VendorDetailsModal = ({ vendor_sales, onClose }) => {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                        <XAxis />
+                        <XAxis dataKey="month"/>
                         <YAxis>
                             <Label
                                 value="Amount"
@@ -94,7 +94,7 @@ const VendorDetailsModal = ({ vendor_sales, onClose }) => {
                                 angle={-90}
                                 style={{
                                     textAnchor: 'middle',
-                                    fill: 'red', // You can customize the label's style
+                                    fill: green[500], // You can customize the label's style
                                 }}
                             />
                         </YAxis>
@@ -103,7 +103,7 @@ const VendorDetailsModal = ({ vendor_sales, onClose }) => {
                         <Line
                             type="monotone"
                             dataKey="sales"
-                            stroke={blue[500]}
+                            stroke={green[500]}
                             activeDot={{ r: 8 }}
                             name='Month'
                         />

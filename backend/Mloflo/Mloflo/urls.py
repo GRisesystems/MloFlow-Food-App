@@ -34,6 +34,7 @@ urlpatterns = [
     path('authapp/', include('authapp.urls')),    
     path('category/', include('Category.urls')),
     path('products/', include('products.urls')),
+    path('order/', include('order.urls')),
     path('conversation/', include('Conversation.urls')),
     path('chef/',include('Chef.urls')),
     path('customer/', include('Customer.urls')),
