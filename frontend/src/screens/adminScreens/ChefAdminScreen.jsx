@@ -14,50 +14,51 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Typography,
+  Paper,
+  Box,
+  Grid,
 } from '@mui/material';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 
-const RootContainer = styled.div`
+const RootContainer = styled(Box)`
   padding: 20px;
-  background-color: #f5f5f5; /* Light gray background color */
-  min-height: 100vh; /* Ensure the content takes up the full viewport height */
+  background-color: #f5f5f5;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: left;
 `;
 
-const StatCardRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+const StatCardRow = styled(Grid)`
   margin-bottom: 20px;
 `;
 
-const StatCardWrapper = styled.div`
-  margin-right: 20px;
-  padding: 5px;
+const StatCardWrapper = styled(Grid)`
   margin-bottom: 30px;
 `;
 
 const StatCard = styled(Card)`
   width: 200px;
   height: 180px;
-  margin: 10px;
   background-color: #fff;
   border-radius: 18px;
   box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
-const StatCardTitle = styled.h2`
+const StatCardTitle = styled(Typography)`
   text-align: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
 `;
 
-const StatCardValue = styled.p`
+const StatCardValue = styled(Typography)`
   margin-top: 10px;
   text-align: center;
   font-size: 24px;
@@ -72,7 +73,6 @@ const TableContainerStyled = styled(TableContainer)`
   border-radius: 10px;
   box-shadow: 4px 4px 4px rgba(0.3, 0, 0, 0.3);
   margin-top: 5px;
-  width: 100%;
 `;
 
 const BoldTableCell = styled(TableCell)`
@@ -84,7 +84,7 @@ const ActionButton = styled(Button)`
   color: black;
 `;
 
-const SearchFilterContainer = styled.div`
+const SearchFilterContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -96,13 +96,14 @@ const SearchFilterContainer = styled.div`
 const SearchButton = styled(Button)`
   background-color: #fbb31d;
   color: black;
-  margin-right: 120px;
+  margin-right: 20px;
 `;
 
-const GlobalStyles = styled.div`
+const GlobalStyles = styled(Paper)`
   background-color: gray;
   min-height: 100vh;
 `;
+
 
 const ChefAdminScreen = () => {
   const chefStatistics = {
@@ -173,7 +174,7 @@ const ChefAdminScreen = () => {
     // Add more chef data as needed
   ];
 
-   const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isBookingFormOpen, setBookingFormOpen] = useState(false);
 
@@ -230,61 +231,25 @@ const ChefAdminScreen = () => {
   };
 
   return (
-    <GlobalStyles>
+    <GlobalStyles elevation={0}>
       <RootContainer>
-        <h1 style={{ color: '#0275d8' }}>Chef Statistics</h1>
-        <StatCardRow>
-          <StatCardWrapper>
-            <StatCard>
-              <StatCardContent>
-                <RestaurantIcon fontSize="large" />
-                <StatCardTitle>Total Chefs</StatCardTitle>
-                <StatCardValue>{chefStatistics.totalChefs}</StatCardValue>
-              </StatCardContent>
-            </StatCard>
-          </StatCardWrapper>
-
-          <StatCardWrapper>
-            <StatCard>
-              <StatCardContent>
-                <RestaurantIcon fontSize="large" />
-                <StatCardTitle>Available Chefs</StatCardTitle>
-                <StatCardValue>{chefStatistics.AvailableChefs}</StatCardValue>
-              </StatCardContent>
-            </StatCard>
-          </StatCardWrapper>
-
-          <StatCardWrapper>
-            <StatCard>
-              <StatCardContent>
-                <RestaurantIcon fontSize="large" />
-                <StatCardTitle>Unavailable Chefs</StatCardTitle>
-                <StatCardValue>{chefStatistics.UnavailableChefs}</StatCardValue>
-              </StatCardContent>
-            </StatCard>
-          </StatCardWrapper>
-
-          <StatCardWrapper>
-            <StatCard>
-              <StatCardContent>
-                <RestaurantIcon fontSize="large" />
-                <StatCardTitle>Most Accepted Requests</StatCardTitle>
-                <StatCardValue>{chefStatistics.AcceptedRequests}</StatCardValue>
-              </StatCardContent>
-            </StatCard>
-          </StatCardWrapper>
-
-          <StatCardWrapper>
-            <StatCard>
-              <StatCardContent>
-                <RestaurantIcon fontSize="large" />
-                <StatCardTitle>Most Denied Requests</StatCardTitle>
-                <StatCardValue>{chefStatistics.DeniedRequests}</StatCardValue>
-              </StatCardContent>
-            </StatCard>
-          </StatCardWrapper>
+        <Typography variant="h4" style={{ color: '#0275d8', marginBottom: '20px' }}>
+          Chef Statistics
+        </Typography>
+        <StatCardRow container spacing={2}>
+          {/* Statistic Cards */}
+          {Object.entries(chefStatistics).map(([stat, value]) => (
+            <StatCardWrapper item key={stat}>
+              <StatCard>
+                <StatCardContent>
+                  <RestaurantIcon fontSize="large" />
+                  <StatCardTitle variant="h6">{stat}</StatCardTitle>
+                  <StatCardValue variant="h5">{value}</StatCardValue>
+                </StatCardContent>
+              </StatCard>
+            </StatCardWrapper>
+          ))}
         </StatCardRow>
-
         <SearchFilterContainer>
           <TextField
             label="Search For A Chef"
@@ -294,20 +259,16 @@ const ChefAdminScreen = () => {
             onChange={handleSearchTextChange}
           />
           <SearchButton variant="contained">Search</SearchButton>
-
           <FormControl variant="outlined" size="small" style={{ width: '300px' }}>
             <InputLabel>Filter</InputLabel>
-            <Select
-              value={filter}
-              onChange={handleFilterChange}
-              label="Filter"
-            >
+            <Select value={filter} onChange={handleFilterChange} label="Filter">
               <MenuItem value="All">All</MenuItem>
             </Select>
           </FormControl>
         </SearchFilterContainer>
-
-        <h2 style={{ color: '#0275d8' }}>Chef Information</h2>
+        <Typography variant="h4" style={{ color: '#0275d8', marginBottom: '20px' }}>
+          Chef Information
+        </Typography>
         <TableContainerStyled>
           <Table>
             <TableHead>
@@ -329,7 +290,9 @@ const ChefAdminScreen = () => {
                   <TableCell>{chef.email}</TableCell>
                   <TableCell>{chef.location}</TableCell>
                   <TableCell>
-                    <ActionButton onClick={() => handleDetailsPageNavigation(chef.id)}>View Details</ActionButton>
+                    <ActionButton onClick={() => handleDetailsPageNavigation(chef.id)}>
+                      View Details
+                    </ActionButton>
                   </TableCell>
                 </TableRow>
               ))}

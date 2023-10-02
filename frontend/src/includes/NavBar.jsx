@@ -91,7 +91,7 @@ function NavBar() {
             <Link to={'/'} style={{ textDecoration: 'none' }}>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hover": { color: "white", transition: "200ms ease-in" }, }}
+              sx={{ my: 2, color: '#0C0B0B', display: 'block', fontWeight: 'bolder', "&:hefover": { color: "white", transition: "200ms ease-in" }, }}
             >
               Home
             </Button>

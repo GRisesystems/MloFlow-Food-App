@@ -7,7 +7,7 @@ const History = () => {
   
   useEffect(() => {
     // Make a PATCH request to fetch "history" chef bookings
-    axios.patch('/host/customer/chef-bookings/history/')
+    axios.patch('/host/customer/chef-bookings/')
       .then(response => {
         setHistoryBookings(response.data);
       })
