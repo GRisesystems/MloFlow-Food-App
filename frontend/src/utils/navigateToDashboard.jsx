@@ -1,6 +1,9 @@
 
-export const navigateToDashboard = (role, navigate ) => {
+export const navigateToDashboard = (role, navigate) => {
     switch (role) {
+        case 'admin':
+            navigate('/admin');
+            break;
         case 'chef':
             navigate('/chef-dashboard');
             break;

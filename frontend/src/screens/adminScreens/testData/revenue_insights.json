@@ -1,0 +1,77 @@
+[
+    {
+      "month": "Jan",
+      "chefs": 280,
+      "vendors": 230,
+      "produce": 150
+    },
+    {
+      "month": "Feb",
+      "chefs": 220,
+      "vendors": 190,
+      "produce": 140
+    },
+    {
+      "month": "Mar",
+      "chefs": 290,
+      "vendors": 270,
+      "produce": 220
+    },
+    {
+      "month": "Apr",
+      "chefs": 1150,
+      "vendors": 1050,
+      "produce": 800
+    },
+    {
+      "month": "May",      
+      "chefs": 1200,
+      "vendors": 1100,
+      "produce": 850
+    },
+    {
+      "month": "Jun",
+      "chefs": 1000,
+      "vendors": 1000,
+      "produce": 750
+    },
+    {
+      "month": "Jul",
+      "chefs": 950,
+      "vendors": 1050,
+      "produce": 800
+    },
+    {
+      "month": "Aug",
+      "chefs": 900,
+      "vendors": 1100,
+      "produce": 850
+    },
+    {
+      "month": "Sep",
+      "chefs": 850,
+      "vendors": 1150,
+      "produce": 900
+    },
+    {
+      "month": "Oct",
+      "chefs": 950,
+      "vendors": 1200,
+      "produce": 950
+    },
+    {
+      "month": "Nov",
+      "chefs": 1000,
+      "vendors": 1100,
+      "produce": 1000
+    },
+    {
+      "month": "Dec",
+      "chefs": 1050,
+      "vendors": 1050,
+      "produce": 1050
+    }   
+    
+    
+  ]
+  
