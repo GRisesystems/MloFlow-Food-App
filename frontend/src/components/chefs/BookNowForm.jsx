@@ -116,7 +116,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
           onSubmit={handleSubmit(onSubmit)}
         >
         <Controller
-          name="firstName"
+          name="first_name"
           control={control}
           defaultValue=""
           rules={{ required: true }}
@@ -179,7 +179,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
           rules={{ required: true }}
           render={({ field, fieldState }) => (
             <TextField
-              label="Specialty"
+              label="chefSpeciality"
               variant="outlined"
               fullWidth
               {...field}
@@ -196,7 +196,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
           rules={{ required: true }}
           render={({ field, fieldState }) => (
             <TextField
-              label="Location"
+              label="location"
               variant="outlined"
               fullWidth
               {...field}
@@ -209,7 +209,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
         {/* Occasion Dropdown */}
         <InputLabel sx={{ mt: 2 }}>Occasion</InputLabel>
           <Select
-            label="Occasion"
+            label="occasion"
             variant="outlined"
             fullWidth
             value={selectedOccasion}
@@ -222,7 +222,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
             ))}
           </Select>
           <Controller
-            name="numberOfGuests"
+            name="noOfGuests"
             control={control}
             defaultValue=""
             render={({ field }) => (
@@ -241,7 +241,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
             <InputLabel sx={{ mt: 2 }}>Date Range</InputLabel>
             <div style={{ display: 'flex', gap: '30px', width:'2000px' }}>
               <Controller
-                name="fromDate"
+                name="start_date"
                 control={control}
                 defaultValue=""
                 rules={{ required: true }}
@@ -260,7 +260,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
                 )}
               />
               <Controller
-                name="toDate"
+                name="end_date"
                 control={control}
                 defaultValue=""
                 rules={{ required: true }}
@@ -281,7 +281,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
             </div>
           </div>
 
-          <InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
+          {/* <InputLabel sx={{ mt: 2 }}>Phone Number</InputLabel>
                 <Controller
                     control={control}
                     rules={{
@@ -299,7 +299,7 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
                         />
                     )}
                     name="phone"
-                />
+                /> */}
                 <section>
                  <p style={{ fontSize: '24px', fontWeight: 'bolder', color: 'black', textAlign: 'center', marginBottom: '0px',marginTop: '0px' }}>
                           Total Price: 

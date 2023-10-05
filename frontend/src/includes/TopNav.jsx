@@ -91,14 +91,18 @@ export default function ClippedDrawer() {
     // nagigate to login screen
     navigate('/login')
   }
-
+  const handleDrawerClose = () => {
+    setIsDrawerVisible(false);
+  };
   const handleLogout = () => {
     // Handle logout fucntionality
     logout()
     signOut()
     setIsDrawerVisible(!isDrawerVisible)
     navigate('/')
+    handleDrawerClose();
   }
+  
 
   const handleProfileMenuOpen = () => {
     setIsDrawerVisible(!isDrawerVisible)
@@ -233,7 +237,7 @@ export default function ClippedDrawer() {
           <Box sx={{ overflow: 'auto' }}>
             <List>
               <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton component={Link} to="/user-profile" onClick={handleDrawerClose}>
                   <ListItemIcon>
                     <AccountCircleIcon />
                   </ListItemIcon>
@@ -242,18 +246,16 @@ export default function ClippedDrawer() {
               </ListItem>
 
               <ListItem disablePadding>
-                <Link to={'/vendor-dashboard'}>
-                <ListItemButton>
+                <ListItemButton onClick={handleDrawerClose}>
                   <ListItemIcon>
                     <DashboardIcon />
                   </ListItemIcon>
                   <ListItemText primary='Dashboard' />
                 </ListItemButton>
-                </Link>
               </ListItem>
 
               <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={handleDrawerClose}>
                   <ListItemIcon>
                     <PaymentsIcon />
                   </ListItemIcon>
@@ -264,7 +266,7 @@ export default function ClippedDrawer() {
             <Divider />
             <List>
               <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={handleDrawerClose}>
                   <ListItemIcon>
                     <SupportAgentIcon />
                   </ListItemIcon>
@@ -281,7 +283,6 @@ export default function ClippedDrawer() {
               </ListItem>
             </List>
           </Box>
-          
         </Drawer>
       )}
     </Box>

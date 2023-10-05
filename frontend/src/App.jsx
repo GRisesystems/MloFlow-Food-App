@@ -24,7 +24,9 @@ import ChefDetailScreen from './screens/chefsScreen/ChefDetailScreen'
 import ContactScreen from './screens/ContactScreen/ContactScreen';
 import Cart from './components/homeScreen/ShoppingCart';
 import WishList from './screens/vendorDashboardScreen/WishList';
-import Checkout from './components/Order/Checkout'
+import Checkout from './components/Order/Checkout';
+import UserProfileScreen from './screens/userProfileScreen/UserProfileScreen'
+import UpdateProfileForm from './components/profileScreen/UpdateProfileForm'
 // import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 
 // Admin routes
@@ -34,6 +36,7 @@ import VendorAdminScreen from './screens/adminScreens/VendorAdminScreen'
 import AdminCustomerScreen from './screens/adminScreens/AdminCustomerScreen'
 import TransactionsScreen from './screens/adminScreens/TransactionsScreen'
 import AdminProfileScreen from './screens/adminScreens/AdminProfileScreen'
+
 // End of admin routes
 
 // utills section
@@ -64,6 +67,9 @@ const AppRouter = () => {
         } />
         <Route path='/chefs' element={<ChefsScreen />} />
         <Route path='/chefs/:id' element={<ChefDetailScreen />} />
+        <Route path="/user-profile" element={<UserProfileScreen />} />
+        <Route path="/update-profile" element={<UpdateProfileForm />} />
+
         <Route path='/vendor-dashboard' element={
           <RequireAuth loginPath={'/'}>
             <VendorDashboardScreen />

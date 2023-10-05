@@ -25,10 +25,10 @@ const ContactForm = () => {
       const response = await axios.post('http://127.0.0.1:8000/conversation/contact-us/', data);
   
       // Check if the request was successful (you can add more error handling)
-      if (response.status === 200) {
+      if (response.status === 201) {
         console.log('Form submitted successfully');
         // Clear the form by resetting it
-        reset();
+        // reset();
       } else {
         console.error('Form submission failed');
       }
@@ -73,7 +73,7 @@ const ContactForm = () => {
           <Grid item xs={12} sm={6} >
             <label>Last Name <span style={{color:'red'}}>*</span></label>
             <Controller
-              name="last_name"
+              name="surname"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
@@ -103,7 +103,7 @@ const ContactForm = () => {
                             error={fieldState.invalid}
                         />
                     )}
-                    name="phone"
+                    name="phone_number"
                 />
 
         <Box sx={{ mt: 2 }}>
