@@ -29,24 +29,34 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
     { value: 'Baby Shower', price: 2500 },
   ];
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  };
-
   const onSubmit = async (data) => {
     try {
-      const emailData = {
-        ...data,
+      const requestData = {
+        first_name: data.first_name,
+        surname: data.surname,
         email: data.email,
-        occasion: selectedOccasion, // Include the selected occasion in the data
+        chefSpeciality: data.specialty,
+        occasion: selectedOccasion,
+        location: data.location,
+        noOfGuests: parseInt(data.noOfGuests),
+        start_date: data.start_date, // Assuming these date values are in the format 'YYYY-MM-DD'
+        end_date: data.end_date,     // and are validated appropriately before sending.
+        status: 'new', // You might adjust the status as needed
+        customer: '3fa85f64-5717-4562-b3fc-2c963f66afa6', // Replace with the actual customer ID
+        chef: '3fa85f64-5717-4562-b3fc-2c963f66afa6', // Replace with the actual chef ID
       };
+
       const response = await axios.post(
         'http://127.0.0.1:8000/customer/chef-bookings/',
-        emailData
+        requestData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
       );
-      console.log('Form submitted:', emailData);
+
+      console.log('Form submitted:', requestData);
       console.log('Server response:', response.data);
 
       // Reset the form after successful submission
@@ -55,10 +65,11 @@ const BookNowForm = ({ open, onClose, accessToken }) => {
       setDialogOpen(true); // Open the dialog after request is submitted
     } catch (error) {
       console.error('Form submission error:', error);
-      // Display error message to the user
+      // Handle error: Display error message to the user
     }
   };
 
+    
   const handleClose = () => {
     onClose();
   };

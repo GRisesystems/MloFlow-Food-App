@@ -36,14 +36,14 @@ const ContactCard = () => {
           <Icon sx={{ color: '#fbb31d' }}> {/* Change icon color */}
             <EmailIcon />
           </Icon>
-          <span style={{ marginLeft: '8px' }}>Email: example@example.com</span>
+          <span style={{ marginLeft: '8px' }}>Email: Mloflow@gmail.com</span>
         </Typography>
 
         <Typography variant="body1" sx={{ mt: 2, mb: 2 }}>
           <Icon sx={{ color: '#fbb31d' }}> {/* Change icon color */}
             <LocationOnIcon />
           </Icon>
-          <span style={{ marginLeft: '8px' }}>Location: New York, USA</span>
+          <span style={{ marginLeft: '8px' }}>Location: Kisumu, Kenya </span>
         </Typography>
 
         {/* Social Media Icons */}

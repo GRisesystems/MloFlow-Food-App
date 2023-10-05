@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Box, Button, Grid, InputLabel, TextField, Typography } from '@mui/material';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 import { Controller, useForm } from 'react-hook-form';
@@ -5,20 +6,27 @@ import { Controller, useForm } from 'react-hook-form';
 
 import axios from 'axios';
 
-
-// import CountryList from 'react-select-country-list';
-
-
-
 const ContactForm = () => {
   // const theme = useTheme()
 
-  const { control,  handleSubmit, formState: { errors } } = useForm({
+  const { control,  handleSubmit, reset, formState: { errors, isSubmitSuccessful} } = useForm({
 
   });
+ 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({
+        first_name: '',
+        surname: '',
+        phone_number: '',
+        email: '',
+        message: ''
+      });
+    }
+  }, [isSubmitSuccessful, reset]);
   
 
-  const onSubmit = async (data, { reset }) => {
+  const onSubmit = async (data, event) => {
      
     try {
       // Make an HTTP POST request to the backend endpoint
@@ -28,7 +36,7 @@ const ContactForm = () => {
       if (response.status === 201) {
         console.log('Form submitted successfully');
         // Clear the form by resetting it
-        // reset();
+        reset();
       } else {
         console.error('Form submission failed');
       }
